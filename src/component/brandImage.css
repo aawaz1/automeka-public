@@ -1,0 +1,45 @@
+.brandImage{
+    width: 5vw ;
+     height :16vh;
+}
+
+@media only screen 
+  and (max-device-width: 430px)  {
+    .brandImage{
+      
+        width: 70vw ;
+        gap: 2vw;
+        
+         /* height :10vh; */
+    }
+ 
+}
+@media only screen 
+  and (max-device-width: 768px)  {
+    .brandImage{
+      
+        width: 15vw ;
+         /* height :10vh; */
+    }
+ 
+}
+
+@media  screen 
+  and (min-device-width: 820px)  {
+    .brandImage{
+      
+        width: 12vw ;
+         /* height :12vh; */
+    }
+ 
+}
+
+@media only screen 
+  and (max-device-width: 1024px)  {
+    .brandImage{
+      
+        width: 18vw ;
+         /* height :10vh; */
+    }
+ 
+}

@@ -1,0 +1,37 @@
+import Carousel from "react-multi-carousel";
+import "react-multi-carousel/lib/styles.css";
+
+
+const ProductSlider = ({ children, title, desktopItemCount , superLargeDesktopItemCount , tabletItemCount , mobileItemCount}) => {
+    const responsive = {
+        superLargeDesktop: {
+            // the naming can be any, depends on you.
+            breakpoint: { max: 4000, min: 3000 },
+            items: superLargeDesktopItemCount ? superLargeDesktopItemCount : 5
+        },
+        desktop: {
+            breakpoint: { max: 3000, min: 1024 },
+            items: desktopItemCount ? desktopItemCount : 4
+        },
+        tablet: {
+            breakpoint: { max: 1024, min: 464 },
+            items: tabletItemCount ? tabletItemCount : 3
+        },
+        mobile: {
+            breakpoint: { max: 464, min: 0 },
+            items: mobileItemCount ? mobileItemCount : 1
+        }
+    };
+    return (
+        <div>
+            {title ? <div>{title}</div> : null}
+            <div className="w-full flex justify-center"> <Carousel className="flex justify-start w-[90%] max-w-[1200px]" responsive={responsive}>
+                {
+                    children
+                }
+            </Carousel></div>
+        </div>
+    )
+}
+
+export default ProductSlider

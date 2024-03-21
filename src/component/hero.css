@@ -1,5 +1,11 @@
 /* Responsive styles for iPhone */
 @media only screen and (max-device-width: 440px) {
+  .hero1{
+    height: 280px;
+  }
+  .iphone{
+    width: 96%;
+  }
     .hero {
       max-width: 100%;
       height: auto;
@@ -16,9 +22,19 @@
     }
   }
   .slider {
-    width: 100%;
+    width: 96%;
     height: 100%;
     background-size: cover;
     background-position: center;
   }
   
+  @media only screen and (max-device-width: 768px) {
+    .hero1{
+      height: 280px;
+    }
+    .iphone{
+      width: 100%;
+      padding: 0%;
+    }
+
+  }

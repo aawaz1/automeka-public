@@ -1,81 +1,82 @@
 import Dropdown from './component/dropdown.js'
 import React, { useState } from 'react'
 import './categories.css';
-import { Menu ,X } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import { RxDividerVertical } from "react-icons/rx";
 
 const Navbar = () => {
-  const [isOpen , setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const toggleNavbar = () => {
-    setIsOpen(!isOpen);  }
- 
+    setIsOpen(!isOpen);
+  }
+
   return (
     <>
-    <div className=' bg-slate-700  text-orange-500 p-2'>
-      <div className='hidden pl-30 md:flex justify-around'>
-      <div className='flex'>
-        <div className=' mr-4 relative group'>
-          <div className="flex items-center hover:text-white cursor-pointer text-white bg-orange-500">
-            <span>All Categories</span>
-            <svg className="w-4 h-4 ml-1 transform group-hover:-rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-            </svg>
+      <div className=' relative z-55 bg-slate-700 " text-orange-500 '>
+        <div style={{minHeight :"50px"}} className='hidden pl-30 md:flex justify-around '>
+          <div className='flex'>
+            <div style={{ zIndex: 44 }} className=' mr-4 relative group '>
+              <div className=" h-100 flex items-center hover:text-white cursor-pointer text-white bg-orange-500">
+                <span  >All Categories</span>
+                <svg className="w-4 h-4 ml-1  transform group-hover:-rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                </svg>
+              </div>
+              <div className='absolute  top-full left-0 mt-2 bg-gray-800 text-white rounded-md shadow-lg opacity-0 group-hover:opacity-100 w-40'>
+                <ul>
+                  <li className='py-1'>Category 1</li>
+                  <li className='py-1'>Category 2</li>
+                  <li className='py-1'>Category 3</li>
+                </ul>
+              </div>
+            </div>
+            <div className='h-100 flex items-center mr-4'>Home</div>
+            <div className='h-100 flex items-center'>About Us</div>
+
           </div>
-          <div className='absolute top-full left-0 mt-2 bg-gray-800 text-white rounded-md shadow-lg opacity-0 group-hover:opacity-100 w-40'>
-            <ul>
-              <li className='py-1'>Category 1</li>
-              <li className='py-1'>Category 2</li>
-              <li className='py-1'>Category 3</li>
-            </ul>
+          <div className="rounded-full p-2 h-98 border border-solid text-white     bg-slate-700 flex items-center justify-center"> USD<RxDividerVertical style={{ fontSize: "1.6rem" }} />
+            English
           </div>
+
         </div>
-        <div className='mr-4'>Home</div>
-        <div>About Us</div>
-      
-      </div>
-      <div class="rounded-full p-1 border w-100 text-white border-orange-600  bg-slate-700 flex items-center justify-center"> USD<RxDividerVertical style={{ fontSize: "1.6rem" }} />
-  dollar
-</div>
-
-      </div>
-      
-      
-      <div className='md:hidden'>
-      <button onClick={toggleNavbar}>
-        {
-          isOpen ? <X/> : <Menu/>
-        }
 
 
-      </button>
-      </div>
-    </div>
-    {
-      isOpen && (
-        <div className='flex basis-full  items-start'>
-        <div className='flex flex-col'>
-        <div className=' mr-4 relative group'>
-          <div className="flex items-center hover:text-white cursor-pointer text-white bg-orange-500">
-            <span>All Categories</span>
-            <svg className="w-4 h-4 ml-1 transform group-hover:-rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-            </svg>
-          </div>
-          <div className='absolute top-full left-0 mt-2 bg-gray-800 text-white rounded-md shadow-lg opacity-0 group-hover:opacity-100 w-40'>
-            <ul>
-              <li className='py-1'>Category 1</li>
-              <li className='py-1'>Category 2</li>
-              <li className='py-1'>Category 3</li>
-            </ul>
-          </div>
+        <div className='md:hidden'>
+          <button onClick={toggleNavbar}>
+            {
+              isOpen ? <X /> : <Menu />
+            }
+
+
+          </button>
         </div>
-        <div className='mr-4'>Home</div>
-        <div>About Us</div>
-      
-      </div></div>
-      )
-    }
-  </>)
+      </div>
+      {
+        isOpen && (
+          <div className='flex basis-full  items-start g-8'>
+            <div className='flex flex-col'>
+              <div className=' mr-4 relative group'>
+                <div className="flex items-center hover:text-white cursor-pointer text-white bg-orange-500">
+                  <span>All Categories</span>
+                  <svg className="w-4 h-4 ml-1 transform group-hover:-rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                  </svg>
+                </div>
+                <div className='absolute top-full left-0 mt-2 bg-gray-800 text-white rounded-md shadow-lg opacity-0 group-hover:opacity-100 w-40'>
+                  <ul>
+                    <li className='py-1'>Category 1</li>
+                    <li className='py-1'>Category 2</li>
+                    <li className='py-1'>Category 3</li>
+                  </ul>
+                </div>
+              </div>
+              <div className='mr-4'>Home</div>
+              <div>About Us</div>
+
+            </div></div>
+        )
+      }
+    </>)
 }
 
 export default Navbar

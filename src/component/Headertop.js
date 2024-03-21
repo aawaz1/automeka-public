@@ -6,18 +6,19 @@ import SearchBox from './component/SearchBox.js';
 import { GrCart } from "react-icons/gr";
 import { FcLike } from "react-icons/fc";
 import { RiAccountBoxLine } from "react-icons/ri";
+import './top.css'
 
 
 const Headertop = () => {
     return (
         <div className=''>
-            <div className='  flex items-center g-12 pt-2 pb-2 pl-40'>
+            <div className='header  flex items-center g-12 pt-2 pb-2 pl-40'>
                 <div className="ml-2"><RxDividerVertical style={{ fontSize: "1.6rem" }} /></div>  <div>Download App</div> <div className="ml-2"><FaApple /></div> <div className="ml-2"><IoLogoAndroid /></div>
 
             </div>
-            <hr className='border border-solid border-gray-100' />
-            <div className="flex items-center justify-between pt-2 pb-2 pl-40">
-                <div className="mb-2"><img src='/' /></div>
+            <hr className='  border border-solid border-gray-100' />
+            <div className=" header1 flex items-center justify-between pt-2 pb-2 pl-40">
+                <div className="mb-2"><img style={{width :"4vw"}} src='/auto_meka_logo_small.webp' /></div>
                 <div className=""><SearchBox /></div>
                 <div className="flex  pr-20 mb-2">
                     <button className="mr-4"><RiAccountBoxLine style={{ fontSize: "1.2rem" }} /></button>
