@@ -1,0 +1,24 @@
+/* Responsive styles for iPhone */
+@media only screen and (max-device-width: 440px) {
+    .hero {
+      max-width: 100%;
+      height: auto;
+      padding: 0; /* Adjust padding as needed */
+    }
+    .slider {
+      border-radius: 0; /* Remove border-radius for smaller screens */
+    }
+    .hidden {
+      display: none; /* Hide arrows on smaller screens */
+    }
+    .flex {
+      justify-content: flex-start; /* Adjust alignment for dots */
+    }
+  }
+  .slider {
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+  }
+  
