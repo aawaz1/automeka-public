@@ -1,4 +1,4 @@
-import Dropdown from './component/dropdown.js'
+import Dropdown from './items/dropdown.js'
 import React, { useState } from 'react'
 import './categories.css';
 import { Menu, X } from 'lucide-react';
@@ -12,7 +12,7 @@ const Navbar = () => {
 
   return (
     <>
-      <div className=' relative z-55 bg-slate-700 " text-orange-500 '>
+      <div className='  z-55 bg-slate-700 " text-orange-500 '>
         <div style={{minHeight :"50px"}} className='hidden pl-30 md:flex justify-around '>
           <div className='flex'>
             <div style={{ zIndex: 44 }} className=' mr-4 relative group '>

@@ -9,6 +9,7 @@ import FeaturedProducts from './component/FeaturedProducts.js'
 import Cashback from './component/Cashback/Cashback.js';
 import ComingSoonProduct from './component/ComingSoonProduct.js';
 import Brands from './component/Brands.js'
+import Footer from './component/Footer.js'
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
       <TopRatedProduct/>
       <ComingSoonProduct/>
       <Brands/>
+      <Footer/>
 
     </div>
   );
