@@ -1,32 +1,34 @@
 import React, { useState } from 'react';
 import { Rating } from "@material-tailwind/react";
+import { MdShoppingCart } from "react-icons/md";
 
 const Productcard = ({ image, price, name }) => {
   const [showButton, setShowButton] = useState(false);
 
   return (
-    <div 
-      className='flex items-center justify-center relative' 
-      onMouseEnter={() => setShowButton(true)} 
+    <div
+      className='flex items-center justify-center relative'
+      onMouseEnter={() => setShowButton(true)}
       onMouseLeave={() => setShowButton(false)}
     >
-      <div className="border border-gray-500 relative">
-        <img 
-          className="p-2" 
-          style={{ width: "10vw", height: "10vw", objectFit: "contain" }} 
-          src={image} 
-          alt="categories image" 
+      <div className="border max-w-[200px] p-[1rem] border-gray-500 relative ">
+        <img
+          className="p-2"
+          style={{ width: "13rem", height: "8rem", objectFit: "contain" }}
+          src={image}
+          alt="categories image"
         />
         <h2 className='text-sm'><Rating /></h2>
-        {showButton && (
-          <div className='absolute bg-orange-500 bottom-2 w-full flex items-center justify-center'>
-            <button>Add To Cart</button>
+
+        <h2 className="text-center text-sm md:text-[1.1rem">{name}</h2>
+        {showButton ? (
+          <div className=' p-[0.42rem] bg-orange-400 bottom-2 rounded-sm flex items-center justify-center'>
+            <button className='text-white  flex items-center '> <MdShoppingCart className='font-sm' /> Add To Cart</button>
           </div>
-        )}
-        <h2 className="text-center text-sm md:text-xl">{name}</h2>
-        <h2 className="text-center text-sm md:text-xl">
-          <span className='text-red-500'>Price:</span> KD {price}
-        </h2>
+        ) : (<h2 className=" p-[0.3rem] text-center text-sm md:text-[1.1rem]">
+          <span className='text-red-500 text-sm md:text-[1.1rem] '>Price:</span> KD {price}
+        </h2>)}
+
       </div>
     </div>
   );

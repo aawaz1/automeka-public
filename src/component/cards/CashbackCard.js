@@ -1,10 +1,8 @@
 import React from 'react'
 
-const CashbackCard = () => {
-  return (
-    <div><div></div>
-    <div></div>
-    </div>
+const CashbackCard = ({image}) => {
+  return (   <img  src={image} className='w-[100%] sm:w-[30%]'/>
+   
   )
 }
 

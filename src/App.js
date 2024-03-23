@@ -10,22 +10,26 @@ import Cashback from './component/Cashback/Cashback.js';
 import ComingSoonProduct from './component/ComingSoonProduct.js';
 import Brands from './component/Brands.js'
 import Footer from './component/Footer.js'
+import Endrosement from './component/Endrosement.js';
+import Library from './component/Library.js'
 
 
 function App() {
   return (
     <div>
 
-      <Headertop />
-      <Navbar />
-      <HeroSlider />
+      <Headertop/>
+      <Navbar/>
+      <HeroSlider/>
       <Categories />
-      {/* <Cashback/> */}
+      <Cashback/>
       <FeaturedProducts/>
       <TopRatedProduct/>
       <ComingSoonProduct/>
       <Brands/>
+      <Endrosement/>
       <Footer/>
+      {/* <Library/> */}
 
     </div>
   );

@@ -2,7 +2,7 @@ import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 
 
-const ProductSlider = ({ children, title, desktopItemCount , superLargeDesktopItemCount , tabletItemCount , mobileItemCount}) => {
+const ProductSlider = ({ children, title, desktopItemCount, superLargeDesktopItemCount, tabletItemCount, mobileItemCount, responsiveProp }) => {
     const responsive = {
         superLargeDesktop: {
             // the naming can be any, depends on you.
@@ -25,7 +25,7 @@ const ProductSlider = ({ children, title, desktopItemCount , superLargeDesktopIt
     return (
         <div>
             {title ? <div>{title}</div> : null}
-            <div className="w-full flex justify-center"> <Carousel className="flex justify-start w-[90%] max-w-[1200px]" responsive={responsive}>
+            <div className="w-full flex justify-center"> <Carousel className="flex justify-start w-[90%] max-w-[1200px]" responsive={responsiveProp ? responsiveProp : responsive}>
                 {
                     children
                 }

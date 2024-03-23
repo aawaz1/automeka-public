@@ -1,18 +1,11 @@
+import CashbackCard from "../cards/CashbackCard"
 
 
 const Cashback = () => {
   return (
-    <div className="flex justify-center g-6">
-        <div className="border border-gray-500 h-5 flex">
-            <div></div>
-            <div className="flex items-center flex-col">
-                <h2>Cashback</h2>
-                <h2>2.5%</h2>
-                <button>Buy Now</button>
-            </div>
-            </div>
-            <div>2
-            </div>
+    <div className=" flex flex-col md:flex-row p-20  justify-center w-90 gap-8">
+    <CashbackCard style={{}} image={'/Group 42771 (1).png'} />
+      <CashbackCard image={'/Group 42780.png'} />
     </div>
   )
 }

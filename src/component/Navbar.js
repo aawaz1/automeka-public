@@ -34,7 +34,7 @@ const Navbar = () => {
             <div className='h-100 flex items-center'>About Us</div>
 
           </div>
-          <div className="rounded-full p-2 h-98 border border-solid text-white     bg-slate-700 flex items-center justify-center"> USD<RxDividerVertical style={{ fontSize: "1.6rem" }} />
+          <div className="rounded-full border-orange-500 p-2 h-98 border border-solid text-white     bg-slate-700 flex items-center justify-center"> USD<RxDividerVertical style={{ fontSize: "1.6rem" }} />
             English
           </div>
 

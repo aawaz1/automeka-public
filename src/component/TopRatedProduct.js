@@ -29,13 +29,13 @@ const TopRatedProduct = () => {
     };
     const productData = [{ name: "10w40 United Oil", image: '/car-service-white-background-isolated-3d-illustration.jpg', price: 2.222 }, { name: "10w40 United Oil", image: '/car-service-white-background-isolated-3d-illustration.jpg', price: 2.222 }, { name: "10w40 United Oil", image: '/car-service-white-background-isolated-3d-illustration.jpg', price: 2.222 }, { name: "10w40 United Oil", image: '/car-service-white-background-isolated-3d-illustration.jpg', price: 2.222 }, { name: "10w40 United Oil", image: '/car-service-white-background-isolated-3d-illustration.jpg', price: 2.222 },]
     return (
-        <>
-            <ProductSlider title={<Producttitle title={"Top Rated Products"} />} >
+        <div className="">
+            <ProductSlider  title={<Producttitle title={"Top Rated Products"} />} >
                 {productData.map(item => {
                     return (<Productcard name={item.name} image={item.image} price={item.price} />)
                 })}
             </ProductSlider>
-        </>
+        </div>
 
     )
 }
