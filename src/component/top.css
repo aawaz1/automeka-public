@@ -1,11 +1,11 @@
 @media only screen and (max-device-width: 400px) {
    .header{
-    border: 2px solid green;
+
     padding: 0;
    }
 
    .header1{
-    border: 2px solid blue;
+   
     padding: 0;
     display: block;
    }
@@ -14,12 +14,12 @@
 
   @media  screen and (min-device-width: 400px)  and (max-device-width: 768px) {
     .header{
-     border: 2px solid green;
+     
      padding: 4vw;
     }
  
     .header1{
-     border: 2px solid blue;
+     
      padding: 4vw;
      display: block;
     }

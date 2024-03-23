@@ -23,7 +23,7 @@ const Headertop = () => {
                 <div className="ml-2"><RxDividerVertical style={{ fontSize: "1.6rem" }} /></div>  <div>Download App</div> <div className="ml-2"><FaApple /></div> <div className="ml-2"><IoLogoAndroid /></div>
 
             </div>
-            <hr className=' border border-solid border-gray-100' />
+            <hr style={{margin : 0}} className=' border border-solid border-gray-100' />
             <div className=" header1 flex items-center justify-between pt-2 pb-2 pl-40">
                 <div className="mb-2"><img style={{width :"5rem"}} src='/auto_meka_logo_small.webp' /></div>
                 <div className=""><SearchBox /></div>
