@@ -3,17 +3,41 @@ import React, { useState } from 'react'
 import './categories.css';
 import { Menu, X } from 'lucide-react';
 import { RxDividerVertical } from "react-icons/rx";
+import { IoCartOutline } from "react-icons/io5";
+import SearchBox from './items/SearchBox.js';
+import { GrCart } from "react-icons/gr";
+import { FcLike } from "react-icons/fc";
+import { RiAccountBoxLine } from "react-icons/ri";
+import { CiHeart } from "react-icons/ci";
+import './top.css'
+
+import Container from './Container.js';
 
 const Navbar = () => {
+  const [issOpen, setIssOpen] = useState(false);
+  const handleIsOpen = () => {
+    setIssOpen(!issOpen)
+  }
   const [isOpen, setIsOpen] = useState(false);
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   }
 
   return (
-    <>
+    <div style={{zIndex : 999999}} className='sticky top-0  bg-white'>
+      <div className="container flex justify-between items-center">
+        <div className=""><img style={{ width: "5rem" }} src='/auto_meka_logo_small.webp' /></div>
+        <SearchBox />
+        <div className="flex">
+          <button className="mr-4"><RiAccountBoxLine style={{ fontSize: "1.2rem" }} /></button>
+          <button onClick={handleIsOpen} className="mr-4"><GrCart style={{ fontSize: "1.2rem" }} /></button>
+          <button className="mr-4"><CiHeart style={{ fontSize: "1.2rem" }} /></button>
+        </div>
+      </div>
+
+      <Container isOpen={isOpen} handleIsOpen={handleIsOpen} />
       <div className='  z-55 bg-slate-700 " text-orange-500 '>
-        <div style={{minHeight :"50px"}} className='hidden pl-30 md:flex justify-around '>
+        <div style={{ minHeight: "50px" }} className='hidden pl-30 md:flex justify-around '>
           <div className='flex'>
             <div style={{ zIndex: 44 }} className=' mr-4 relative group '>
               <div className=" h-100 flex items-center hover:text-white cursor-pointer text-white bg-orange-500">
@@ -76,7 +100,7 @@ const Navbar = () => {
             </div></div>
         )
       }
-    </>)
+    </div>)
 }
 
 export default Navbar

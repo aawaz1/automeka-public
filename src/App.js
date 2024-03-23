@@ -1,34 +1,32 @@
 
 import './App.css';
-import Categories from './component/Categories.js';
-import Headertop from './component/Headertop.js';
-import HeroSlider from './component/HeroSlider.js';
-import Navbar from './component/Navbar.js'
-import TopRatedProduct from './component/TopRatedProduct.js';
-import FeaturedProducts from './component/FeaturedProducts.js'
-import Cashback from './component/Cashback/Cashback.js';
-import ComingSoonProduct from './component/ComingSoonProduct.js';
-import Brands from './component/Brands.js'
-import Footer from './component/Footer.js'
-import Endrosement from './component/Endrosement.js';
-import Library from './component/Library.js'
+import { BrowserRouter  as Router  , Routes ,Route } from 'react-router-dom';
+import Home from './component/Home/Home.js';
+import Layout from './component/Layout/Layout.js';
 
 
 function App() {
   return (
     <div>
+      <Router>
+      <Layout>
+        <Routes>
+       
+    <Route path='/' element={<Home/>}/>
+    <Route path='/product' element={<Home/>}/>
+     
+        </Routes>
+        </Layout>
+      
 
-      <Headertop/>
-      <Navbar/>
-      <HeroSlider/>
-      <Categories />
-      <Cashback/>
-      <FeaturedProducts/>
-      <TopRatedProduct/>
-      <ComingSoonProduct/>
-      <Brands/>
-      <Endrosement/>
-      <Footer/>
+      </Router>
+
+   
+    
+
+      
+      
+      {/* <Footer/> */}
       {/* <Library/> */}
 
     </div>
