@@ -16,92 +16,93 @@ import Container from './Container.js';
 const Navbar = () => {
   const [issOpen, setIssOpen] = useState(false);
   const handleIsOpen = () => {
-    console.log( `is open ${issOpen}`)
+    console.log(`is open ${issOpen}`)
     setIssOpen(!issOpen)
   }
   const [isOpen, setIsOpen] = useState(false);
   const toggleNavbar = () => {
+    console.log("object")
     setIsOpen(!isOpen);
   }
 
   return (
-    <div style={{zIndex : 999999}} className='sticky top-0  bg-white'>
+    <div style={{ zIndex: 999999 }} className='sticky top-0  bg-white'>
       <div className="container flex justify-between items-center">
         <div className=""><img style={{ width: "5rem" }} src='/auto_meka_logo_small.webp' /></div>
         <SearchBox />
         <div className="flex">
           <button className="mr-4"><RiAccountBoxLine style={{ fontSize: "1.2rem" }} /></button>
           <button onClick={handleIsOpen} className="mr-4"><GrCart style={{ fontSize: "1.2rem" }} /></button>
-          <button className="mr-4 font-semibold "><CiHeart className=""style={{ fontSize: "1.2rem" }} /></button>
+          <button className="mr-4 font-semibold "><CiHeart className="" style={{ fontSize: "1.2rem" }} /></button>
         </div>
       </div>
 
-      <Container isOpen={isOpen} handleIsOpen={handleIsOpen} />
+      <Container isOpen={issOpen} handleIsOpen={handleIsOpen} />
       <div className='  z-55 bg-slate-700 " text-orange-500 '>
         <div style={{ minHeight: "50px" }} className='hidden pl-30 md:flex justify-around '>
           <div className='flex'>
-            <div style={{ zIndex: 44 }} className=' mr-4 relative group '>
-              {/* <div className=" h-100 flex items-center hover:text-white cursor-pointer text-white bg-orange-500">
+
+            {/* <div className=" h-100 flex items-center hover:text-white cursor-pointer text-white bg-orange-500">
                 <span  >All Categories</span>
                 <svg className="w-4 h-4 ml-1  transform group-hover:-rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
               </div> */}
-              <div className="flex gap-3.5 self-stretch px-9 py-4 bg-orange-500 md:px-5">
-<div className="grow text-white">ALL CATEGORIES</div>
-<img
-  loading="lazy"
-  src="https://cdn.builder.io/api/v1/image/assets/TEMP/d28a7a73318630afda323d1892b7d2f92fbf97fd19b53c38b1172b304d413cea?apiKey=97bd60a383fa4df4a87dc42761361ab7&"
-  className="shrink-0 self-start w-6 aspect-square"
-/>
-</div>
+            <div className="flex items-center gap-3.5 self-stretch px-9 py-2 bg-orange-500 md:px-5 relative group cursor-pointer">
+              <div className="grow text-white  items-center flex ">ALL CATEGORIES</div>
+              <div><img
+                loading="lazy"
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/d28a7a73318630afda323d1892b7d2f92fbf97fd19b53c38b1172b304d413cea?apiKey=97bd60a383fa4df4a87dc42761361ab7&"
+                className="shrink-0 self-start w-6 aspect-square"
+              /></div>
               <div className='absolute  top-full left-0 mt-2 bg-gray-800 text-white rounded-md shadow-lg opacity-0 group-hover:opacity-100 w-40'>
                 <ul className='gap-2 pt-2'>
                   <li className=' px-4 py-1'>Category 1</li>
                   <li className=' px-4 py-1'>Category 1</li>
                   <li className=' px-4 py-1'>Category 1</li>
                   <li className=' px-4 py-1'>Category 1</li>
-              
+
                 </ul>
               </div>
             </div>
-            <div className='h-100 flex items-center mr-4'>Home</div>
-            <div className='h-100 flex items-center'>About Us</div>
+
+
+            <div className='h-100 flex items-center  px-6 py-2 hover:text-white cursor-pointer'>Home</div>
+            <div className='h-100 flex items-center px-2 py-2 hover:text-white cursor-pointer'>About Us</div>
 
           </div>
-         <div style={{border :"",marginTop :"1rem" , position : "relative"}}> <div style={{position : "relative" , alignItems : "center" , textAlign : "center"}} className="rounded-full border-orange-500 p-2 h-98 border border-solid text-white     bg-slate-700 flex items-center justify-center"> USD<RxDividerVertical style={{ fontSize: "1.6rem" }} />
+          <div className='flex items-center'> <div style={{ position: "relative", alignItems: "center", textAlign: "center" }} className="  rounded-full border-orange-500 px-2 py-1 h-98 border border-solid text-white     bg-slate-700 flex items-center justify-center text-[0.8rem]" > USD<RxDividerVertical style={{ fontSize: "1.6rem" }} />
             English
           </div></div>
 
         </div>
 
 
-        <div className='md:hidden'>
+        <div className='md:hidden flex justify-start items-center p-2'>
           <button onClick={toggleNavbar}>
             {
               isOpen ? <X /> : <Menu />
             }
 
 
-          </button>
-        </div>
+          </button></div>
       </div>
       {
         isOpen && (
-          <div className='flex basis-full  items-start g-8'>
-            <div className='flex flex-col'>
+          <div className='flex basis-full  items-center g-8 pl-[0.2rem]'>
+            <div className='flex flex-col gap-1 pt-[1rem] pl-[0.7rem] shadow-md hover:shadow-lg border-full'>
               <div className=' mr-4 relative group'>
-                <div className="flex items-center hover:text-white cursor-pointer text-white bg-orange-500">
-                  <span>All Categories</span>
+                <div className="flex items-center hover:text-white cursor-pointer text-white bg-orange-500 px-1 py-1 rounded-md">
+                  <span className=''>All Categories</span>
                   <svg className="w-4 h-4 ml-1 transform group-hover:-rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
                   </svg>
                 </div>
                 <div className='absolute top-full left-0 mt-2 bg-gray-800 text-white rounded-md shadow-lg opacity-0 group-hover:opacity-100 w-40'>
                   <ul>
-                    <li className='py-1'>Category 1</li>
-                    <li className='py-1'>Category 2</li>
-                    <li className='py-1'>Category 3</li>
+                    <li className='py-1 px-1'>Category 1</li>
+                    <li className='py-1 px-1'>Category 2</li>
+                    <li className='py-1 px-1'>Category 3</li>
                   </ul>
                 </div>
               </div>
