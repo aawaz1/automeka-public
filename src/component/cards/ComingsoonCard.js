@@ -1,11 +1,12 @@
 import React from 'react'
+import { IMAGE_URL } from '../../constants'
 
-const ComingsoonCard = ({image,title}) => {
+const ComingsoonCard = ({name , image}) => {
   return (
     
-        <div className='flex items-center justify-center '><div className=" w-[80%] flex  pl-4 pt-1 pb-1 bg-white"><img className=" p-2 " style={{ width: "4vw" ,height:"4vw" }} src={'/car-engine-fuel-oil-filters-oil-canisters-isolated-against-white-background-3d-illustration.jpg'} alt="categories image" />
+        <div className='flex items-center justify-center '><div className=" w-[80%] flex  pl-4 pt-1 pb-1 bg-white"><img className=" p-2 " style={{ width: "6vw" ,height:"6vw" }} src={IMAGE_URL + image} alt="categories image" />
 
-        <h2 className="pl-4 text-sm">Total Oil</h2></div></div>
+        <h2 className="pl-4 text-sm">{name}</h2></div></div>
 
     
   )

@@ -6,26 +6,15 @@ import './brandImage.css'
 import Productcard from './cards/Productcard';
 import './brandImage.css'
 import Producttitle from '../wrapper/Producttitle';
+import useBrands from './customHooks/useBrands';
+import { IMAGE_URL } from '../constants';
 
 
 const Brands = () => {
+    const brands = useBrands();
+    console.log(brands);
     const productData = [{ name: "10w40 United Oil", image: '/car-service-white-background-isolated-3d-illustration.jpg', price: 2.222 }, { name: "10w40 United Oil", image: '/car-service-white-background-isolated-3d-illustration.jpg', price: 2.222 }, { name: "10w40 United Oil", image: '/car-service-white-background-isolated-3d-illustration.jpg', price: 2.222 }, { name: "10w40 United Oil", image: '/car-service-white-background-isolated-3d-illustration.jpg', price: 2.222 }, { name: "10w40 United Oil", image: '/car-service-white-background-isolated-3d-illustration.jpg', price: 2.222 },]
-    // const [brands, setBrands] = useState([])
-
-    // useEffect(() => {
-    //     const getAllBrands = async () => {
-    //         try {
-    //             const { data } = await axios.get(
-    //                 `https://restapi.ansoftt.com:4321/v1/brand/`
-    //             );
-    //             setBrands(data?.data);
-
-    //         } catch (error) {
-    //             console.error("Error fetching brands:", error);
-    //         }
-    //     }
-    //     getAllBrands();
-    // }, []);
+   
 
     return (
 
@@ -36,10 +25,10 @@ const Brands = () => {
 
 
             <Marquee style={{ gap: '7vw', cursor: "pointer" }} pauseOnHover={true}>
-                {productData.map(item => (
+                {brands.map(item => (
                     <div style={{ marginLeft: "6vw" }}>
-                        {/* <h4>{brand?.name}</h4> */}
-                        <img className='brandImage' src={item.image} alt='' />
+                       
+                        <img className='brandImage' src={ IMAGE_URL + item.image} alt='' />
                     </div>
                 ))}
             </Marquee>

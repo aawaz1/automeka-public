@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Rating } from "@material-tailwind/react";
 import { MdShoppingCart } from "react-icons/md";
+import { IMAGE_URL } from '../../constants';
 
 const Productcard = ({ image, price, name }) => {
   const [showButton, setShowButton] = useState(false);
@@ -15,10 +16,10 @@ const Productcard = ({ image, price, name }) => {
         <img
           className="p-2"
           style={{ width: "13rem", height: "8rem", objectFit: "contain" }}
-          src={image}
+          src={ IMAGE_URL + image}
           alt="categories image"
         />
-        <h2 className='text-sm'><Rating /></h2>
+        {/* <h2 className='text-sm'><Rating /></h2> */}
 
         <h2 className="text-center text-sm md:text-[1.1rem">{name}</h2>
         {showButton ? (

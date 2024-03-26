@@ -5,9 +5,11 @@ import CategoryTitle from '../wrapper/CategoryTitle.js'
 import Productcard from "./cards/Productcard.js";
 import Producttitle from "../wrapper/Producttitle.js";
 import ProductSlider from "./ScrollComponent/ProductSlider.js";
+import useTopRatedProducts from "./customHooks/useTopRatedProducts.js";
 
 
 const TopRatedProduct = () => {
+    const topRatedProducts = useTopRatedProducts();
     const responsive = {
         superLargeDesktop: {
             // the naming can be any, depends on you.
@@ -31,8 +33,8 @@ const TopRatedProduct = () => {
     return (
         <div className="">
             <ProductSlider  title={<Producttitle title={"Top Rated Products"} />} >
-                {productData.map(item => {
-                    return (<Productcard name={item.name} image={item.image} price={item.price} />)
+                {topRatedProducts?.map(item => {
+                    return (<Productcard name={item.name} image={item.image_list[0]} price={item.price} />)
                 })}
             </ProductSlider>
         </div>

@@ -16,6 +16,7 @@ import Container from './Container.js';
 const Navbar = () => {
   const [issOpen, setIssOpen] = useState(false);
   const handleIsOpen = () => {
+    console.log( `is open ${issOpen}`)
     setIssOpen(!issOpen)
   }
   const [isOpen, setIsOpen] = useState(false);
@@ -31,7 +32,7 @@ const Navbar = () => {
         <div className="flex">
           <button className="mr-4"><RiAccountBoxLine style={{ fontSize: "1.2rem" }} /></button>
           <button onClick={handleIsOpen} className="mr-4"><GrCart style={{ fontSize: "1.2rem" }} /></button>
-          <button className="mr-4"><CiHeart style={{ fontSize: "1.2rem" }} /></button>
+          <button className="mr-4 font-semibold "><CiHeart className=""style={{ fontSize: "1.2rem" }} /></button>
         </div>
       </div>
 
@@ -40,17 +41,27 @@ const Navbar = () => {
         <div style={{ minHeight: "50px" }} className='hidden pl-30 md:flex justify-around '>
           <div className='flex'>
             <div style={{ zIndex: 44 }} className=' mr-4 relative group '>
-              <div className=" h-100 flex items-center hover:text-white cursor-pointer text-white bg-orange-500">
+              {/* <div className=" h-100 flex items-center hover:text-white cursor-pointer text-white bg-orange-500">
                 <span  >All Categories</span>
                 <svg className="w-4 h-4 ml-1  transform group-hover:-rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
-              </div>
+              </div> */}
+              <div className="flex gap-3.5 self-stretch px-9 py-4 bg-orange-500 md:px-5">
+<div className="grow text-white">ALL CATEGORIES</div>
+<img
+  loading="lazy"
+  src="https://cdn.builder.io/api/v1/image/assets/TEMP/d28a7a73318630afda323d1892b7d2f92fbf97fd19b53c38b1172b304d413cea?apiKey=97bd60a383fa4df4a87dc42761361ab7&"
+  className="shrink-0 self-start w-6 aspect-square"
+/>
+</div>
               <div className='absolute  top-full left-0 mt-2 bg-gray-800 text-white rounded-md shadow-lg opacity-0 group-hover:opacity-100 w-40'>
-                <ul>
-                  <li className='py-1'>Category 1</li>
-                  <li className='py-1'>Category 2</li>
-                  <li className='py-1'>Category 3</li>
+                <ul className='gap-2 pt-2'>
+                  <li className=' px-4 py-1'>Category 1</li>
+                  <li className=' px-4 py-1'>Category 1</li>
+                  <li className=' px-4 py-1'>Category 1</li>
+                  <li className=' px-4 py-1'>Category 1</li>
+              
                 </ul>
               </div>
             </div>
@@ -58,9 +69,9 @@ const Navbar = () => {
             <div className='h-100 flex items-center'>About Us</div>
 
           </div>
-          <div className="rounded-full border-orange-500 p-2 h-98 border border-solid text-white     bg-slate-700 flex items-center justify-center"> USD<RxDividerVertical style={{ fontSize: "1.6rem" }} />
+         <div style={{border :"",marginTop :"1rem" , position : "relative"}}> <div style={{position : "relative" , alignItems : "center" , textAlign : "center"}} className="rounded-full border-orange-500 p-2 h-98 border border-solid text-white     bg-slate-700 flex items-center justify-center"> USD<RxDividerVertical style={{ fontSize: "1.6rem" }} />
             English
-          </div>
+          </div></div>
 
         </div>
 

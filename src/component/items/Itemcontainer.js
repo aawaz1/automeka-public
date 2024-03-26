@@ -4,7 +4,7 @@ import { PRODUCTS, RESOURCES, COMPANY, SUPPORT } from "./Menus.js";
 import './items.css'
 const ItemsContainer = () => {
   return (
-    <div className="grid-container   gap-6 sm:px-8 px-3 py-16">
+    <div className="grid-container   gap-6  px-8 md:px-[7.5rem] py-16">
       <div className=' item1'><Items Links={PRODUCTS} title="PRODUCTS" /></div>
      <div  className='item2'> <Item Links={RESOURCES} title="USEFUL LINKS" /></div>
      <div  className='item3'> <Item Links={COMPANY} title="CONTACT" /></div>

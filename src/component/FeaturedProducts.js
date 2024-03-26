@@ -6,9 +6,12 @@ import Productcard from "./cards/Productcard.js";
 import Producttitle from "../wrapper/FeaturedProductTitle.js";
 import ProductSlider from "./ScrollComponent/ProductSlider.js";
 import FeaturedProducttitle from "../wrapper/FeaturedProductTitle.js";
+import useFeaturedProducts from "./customHooks/useFeaturedProducts.js";
 
 
 const FeaturedProducts = () => {
+    const featuredProducts = useFeaturedProducts();
+    console.log(featuredProducts);
     const responsive = {
         superLargeDesktop: {
             // the naming can be any, depends on you.
@@ -32,8 +35,8 @@ const FeaturedProducts = () => {
     return (
         <>
             <ProductSlider title={<FeaturedProducttitle />} >
-                {productData.map(item => {
-                    return (<Productcard name={item.name} image={item.image} price={item.price} />)
+                {featuredProducts.map(item => {
+                    return (<Productcard name={item.name} image={item?.image_list[0]} price={item.price} />)
                 })}
             </ProductSlider>
         </>
