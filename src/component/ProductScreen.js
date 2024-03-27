@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaRegHeart } from "react-icons/fa";
+import TabNav from '../component/Tabnav.js'
 
 const ProductScreen = () => {
     const [currentImage, setCurrentImage] = useState('/Group 42818.png');
@@ -8,8 +9,8 @@ const ProductScreen = () => {
         setCurrentImage(image);
     };
     return (
-        <div>
-            <div className='grid grid-cols-1 md:grid-cols-2 container gap-4 p-2'>
+        <div className='container'>
+            <div className='grid grid-cols-1 md:grid-cols-2  gap-4 p-2'>
                 <div className='p-2'>
                     <div>
                         <img src={currentImage} alt="main" height={'20%'} width={'100%'} />
@@ -50,13 +51,13 @@ const ProductScreen = () => {
                         </div>
                     </div>
                     <div className='flex  gap-4 items-center'>
-                       
-                            <button style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-orange-400 font-medium font-poppins   '> Add to Cart</button>
-                       
-                       
-                            <button className='  bg-orange-400 px-4 py-1 text-white font-medium font-poppins rounded-md'> Buy Now</button>
-                        
-                        <FaRegHeart/>
+
+                        <button style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-orange-400 font-medium font-poppins   '> Add to Cart</button>
+
+
+                        <button className='  bg-orange-400 px-4 py-1 text-white font-medium font-poppins rounded-md'> Buy Now</button>
+
+                        <FaRegHeart />
                     </div>
                     <div className='flex items-center pt-4 py-2 gap-2'>
                         <h2 className='text-[1rem] '>Country of Origin :</h2>
@@ -72,7 +73,12 @@ const ProductScreen = () => {
                     </div> */}
                 </div>
             </div>
-            <div></div>
+
+            <div><div className='bg-gray-100  py-2'> <TabNav /></div>
+            <div>
+            <h2 className='text-[1.5rem] py-4'>Related Products</h2></div></div>
+
+
         </div>
     )
 }

@@ -9,6 +9,7 @@ import Category from './component/Category.js';
 import LoginForm from './component/Loginform.js';
 import RegisterForm from './component/Registerform.js';
 import ProductScreen from './component/ProductScreen.js';
+import MyAccount from './component/MyAccount.js';
 
 
 function App() {
@@ -26,6 +27,7 @@ function App() {
     <Route path='/login' element={<LoginForm/>}/>
     <Route path='/register' element={<RegisterForm/>}/>
     <Route path='/product' element={<ProductScreen/>}/>
+    <Route path='/profile' element={<MyAccount/>}/>
      
         </Routes>
         </Layout>
