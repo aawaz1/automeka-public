@@ -55,7 +55,7 @@ const Navbar = () => {
                 src="https://cdn.builder.io/api/v1/image/assets/TEMP/d28a7a73318630afda323d1892b7d2f92fbf97fd19b53c38b1172b304d413cea?apiKey=97bd60a383fa4df4a87dc42761361ab7&"
                 className="shrink-0 self-start w-6 aspect-square"
               /></div>
-              <div className='absolute  top-full left-0 mt-2 bg-gray-800 text-white rounded-md shadow-lg opacity-0 group-hover:opacity-100 w-40'>
+              <div className='absolute  top-full left-0  bg-gray-800 text-white rounded-md shadow-lg hidden group-hover:block w-40'>
                 <ul className='gap-2 pt-2'>
                   <li className=' px-4 py-1'>Category 1</li>
                   <li className=' px-4 py-1'>Category 1</li>

@@ -241,7 +241,7 @@ const Checkout = () => {
                     </div>
                   </div>
                 </div>
-                <div className="self-stretch h-[0.5px] relative box-border z-[1] border-t-[0.5px] border-solid border-silver-200" />
+                <div className="self-stretch h-[0.5px] relative box-z-[1] border-t-[0.5px] border-solid border-silver-200" />
               </div>
               <div className="self-stretch flex flex-col items-start justify-start gap-[14px] max-w-full">
                 <div className="w-[551px] flex flex-row items-start justify-start py-0 px-[3px] box-border max-w-full">

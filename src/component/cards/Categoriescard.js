@@ -21,15 +21,15 @@ const CategoriesCard = () => {
         />
         {/* <h2 className='text-sm'><Rating /></h2> */}
 
-        <h2 className=" text-lg md:text-[1.1rem">Veslee Oil</h2>
+        <div><h2 className=" text-lg md:text-[1.1rem">Veslee Oil</h2></div>
         {showButton ? (
           <div className=' p-[0.42rem] bg-orange-400 bottom-2 rounded-sm flex items-center justify-center'>
             <button className='text-white  flex items-center'> <MdShoppingCart className='font-sm' /> Add To Cart</button>
           </div>
-        ) : (<h2 className=" p-[0.3rem]  text-green-400 text-sm md:text-[1.1rem]">
-          <span className='text-green-400 text-sm md:text-[1.1rem] '>Price:</span> KD 5.000
+        ) : (<h2 className=" p-[0.rem]  text-green-400 text-lg md:text-[1.1rem]">
+          Price: KD 5.000
         </h2>)}
-        
+
 
       </div>
     </div>
