@@ -1,44 +1,31 @@
-import { Grid } from '@mui/material'
 import React from 'react'
-import { fetchOrder } from '../store/thunk'
-import { useDispatch, useSelector } from 'react-redux'
 
-
-const Orderscreen = () => {
-    const order = useSelector(state => state.order);
-    const { orderDetails } = order;
-    console.log(orderDetails , order);
-
-    const dispatch = useDispatch()
-    return (
-        <div className="p-2 flex flex-col overflow-x-scroll md:overflow-hidden w-[30rem] md:w-[100%]   justify-center items-center container">
-            <h2 className=' pb-4 font-semibold text-[1.2rem]'>{orderDetails ? "Your Order Details" : "Your Order History" }</h2>
-
-            {orderDetails ?
-             <div className='container p-2   justify-center items-center'>
-         {/* <h2 className=' pb-4 font-semibold text-[1.2rem]'>Your Order History</h2> */}
-         <div className="flex flex-col gap-3 px-5 max-w-[862px]">
+const SingleOrderScreen = () => {
+  return (
+    <div className='container p-2  flex flex-col  justify-center items-center'>
+         <h2 className=' pb-4 font-semibold text-[1.2rem]'>Your Order History</h2>
+         <div className="flex flex-col px-5 max-w-[862px]">
       <div className="w-full text-lg font-medium text-black max-md:max-w-full">
         Tracking Number
       </div>
-      <div className="justify-center items-start px-2 py-[1rem] mt-2 max-w-full text-base font-medium bg-white rounded border border-solid border-stone-300 text-zinc-500 w-[410px] max-md:pr-5">
+      <div className="justify-center items-start px-4 py-[1rem] mt-5 max-w-full text-base font-medium bg-white rounded border border-solid border-stone-300 text-zinc-500 w-[410px] max-md:pr-5">
         46363848354{" "}
       </div>
-      <div className=" w-full text-lg font-medium text-black max-md:max-w-full">
+      <div className="mt-9 w-full text-lg font-medium text-black max-md:max-w-full">
         Delivery Address
       </div>
-      <div className=" w-full text-base font-medium text-zinc-500 max-md:max-w-full">
+      <div className="mt-5 w-full text-base font-medium text-zinc-500 max-md:max-w-full">
         Loream ipsum dolor
       </div>
-      <div className=" w-full text-base font-medium text-zinc-500 max-md:max-w-full">
+      <div className="mt-5 w-full text-base font-medium text-zinc-500 max-md:max-w-full">
         &quot;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
         eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
         minim veniam, quis nostrud exercitation ullamco .
       </div>
-      <div className=" w-full text-lg font-medium text-black max-md:mt-10 max-md:max-w-full">
+      <div className="mt-16 w-full text-lg font-medium text-black max-md:mt-10 max-md:max-w-full">
         Product Details
       </div>
-      <div className="px-8 py-4 mt-4 w-full bg-neutral-100 max-md:px-5 max-md:mt-10 max-md:max-w-full">
+      <div className="px-16 py-9 mt-16 w-full bg-neutral-100 max-md:px-5 max-md:mt-10 max-md:max-w-full">
         <div className="flex gap-5 max-md:flex-col max-md:gap-0">
           <div className="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
             <img
@@ -57,39 +44,12 @@ const Orderscreen = () => {
           </div>
         </div>
       </div>
-      <div className="justify-center items-center text-center w-[12rem] mt-4 px-6 py-2.5 text-[0.9rem] bg-white border-amber-500 border-solid shadow-sm rounded-full text-neutral-400">
-     <button> Back To Orders{" "}</button>
+      <div className="justify-center w-[12rem] px-4 py-4 text-base bg-white border-amber-500 border-solid shadow-sm rounded-full text-neutral-400">
+      Back To Orders{" "}
     </div>
     </div>
-    </div> 
-    : 
-    <Grid bgcolor={"#F5F5F5"} container spacing={1} className=' '>
-                <Grid item xs={2}>Order Number</Grid>
-                <Grid item xs={3}>Order Date</Grid>
-                <Grid item xs={3}>Status</Grid>
-                <Grid item xs={2}>Payment</Grid>
-                <Grid item xs={2}></Grid>
-
-                <Grid item xs={2}>12638594647</Grid>
-                <Grid item xs={3}>12//07/2024</Grid>
-                <Grid item xs={3}>pending</Grid>
-                <Grid item xs={2}>Paid</Grid>
-                <Grid className="text-base text-orange-400 cursor-pointer font-poppins" item xs={2} onClick={() => dispatch(fetchOrder("65d985121418538f5ccbf55c"))}>Details</Grid>
-            </Grid>}
-        </div>
-
-
-
-
-
-
-
-
-
-
-
-
-    )
+    </div>
+  )
 }
 
-export default Orderscreen
+export default SingleOrderScreen

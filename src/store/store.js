@@ -166,12 +166,12 @@ import { apiSlice } from './slices/api-slice';
 
 // Import other reducers
 
-import currencyReducer from './slices/currency-slice';
+
 import cartReducer from './slices/cart-slice';
 import compareReducer from './slices/compare-slice';
 import wishlistReducer from './slices/wishlist-slice';
 import authSliceReducer from './slices/auth-slice';
-
+import orderSliceReducer from './slices/orderSlice'
 // Redux Persist configuration
 const persistConfig = {
   key: 'flone',
@@ -182,8 +182,9 @@ const persistConfig = {
 
 // Combine reducers
 const rootReducer = combineReducers({
+  
 
-  currency: currencyReducer,
+  order : orderSliceReducer,
   auth : authSliceReducer,
   cart: cartReducer,
   compare: compareReducer,

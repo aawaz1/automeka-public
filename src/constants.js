@@ -1,4 +1,5 @@
 // export const BASE_URLL = 'http://localhost:4321/v1'
+export const BASE_URLL = 'https://restapi.ansoftt.com:4321/v1'
 export const BASE_URL = 'https://restapi.ansoftt.com:4321/v1'
 export const IMAGE_URL = 'https://restapi.ansoftt.com:4321'
 export const PRODUCTS_URL = "/api/product";
