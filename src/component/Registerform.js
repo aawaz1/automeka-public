@@ -1,15 +1,27 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { PhoneInput } from 'react-international-phone';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import PhoneInput from "react-phone-input-2";
 import 'react-international-phone/style.css';
+import { useRegisterMutation } from '../store/slices/usersApiSlice.js'
+import { setCredentials } from "../store/slices/auth-slice.js";
+import { useDispatch } from 'react-redux';
+import 'react-phone-input-2/lib/style.css'
 
 const Registerform = () => {
+    const [register, { isLoading }] = useRegisterMutation()
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    const { search } = useLocation();
+    const [country, setCountry] = useState("kw");
+
+    const sp = new URLSearchParams(search);
+    const redirect = sp.get('redirect') || '/'
     const [formData, setFormData] = useState({
         name: "",
         phone: "",
         password: "",
         email: "",
-        confirmPassword: ""
+
     });
 
     const [errors, setErrors] = useState({});
@@ -18,7 +30,6 @@ const Registerform = () => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
     };
-
     const submitHandler = async (e) => {
         e.preventDefault();
         const validationErrors = {};
@@ -42,64 +53,82 @@ const Registerform = () => {
             validationErrors.password = "Password must be at least 6 characters long";
         }
 
-        if (!formData.confirmPassword.trim()) {
-            validationErrors.confirmPassword = "Confirm Password is required";
-        } else if (formData.confirmPassword !== formData.password) {
-            validationErrors.confirmPassword = "Passwords do not match";
-        }
+        // if (!formData.confirmPassword.trim()) {
+        //     validationErrors.confirmPassword = "Confirm Password is required";
+        // } else if (formData.confirmPassword !== formData.password) {
+        //     validationErrors.confirmPassword = "Passwords do not match";
+        // }
 
         setErrors(validationErrors);
-
-        if (Object.keys(validationErrors).length === 0) {
-            alert("Form Submitted Successfully");
-
-            // Clear form fields after successful submission
+        try {
+            const res = await register(formData).unwrap();
+            dispatch(setCredentials({ ...res, }));
+            navigate('/login');
             setFormData({
                 name: "",
                 phone: "",
                 password: "",
                 email: "",
                 confirmPassword: ""
-            });
-        }
-    };
 
+            });
+        } catch (err) {
+            console.error(err.message)
+
+
+
+
+        }
+
+
+
+
+
+    }
     return (
         <div className='flex flex-col justify-center items-center p-4 border border-red-500 border-solid'>
             <h2 className='font-semibold text-[1.5rem] font-poppins text-orange-500'>Register</h2>
             <form onSubmit={submitHandler}>
-                <div className='grid grid-cols-1 md:grid-cols-2 p-2 w-[20rem] justify-center border rounded-md border-gray-400 md:w-[40rem]'>
-                    <div className="p-6">
+                <div className='grid grid-cols-1 md:grid-cols-2  w-[20rem] gap-4 p-4 md:px-6 md:py-6 justify-center border rounded-md border-gray-400 md:w-[40rem]'>
+                    <div className="">
                         <input className="bg-whitesmoke rounded-md p-2 w-[100%] md:w-[100%]" placeholder="Enter your Email" type="text" name="email" value={formData.email} onChange={handleChange} />
                         <div className='text-red-500'>{errors.email && <span>{errors.email}</span>}</div>
                     </div>
-                    <div className="p-4">
+                    <div className="">
                         <input className="bg-whitesmoke w-[100%] md:w-[100%]rounded-md p-2 " placeholder="Enter your Name" type="text" name="name" value={formData.name} onChange={handleChange} />
                         <div className='text-red-500'>  {errors.name && <span>{errors.name}</span>}</div>
                     </div>
-                    <div className="p-4">
+                    <div className="">
 
-                        <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " placeholder="Enter your Phone" type="text" name="phone" value={formData.phone} onChange={handleChange} />
+                        <PhoneInput
+                            country={country}
+                            placeholder="Enter Your Phone"
+                            value={formData.phone}
+                            inputStyle={{ width: "100%" }}
+                            onChange={(value) => handleChange({ target: { value, name: "phone" } })}
+                            countryCodeEditable={false}
+                        />
+
+                        {/* <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " placeholder="Enter your Phone" type="text" name="phone" value={formData.phone} onChange={handleChange} /> */}
                         <div className='text-red-500'>{errors.phone && <span>{errors.phone}</span>}</div>
                     </div>
-                    <div className="p-4">
+                    <div className="">
                         <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " placeholder="Enter your Password" type="password" name="password" value={formData.password} onChange={handleChange} />
                         <div className='text-red-500'>{errors.password && <span>{errors.password}</span>}</div>
                     </div>
-                    <div className="p-4">
-                        <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " placeholder="Confirm Password" type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} />
-                        <div className='text-red-500'>{errors.confirmPassword && <span>{errors.confirmPassword}</span>}</div>
+                    {/* <div className="p-4">
+                    <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " placeholder="Confirm Password" type="password" name="confirmPassword" value={formData.confirmPassword} onChange={handleChange} />
+                    <div className='text-red-500'>{errors.confirmPassword && <span>{errors.confirmPassword}</span>}</div>
+                </div>
+                <div></div> */}
+                    <div className=" items-start">
+                        <button className='px-2 py-1 bg-slate-300  hover:bg-orange-500 hover:text-white border rounded-md font-poppins font-medium' type='submit'>Submit</button>
                     </div>
                     <div></div>
-                    <div className="p-6 items-start">
-                        <button className='px-2 py-1 bg-gray-100  hover:bg-orange-500 hover:text-white border rounded-md font-poppins font-medium' type='submit'>Submit</button>
-                    </div>
-                    <div></div>
-                    <div><h4 className='text-sm px-4'>Already Have An Account ? <Link to='/login'>Login</Link></h4></div>
+                    <div><h4 className='text-sm font-poppins '>Already Have An Account ? <Link to='/login'>Login</Link></h4></div>
                 </div>
             </form>
         </div>
     );
 }
-
 export default Registerform;

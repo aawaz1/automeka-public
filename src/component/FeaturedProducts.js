@@ -35,8 +35,8 @@ const FeaturedProducts = () => {
     return (
         <>
             <ProductSlider title={<FeaturedProducttitle />} >
-                {featuredProducts.map(item => {
-                    return (<Productcard name={item.name} image={item?.image_list[0]} price={item.price} />)
+                {featuredProducts.map(product => {
+                    return (<Productcard product={product} />)
                 })}
             </ProductSlider>
         </>

@@ -33,8 +33,8 @@ const TopRatedProduct = () => {
     return (
         <div className="">
             <ProductSlider  title={<Producttitle title={"Top Rated Products"} />} >
-                {topRatedProducts?.map(item => {
-                    return (<Productcard name={item.name} image={item.image_list[0]} price={item.price} />)
+                {topRatedProducts?.map(product => {
+                    return (<Productcard product={product}  />)
                 })}
             </ProductSlider>
         </div>

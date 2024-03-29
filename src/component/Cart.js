@@ -9,9 +9,9 @@ import VariableHolder from "../components/VariableHolder";
 const Wishlist = () => {
   return (
     <div>
-        <Box>
+        {/* <Box>
             
-        </Box>
+        </Box> */}
         </div>
    
 //     <div className=" container h-[50rem] flex flex-col self-center px-5 pb-3 pt-3 mt-16 w-full font-medium max-w-[1371px] max-md:mt-10 max-md:max-w-full">
