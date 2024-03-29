@@ -15,7 +15,8 @@ import SingleOrderscreen from './component/SingleOrderScreen.js';
 import OrderTracker from './component/OrderTracker.js';
 import AddAddress from './component/AddAddress.js';
 import EditProfile from './component/Editprofile.js'
-import Cart from './component/Cart.js'
+import Cart from './component/Cart.js';
+import FAQ from './component/Faq.js'
 
 
 function App() {
@@ -33,13 +34,15 @@ function App() {
             <Route path='/category' element={<Category />} />
             <Route path='/login' element={<LoginForm />} />
             <Route path='/register' element={<RegisterForm />} />
-            <Route path='/product' element={<ProductScreen />} />
+            <Route path='/product/:id' element={<ProductScreen />} />
             <Route path='/myaccount/' element={<MyAccount />} />
             <Route path='/myaccount/orders' element={<Orderscreen />} />
             <Route path='/order' element={<SingleOrderscreen />} />
             <Route path='/ordertracker' element={<OrderTracker />} />
             <Route path='/addaddress' element={<AddAddress/>} />
             <Route path='/editprofile' element={<EditProfile/>}/>
+            <Route path='/FAQs' element={<FAQ/>}/>
+           
             
 
           </Routes>

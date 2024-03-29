@@ -3,7 +3,7 @@ import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Box from '@mui/material/Box';
 
-const MyTabs = () => {
+const MyTabs = ({ product }) => {
     const [value, setValue] = useState(0);
 
     const handleChange = (event, newValue) => {
@@ -38,26 +38,25 @@ const MyTabs = () => {
                     <Tab
                         label="Description"
                         {...a11yProps(0)}
-                       
+
                     />
                     <Tab
                         label="Specifications"
                         {...a11yProps(1)}
-                       
+
                     />
                     <Tab
                         label="Product Reviews"
                         {...a11yProps(2)}
-                      
+
                     />
                 </Tabs>
             </Box>
             <CustomTabPanel value={value} index={0}>
-                Description
-                evrrbrbtrbtbbtn
+                <div className='p-2'>{product?.about}</div>
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
-                Specifications
+                {/* {product?.specs} */}
             </CustomTabPanel>
             <CustomTabPanel value={value} index={2}>
                 Product Reviews

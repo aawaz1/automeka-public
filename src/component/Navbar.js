@@ -12,8 +12,12 @@ import { CiHeart } from "react-icons/ci";
 import './top.css'
 
 import Container from './Container.js';
+import useCategory from './customHooks/useCategory.js';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Navbar = () => {
+  const navigate = useNavigate();
+  const categories = useCategory();
   const [issOpen, setIssOpen] = useState(false);
   const handleIsOpen = () => {
     console.log(`is open ${issOpen}`)
@@ -55,19 +59,22 @@ const Navbar = () => {
                 src="https://cdn.builder.io/api/v1/image/assets/TEMP/d28a7a73318630afda323d1892b7d2f92fbf97fd19b53c38b1172b304d413cea?apiKey=97bd60a383fa4df4a87dc42761361ab7&"
                 className="shrink-0 self-start w-6 aspect-square"
               /></div>
-              <div className='absolute  top-full left-0  bg-gray-800 text-white rounded-md shadow-lg hidden group-hover:block w-40'>
+              <div className='absolute  top-full left-0  bg-gray-800 text-white rounded-md shadow-lg hidden group-hover:block w-[100%]'>
                 <ul className='gap-2 pt-2'>
-                  <li className=' px-4 py-1'>Category 1</li>
-                  <li className=' px-4 py-1'>Category 1</li>
-                  <li className=' px-4 py-1'>Category 1</li>
-                  <li className=' px-4 py-1'>Category 1</li>
+                  {categories.map(category => {
+                    return (<Link style={{ textDecoration: "none", color: "white" }} to={`/category?category=${category.name}`}><li className=' px-4 py-1'>{category.name}</li></Link>
+
+                    )
+                  })}
+
+
 
                 </ul>
               </div>
             </div>
 
 
-            <div className='h-100 flex items-center  px-6 py-2 hover:text-white cursor-pointer'>Home</div>
+            <div className='h-100 flex items-center  px-6 py-2 hover:text-white cursor-pointer' onClick={() => navigate('/')}>Home</div>
             <div className='h-100 flex items-center px-2 py-2 hover:text-white cursor-pointer'>About Us</div>
 
           </div>

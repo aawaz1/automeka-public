@@ -40,7 +40,7 @@ const cartSlice = createSlice({
                 quantity: qty,
               });
             }
-      
+        console.log("item added")
            
           },
         

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const Item = ({ Links, title }) => {
   return (
@@ -6,13 +7,13 @@ const Item = ({ Links, title }) => {
       <h1 className="mb-1 text-lg">{title}</h1>
       {Links.map((link) => (
         <li key={link.name}>
-          <a
-            className="text-gray-400 hover:text-orange-400 duration-300
+          <Link to={`/${link.name}`}
+            className="text-gray-400 hover:text-orange-400 duration-300 font-semibold
           text-sm cursor-pointer leading-6"
             href={link.link}
           >
             {link.name}
-          </a>
+          </Link>
         </li>
       ))}
     </ul>
