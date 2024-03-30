@@ -31,6 +31,7 @@ const MyTabs = ({ product }) => {
             <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
                 <Tabs
                     value={value}
+                    variant='scrollable'
                     onChange={handleChange}
                     aria-label="basic tabs example"
                     TabIndicatorProps={{ sx: { backgroundColor: 'orange' } }} // Customize indicator color

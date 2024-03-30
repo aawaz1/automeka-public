@@ -4,9 +4,12 @@ import { MdShoppingCart } from "react-icons/md";
 import { IMAGE_URL } from '../../constants';
 import { Link } from 'react-router-dom';
 import CommonRating from '../Rating';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../store/slices/cart-slice';
 
 const Productcard = ({ product }) => {
   const [showButton, setShowButton] = useState(false);
+  const dispatch = useDispatch()
 
   return (
     <div
@@ -16,7 +19,7 @@ const Productcard = ({ product }) => {
     >
       <div className="border max-w-[200px] p-[1rem] border-gray-500 relative ">
         <div className='bg-red-600 absolute rounded-sm  py-1 px-2   top-2 right-2' style={{ fontSize: "0.5rem" }}><span className='text-white'>-10%</span></div>
-        <Link to={`product/${product._id}`}>
+        <Link to={`/product/${product._id}`}>
           <img
             className="p-2"
             style={{ width: "13rem", height: "8rem", objectFit: "contain" }}
@@ -29,8 +32,8 @@ const Productcard = ({ product }) => {
 
         <h2 className=" text-sm md:text-[1.1rem]  truncate">{product?.name}</h2>
         {showButton ? (<>
-          {product.on_stock && product.on_stock > 0 ? (<div className=' p-[0.42rem] bg-orange-400 bottom-2 rounded-sm flex items-center justify-center'>{ }
-            <button className='text-white  flex items-center '> <MdShoppingCart className='font-sm' /> Add To Cart</button>
+          {product?.on_stock && product?.on_stock > 0 ? (<div className=' p-[0.42rem] bg-orange-400 bottom-2 rounded-sm flex items-center justify-center'>{ }
+            <button className='text-white  flex items-center ' onClick={() => dispatch(addToCart({product , qty : 1})) }> <MdShoppingCart className='font-sm' /> Add To Cart</button>
           </div>) : (<div className=' p-[0.42rem] bg-black bottom-2 rounded-sm flex items-center justify-center'>{ }
             <button disabled className='text-white  flex items-center '> Out Of Stock</button>
           </div>)}

@@ -5,163 +5,147 @@ import VariableModifier from "../components/VariableModifier";
 import DataTransformer from "../components/DataTransformer";
 import GroupComponent1 from "../components/GroupComponent1";
 import VariableHolder from "../components/VariableHolder";
+import { Grid } from "@mui/material";
+import { useSelect } from "@material-tailwind/react";
+import { useDispatch, useSelector } from "react-redux";
+import { IMAGE_URL } from "../constants.js";
+import { deleteAllFromWishlist } from "../store/slices/wishlist-slice.js";
+import { addToCart } from "../store/slices/cart-slice.js";
 
 const Wishlist = () => {
-  return (
-    // <div className=" container w-full h-[40rem] relative bg-white overflow-hidden flex flex-col items-start justify-start pt-[13px] px-0 pb-0 box-border tracking-[normal] text-left text-base text-black font-poppins mq900:h-auto">
-     
-     
-        
-         
-         
-    //   <div className="w-[242px] relative text-3xl font-medium hidden z-[7] mq450:text-lg">
-    //     Tyre Polish Dr Marcus
-    //   </div>
-    //   <div className="w-[783px] flex flex-row items-start justify-center pt-2 px-5 pb-12 box-border max-w-full shrink-0 text-5xl">
-    //     <h3 className="m-0 relative text-inherit font-medium font-inherit shrink-0 [debug_commit:f6aba90] mq450:text-lgi">
-    //       Your Wishlist items
-    //     </h3>
-    //   </div>
-    //   <div className="self-stretch flex flex-row items-start justify-center pt-0 pb-[20.5px] pr-5 pl-[22px] box-border max-w-full shrink-0 text-lg">
-    //     <div className="w-[1368px] flex flex-row items-start justify-between shrink-0 [debug_commit:f6aba90] max-w-full gap-[20px] mq900:flex-wrap mq900:justify-center">
-    //       <div className="relative font-medium inline-block min-w-[86px]">
-    //         PRODUCT
-    //       </div>
-    //       <div className="flex flex-row items-start justify-start gap-[149px] max-w-full mq450:gap-[149px_37px] mq900:flex-wrap mq900:gap-[149px_74px]">
-    //         <div className="relative font-medium inline-block min-w-[51px]">
-    //           PRICE
-    //         </div>
-    //         <div className="w-48 flex flex-col items-start justify-start">
-    //           <div className="relative font-medium">STOCK STATUS</div>
-    //         </div>
-    //         <div className="relative font-medium inline-block min-w-[120px]">
-    //           ADD TO CART
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    //   <div className="self-stretch h-[25.5px] flex flex-row items-start justify-center pt-0 pb-[23px] pr-[21px] pl-5 box-border max-w-full">
-    //     <img
-    //       className="h-[2.5px] w-[1371px] relative object-contain shrink-0 [debug_commit:f6aba90]"
-    //       loading="lazy"
-    //       alt=""
-    //     />
-    //   </div>
-    //   <VariableModifier />
-    //   <div className="self-stretch h-[17.5px] flex flex-row items-start justify-center pt-0 pb-[15px] pr-[21px] pl-5 box-border max-w-full">
-    //     <img
-    //       className="h-[2.5px] w-[1371px] relative object-contain shrink-0 [debug_commit:f6aba90]"
-    //       loading="lazy"
-    //       alt=""
-    //     />
-    //   </div>
-    //   <DataTransformer />
-    //   <div className="self-stretch h-[30px] flex flex-row items-start justify-center pt-0 pb-[29.5px] pr-[21px] pl-5 box-border max-w-full">
-    //     <div className="self-stretch w-[1371.5px] relative box-border shrink-0 [debug_commit:f6aba90] max-w-full border-t-[0.5px] border-solid border-silver-100" />
-    //   </div>
-    //   <div className="self-stretch flex flex-row items-start justify-center pt-0 pb-[412px] pr-5 pl-[1252px] shrink-0 mq1300:pl-[626px] mq1300:box-border mq450:pl-5 mq450:pb-[268px] mq450:box-border mq900:pl-[313px] mq900:box-border">
-    //     <div className="relative font-medium shrink-0 [debug_commit:f6aba90]">
-    //       {" "}
-    //       Clear All Wishlist
-    //     </div>
-    //   </div>
-     
-    
-      
-    // </div>
-    <div className=" container h-[50rem] flex flex-col self-center px-5 pb-3 pt-3 mt-16 w-full font-medium max-w-[1371px] max-md:mt-10 max-md:max-w-full">
-    <div className="text-2xl text-black max-md:max-w-full">
-      Your Wishlist items
+  const { wishlistItems } = useSelector((state) => state.wishlist);
+  const dispatch = useDispatch();
+  const handleIncrement = (cartItem) => {
+    dispatch(addToCart({ product: cartItem, qty: 1 }));
+  };
+  return (<>
+    <div className="hidden md:block container">
+      <h2 className="font-bold font-poppins text-[1.2rem] p-2 py-4">Your Wishlists Item</h2>
+      <div style={{ borderBottom: "1px solid lightgrey" }}></div>
+      <Grid container spacing={1} className="py-3">
+        <Grid item container xs={12} >
+          <Grid className="font-semibold font-poppins" item md={6}>Product</Grid>
+          <Grid className="font-semibold font-poppins" item md={2}>Price</Grid>
+          <Grid className="font-semibold font-poppins" item md={2}>Stock Status</Grid>
+          <Grid className="font-semibold font-poppins" item md={2}>Add To Cart</Grid>
+        </Grid>
+
+        {wishlistItems.map(cartItem => {
+          return (<Grid item container xs={12} style={{ borderBottom: "1px solid lightgrey" }}>
+            <Grid item md={6}>
+              <div className="flex py-2 gap-2">
+                <div className=""><img style={{ width: "6rem", height: "4rem" }} src={IMAGE_URL + cartItem?.image_list[0]} alt="hello cart" /></div>
+                <div><h2 className="text-[1.0rem] font-medium font-poppins">{cartItem.name}</h2></div>
+              </div>
+            </Grid>
+            <Grid className="font-medium font-poppins" item md={2} alignItems={"center"} display={"flex"}>{cartItem?.price.toFixed(3)}</Grid>
+            <Grid item md={2} alignItems={"center"} display={"flex"}></Grid>
+            <Grid item md={2} alignItems={"center"} display={"flex"}><div className="bg-orange-400 rounded-md text-white px-3 py-1.5"><button className="text-white bg-orange-400 " onClick={() =>handleIncrement(cartItem)}>Add To Cart</button></div></Grid>
+          </Grid>)
+        })}
+
+        {wishlistItems && (<Grid className="p-2" item container xs={12}>
+          <Grid className="font-semibold font-poppins" item md={6}></Grid>
+          <Grid className="font-semibold font-poppins" item md={2}></Grid>
+          <Grid className="font-semibold font-poppins" item md={2}></Grid>
+          <Grid className="font-medium font-poppins hover:text-orange-400" item md={2}><button onClick={() => dispatch(deleteAllFromWishlist())}>{wishlistItems.length > 0 && "Clear Wishlist"}</button></Grid>
+        </Grid>)}
+
+      </Grid>
     </div>
-    <div className="flex gap-5 justify-between mt-16 w-full text-lg text-black max-md:flex-wrap max-md:mt-10 max-md:max-w-full">
-      <div>PRODUCT</div>
-      <div className="flex gap-5 max-md:flex-wrap max-md:max-w-full">
-        <div>PRICE</div>
-        <div className="flex-auto">STOCK STATUS</div>
-        <div className="flex-auto">ADD TO CART</div>
+    <div className="md:hidden container h-[50rem] flex flex-col self-center px-5 pb-3 pt-3 mt-16 w-full font-medium max-w-[1371px] max-md:mt-10 max-md:max-w-full">
+      <div className="text-2xl text-black max-md:max-w-full">
+        Your Wishlist items
       </div>
-    </div>
-    <div className="shrink-0 mt-7 border border-solid bg-stone-300 border-stone-300 h-[3px] max-md:max-w-full" />
-    <div className="flex gap-5 justify-between px-0.5 mt-6 w-full max-md:flex-wrap max-md:max-w-full">
-      <div className="flex gap-5 justify-between items-center">
-        <img
-          loading="lazy"
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/4275a5684bdda0fcbc734c7ccf0f0a5c197ca91676414ac6082d84401871c22e?apiKey=97bd60a383fa4df4a87dc42761361ab7&"
-          className="shrink-0 self-stretch my-auto w-8 aspect-square"
-        />
-        <img
-          loading="lazy"
-          srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/463b36be7cb62ffa3ee88fe28cd9c870fa69ccfa4293f5f53f18fd3c814657a6?apiKey=97bd60a383fa4df4a87dc42761361ab7&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/463b36be7cb62ffa3ee88fe28cd9c870fa69ccfa4293f5f53f18fd3c814657a6?apiKey=97bd60a383fa4df4a87dc42761361ab7&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/463b36be7cb62ffa3ee88fe28cd9c870fa69ccfa4293f5f53f18fd3c814657a6?apiKey=97bd60a383fa4df4a87dc42761361ab7&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/463b36be7cb62ffa3ee88fe28cd9c870fa69ccfa4293f5f53f18fd3c814657a6?apiKey=97bd60a383fa4df4a87dc42761361ab7&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/463b36be7cb62ffa3ee88fe28cd9c870fa69ccfa4293f5f53f18fd3c814657a6?apiKey=97bd60a383fa4df4a87dc42761361ab7&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/463b36be7cb62ffa3ee88fe28cd9c870fa69ccfa4293f5f53f18fd3c814657a6?apiKey=97bd60a383fa4df4a87dc42761361ab7&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/463b36be7cb62ffa3ee88fe28cd9c870fa69ccfa4293f5f53f18fd3c814657a6?apiKey=97bd60a383fa4df4a87dc42761361ab7&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/463b36be7cb62ffa3ee88fe28cd9c870fa69ccfa4293f5f53f18fd3c814657a6?apiKey=97bd60a383fa4df4a87dc42761361ab7&"
-          className="shrink-0 self-stretch w-20 aspect-[0.74]"
-        />
-        <div className="flex flex-col self-stretch my-auto">
-          <div className="text-lg text-black">10w40 United Oil</div>
-          <div className="flex gap-2 mt-3.5 text-xs whitespace-nowrap text-neutral-400">
-            <img
-              loading="lazy"
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/152a7afe7af605eb2fd747cfb78e7ffd8dad87983801750ca1c0a5c35d673567?apiKey=97bd60a383fa4df4a87dc42761361ab7&"
-              className="shrink-0 max-w-full aspect-[5] w-[104px]"
-            />
-            <div>(4.7)</div>
+      <div className="flex gap-5 justify-between mt-16 w-full text-lg text-black max-md:flex-wrap max-md:mt-10 max-md:max-w-full">
+        <div>PRODUCT</div>
+        <div className="flex gap-5 max-md:flex-wrap max-md:max-w-full">
+          <div>PRICE</div>
+          <div className="flex-auto">STOCK STATUS</div>
+          <div className="flex-auto">ADD TO CART</div>
+        </div>
+      </div>
+      <div className="shrink-0 mt-7 border border-solid bg-stone-300 border-stone-300 h-[3px] max-md:max-w-full" />
+      <div className="flex gap-5 justify-between px-0.5 mt-6 w-full max-md:flex-wrap max-md:max-w-full">
+        <div className="flex gap-5 justify-between items-center">
+          <img
+            loading="lazy"
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/4275a5684bdda0fcbc734c7ccf0f0a5c197ca91676414ac6082d84401871c22e?apiKey=97bd60a383fa4df4a87dc42761361ab7&"
+            className="shrink-0 self-stretch my-auto w-8 aspect-square"
+          />
+          <img
+            loading="lazy"
+            srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/463b36be7cb62ffa3ee88fe28cd9c870fa69ccfa4293f5f53f18fd3c814657a6?apiKey=97bd60a383fa4df4a87dc42761361ab7&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/463b36be7cb62ffa3ee88fe28cd9c870fa69ccfa4293f5f53f18fd3c814657a6?apiKey=97bd60a383fa4df4a87dc42761361ab7&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/463b36be7cb62ffa3ee88fe28cd9c870fa69ccfa4293f5f53f18fd3c814657a6?apiKey=97bd60a383fa4df4a87dc42761361ab7&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/463b36be7cb62ffa3ee88fe28cd9c870fa69ccfa4293f5f53f18fd3c814657a6?apiKey=97bd60a383fa4df4a87dc42761361ab7&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/463b36be7cb62ffa3ee88fe28cd9c870fa69ccfa4293f5f53f18fd3c814657a6?apiKey=97bd60a383fa4df4a87dc42761361ab7&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/463b36be7cb62ffa3ee88fe28cd9c870fa69ccfa4293f5f53f18fd3c814657a6?apiKey=97bd60a383fa4df4a87dc42761361ab7&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/463b36be7cb62ffa3ee88fe28cd9c870fa69ccfa4293f5f53f18fd3c814657a6?apiKey=97bd60a383fa4df4a87dc42761361ab7&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/463b36be7cb62ffa3ee88fe28cd9c870fa69ccfa4293f5f53f18fd3c814657a6?apiKey=97bd60a383fa4df4a87dc42761361ab7&"
+            className="shrink-0 self-stretch w-20 aspect-[0.74]"
+          />
+          <div className="flex flex-col self-stretch my-auto">
+            <div className="text-lg text-black">10w40 United Oil</div>
+            <div className="flex gap-2 mt-3.5 text-xs whitespace-nowrap text-neutral-400">
+              <img
+                loading="lazy"
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/152a7afe7af605eb2fd747cfb78e7ffd8dad87983801750ca1c0a5c35d673567?apiKey=97bd60a383fa4df4a87dc42761361ab7&"
+                className="shrink-0 max-w-full aspect-[5] w-[104px]"
+              />
+              <div>(4.7)</div>
+            </div>
+          </div>
+        </div>
+        <div className="flex gap-5 justify-between items-center self-start mt-5 text-base max-md:flex-wrap max-md:max-w-full">
+          <div className="self-stretch my-auto text-black"> 3.500 KD</div>
+          <div className="self-stretch my-auto text-amber-500">
+            {" "}
+            out of stock
+          </div>
+          <div className="justify-center self-stretch px-2 py-2 tracking-tight text-center text-white bg-amber-500 rounded-md ">
+            Add To Cart
           </div>
         </div>
       </div>
-      <div className="flex gap-5 justify-between items-center self-start mt-5 text-base max-md:flex-wrap max-md:max-w-full">
-        <div className="self-stretch my-auto text-black"> 3.500 KD</div>
-        <div className="self-stretch my-auto text-amber-500">
-          {" "}
-          out of stock
-        </div>
-        <div className="justify-center self-stretch px-2 py-2 tracking-tight text-center text-white bg-amber-500 rounded-md ">
-          Add To Cart
-        </div>
-      </div>
-    </div>
-    <div className="shrink-0 mt-2.5 border border-solid bg-stone-300 border-stone-300 h-[3px] max-md:max-w-full" />
-    <div className="flex gap-5 justify-between px-0.5 mt-4 w-full max-md:flex-wrap max-md:max-w-full">
-      <div className="flex gap-5 justify-between items-center">
-        <img
-          loading="lazy"
-          src="https://cdn.builder.io/api/v1/image/assets/TEMP/1e06854917bc79b4fe8f53567a45503be0ff51abeef7dfe2df9f398759b100c1?apiKey=97bd60a383fa4df4a87dc42761361ab7&"
-          className="shrink-0 self-stretch my-auto w-8 aspect-square"
-        />
-        <img
-          loading="lazy"
-          srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/649ddd2d6663113850a2316bfe3e96695e6fa1fff5f5af348732a4e5910078a3?apiKey=97bd60a383fa4df4a87dc42761361ab7&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/649ddd2d6663113850a2316bfe3e96695e6fa1fff5f5af348732a4e5910078a3?apiKey=97bd60a383fa4df4a87dc42761361ab7&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/649ddd2d6663113850a2316bfe3e96695e6fa1fff5f5af348732a4e5910078a3?apiKey=97bd60a383fa4df4a87dc42761361ab7&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/649ddd2d6663113850a2316bfe3e96695e6fa1fff5f5af348732a4e5910078a3?apiKey=97bd60a383fa4df4a87dc42761361ab7&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/649ddd2d6663113850a2316bfe3e96695e6fa1fff5f5af348732a4e5910078a3?apiKey=97bd60a383fa4df4a87dc42761361ab7&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/649ddd2d6663113850a2316bfe3e96695e6fa1fff5f5af348732a4e5910078a3?apiKey=97bd60a383fa4df4a87dc42761361ab7&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/649ddd2d6663113850a2316bfe3e96695e6fa1fff5f5af348732a4e5910078a3?apiKey=97bd60a383fa4df4a87dc42761361ab7&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/649ddd2d6663113850a2316bfe3e96695e6fa1fff5f5af348732a4e5910078a3?apiKey=97bd60a383fa4df4a87dc42761361ab7&"
-          className="shrink-0 self-stretch max-w-full aspect-[0.88] w-[109px]"
-        />
-        <div className="flex flex-col self-stretch my-auto">
-          <div className="text-lg text-black">
-            5w30 united oil
-            <br />
-          </div>
-          <div className="flex gap-2 mt-3.5 text-xs whitespace-nowrap text-neutral-400">
-            <img
-              loading="lazy"
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/0e904d8713a1faf3431b8ee28edf33374e9d95a515c42b155e20cd0c5e4e2881?apiKey=97bd60a383fa4df4a87dc42761361ab7&"
-              className="shrink-0 max-w-full aspect-[5] w-[104px]"
-            />
-            <div>(4.7)</div>
+      <div className="shrink-0 mt-2.5 border border-solid bg-stone-300 border-stone-300 h-[3px] max-md:max-w-full" />
+      <div className="flex gap-5 justify-between px-0.5 mt-4 w-full max-md:flex-wrap max-md:max-w-full">
+        <div className="flex gap-5 justify-between items-center">
+          <img
+            loading="lazy"
+            src="https://cdn.builder.io/api/v1/image/assets/TEMP/1e06854917bc79b4fe8f53567a45503be0ff51abeef7dfe2df9f398759b100c1?apiKey=97bd60a383fa4df4a87dc42761361ab7&"
+            className="shrink-0 self-stretch my-auto w-8 aspect-square"
+          />
+          <img
+            loading="lazy"
+            srcSet="https://cdn.builder.io/api/v1/image/assets/TEMP/649ddd2d6663113850a2316bfe3e96695e6fa1fff5f5af348732a4e5910078a3?apiKey=97bd60a383fa4df4a87dc42761361ab7&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/649ddd2d6663113850a2316bfe3e96695e6fa1fff5f5af348732a4e5910078a3?apiKey=97bd60a383fa4df4a87dc42761361ab7&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/649ddd2d6663113850a2316bfe3e96695e6fa1fff5f5af348732a4e5910078a3?apiKey=97bd60a383fa4df4a87dc42761361ab7&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/649ddd2d6663113850a2316bfe3e96695e6fa1fff5f5af348732a4e5910078a3?apiKey=97bd60a383fa4df4a87dc42761361ab7&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/649ddd2d6663113850a2316bfe3e96695e6fa1fff5f5af348732a4e5910078a3?apiKey=97bd60a383fa4df4a87dc42761361ab7&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/649ddd2d6663113850a2316bfe3e96695e6fa1fff5f5af348732a4e5910078a3?apiKey=97bd60a383fa4df4a87dc42761361ab7&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/649ddd2d6663113850a2316bfe3e96695e6fa1fff5f5af348732a4e5910078a3?apiKey=97bd60a383fa4df4a87dc42761361ab7&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/649ddd2d6663113850a2316bfe3e96695e6fa1fff5f5af348732a4e5910078a3?apiKey=97bd60a383fa4df4a87dc42761361ab7&"
+            className="shrink-0 self-stretch max-w-full aspect-[0.88] w-[109px]"
+          />
+          <div className="flex flex-col self-stretch my-auto">
+            <div className="text-lg text-black">
+              5w30 united oil
+              <br />
+            </div>
+            <div className="flex gap-2 mt-3.5 text-xs whitespace-nowrap text-neutral-400">
+              <img
+                loading="lazy"
+                src="https://cdn.builder.io/api/v1/image/assets/TEMP/0e904d8713a1faf3431b8ee28edf33374e9d95a515c42b155e20cd0c5e4e2881?apiKey=97bd60a383fa4df4a87dc42761361ab7&"
+                className="shrink-0 max-w-full aspect-[5] w-[104px]"
+              />
+              <div>(4.7)</div>
+            </div>
           </div>
         </div>
+        <div className="flex gap-5 justify-between items-center my-auto text-base max-md:flex-wrap max-md:max-w-full">
+          <div className="self-stretch my-auto text-black"> 1.600 KD</div>
+          <div className="self-stretch my-auto text-amber-500">
+            {" "}
+            out of stock
+          </div>
+          <div className="justify-center self-stretch px-2 py-2 tracking-tight text-center text-white bg-amber-500 rounded-md ">
+            Add To Cart
+          </div>
+        </div>
       </div>
-      <div className="flex gap-5 justify-between items-center my-auto text-base max-md:flex-wrap max-md:max-w-full">
-        <div className="self-stretch my-auto text-black"> 1.600 KD</div>
-        <div className="self-stretch my-auto text-amber-500">
-          {" "}
-          out of stock
-        </div>
-        <div className="justify-center self-stretch px-2 py-2 tracking-tight text-center text-white bg-amber-500 rounded-md ">
-          Add To Cart
-        </div>
+      <div className="self-end mt-12 text-base text-black max-md:mt-10">
+        {" "}
+        Clear All Wishlist
       </div>
     </div>
-    <div className="self-end mt-12 text-base text-black max-md:mt-10">
-      {" "}
-      Clear All Wishlist
-    </div>
-  </div>
-  );
+  </>);
 };
 
 export default Wishlist;

@@ -8,14 +8,18 @@ import SearchBox from './items/SearchBox.js';
 import { GrCart } from "react-icons/gr";
 import { FcLike } from "react-icons/fc";
 import { RiAccountBoxLine } from "react-icons/ri";
-import { CiHeart } from "react-icons/ci";
+import { FaRegHeart } from "react-icons/fa";
 import './top.css'
 
 import Container from './Container.js';
 import useCategory from './customHooks/useCategory.js';
 import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Navbar = () => {
+  const { cartItems } = useSelector(state => state.cart);
+  const { wishlistItems } = useSelector((state) => state.wishlist);
+
   const navigate = useNavigate();
   const categories = useCategory();
   const [issOpen, setIssOpen] = useState(false);
@@ -30,20 +34,21 @@ const Navbar = () => {
   }
 
   return (
-    <div style={{ zIndex: 999999 }} className='sticky top-0  bg-white'>
+    <div style={{ zIndex: 999999 }} className='sticky top-0  bg-white py-2'>
       <div className="container flex justify-between items-center">
         <div className=""><img style={{ width: "5rem" }} src='/auto_meka_logo_small.webp' /></div>
         <SearchBox />
         <div className="flex">
-          <button className="mr-4"><RiAccountBoxLine style={{ fontSize: "1.2rem" }} /></button>
-          <button onClick={handleIsOpen} className="mr-4"><GrCart style={{ fontSize: "1.2rem" }} /></button>
-          <button className="mr-4 font-semibold "><CiHeart className="" style={{ fontSize: "1.2rem" }} /></button>
+          <button className="mr-4" onClick={() => navigate('/myaccount')}><RiAccountBoxLine style={{ fontSize: "1.2rem" }} /></button>
+          <div className='relative mr-4'> <button onClick={handleIsOpen} className=""><GrCart style={{ fontSize: "1.2rem" }} /></button>
+            <div className='absolute top-[-1rem] right-[-0.9rem] bg-orange-400 w-[1.2rem] rounded-full  flex justify-center items-center'><span>{cartItems.length > 0 && cartItems.length}</span></div></div>
+          <div className='mr-4 relative'><button className=" font-semibold " onClick={() => navigate('/wishlist')}><FaRegHeart className="" style={{ fontSize: "1.2rem" }} /></button><div className='absolute top-[-1rem] right-[-0.9rem] bg-orange-400 w-[1.2rem] rounded-full  flex justify-center items-center'><span> {wishlistItems.length > 0 && wishlistItems.length}</span></div></div>
         </div>
       </div>
 
       <Container isOpen={issOpen} handleIsOpen={handleIsOpen} />
       <div className='  z-55 bg-slate-700 " text-orange-500 '>
-        <div style={{ minHeight: "50px" }} className='hidden pl-30 md:flex justify-around '>
+        <div style={{ minHeight: "50px" }} className=' container hidden pl-30 md:flex justify-between '>
           <div className='flex'>
 
             {/* <div className=" h-100 flex items-center hover:text-white cursor-pointer text-white bg-orange-500">
@@ -78,9 +83,11 @@ const Navbar = () => {
             <div className='h-100 flex items-center px-2 py-2 hover:text-white cursor-pointer'>About Us</div>
 
           </div>
-          <div className='flex items-center'> <div style={{ position: "relative", alignItems: "center", textAlign: "center" }} className="  rounded-full border-orange-500 px-2 py-1 h-98 border border-solid text-white     bg-slate-700 flex items-center justify-center text-[0.8rem]" > USD<RxDividerVertical style={{ fontSize: "1.6rem" }} />
+          <div className='flex items-center'>
+            {/* <div style={{ position: "relative", alignItems: "center", textAlign: "center" }} className="  rounded-full border-orange-500 px-2 py-1 h-98 border border-solid text-white     bg-slate-700 flex items-center justify-center text-[0.8rem]" > USD<RxDividerVertical style={{ fontSize: "1.6rem" }} />
             English
-          </div></div>
+          </div> */}
+          </div>
 
         </div>
 

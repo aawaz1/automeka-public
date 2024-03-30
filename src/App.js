@@ -39,11 +39,12 @@ function App() {
             <Route path='/myaccount/orders' element={<Orderscreen />} />
             <Route path='/order' element={<SingleOrderscreen />} />
             <Route path='/ordertracker' element={<OrderTracker />} />
-            <Route path='/addaddress' element={<AddAddress/>} />
-            <Route path='/editprofile' element={<EditProfile/>}/>
-            <Route path='/FAQs' element={<FAQ/>}/>
-           
-            
+            <Route path='/addaddress' element={<AddAddress />} />
+            <Route path='/editprofile' element={<EditProfile />} />
+            <Route path='/FAQs' element={<FAQ />} />
+
+
+
 
           </Routes>
         </Layout>

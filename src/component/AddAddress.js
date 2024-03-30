@@ -1,6 +1,27 @@
-import React from 'react'
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
 
 const AddAddress = () => {
+    const [governates, setGovernates] = useState([]);
+    const [governate, setGovernate] = useState("");
+    const handleGovernateSelect = (selectedValue) => {
+        setGovernate(selectedValue); // Set the selected governate ID in the state
+    };
+    const getAllGovernates = async () => {
+        try {
+            const { data } = await axios.get(
+                `https://restapi.ansoftt.com:4321/v1/governate/`
+            );
+            setGovernates(data.data);
+            console.log(data.data)
+            console.log(governates)
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    useEffect(() => {
+        getAllGovernates();
+    }, []);
     return (
         <div className='container p-4'>
             <h2 className='font-semibold text-lg font-poppins'>Add Address</h2>
@@ -19,12 +40,12 @@ const AddAddress = () => {
                 <div className="p-4">
                     <label className='text-[1rem] font-semiobold font-poppins'>Address 1</label>
 
-                    <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="phone" />
+                    <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="address_2" />
 
                 </div>
                 <div className="p-4">
-                    <label className='text-[1rem] font-semiobold font-poppins'>Phone</label>
-                    <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="password" name="password" />
+                    <label className='text-[1rem] font-semiobold font-poppins'>Address 2</label>
+                    <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="address_2" />
 
                 </div>
                 <div className="p-4">
@@ -43,8 +64,30 @@ const AddAddress = () => {
 
                 </div>
                 <div className="p-4">
-                    <label className='text-[1rem] font-semiobold font-poppins'>Address 1</label>
+                    <label className='text-[1rem] font-semiobold font-poppins'>Phone</label>
                     <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="password" name="confirmPassword" />
+
+                </div>
+                <div className="p-4">
+                    <label className='text-[1rem] font-semiobold font-poppins'>LandMark</label>
+                    <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="password" name="confirmPassword" />
+
+                </div>
+                <div className="p-4">
+                    <label className='text-[1rem] font-semiobold font-poppins'>Governate</label>
+                    <div className="">
+
+                        <select className='bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2' value={governate} onChange={(e) => handleGovernateSelect(e.target.value)}>
+                            <option value="">Select a governate</option>
+                            {governates.map(g => (
+                                <option key={g._id} value={g._id}>{g.value} - {g.name}</option>
+                            ))}
+                        </select>
+
+
+
+
+                    </div>
 
                 </div>
 
