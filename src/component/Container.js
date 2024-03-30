@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import CartMenu from '../component/cartmenu.js'
 
 const Container = ({ isOpen , handleIsOpen}) => {
+    const [cartItems ,setCartItems] = useState(false)
     return (
         <>
             {
