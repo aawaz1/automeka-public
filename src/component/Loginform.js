@@ -36,7 +36,7 @@ const Loginform = () => {
 
         if (!formData.password.trim()) {
             validationErrors.password = "Password is required";
-        } else if (formData.password.length < 6) {
+        } else if (formData.password?.length < 6) {
             validationErrors.password = "Password must be at least 6 characters long";
         }
         setErrors(validationErrors);
@@ -80,7 +80,7 @@ const Loginform = () => {
 
 
 
-                        <div className=" items-start">
+                    <div className=" items-start">
                         <button className='px-2 py-1 bg-slate-300  hover:bg-orange-500 hover:text-white border rounded-md font-poppins font-medium' type='submit'>Submit</button>
                     </div>
                     <div><h4 className='text-sm font-poppins'>Dont Have An Account ? <Link to='/register'>Register</Link></h4></div>

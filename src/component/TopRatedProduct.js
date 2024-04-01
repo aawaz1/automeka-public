@@ -31,12 +31,12 @@ const TopRatedProduct = () => {
     };
     const productData = [{ name: "10w40 United Oil", image: '/car-service-white-background-isolated-3d-illustration.jpg', price: 2.222 }, { name: "10w40 United Oil", image: '/car-service-white-background-isolated-3d-illustration.jpg', price: 2.222 }, { name: "10w40 United Oil", image: '/car-service-white-background-isolated-3d-illustration.jpg', price: 2.222 }, { name: "10w40 United Oil", image: '/car-service-white-background-isolated-3d-illustration.jpg', price: 2.222 }, { name: "10w40 United Oil", image: '/car-service-white-background-isolated-3d-illustration.jpg', price: 2.222 },]
     return (
-        <div className="">
-            <ProductSlider  title={<Producttitle title={"Top Rated Products"} />} >
+        <div className="">{topRatedProducts ?
+            <ProductSlider title={<Producttitle title={"Best Selling Products"} />} >
                 {topRatedProducts?.map(product => {
-                    return (<Productcard product={product}  />)
+                    return (<Productcard product={product} />)
                 })}
-            </ProductSlider>
+            </ProductSlider> : <>No Data</>}
         </div>
 
     )

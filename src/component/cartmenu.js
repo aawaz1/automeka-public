@@ -77,7 +77,10 @@ const Cartmenu = ({ handleIsOpen }) => {
                             </div>
                             <hr className='border border-gray-500' />
                             <div className='flex justify-center py-4 gap-3'>
-                                <button className='bg-orange-400 text-white p-2 px-4 rounded-md'>Checkout</button>
+                                <button  onClick={() => {
+                                    navigate('/checkout');
+                                    handleIsOpen();
+                                }} className='bg-orange-400 text-white p-2 px-4 rounded-md'>Checkout</button>
                                 <button className='bg-orange-400 text-white p-2 px-4 rounded-md' onClick={() => {
                                     navigate('/cart');
                                     handleIsOpen();

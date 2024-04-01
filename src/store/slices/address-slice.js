@@ -3,16 +3,23 @@ import { apiSlice } from './api-slice'
 
 
 export const addressApiSlice = apiSlice.injectEndpoints({
-    endpoints : (builder) => ({
-        create : builder.mutation({
-            query : (data) => ({
-                url : `${ADDRESS_URL}`,
-                method : 'POST',
-                body : data
+    endpoints: (builder) => ({
+        create: builder.mutation({
+            query: (data) => ({
+                url: `${ADDRESS_URL}`,
+                method: 'POST',
+                body: data
             }),
-            
+
 
         }),
+        update: builder.mutation({
+            query: ({ id, data }) => ({
+                url: `${ADDRESS_URL}/${id}`,
+                method: 'PATCH',
+                body: data
+            })
+        })
 
 
 
@@ -22,4 +29,4 @@ export const addressApiSlice = apiSlice.injectEndpoints({
 
 
 
-export const {useCreateMutation} = addressApiSlice
+export const { useCreateMutation, useUpdateMutation } = addressApiSlice

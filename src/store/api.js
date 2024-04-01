@@ -3,7 +3,7 @@ import { BASE_URL } from "../constants";
 
 export const fetchOrderData = async (orderId) => {
 
-  const response = await axios.get(`${BASE_URL}/order/`);
+  const response = await axios.get(`${BASE_URL}/order/details/${orderId}`);
   // const response = await axios.get(`${BASE_URL}/order/${orderId}`);
 
   if (response.statusText != "OK") {

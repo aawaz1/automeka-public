@@ -6,21 +6,23 @@ import { TbSortDescending } from "react-icons/tb";
 import useCategory from './customHooks/useCategory';
 import useFeaturedProducts from './customHooks/useFeaturedProducts';
 import { Grid } from '@mui/material';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams } from 'react-router-dom';
 
 const Category = () => {
+
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const category = searchParams.get('category');
-  
+    const name = searchParams.get('name');
+
     console.log(category);
     const [isOpen, setIsOpen] = useState(false);
-    const featuredProducts = useFeaturedProducts();
+    const featuredProducts = useFeaturedProducts(name);
     const [selectedCategory, setSelectedCategory] = useState(null)
     useEffect(() => {
-if(category){
-    setSelectedCategory(category);
-}
+        if (category) {
+            setSelectedCategory(category);
+        }
     }, [category])
     const categories = useCategory();
     return (

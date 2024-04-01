@@ -17,18 +17,19 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../store/slices/auth-slice.js';
 
-const Navbar = () => { 
+const Navbar = () => {
   const dispatch = useDispatch();
- 
- 
+  const { userInfo } = useSelector(state => state.auth);
+
+
   const { cartItems } = useSelector(state => state.cart);
   const { wishlistItems } = useSelector((state) => state.wishlist);
   const logoutHandler = async () => {
     try {
-     
+
       dispatch(logout());
 
-    
+
       // navigate('/login-register');
     } catch (error) {
       console.log(error);
@@ -51,24 +52,25 @@ const Navbar = () => {
   return (
     <div style={{ zIndex: 999999 }} className='sticky top-0  bg-white py-2'>
       <div className="container flex justify-between items-center">
-        <div className=""><img style={{ width: "5rem" }} src='/auto_meka_logo_small.webp' /></div>
+        <div onClick={() => navigate('/')} className=""><img className=' w-[3rem] md:w-[5rem]' src='/auto_meka_logo_small.webp' /></div>
         <SearchBox />
         <div className="flex">
-          <button className="mr-4" ><div className="flex items-center text-black relative group cursor-pointer">
-              <div className="   items-center flex text-black"><RiAccountBoxLine style={{ fontSize: "1.2rem" }} /></div>
-              
-              <div className='absolute  top-4 left-0  bg-gray-800 text-white rounded-md shadow-lg hidden group-hover:block w-[10vw]'>
-                <ul className='gap-2 pt-2'>
-              <Link style={{ transition: "ease-out" , textDecoration: "none", color: "white" }} className='text' to={'/myaccount'}><li >My Account</li></Link>
-              <Link onClick={logoutHandler} to='/login' style={{ transition: "ease-out" , textDecoration: "none", color: "white" }} className='text' ><li >LogOut</li></Link>
+          <button className=" mr-1 md:mr-4" ><div className="flex items-center text-black relative group cursor-pointer">
+            <div className="   items-center flex text-black"><RiAccountBoxLine style={{ fontSize: "1.2rem" }} /></div>
+
+            <div className='absolute  left-[-62px] top-[20px]  bg-gray-800 text-white rounded-md shadow-lg hidden group-hover:block w-[10vw]'>
+              <ul className='gap-2 pt-2'>
+                {!userInfo && (<Link style={{ transition: "ease-out", textDecoration: "none", color: "white" }} to='/login'>Login</Link>)}
+                {userInfo && (<> <Link style={{ transition: "ease-out", textDecoration: "none", color: "white" }} className='text' to={'/myaccount'}><li >My Account</li></Link>
+                  <Link onClick={logoutHandler} to='/login' style={{ transition: "ease-out", textDecoration: "none", color: "white" }} className='text' ><li >LogOut</li></Link> </>)}
 
 
-                </ul>
-              </div>
-            </div></button>
-          <div className='relative mr-4'> <button onClick={handleIsOpen} className=""><GrCart style={{ fontSize: "1.2rem" }} /></button>
-            <div className='absolute top-[-1rem] right-[-0.9rem] bg-orange-400 w-[1.2rem] rounded-full  flex justify-center items-center'><span>{cartItems.length > 0 && cartItems.length}</span></div></div>
-          <div className='mr-4 relative'><button className=" font-semibold " onClick={() => navigate('/wishlist')}><FaRegHeart className="" style={{ fontSize: "1.2rem" }} /></button><div className='absolute top-[-1rem] right-[-0.9rem] bg-orange-400 w-[1.2rem] rounded-full  flex justify-center items-center'><span> {wishlistItems.length > 0 && wishlistItems.length}</span></div></div>
+              </ul>
+            </div>
+          </div></button>
+          <div className='relative mr-2 md:mr-4'> <button onClick={handleIsOpen} className=""><GrCart style={{ fontSize: "1.2rem" }} /></button>
+            <div className='absolute top-[-1rem] right-[-0.9rem] bg-orange-400 w-[1.2rem] rounded-full  flex justify-center items-center'><span>{cartItems?.length > 0 && cartItems?.length}</span></div></div>
+          <div className='mr-1 md:mr-4 relative'><button className=" font-semibold " onClick={() => navigate('/wishlist')}><FaRegHeart className="" style={{ fontSize: "1.2rem" }} /></button><div className='absolute top-[-1rem] right-[-0.9rem] bg-orange-400 w-[1.2rem] rounded-full  flex justify-center items-center'><span> {wishlistItems?.length > 0 && wishlistItems?.length}</span></div></div>
         </div>
       </div>
 
@@ -106,7 +108,7 @@ const Navbar = () => {
 
 
             <div className='h-100 flex items-center  px-6 py-2 hover:text-white cursor-pointer' onClick={() => navigate('/')}>Home</div>
-            <div className='h-100 flex items-center px-2 py-2 hover:text-white cursor-pointer'>About Us</div>
+            <div className='h-100 flex items-center px-2 py-2 hover:text-white cursor-pointer' onClick={() => navigate('/about')}>About Us</div>
 
           </div>
           <div className='flex items-center'>
@@ -140,9 +142,11 @@ const Navbar = () => {
                 </div>
                 <div className='absolute top-full left-0 mt-2 bg-gray-800 text-white rounded-md shadow-lg opacity-0 group-hover:opacity-100 w-40'>
                   <ul>
-                    <li className='py-1 px-1'>Category 1</li>
-                    <li className='py-1 px-1'>Category 2</li>
-                    <li className='py-1 px-1'>Category 3</li>
+                    {categories.map(category => {
+                      return (<Link style={{ textDecoration: "none", color: "white" }} to={`/category?category=${category.name}`}><li className=' px-4 py-1'>{category.name}</li></Link>
+
+                      )
+                    })}
                   </ul>
                 </div>
               </div>

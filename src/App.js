@@ -16,7 +16,9 @@ import OrderTracker from './component/OrderTracker.js';
 import AddAddress from './component/AddAddress.js';
 import EditProfile from './component/Editprofile.js'
 import Cart from './component/Cart.js';
-import FAQ from './component/Faq.js'
+import FAQ from './component/Faq.js';
+import EditAddress from './component/EditAddress.js';
+import About from './component/About.js'
 
 
 function App() {
@@ -40,8 +42,10 @@ function App() {
             <Route path='/order' element={<SingleOrderscreen />} />
             <Route path='/ordertracker' element={<OrderTracker />} />
             <Route path='/addaddress' element={<AddAddress />} />
+            <Route path='/editaddress/:id' element={<EditAddress />} />
             <Route path='/editprofile' element={<EditProfile />} />
             <Route path='/FAQs' element={<FAQ />} />
+            <Route path='/about' element={<About />} />
 
 
 

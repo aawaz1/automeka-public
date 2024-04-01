@@ -5,6 +5,7 @@ import { setCredentials } from '../store/slices/auth-slice';
 
 const EditProfile = () => {
     const { userInfo } = useSelector((state) => state.auth);
+    console.log(userInfo)
 
     const [user_name, setName] = useState("");
     const [email, setEmail] = useState("");

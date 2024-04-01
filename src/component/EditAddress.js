@@ -1,24 +1,16 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { useCreateMutation } from '../store/slices/address-slice';
+import { useCreateMutation, useUpdateMutation } from '../store/slices/address-slice';
 import cogoToast from 'cogo-toast';
+import { useParams } from 'react-router-dom';
 
-const AddAddress = () => {
+const EditAddress = () => {
+    const { id: addressId } = useParams()
 
-    const [create] = useCreateMutation();
+    const [update] = useUpdateMutation();
     let id = JSON.parse(localStorage.getItem("id") || null);
 
-    const [address_1, setAddress1] = useState('');
-    const [name, setName] = useState("")
-    const [address_2, setAddress2] = useState('');
-    const [city, setCity] = useState('');
-    const [phone, setPhone] = useState('');
-    const [country, setCountry] = useState('');
-    const [state, setState] = useState('');
-    const [governate, setGovernate] = useState("");
-    const [governates, setGovernates] = useState([]);
-    const [landmark, setLandmark] = useState('');
-    const [postal_code, setPostalCode] = useState('')
+
 
     const handleGovernateSelect = (selectedValue) => {
         setGovernate(selectedValue); // Set the selected governate ID in the state
@@ -35,13 +27,56 @@ const AddAddress = () => {
             console.log(error);
         }
     };
+    const [address, setAddresses] = useState([]);
     useEffect(() => {
         getAllGovernates();
     }, []);
+    const getAddress = async () => {
+        try {
+            const { data } = await axios.get(
+                `http://192.168.1.98:4321/v1/address/${addressId}`
+            );
+            setAddresses(data?.data);
+            console.log(data?.data.address_1);
+
+            console.log(data?.data);
+
+
+        } catch (error) {
+            console.log(error);
+        }
+    };
+    useEffect(() => {
+        getAddress();
+    }, []);
+    const [address_1, setAddress1] = useState(address.address_1);
+    const [name, setName] = useState(address.name)
+    const [address_2, setAddress2] = useState(address.address_2);
+    const [city, setCity] = useState(address.city);
+    const [phone, setPhone] = useState(address.phone);
+    const [country, setCountry] = useState(address.country);
+    const [state, setState] = useState(address.state);
+    const [governate, setGovernate] = useState("");
+    const [governates, setGovernates] = useState([]);
+    const [landmark, setLandmark] = useState(address.landmark);
+    const [postal_code, setPostalCode] = useState(address.postal_code);
+    useEffect(() => {
+        setAddress1(address.address_1);
+        setAddress2(address.address_2);
+        setCity(address.city);
+        setCountry(address.country);
+        setPhone(address.phone);
+        setState(address.state);
+        setLandmark(address.landmark);
+        setPostalCode(address.postal_code)
+        setName(address.name)
+
+    }, [address])
     const createAddressHandler = async () => {
 
         try {
-            const res = await create({
+            const res = await update({
+                id: addressId,
                 address_1: address_1,
                 address_2: address_2,
                 user_id: id,
@@ -58,7 +93,7 @@ const AddAddress = () => {
             }).unwrap();
 
 
-            cogoToast.success("Address Created Successfully", { position: "bottom-left" });
+            cogoToast.success("Address Updated Successfully", { position: "bottom-left" });
 
 
 
@@ -142,7 +177,7 @@ const AddAddress = () => {
                 </div>
 
 
-                <div className="p-6 flex gap-2 items-start">
+                <div className="p-6  items-start">
                     <button className='mr-6 px-12 py-2 bg-gray-100  hover:bg-orange-500 hover:text-white border rounded-md font-poppins font-medium'  >Cancel</button>
                     <button className='px-12 py-2 bg-orange-400  hover:bg-orange-500 text-white hover:text-black border rounded-md font-poppins font-medium' type='submit' onClick={createAddressHandler}>Save</button>
                 </div>
@@ -155,4 +190,4 @@ const AddAddress = () => {
     )
 }
 
-export default AddAddress
+export default EditAddress
