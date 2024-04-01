@@ -14,11 +14,26 @@ import './top.css'
 import Container from './Container.js';
 import useCategory from './customHooks/useCategory.js';
 import { Link, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../store/slices/auth-slice.js';
 
-const Navbar = () => {
+const Navbar = () => { 
+  const dispatch = useDispatch();
+ 
+ 
   const { cartItems } = useSelector(state => state.cart);
   const { wishlistItems } = useSelector((state) => state.wishlist);
+  const logoutHandler = async () => {
+    try {
+     
+      dispatch(logout());
+
+    
+      // navigate('/login-register');
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const navigate = useNavigate();
   const categories = useCategory();
@@ -39,7 +54,18 @@ const Navbar = () => {
         <div className=""><img style={{ width: "5rem" }} src='/auto_meka_logo_small.webp' /></div>
         <SearchBox />
         <div className="flex">
-          <button className="mr-4" onClick={() => navigate('/myaccount')}><RiAccountBoxLine style={{ fontSize: "1.2rem" }} /></button>
+          <button className="mr-4" ><div className="flex items-center text-black relative group cursor-pointer">
+              <div className="   items-center flex text-black"><RiAccountBoxLine style={{ fontSize: "1.2rem" }} /></div>
+              
+              <div className='absolute  top-4 left-0  bg-gray-800 text-white rounded-md shadow-lg hidden group-hover:block w-[10vw]'>
+                <ul className='gap-2 pt-2'>
+              <Link style={{ transition: "ease-out" , textDecoration: "none", color: "white" }} className='text' to={'/myaccount'}><li >My Account</li></Link>
+              <Link onClick={logoutHandler} to='/login' style={{ transition: "ease-out" , textDecoration: "none", color: "white" }} className='text' ><li >LogOut</li></Link>
+
+
+                </ul>
+              </div>
+            </div></button>
           <div className='relative mr-4'> <button onClick={handleIsOpen} className=""><GrCart style={{ fontSize: "1.2rem" }} /></button>
             <div className='absolute top-[-1rem] right-[-0.9rem] bg-orange-400 w-[1.2rem] rounded-full  flex justify-center items-center'><span>{cartItems.length > 0 && cartItems.length}</span></div></div>
           <div className='mr-4 relative'><button className=" font-semibold " onClick={() => navigate('/wishlist')}><FaRegHeart className="" style={{ fontSize: "1.2rem" }} /></button><div className='absolute top-[-1rem] right-[-0.9rem] bg-orange-400 w-[1.2rem] rounded-full  flex justify-center items-center'><span> {wishlistItems.length > 0 && wishlistItems.length}</span></div></div>

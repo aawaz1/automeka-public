@@ -55,11 +55,12 @@ const Cart = () => {
         })}
 
         {cartItems && (<Grid className="p-2" item container xs={12}>
-          <Grid className="font-semibold font-poppins" item md={6}></Grid>
+          <Grid padding={5} className="font-semibold font-poppins" item md={6}><button className="px-6 py-2 bg-orange-400 rounded-full text-white hover:bg-orange-300 hover:text-black font-poppins font-medium">Proceed To Checkout</button></Grid>
           <Grid className="font-semibold font-poppins" item md={2}></Grid>
           <Grid className="font-semibold font-poppins" item md={2}></Grid>
           <Grid className="font-medium font-poppins hover:text-orange-400" item md={2}><button onClick={() => dispatch(deleteAllFromCart())}>{cartItems.length > 0 && "Clear Cart"}</button></Grid>
         </Grid>)}
+        
 
       </Grid>
     </div>

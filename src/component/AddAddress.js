@@ -26,54 +26,54 @@ const AddAddress = () => {
         <div className='container p-4'>
             <h2 className='font-semibold text-lg font-poppins'>Add Address</h2>
 
-            <div className='grid grid-cols-1 md:grid-cols-2 p-2 w-[20rem] justify-center border rounded-md border-gray-400 md:w-[60rem]'>
-                <div className="p-6">
+            <div className='grid grid-cols-1 md:grid-cols-2 p-1 gap-2 w-[20rem] justify-center border rounded-md border-gray-400 md:w-[60rem]'>
+                <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Name</label>
                     <input className="bg-whitesmoke rounded-md p-2 w-[100%] md:w-[100%]" type="text" name="email" />
 
                 </div>
-                <div className="p-4">
+                <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Email</label>
                     <input className="bg-whitesmoke w-[100%] md:w-[100%]rounded-md p-2 " type="text" name="name" />
 
                 </div>
-                <div className="p-4">
+                <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Address 1</label>
 
                     <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="address_2" />
 
                 </div>
-                <div className="p-4">
+                <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Address 2</label>
                     <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="address_2" />
 
                 </div>
-                <div className="p-4">
+                <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Country</label>
                     <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="password" name="confirmPassword" />
 
                 </div>
-                <div className="p-4">
+                <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>State</label>
                     <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="password" name="confirmPassword" />
 
                 </div>
-                <div className="p-4">
+                <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Pin-Code</label>
                     <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="password" name="confirmPassword" />
 
                 </div>
-                <div className="p-4">
+                <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Phone</label>
                     <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="password" name="confirmPassword" />
 
                 </div>
-                <div className="p-4">
+                <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>LandMark</label>
                     <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="password" name="confirmPassword" />
 
                 </div>
-                <div className="p-4">
+                <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Governate</label>
                     <div className="">
 
