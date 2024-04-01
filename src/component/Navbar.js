@@ -55,8 +55,8 @@ const Navbar = () => {
         <div onClick={() => navigate('/')} className=""><img className=' w-[3rem] md:w-[5rem]' src='/auto_meka_logo_small.webp' /></div>
         <SearchBox />
         <div className="flex">
-          <button className=" mr-1 md:mr-4" ><div className="flex items-center text-black relative group cursor-pointer">
-            <div className="   items-center flex text-black"><RiAccountBoxLine style={{ fontSize: "1.2rem" }} /></div>
+          <button className=" max-sm:mr-1 sm:mr-4" ><div className="flex items-center text-black relative group cursor-pointer">
+            <div className="   items-center flex text-black"><RiAccountBoxLine style={{ fontSize: "1.4rem" }} /></div>
 
             <div className='absolute  left-[-62px] top-[20px]  bg-gray-800 text-white rounded-md shadow-lg hidden group-hover:block w-[10vw]'>
               <ul className='gap-2 pt-2'>
@@ -68,9 +68,9 @@ const Navbar = () => {
               </ul>
             </div>
           </div></button>
-          <div className='relative mr-2 md:mr-4'> <button onClick={handleIsOpen} className=""><GrCart style={{ fontSize: "1.2rem" }} /></button>
+          <div className='relative max-sm:mr-1 sm:mr-4'> <button onClick={handleIsOpen} className=""><GrCart style={{ fontSize: "1.4rem" }} /></button>
             <div className='absolute top-[-1rem] right-[-0.9rem] bg-orange-400 w-[1.2rem] rounded-full  flex justify-center items-center'><span>{cartItems?.length > 0 && cartItems?.length}</span></div></div>
-          <div className='mr-1 md:mr-4 relative'><button className=" font-semibold " onClick={() => navigate('/wishlist')}><FaRegHeart className="" style={{ fontSize: "1.2rem" }} /></button><div className='absolute top-[-1rem] right-[-0.9rem] bg-orange-400 w-[1.2rem] rounded-full  flex justify-center items-center'><span> {wishlistItems?.length > 0 && wishlistItems?.length}</span></div></div>
+          <div className='max-sm:mr-1 sm:mr-4 relative'><button className=" font-semibold " onClick={() => navigate('/wishlist')}><FaRegHeart className="" style={{ fontSize: "1.4rem" }} /></button><div className='absolute top-[-1rem] right-[-0.9rem] bg-orange-400 w-[1.2rem] rounded-full  flex justify-center items-center'><span> {wishlistItems?.length > 0 && wishlistItems?.length}</span></div></div>
         </div>
       </div>
 
