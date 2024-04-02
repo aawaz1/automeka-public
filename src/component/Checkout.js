@@ -5,11 +5,13 @@ import { deleteAllFromCart, saveAddress1 } from "../store/slices/cart-slice";
 import { useCreateOrderMutation } from "../store/slices/order-slice";
 import { IMAGE_URL } from "../constants";
 import { useNavigate } from "react-router-dom";
+import { MdAddToQueue } from "react-icons/md";
 
 
 const Checkout = () => {
   const navigate = useNavigate()
   const cart = useSelector((state) => state.cart);
+
   const { cartItems } = cart;
   let id = JSON.parse(localStorage.getItem("id") || null);
   const { saveAddress } = cart;
@@ -41,13 +43,9 @@ const Checkout = () => {
   const getAllAddresses = async () => {
     try {
       const { data } = await axios.get(
-        `https://restapi.ansoftt.com:4321/v1/address/`
+        `https://restapi.ansoftt.com:4321/v1/address/all/${id}`
       );
       setAddresses(data?.data);
-      console.log(data?.data[0]._id);
-
-      console.log(data?.data);
-
 
     } catch (error) {
       console.log(error);
@@ -122,23 +120,26 @@ const Checkout = () => {
           <h3 className="font-poppins font-semibold text-[1.6rem]">Delivery Address</h3>
           <div className="w-[100%] text-none rounded-full text-orange-500 p-2">
 
-            <select className='w-[100%]' onChange={handleAddressChange}>
-              <option style={{ color: "#D17B06" }} className='text-orange-500' value="">View addresses</option>
+            <select style={{ border: "2px solid orange", borderRadius: "3px" }} className='w-[100%]' onChange={handleAddressChange}>
+              <option style={{ color: "#D17B06" }} className='text-slate-500' value="">View addresses</option>
               {addresses.map((address) => (
                 <option className='w-[100%]' style={{ color: "#D17B06" }} key={address._id} value={address._id}>
-                  {address.address_1}, {address.address_2}, {address.city}, {address.country} , {address.governates.value}
+                  {address?.address_1}, {address?.address_2}, {address?.city}, {address?.country} , {address?.governates.value}
                 </option>
               ))}
             </select>
 
 
           </div>
+
           <div className="py-6">
 
             <div className="border border-solid border-gray-400 rounded-md p-4">
-              <h3 className="font-poppins text-[1rem] font-medium">{saveAddress.address_1} ,{saveAddress.address_2} ,{saveAddress.postal_code} , {saveAddress.country} ,{saveAddress.city} , {saveAddress.state}</h3>
+              <h3 className="font-poppins text-[1rem] font-medium">{saveAddress?.address_1} ,{saveAddress?.address_2} ,{saveAddress?.postal_code} , {saveAddress?.country} ,{saveAddress?.city} , {saveAddress?.state}</h3>
 
             </div>
+            <div className="py-2 flex justify-end items-end"><button onClick={() => navigate("/addaddress")} style={{ borderBottom: " 2px solid orange" }} className="text-gray-400 border-b-orange-400"><MdAddToQueue fontSize={"1.5rem"}
+            /></button></div>
 
           </div>
           <div className="self-stretch h-[517px] flex flex-col items-start justify-start gap-[10px] max-w-full">

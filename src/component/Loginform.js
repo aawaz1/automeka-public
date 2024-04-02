@@ -3,6 +3,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useLoginMutation } from '../store/slices/usersApiSlice.js'
 import { setCredentials } from '../store/slices/auth-slice.js';
 import { useDispatch } from 'react-redux';
+import cogoToast from 'cogo-toast';
 
 const Loginform = () => {
     const navigate = useNavigate();
@@ -43,6 +44,7 @@ const Loginform = () => {
         try {
             const res = await login(formData).unwrap();
             dispatch(setCredentials({ ...res, }));
+            cogoToast.success("Logged IN Successfully")
             navigate(redirect);
             setFormData({
 

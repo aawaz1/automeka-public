@@ -57,35 +57,35 @@ const EditProfile = () => {
             </div>
 
             <div className='grid grid-cols-1 md:grid-cols-2 p-2  justify-center border rounded-md border-gray-400 '>
-                <div className="p-6">
+                <div className=" p-1 md:p-6">
                     <h2 className='font-bold text-lg  font-poppins'>Edit Profile</h2>
 
 
 
                 </div>
-                <div className="p-6">
+                <div className="p-1 md:p-6">
 
 
 
 
                 </div>
-                <div className="p-6">
+                <div className="p-1 md:p-6">
                     <label className='text-[1rem] font-semiobold font-poppins'>Name</label>
                     <input className="bg-whitesmoke rounded-md p-2 w-[100%] md:w-[100%]" type="text" name="first name" value={user_name} onChange={(e) => setName(e.target.value)} />
 
                 </div>
-                <div className="p-4">
+                <div className="p-1 md:p-4">
                     <label className='text-[1rem] font-semiobold font-poppins'></label>
                     {/* <input className="bg-whitesmoke w-[100%] md:w-[100%]rounded-md p-2 " type="text" name="last name" /> */}
 
                 </div>
-                <div className="p-4">
+                <div className="p-1 md:p-4">
                     <label className='text-[1rem] font-semiobold font-poppins'>Email</label>
 
                     <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
 
                 </div>
-                <div className="p-4">
+                <div className="p-1 md:p-4">
                     <label className='text-[1rem] font-semiobold font-poppins'>Phone</label>
 
                     <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="phone" value={phone} onChange={(e) => setPhone(e.target.value)} />
@@ -97,9 +97,9 @@ const EditProfile = () => {
 
 
 
-                <div className="p-6  items-start">
-                    <button className='mr-6 px-12 py-2 bg-gray-100  hover:bg-orange-500 hover:text-white border rounded-md font-poppins font-medium' type='submit'>Cancel</button>
-                    <button className='px-12 py-2 bg-orange-400  hover:bg-orange-500 text-white hover:text-black border rounded-md font-poppins font-medium' type='submit' onClick={submitHandler}>Save</button>
+                <div className="p-6 flex flex-col md:flex-row  gap-2  items-start">
+                    <button className='mr-6 px-8 md:px-12 py-2 bg-gray-100  hover:bg-orange-500 hover:text-white border rounded-md font-poppins font-medium' type='submit'>Cancel</button>
+                    <button className='px-10 md:px-14 py-2 bg-orange-400  hover:bg-orange-500 text-white hover:text-black border rounded-md font-poppins font-medium' type='submit' onClick={submitHandler}>Save</button>
                 </div>
                 <div></div>
 

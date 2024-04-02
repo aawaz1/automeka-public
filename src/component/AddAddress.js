@@ -71,7 +71,7 @@ const AddAddress = () => {
         <div className='container p-4'>
             <h2 className='font-semibold text-lg font-poppins'>Add Address</h2>
 
-            <div className='grid grid-cols-1 md:grid-cols-2 p-1 gap-2 w-[20rem] justify-center border rounded-md border-gray-400 md:w-[60rem]'>
+            <div className='grid grid-cols-1 md:grid-cols-2 p-1 gap-2  justify-center border rounded-md border-gray-400 w-[100%] md:w-[60rem]'>
 
 
                 <div className="p-2">
@@ -140,9 +140,9 @@ const AddAddress = () => {
                 </div>
 
 
-                <div className="p-6 flex gap-2 items-start">
-                    <button className='mr-6 px-12 py-2 bg-gray-100  hover:bg-orange-500 hover:text-white border rounded-md font-poppins font-medium'  >Cancel</button>
-                    <button className='px-12 py-2 bg-orange-400  hover:bg-orange-500 text-white hover:text-black border rounded-md font-poppins font-medium' type='submit' onClick={createAddressHandler}>Save</button>
+                <div className="p-6 flex  md:flex-row gap-2 items-start">
+                    <button className='mr-6 px-8 md:px-12 py-2 bg-gray-100  hover:bg-orange-500 hover:text-white border rounded-md font-poppins font-medium'  >Cancel</button>
+                    <button className='px-10 md:px-12 py-2 bg-orange-400  hover:bg-orange-500 text-white hover:text-black border rounded-md font-poppins font-medium' type='submit' onClick={createAddressHandler}>Save</button>
                 </div>
                 <div></div>
 
