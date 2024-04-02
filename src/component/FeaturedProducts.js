@@ -11,7 +11,6 @@ import useFeaturedProducts from "./customHooks/useFeaturedProducts.js";
 
 const FeaturedProducts = () => {
     const featuredProducts = useFeaturedProducts();
-    console.log(featuredProducts);
     const responsive = {
         superLargeDesktop: {
             // the naming can be any, depends on you.

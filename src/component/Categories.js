@@ -9,18 +9,17 @@ import { Audio } from 'react-loader-spinner'
 
 
 const Categories = () => {
-    
-   const categories = useCategory();
-   console.log(categories);
-   if(categories === null ) return <Audio
-   height="80"
-   width="80"
-   radius="9"
-   color="green"
-   ariaLabel="loading"
-   wrapperStyle
-   wrapperClass
- />;
+
+    const categories = useCategory();
+    if (categories === null) return <Audio
+        height="80"
+        width="80"
+        radius="9"
+        color="green"
+        ariaLabel="loading"
+        wrapperStyle
+        wrapperClass
+    />;
     const responsive = {
         superLargeDesktop: {
             // the naming can be any, depends on you.

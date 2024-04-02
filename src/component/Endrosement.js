@@ -23,6 +23,7 @@ const Endrosement = () => {
             items: 1
         }
     };
+
     const productData = [{ name: "10w40 United Oil", image: '/Group 42735.png', price: 2.222 }]
 
     return (
@@ -32,20 +33,16 @@ const Endrosement = () => {
 
 
             {console.log("ProductL ", productData)}
-            <ProductSlider title={"y54h"} responsiveProp={responsive}>
-                {productData?.map(item => {
-                    return (
-                        <EndrosementCard name={item.name} image={item.image} />
-                    )
-                })}
-            </ProductSlider>
-
-
-
-
-
-
-
+            <div className='w-[100%] md:w-[30%]'> {productData?.length ?
+                <ProductSlider responsiveProp={responsive}>
+                    {productData?.map(item => {
+                        return (
+                            <EndrosementCard name={item.name} image={item.image} key={item.name} />
+                        )
+                    })}
+                </ProductSlider>
+                : null}
+            </div>
         </div>
     )
 }

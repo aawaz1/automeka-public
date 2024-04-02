@@ -15,7 +15,6 @@ const Category = () => {
     const category = searchParams.get('category');
     const name = searchParams.get('name');
 
-    console.log(category);
     const [isOpen, setIsOpen] = useState(false);
     const featuredProducts = useFeaturedProducts(name);
     const [selectedCategory, setSelectedCategory] = useState(null)

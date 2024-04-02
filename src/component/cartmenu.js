@@ -8,7 +8,6 @@ import { IMAGE_URL } from '../constants.js';
 
 const Cartmenu = ({ handleIsOpen }) => {
     const { cartItems } = useSelector((state) => state.cart);
-    console.log(cartItems);
 
     const navigate = useNavigate();
     const dispatch = useDispatch()
@@ -77,7 +76,7 @@ const Cartmenu = ({ handleIsOpen }) => {
                             </div>
                             <hr className='border border-gray-500' />
                             <div className='flex justify-center py-4 gap-3'>
-                                <button  onClick={() => {
+                                <button onClick={() => {
                                     navigate('/checkout');
                                     handleIsOpen();
                                 }} className='bg-orange-400 text-white p-2 px-4 rounded-md'>Checkout</button>

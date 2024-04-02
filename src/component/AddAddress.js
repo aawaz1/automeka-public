@@ -29,8 +29,6 @@ const AddAddress = () => {
                 `https://restapi.ansoftt.com:4321/v1/governate/`
             );
             setGovernates(data.data);
-            console.log(data.data)
-            console.log(governates)
         } catch (error) {
             console.log(error);
         }

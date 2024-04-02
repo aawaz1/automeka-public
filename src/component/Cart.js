@@ -21,7 +21,6 @@ const Cart = () => {
   };
 
   const { cartItems } = useSelector((state) => state.cart);
-  console.log(cartItems);
   const dispatch = useDispatch();
   return (<>
     <div className="hidden md:block container">
@@ -126,7 +125,7 @@ const Cart = () => {
 
         )
       })}
-     
+
       <div className="flex justify-between items-center p-2 gap-2 mt-2"> <div className="px-6 py-2 bg-orange-400 rounded-full text-white hover:bg-orange-300 hover:text-black font-poppins font-medium">
         {" "}
         Checkout

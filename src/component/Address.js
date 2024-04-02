@@ -16,7 +16,7 @@ const Address = () => {
     const handleDeleteAddress = async () => {
         try {
             const { data } = await axios.delete(
-                `http://192.168.1.98:4321/v1/address/${selectedAddress._id}`
+                `https://restapi.ansoftt.com:4321/v1/address/${selectedAddress._id}`
             );
             getAllAddresses();
 
@@ -38,13 +38,9 @@ const Address = () => {
     const getAllAddresses = async () => {
         try {
             const { data } = await axios.get(
-                `http://192.168.1.98:4321/v1/address/all/${id}`
+                `https://restapi.ansoftt.com:4321/v1/address/all/${id}`
             );
             setAddresses(data?.data);
-            console.log(data?.data[0]._id);
-
-            console.log(data?.data);
-
 
         } catch (error) {
             console.log(error);

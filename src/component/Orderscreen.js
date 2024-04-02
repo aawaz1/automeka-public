@@ -5,6 +5,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import axios from 'axios'
 import { clearOrderDetails } from '../store/slices/orderSlice'
 import { IMAGE_URL } from '../constants'
+import OrderTracker from './OrderTracker';
+import { IoIosArrowForward } from "react-icons/io";
 
 
 const Orderscreen = () => {
@@ -12,6 +14,9 @@ const Orderscreen = () => {
   console.log(orderDetails)
 
   const cart = useSelector((state) => state.cart);
+  const [tracker, setTracker] = useState(null);
+
+  
   const { cartItems } = cart;
   let id = JSON.parse(localStorage.getItem("id") || null);
   console.log(id)
@@ -19,6 +24,7 @@ const Orderscreen = () => {
   const { saveAddress } = cart;
   console.log(saveAddress);
 
+ 
 
 
   const dispatch = useDispatch();
@@ -45,10 +51,11 @@ const Orderscreen = () => {
   }, [])
   return (
     <div className="p-2 flex flex-col  w-[30rem] md:w-[100%]   justify-center items-center container">
-      <h2 className=' pb-4 font-semibold text-[1.2rem]'>{orderDetails ? "Your Order Details" : "Your Order History"}</h2>
+      <h2 className=' pb-4 font-semibold text-[1.2rem]'>{orderDetails ? (tracker ? "Order Tracker" : "Order Details") : "Your Order History"}
+</h2>
 
       {orderDetails ? <>
-        <div className='container p-2   justify-center items-center'>
+        {tracker ? <OrderTracker tracker={tracker} setTracker={setTracker} /> : <div className='container p-2   justify-center items-center'>
           {/* <h2 className=' pb-4 font-semibold text-[1.2rem]'>Your Order History</h2> */}
           <div className="flex flex-col gap-3 px-5 max-w-[862px]">
             {/* <div className="w-full text-lg font-medium text-black max-md:max-w-full">
@@ -89,15 +96,22 @@ const Orderscreen = () => {
                         </div>
                       </div>
                     </div>
+                    <div onClick={() => setTracker(order_item?.product?._id)}><IoIosArrowForward/></div>
                   </div>
-                </div>)
+                </div>
+              )
             })}
-            <div className="justify-center items-center text-center w-[12rem] mt-4 px-6 py-2.5 text-[0.9rem] bg-white border-amber-500 border-solid shadow-sm rounded-full text-neutral-400">
-              <button onClick={() => dispatch(clearOrderDetails(orderDetails))}> Back To Orders{" "}</button>
+            <div className='flex justify-between'>
+              <div className="justify-center items-center text-center w-[12rem] mt-4 px-6 py-2.5 text-[0.9rem] bg-white border-amber-500 border-solid shadow-sm rounded-full text-neutral-400">
+                <button onClick={() => dispatch(clearOrderDetails(orderDetails))}> Back To Orders{" "}</button>
+              </div>
+              {/* <div className="justify-center items-center text-center w-[12rem] mt-4 px-6 py-2.5 text-[0.9rem] bg-white border-amber-500 border-solid shadow-sm rounded-full text-neutral-400">
+                <button onClick={() => setTracker(true)}>  Order Tracker{" "}</button>
+              </div> */}
             </div>
           </div>
         </div>
-      </> :
+        } </> :
 
 
         <div className='w-[100%] p-2 overflow-x-scroll md:overflow-hidden'>

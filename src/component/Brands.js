@@ -12,9 +12,8 @@ import { IMAGE_URL } from '../constants';
 
 const Brands = () => {
     const brands = useBrands();
-    console.log(brands);
     const productData = [{ name: "10w40 United Oil", image: '/car-service-white-background-isolated-3d-illustration.jpg', price: 2.222 }, { name: "10w40 United Oil", image: '/car-service-white-background-isolated-3d-illustration.jpg', price: 2.222 }, { name: "10w40 United Oil", image: '/car-service-white-background-isolated-3d-illustration.jpg', price: 2.222 }, { name: "10w40 United Oil", image: '/car-service-white-background-isolated-3d-illustration.jpg', price: 2.222 }, { name: "10w40 United Oil", image: '/car-service-white-background-isolated-3d-illustration.jpg', price: 2.222 },]
-   
+
 
     return (
 
@@ -27,8 +26,8 @@ const Brands = () => {
             <Marquee style={{ gap: '7vw', cursor: "pointer" }} pauseOnHover={true}>
                 {brands.map(item => (
                     <div style={{ marginLeft: "6vw" }}>
-                       
-                        <img className='brandImage' src={ IMAGE_URL + item.image} alt='' />
+
+                        <img className='brandImage' src={IMAGE_URL + item.image} alt='' />
                     </div>
                 ))}
             </Marquee>

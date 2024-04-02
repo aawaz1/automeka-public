@@ -10,11 +10,11 @@ const steps = [
   'DELIVERED',
 ];
 
-export default function HorizontalLinearAlternativeLabelStepper() {
+export default function HorizontalLinearAlternativeLabelStepper({tracker}) {
   return (
     <Box sx={{ width: '100%' , color : "orange" }}>
       <Stepper activeStep={1} alternativeLabel>
-        {steps.map((label) => (
+        {tracker?.map((label) => (
           <Step sx={{color : "red"}} key={label}>
             <StepLabel style={{ color:  'orange' }}>{label}</StepLabel>
           </Step>

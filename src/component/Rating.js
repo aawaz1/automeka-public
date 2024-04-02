@@ -6,8 +6,6 @@ import StarIcon from '@mui/icons-material/Star';
 
 
 const CommonRating = ({ value, isReadOnly, onChange }) => {
-    console.log(value)
-
 
     return (
         <Box

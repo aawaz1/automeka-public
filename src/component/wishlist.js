@@ -9,7 +9,7 @@ import { Grid } from "@mui/material";
 import { useSelect } from "@material-tailwind/react";
 import { useDispatch, useSelector } from "react-redux";
 import { IMAGE_URL } from "../constants.js";
-import { deleteAllFromWishlist } from "../store/slices/wishlist-slice.js";
+import { deleteAllFromWishlist, deleteFromWishlist } from "../store/slices/wishlist-slice.js";
 import { addToCart } from "../store/slices/cart-slice.js";
 
 const Wishlist = () => {
@@ -27,8 +27,8 @@ const Wishlist = () => {
         <Grid item container xs={12} >
           <Grid className="font-semibold font-poppins" item md={6}>Product</Grid>
           <Grid className="font-semibold font-poppins" item md={2}>Price</Grid>
-          <Grid className="font-semibold font-poppins" item md={2}>Stock Status</Grid>
           <Grid className="font-semibold font-poppins" item md={2}>Add To Cart</Grid>
+          <Grid className="font-semibold font-poppins" item md={2}>Action</Grid>
         </Grid>
 
         {wishlistItems.map(cartItem => {
@@ -40,9 +40,24 @@ const Wishlist = () => {
               </div>
             </Grid>
             <Grid className="font-medium font-poppins" item md={2} alignItems={"center"} display={"flex"}>{cartItem?.price.toFixed(3)}</Grid>
-            <Grid item md={2} alignItems={"center"} display={"flex"}>{cartItem?.on_stock}</Grid>
-            <Grid item md={2} alignItems={"center"} display={"flex"}><div className="bg-orange-400 rounded-md text-white px-3 py-1.5"><button className="text-white bg-orange-400 " onClick={() => handleIncrement(cartItem)}>
-              Add To Cart
+            <Grid item md={2} alignItems={"center"} display={"flex"}>
+              {cartItem.varaints > 0 ? (
+                <button disabled={cartItem.coming_soon} style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-orange-400 font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product: cartItem, qty: 1 }))}>Add To Cart</button>
+              ) : (
+                <>
+                  {cartItem?.on_stock > 1 && (
+                    <button disabled={cartItem.coming_soon} style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-orange-400 font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product: cartItem, qty: 1 }))}>Add to Cart</button>
+                  )}
+                  {cartItem?.on_stock <= 0 && (
+                    <button style={{ cursor: "not-allowed" }} className=' p-[0.42rem] bg-black bottom-2 rounded-sm flex  text-white items-center justify-center' disabled>Out of Stock</button>
+                  )}
+                </>
+              )}
+            </Grid>
+            <Grid item md={2} alignItems={"center"} display={"flex"}><div className=""><button onClick={() =>
+              dispatch(deleteFromWishlist(cartItem._id))
+            } >
+              Remove
             </button></div></Grid>
           </Grid>)
         })}
@@ -81,12 +96,7 @@ const Wishlist = () => {
               <div className="flex flex-col self-stretch my-auto">
                 <div className="text-lg text-black">{cartItem?.name}</div>
                 <div className="flex gap-2 mt-3.5 text-xs whitespace-nowrap text-neutral-400">
-                  {/* <img
-              loading="lazy"
-              src="https://cdn.builder.io/api/v1/image/assets/TEMP/152a7afe7af605eb2fd747cfb78e7ffd8dad87983801750ca1c0a5c35d673567?apiKey=97bd60a383fa4df4a87dc42761361ab7&"
-              className="shrink-0 max-w-full aspect-[5] w-[104px]"
-            /> */}
-                  {/* <div>(4.7)</div> */}
+                 
                 </div>
               </div>
             </div>
@@ -94,9 +104,25 @@ const Wishlist = () => {
               <div className="self-stretch my-auto text-black">KD {cartItem?.price.toFixed(3)}</div>
 
               <div className="justify-center self-stretch px-2 py-2 tracking-tight text-center ">
-              {cartItem?.on_stock}
-                
+              {cartItem.varaints > 0 ? (
+                <button disabled={cartItem.coming_soon} style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-orange-400 font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product: cartItem, qty: 1 }))}>Add To Cart</button>
+              ) : (
+                <>
+                  {cartItem?.on_stock > 1 && (
+                    <button disabled={cartItem.coming_soon} style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-orange-400 font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product: cartItem, qty: 1 }))}>Add to Cart</button>
+                  )}
+                  {cartItem?.on_stock <= 0 && (
+                    <button style={{ cursor: "not-allowed" }} className=' p-[0.42rem] bg-black bottom-2 rounded-sm flex  text-white items-center justify-center' disabled>Out of Stock</button>
+                  )}
+                </>
+              )}
+
               </div>
+              <div><button onClick={() =>
+              dispatch(deleteFromWishlist(cartItem._id))
+            } >
+              Remove
+            </button></div>
             </div>
           </div>
           <div className="shrink-0 mt-2 border border-solid bg-stone-300 border-stone-300 h-[3px] max-md:max-w-full" />

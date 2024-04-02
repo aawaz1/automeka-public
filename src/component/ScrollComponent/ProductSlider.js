@@ -23,13 +23,14 @@ const ProductSlider = ({ children, title, desktopItemCount, superLargeDesktopIte
         }
     };
     return (
-        <div>
+        <div style={{ width: "100%" }}>
             {title ? <div>{title}</div> : null}
-            <div className="w-full flex justify-center"> <Carousel className="flex justify-start w-[90%] max-w-[1200px]" responsive={responsiveProp ? responsiveProp : responsive}>
-                {
-                    children
-                }
-            </Carousel></div>
+            <div className="w-full flex justify-center">
+                <Carousel className="flex justify-start w-[90%] max-w-[1200px]" responsive={responsiveProp ? responsiveProp : responsive}>
+                    {
+                        children
+                    }
+                </Carousel></div>
         </div>
     )
 }
