@@ -61,6 +61,7 @@ const AddAddress = () => {
 
 
         } catch (error) {
+            console.log(error)
             cogoToast.error("Please fill all the input fields", { position: "bottom-left" });
 
 

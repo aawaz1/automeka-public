@@ -24,6 +24,9 @@ module.exports = {
         darkslategray: "#3a4855",
         darkorange: "#f68e00",
         slategray: "#616e7a",
+        
+          customOrange: '#F68E00',
+        
         dimgray: {
           "100": "#5a5a5a",
           "200": "rgba(87, 87, 88, 0.5)",

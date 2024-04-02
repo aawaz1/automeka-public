@@ -6,9 +6,11 @@ import { useRegisterMutation } from '../store/slices/usersApiSlice.js'
 import { setCredentials } from "../store/slices/auth-slice.js";
 import { useDispatch } from 'react-redux';
 import 'react-phone-input-2/lib/style.css'
+import cogoToast from 'cogo-toast';
 
 const Registerform = () => {
-    const [register, { isLoading }] = useRegisterMutation()
+    const [register, { isLoading }] = useRegisterMutation();
+    const [showPassword, setShowPassword] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const { search } = useLocation();
@@ -29,6 +31,7 @@ const Registerform = () => {
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
+        setShowPassword(true)
     };
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -73,7 +76,8 @@ const Registerform = () => {
 
             });
         } catch (err) {
-            console.error(err.message)
+            console.log(err);
+            cogoToast.error(err?.data?.message, { position: "bottom-left" });
 
 
 
@@ -91,12 +95,12 @@ const Registerform = () => {
             <form onSubmit={submitHandler}>
                 <div className='grid grid-cols-1 md:grid-cols-2  w-[20rem] gap-4 p-4 md:px-6 md:py-6 justify-center border rounded-md border-gray-400 md:w-[40rem]'>
                     <div className="">
-                        <input className="bg-whitesmoke rounded-md p-2 w-[100%] md:w-[100%]" placeholder="Enter your Email" type="text" name="email" value={formData.email} onChange={handleChange} />
-                        <div className='text-red-500'>{errors.email && <span>{errors.email}</span>}</div>
+                        <input className="bg-whitesmoke rounded-md p-2 w-[100%] md:w-[100%]" placeholder="Enter your Name" type="text" name="name" value={formData.name} onChange={handleChange} />
+                        <div className='text-red-500'>{errors.name && <span>{errors.name}</span>}</div>
                     </div>
                     <div className="">
-                        <input className="bg-whitesmoke w-[100%] md:w-[100%]rounded-md p-2 " placeholder="Enter your Name" type="text" name="name" value={formData.name} onChange={handleChange} />
-                        <div className='text-red-500'>  {errors.name && <span>{errors.name}</span>}</div>
+                        <input className="bg-whitesmoke w-[100%] md:w-[100%]rounded-md p-2 " placeholder="Enter your Email" type="text" name="email" value={formData.email} onChange={handleChange} />
+                        <div className='text-red-500'>  {errors.email && <span>{errors.email}</span>}</div>
                     </div>
                     <div className="">
 
@@ -113,7 +117,7 @@ const Registerform = () => {
                         <div className='text-red-500'>{errors.phone && <span>{errors.phone}</span>}</div>
                     </div>
                     <div className="">
-                        <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " placeholder="Enter your Password" type="password" name="password" value={formData.password} onChange={handleChange} />
+                        <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " placeholder="Enter your Password" type={showPassword ? 'text' : 'password'} name="password" value={formData.password} onChange={handleChange} />
                         <div className='text-red-500'>{errors.password && <span>{errors.password}</span>}</div>
                     </div>
                     {/* <div className="p-4">

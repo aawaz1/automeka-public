@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 
 import { createSlice } from '@reduxjs/toolkit';
+import cogoToast from 'cogo-toast';
 
 
 
@@ -10,6 +11,7 @@ const cartSlice = createSlice({
     initialState: {
         cartItems : [],
         saveAddress : [],
+        search : "",
         
         shippingAddress: [],
         variant  : [],
@@ -40,7 +42,7 @@ const cartSlice = createSlice({
                 quantity: qty,
               });
             }
-        console.log("item added")
+            cogoToast.success("Item Added Successfully", { position: "bottom-left" });
            
           },
         
@@ -77,6 +79,9 @@ const cartSlice = createSlice({
         saveVariant(state,action){
           state.variant = action.payload
         },
+        saveSearch(state,action){
+          state.search = action.payload
+        },
         saveCategory(state,action){
           state.category = action.payload
         },
@@ -86,7 +91,7 @@ const cartSlice = createSlice({
     },
 });
 
-export const { addToCart, deleteFromCart,saveShippingAddress,saveCategory,savePrice ,saveVariant,saveAddress1,increaseOrder, decreaseQuantity, deleteAllFromCart } = cartSlice.actions;
+export const { addToCart, deleteFromCart,saveSearch ,saveShippingAddress,saveCategory,savePrice ,saveVariant,saveAddress1,increaseOrder, decreaseQuantity, deleteAllFromCart } = cartSlice.actions;
 export default cartSlice.reducer;
 
 

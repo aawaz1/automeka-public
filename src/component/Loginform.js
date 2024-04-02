@@ -54,7 +54,8 @@ const Loginform = () => {
 
             });
         } catch (err) {
-            console.error(err.message)
+            console.log(err);
+            cogoToast.error(err?.data?.message || err?.data?.error[0]?.msg, { position: "bottom-left" });
 
 
 

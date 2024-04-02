@@ -103,8 +103,8 @@ const ProductScreen = () => {
                 </div>
                 <div className='p-2'>
                     <h2 className='text-[1.2rem]'>{product?.name}</h2>
-                    <h2 className='text-[1.0rem] text-green-400'>{getPriceForColor()?.toFixed(3)}</h2>
-                    <CommonRating value={product?.rating} isReadOnly={false} onChange={(e) => console.log(e.target.value)} />
+                    <h2 className='text-[1.0rem] text-green-400'>KD {getPriceForColor()?.toFixed(3)}</h2>
+                    <CommonRating value={product?.rating} />
                     <div className='flex py-2'>
                         {availability !== null && availability > 0 ? (<>
                             <div className='rounded-l-lg border border-gray-500 px-2 bg-gray-100' onClick={handleDecrement}>-</div>
@@ -181,22 +181,22 @@ const ProductScreen = () => {
                                         <button style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-orange-400 font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product, qty }))}> Add to Cart</button>
 
 
-                                        <button className='  bg-orange-400 px-4 py-1 text-white font-medium font-poppins rounded-md'onClick={() => {
-    try {
-      dispatch(addToCart({ product, qty }));
-      navigate('/cart');
-    } catch (error) {
-      console.error('Error occurred while adding to cart:', error);
-    }
-  }} > Buy Now</button>
+                                        <button className='  bg-orange-400 px-4 py-1 text-white font-medium font-poppins rounded-md' onClick={() => {
+                                            try {
+                                                dispatch(addToCart({ product, qty }));
+                                                navigate('/cart');
+                                            } catch (error) {
+                                                console.error('Error occurred while adding to cart:', error);
+                                            }
+                                        }} > Buy Now</button>
                                         <FaRegHeart onClick={() => dispatch(addToWishlist(product))} />  </>
                                 )}
                                 {product?.on_stock <= 0 && (
                                     <>
-                                    <div style={{ cursor: "not-allowed" }} className=' p-[0.42rem] bg-black bottom-2 rounded-sm flex  items-center justify-center'>{ }
-                                        <button style={{ cursor: "not-allowed" }} disabled className='text-white  flex items-center '> Out Of Stock</button>
-                                    </div>
-                                    <FaRegHeart onClick={() => dispatch(addToWishlist(product))} /></>
+                                        <div style={{ cursor: "not-allowed" }} className=' p-[0.42rem] bg-black bottom-2 rounded-sm flex  items-center justify-center'>{ }
+                                            <button style={{ cursor: "not-allowed" }} disabled className='text-white  flex items-center '> Out Of Stock</button>
+                                        </div>
+                                        <FaRegHeart onClick={() => dispatch(addToWishlist(product))} /></>
                                 )}
                             </>
                         )}

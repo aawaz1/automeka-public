@@ -23,6 +23,7 @@ const Navbar = () => {
 
 
   const { cartItems } = useSelector(state => state.cart);
+
   const { wishlistItems } = useSelector((state) => state.wishlist);
   const logoutHandler = async () => {
     try {
@@ -49,16 +50,18 @@ const Navbar = () => {
     setIsOpen(!isOpen);
   }
 
+  const cartQuantity = cartItems?.reduce((acc, item) => item.quantity + acc, 0)
+
   return (
     <div style={{ zIndex: 999999 }} className='sticky top-0  bg-white py-2'>
       <div className="container flex justify-between items-center">
-        <div onClick={() => navigate('/')} className=""><img className=' w-[3rem] md:w-[5rem]' src='/auto_meka_logo_small.webp' /></div>
+        <div onClick={() => navigate('/')} className="rounded-md "><img className=' w-[3rem] md:w-[5rem]' src='/auto_meka_logo_small.webp' /></div>
         <SearchBox />
         <div className="flex">
           <button className=" max-sm:mr-1 sm:mr-4" ><div className="flex items-center text-black relative group cursor-pointer">
             <div className="   items-center flex text-black"><RiAccountBoxLine style={{ fontSize: "1.4rem" }} /></div>
 
-            <div className='absolute  left-[-62px] top-[20px]  bg-gray-800 text-white rounded-md shadow-lg hidden group-hover:block w-[10vw]'>
+            <div className='absolute max-sm:top-0 max-sm:right-0 md:left-[-62px] md:top-[20px]  bg-gray-800 text-white rounded-md shadow-lg hidden group-hover:block w-[10vw]'>
               <ul className='gap-2 pt-2'>
                 {!userInfo && (<Link style={{ transition: "ease-out", textDecoration: "none", color: "white" }} to='/login'>Login</Link>)}
                 {userInfo && (<> <Link style={{ transition: "ease-out", textDecoration: "none", color: "white" }} className='text' to={'/myaccount'}><li >My Account</li></Link>
@@ -69,8 +72,12 @@ const Navbar = () => {
             </div>
           </div></button>
           <div className='relative max-sm:mr-1 sm:mr-4'> <button onClick={handleIsOpen} className=""><GrCart style={{ fontSize: "1.4rem" }} /></button>
-            <div className='absolute top-[-1rem] right-[-0.9rem] bg-orange-400 w-[1.2rem] rounded-full  flex justify-center items-center'><span>{cartItems?.length > 0 && cartItems?.length}</span></div></div>
-          <div className='max-sm:mr-1 sm:mr-4 relative'><button className=" font-semibold " onClick={() => navigate('/wishlist')}><FaRegHeart className="" style={{ fontSize: "1.4rem" }} /></button><div className='absolute top-[-1rem] right-[-0.9rem] bg-orange-400 w-[1.2rem] rounded-full  flex justify-center items-center'><span> {wishlistItems?.length > 0 && wishlistItems?.length}</span></div></div>
+            {cartQuantity ? <div className='absolute top-[-1rem] right-[-0.9rem] bg-customOrange w-[1.2rem] rounded-full  flex justify-center items-center'>
+              <span>{cartQuantity}</span>
+              {/* <span>{cartItems?.length > 0 && cartItems?.length}</span> */}
+            </div> : null}
+          </div>
+          <div className='max-sm:mr-1 sm:mr-4 relative'><button className=" font-semibold " onClick={() => navigate('/wishlist')}><FaRegHeart className="" style={{ fontSize: "1.4rem" }} /></button><div className='absolute top-[-1rem] right-[-0.9rem] bg-customOrange w-[1.2rem] rounded-full  flex justify-center items-center'><span> {wishlistItems?.length > 0 && wishlistItems?.length}</span></div></div>
         </div>
       </div>
 
@@ -85,7 +92,7 @@ const Navbar = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
                 </svg>
               </div> */}
-            <div className="flex items-center gap-3.5 self-stretch px-9 py-2 bg-orange-500 md:px-5 relative group cursor-pointer">
+            <div className="flex items-center gap-3.5 self-stretch px-9 py-2 bg-customOrange md:px-5 relative group cursor-pointer">
               <div className="grow text-white  items-center flex ">ALL CATEGORIES</div>
               <div><img
                 loading="lazy"

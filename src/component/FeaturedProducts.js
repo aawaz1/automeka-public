@@ -7,9 +7,11 @@ import Producttitle from "../wrapper/FeaturedProductTitle.js";
 import ProductSlider from "./ScrollComponent/ProductSlider.js";
 import FeaturedProducttitle from "../wrapper/FeaturedProductTitle.js";
 import useFeaturedProducts from "./customHooks/useFeaturedProducts.js";
+import { useNavigate } from "react-router-dom";
 
 
 const FeaturedProducts = () => {
+    const navigate = useNavigate()
     const featuredProducts = useFeaturedProducts();
     const responsive = {
         superLargeDesktop: {
@@ -34,10 +36,15 @@ const FeaturedProducts = () => {
     return (
         <>
             <ProductSlider title={<FeaturedProducttitle />} >
+
+
                 {featuredProducts.map(product => {
                     return (<Productcard product={product} />)
                 })}
             </ProductSlider>
+            <div className="  flex justify-center mt-2  items-center   text-[1rem]" >
+                <span className="font-poppins cursor-pointer  text-[1rem]" onClick={() => navigate("/category")}> View All</span>
+            </div>
         </>
 
     )

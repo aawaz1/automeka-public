@@ -8,9 +8,9 @@ const Items = ({ Links, title }) => {
       {Links.map((link) => (
         <li key={link.name}>
           <img src={link.image} style={{ width: "7rem", height: "7rem" }} />
-          <div className="flex justify-start gap-2">
+          <div className="flex flex-col justify-start gap-2 mt-1">
             <div className="pr-1">
-            <Link to={'https://play.google.com/store/apps/details?id=com.anintl.automeka&pli=1'}><img src={link.image1} style={{ width: "6rem", height: "2rem" }} /></Link>
+              <Link to={'https://play.google.com/store/apps/details?id=com.anintl.automeka&pli=1'}><img src={link.image1} style={{ width: "6rem", height: "2rem" }} /></Link>
             </div>  <div><img src={link.image2} style={{ width: "6rem", height: "2rem" }} /></div>
           </div>
 

@@ -45,7 +45,7 @@ const Categories = () => {
             <ProductSlider title={<CategoryTitle />} >
                 {
                     categories.map(item => {
-                        return (<Categorycard title={item.name.toUpperCase()} image={item?.image} />)
+                        return (<Categorycard title={item.name} image={item?.image} />)
                     })
                 }
             </ProductSlider>

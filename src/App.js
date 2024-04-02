@@ -1,6 +1,6 @@
 
 import './App.css';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './component/Home/Home.js';
 import Layout from './component/Layout/Layout.js';
 import Wishlist from './component/wishlist.js';
@@ -19,6 +19,8 @@ import Cart from './component/Cart.js';
 import FAQ from './component/Faq.js';
 import EditAddress from './component/EditAddress.js';
 import About from './component/About.js'
+import Contactus from './component/Contactus.js';
+import NotFound from './component/Notfound.js'
 
 
 function App() {
@@ -46,6 +48,8 @@ function App() {
             <Route path='/editprofile' element={<EditProfile />} />
             <Route path='/FAQs' element={<FAQ />} />
             <Route path='/about' element={<About />} />
+            <Route path='/Contact_Us' element={<Contactus/>}/>
+            <Route path='*' element={<NotFound/>}/>
 
 
 
