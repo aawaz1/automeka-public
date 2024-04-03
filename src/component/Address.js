@@ -53,7 +53,7 @@ const Address = () => {
     return (
         <div className='container flex flex-col items-center justify-start py-2'>
             <h2 className='  font-semibold text-[1.2rem]'>Addresses</h2>
-            <div className="justify-center items-center text-center w-[12rem] mt-4 px-4 py-2 text-[0.9rem] bg-orange-400 border-solid shadow-sm rounded-full text-white">
+            <div className="justify-center items-center text-center w-[12rem] mt-4 px-4 py-2 text-[0.9rem] bg-customOrange border-solid shadow-sm rounded-full text-white">
                 <button onClick={() => navigate('/addaddress')}> Add New Address{" "}</button>
             </div>
 
@@ -65,7 +65,7 @@ const Address = () => {
             <h2 className='  font-medium font-poppins text-gray-400 text-[0.9rem]'>Default</h2> */}
 
 
-            {/* <div><h2 className='  font-semibold font-poppins text-orange-400 text-[0.9rem] py-4'>View Addresses</h2></div> */}
+            {/* <div><h2 className='  font-semibold font-poppins text-customOrange text-[0.9rem] py-4'>View Addresses</h2></div> */}
             <div className="w-[100%] flex items-center justify-center rounded-full text-orange-500 py-4 ">
 
                 <select style={{ border: "2px solid orange", borderRadius: "3px" }} className='w-[100%]' onChange={handleAddressChange}>
@@ -81,8 +81,8 @@ const Address = () => {
             </div>
 
             <div className="p-6 flex gap-2  items-start">
-                <button onClick={() => navigate(`/editaddress/${selectedAddress._id}`)} className='mr-6 px-8 py-1  text-gray-500 hover:text-black hover:bg-orange-400 border rounded-full font-poppins font-medium' type='submit'>Edit</button>
-                <button onClick={handleDeleteAddress} className='px-6 py-1  text-gray-500 hover:text-black hover:bg-orange-400  border rounded-full font-poppins font-medium' type='submit'>Delete</button>
+                <button onClick={() => navigate(`/editaddress/${selectedAddress._id}`)} className='mr-6 px-8 py-1  text-gray-500 hover:text-black hover:bg-customOrange border rounded-full font-poppins font-medium' type='submit'>Edit</button>
+                <button onClick={handleDeleteAddress} className='px-6 py-1  text-gray-500 hover:text-black hover:bg-customOrange  border rounded-full font-poppins font-medium' type='submit'>Delete</button>
             </div>
 
 

@@ -82,7 +82,7 @@ const Navbar = () => {
       </div>
 
       <Container isOpen={issOpen} handleIsOpen={handleIsOpen} />
-      <div className='  z-55 bg-slate-700 " text-orange-500 '>
+      <div className='  z-55 bg-slate-700 " text-customOrange '>
         <div style={{ minHeight: "50px" }} className=' container hidden pl-30 md:flex justify-between '>
           <div className='flex'>
 

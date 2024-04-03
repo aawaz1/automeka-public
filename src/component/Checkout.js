@@ -6,6 +6,7 @@ import { useCreateOrderMutation } from "../store/slices/order-slice";
 import { IMAGE_URL } from "../constants";
 import { useNavigate } from "react-router-dom";
 import { MdAddToQueue } from "react-icons/md";
+import Noitemsfound from "./Noitemsfound";
 
 
 const Checkout = () => {
@@ -114,7 +115,7 @@ const Checkout = () => {
   }
   return (
     <>
-      <div className="container  grid grid-cols-1 md:grid-cols-2 p-4 gap-3">
+    {cart.cartItems && cart.cartItems.length ?  <div className="container  grid grid-cols-1 md:grid-cols-2 p-4 gap-3">
         <div>
 
           <h3 className="font-poppins font-semibold text-[1.6rem]">Delivery Address</h3>
@@ -138,7 +139,7 @@ const Checkout = () => {
               <h3 className="font-poppins text-[1rem] font-medium">{saveAddress?.address_1} ,{saveAddress?.address_2} ,{saveAddress?.postal_code} , {saveAddress?.country} ,{saveAddress?.city} , {saveAddress?.state}</h3>
 
             </div>
-            <div className="py-2 flex justify-end items-end"><button onClick={() => navigate("/addaddress")} style={{ borderBottom: " 2px solid orange" }} className="text-gray-400 border-b-orange-400"><MdAddToQueue fontSize={"1.5rem"}
+            <div className="py-2 flex justify-end items-end"><button onClick={() => navigate("/addaddress")} style={{ borderBottom: " 2px solid orange" }} className="text-gray-400 border-b-customOrange"><MdAddToQueue fontSize={"1.5rem"}
             /></button></div>
 
           </div>
@@ -303,7 +304,7 @@ const Checkout = () => {
         </div>
 
 
-      </div>
+      </div> : <Noitemsfound/>}
 
 
 

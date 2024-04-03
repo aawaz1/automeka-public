@@ -4,10 +4,18 @@ import { IoSearchSharp } from "react-icons/io5";
 import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveSearch } from '../../store/slices/cart-slice';
+import useScrollTop from '../customHooks/useScrollToTop';
 
 const SearchBox = () => {
+    const handleScrollToTop = () => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth" // Smooth scrolling animation
+        });
+    };
     const cart  = useSelector(state => state.cart);
     const {search} = cart;
+    const scroll = useScrollTop()
     const navigate = useNavigate();
     const dispatch = useDispatch()
     const { keyword: urlKeyword } = useParams();
@@ -15,6 +23,8 @@ const SearchBox = () => {
     const submitHandler = (e) => {
         e.preventDefault();
         navigate(`/category`)
+       handleScrollToTop();
+
         // if (keyword.trim()) {
         //     setKeyword('');
         //     navigate(`/category?name=${keyword}`)
@@ -25,7 +35,7 @@ const SearchBox = () => {
 
     }
     return (
-        <div className="w-50 md:w-96">
+        <div className="w-50 ">
             <div className=" flex w-full flex-wrap items-stretch">
                 <input
                     type="search"

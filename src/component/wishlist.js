@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { IMAGE_URL } from "../constants.js";
 import { deleteAllFromWishlist, deleteFromWishlist } from "../store/slices/wishlist-slice.js";
 import { addToCart } from "../store/slices/cart-slice.js";
+import Noitemsfound from "./Noitemsfound.js";
 
 const Wishlist = () => {
   const { wishlistItems } = useSelector((state) => state.wishlist);
@@ -20,7 +21,7 @@ const Wishlist = () => {
     dispatch(addToCart({ product: cartItem, qty: 1 }));
   };
   return (<>
-    <div className="hidden md:block container">
+   {wishlistItems && wishlistItems?.length > 0  ? <div className="hidden md:block container">
       <h2 className="font-bold font-poppins text-[1.2rem] p-2 py-4">Your Wishlists Item</h2>
       <div style={{ borderBottom: "1px solid lightgrey" }}></div>
       <Grid container spacing={1} className="py-3">
@@ -42,11 +43,11 @@ const Wishlist = () => {
             <Grid className="font-medium font-poppins" item md={2} alignItems={"center"} display={"flex"}>{cartItem?.price.toFixed(3)}</Grid>
             <Grid item md={2} alignItems={"center"} display={"flex"}>
               {cartItem.varaints > 0 ? (
-                <button disabled={cartItem.coming_soon} style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-orange-400 font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product: cartItem, qty: 1 }))}>Add To Cart</button>
+                <button disabled={cartItem.coming_soon} style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-customOrange font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product: cartItem, qty: 1 }))}>Add To Cart</button>
               ) : (
                 <>
                   {cartItem?.on_stock > 1 && (
-                    <button disabled={cartItem.coming_soon} style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-orange-400 font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product: cartItem, qty: 1 }))}>Add to Cart</button>
+                    <button disabled={cartItem.coming_soon} style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-customOrange font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product: cartItem, qty: 1 }))}>Add to Cart</button>
                   )}
                   {cartItem?.on_stock <= 0 && (
                     <button style={{ cursor: "not-allowed" }} className=' p-[0.42rem] bg-black bottom-2 rounded-sm flex  text-white items-center justify-center' disabled>Out of Stock</button>
@@ -66,11 +67,11 @@ const Wishlist = () => {
           <Grid className="font-semibold font-poppins" item md={6}></Grid>
           <Grid className="font-semibold font-poppins" item md={2}></Grid>
           <Grid className="font-semibold font-poppins" item md={2}></Grid>
-          <Grid className="font-medium font-poppins hover:text-orange-400" item md={2}><button onClick={() => dispatch(deleteAllFromWishlist())}>{wishlistItems?.length > 0 && "Clear Wishlist"}</button></Grid>
+          <Grid className="font-medium font-poppins hover:text-customOrange" item md={2}><button onClick={() => dispatch(deleteAllFromWishlist())}>{wishlistItems?.length > 0 && "Clear Wishlist"}</button></Grid>
         </Grid>)}
 
       </Grid>
-    </div>
+    </div> : <Noitemsfound/>}
     <div className="md:hidden container h-[50rem] flex flex-col self-center px-5 pb-3 pt-3 mt-16 w-full font-medium max-w-[1371px] max-md:mt-10 max-md:max-w-full">
       <div className="text-2xl text-black max-md:max-w-full">
         Your Wishlist items
@@ -105,11 +106,11 @@ const Wishlist = () => {
 
               <div className="justify-center self-stretch px-2 py-2 tracking-tight text-center ">
               {cartItem.varaints > 0 ? (
-                <button disabled={cartItem.coming_soon} style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-orange-400 font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product: cartItem, qty: 1 }))}>Add To Cart</button>
+                <button disabled={cartItem.coming_soon} style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-customOrange font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product: cartItem, qty: 1 }))}>Add To Cart</button>
               ) : (
                 <>
                   {cartItem?.on_stock > 1 && (
-                    <button disabled={cartItem.coming_soon} style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-orange-400 font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product: cartItem, qty: 1 }))}>Add to Cart</button>
+                    <button disabled={cartItem.coming_soon} style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-customOrange font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product: cartItem, qty: 1 }))}>Add to Cart</button>
                   )}
                   {cartItem?.on_stock <= 0 && (
                     <button style={{ cursor: "not-allowed" }} className=' p-[0.42rem] bg-black bottom-2 rounded-sm flex  text-white items-center justify-center' disabled>Out of Stock</button>

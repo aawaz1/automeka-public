@@ -170,18 +170,18 @@ const ProductScreen = () => {
                     <div className='flex  gap-4 items-center'>
                         {availability !== null && availability > 0 ? (
                             <>
-                                <button style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-orange-400 font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product, qty }))}> Add to Cart</button>
+                                <button style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-customOrange font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product, qty }))}> Add to Cart</button>
 
 
-                                <button className='  bg-orange-400 px-4 py-1 text-white font-medium font-poppins rounded-md'> Buy Now</button>
+                                <button className='  bg-customOrange px-4 py-1 text-white font-medium font-poppins rounded-md'> Buy Now</button>
                                 <FaRegHeart onClick={() => dispatch(addToWishlist(product))} /> </>) : (
                             <>
                                 {product?.on_stock > 0 && (
                                     <>
-                                        <button style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-orange-400 font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product, qty }))}> Add to Cart</button>
+                                        <button style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-customOrange font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product, qty }))}> Add to Cart</button>
 
 
-                                        <button className='  bg-orange-400 px-4 py-1 text-white font-medium font-poppins rounded-md' onClick={() => {
+                                        <button className='  bg-customOrange px-4 py-1 text-white font-medium font-poppins rounded-md' onClick={() => {
                                             try {
                                                 dispatch(addToCart({ product, qty }));
                                                 navigate('/cart');

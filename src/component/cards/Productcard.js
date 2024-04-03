@@ -33,7 +33,7 @@ const Productcard = ({ product }) => {
 
         <h2 className=" text-sm md:text-[1.1rem]  truncate">{product?.name}</h2>
         {showButton ? (<>
-          {product?.on_stock && product?.on_stock > 0 ? (<div className=' p-[0.42rem] bg-orange-400 bottom-2 rounded-sm flex items-center justify-center'>{ }
+          {product?.on_stock && product?.on_stock > 0 ? (<div className=' p-[0.42rem] bg-customOrange bottom-2 rounded-sm flex items-center justify-center'>{ }
             <button className='text-white  flex items-center ' onClick={() => dispatch(addToCart({ product, qty: 1 }))}> <MdShoppingCart className='font-sm' /> Add To Cart</button>
           </div>) : (<div className=' p-[0.42rem] bg-black bottom-2 rounded-sm flex items-center justify-center'>{ }
             <button disabled className='text-white  flex items-center '> Out Of Stock</button>

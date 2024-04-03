@@ -74,7 +74,7 @@ const Reviews = ({ product }) => {
           </div>
           <button
             type='submit'
-            className='px-4 py-2 bg-orange-400 hover:bg-orange-300 text-white rounded-md'
+            className='px-4 py-2 bg-customOrange hover:bg-orange-300 text-white rounded-md'
           >
             Submit
           </button>

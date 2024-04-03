@@ -47,7 +47,7 @@ const Cartmenu = ({ handleIsOpen }) => {
                                                     }>-</div>
                                                     <div className='px-2 border border-gray-500'>{cartItem.quantity}</div>
                                                     <div className='rounded-r-lg border border-gray-500 bg-gray-100 px-2 cursor-pointer' onClick={() => handleIncrement(cartItem)}>+</div></div>
-                                                <button className='text-orange-400 text-[0.8rem]' onClick={() => dispatch(deleteFromCart(cartItem?.cartItemId))}>Remove</button>
+                                                <button className='text-customOrange text-[0.8rem]' onClick={() => dispatch(deleteFromCart(cartItem?.cartItemId))}>Remove</button>
 
 
                                             </div>
@@ -79,8 +79,8 @@ const Cartmenu = ({ handleIsOpen }) => {
                                 <button onClick={() => {
                                     navigate('/checkout');
                                     handleIsOpen();
-                                }} className='bg-orange-400 text-white p-2 px-4 rounded-md'>Checkout</button>
-                                <button className='bg-orange-400 text-white p-2 px-4 rounded-md' onClick={() => {
+                                }} className='bg-customOrange text-white p-2 px-4 rounded-md'>Checkout</button>
+                                <button className='bg-customOrange text-white p-2 px-4 rounded-md' onClick={() => {
                                     navigate('/cart');
                                     handleIsOpen();
                                 }}

@@ -21,6 +21,7 @@ import EditAddress from './component/EditAddress.js';
 import About from './component/About.js'
 import Contactus from './component/Contactus.js';
 import NotFound from './component/Notfound.js'
+import PrivateRoute from './component/routes/PrivateRoute.js';
 
 
 function App() {
@@ -34,21 +35,21 @@ function App() {
 
             <Route path='/wishlist' element={<Wishlist />} />
             <Route path='/cart' element={<Cart />} />
-            <Route path='/checkout' element={<Checkout />} />
+            <Route path='/checkout'  element={<PrivateRoute element={<Checkout />} />}/>
             <Route path='/category' element={<Category />} />
             <Route path='/login' element={<LoginForm />} />
             <Route path='/register' element={<RegisterForm />} />
             <Route path='/product/:id' element={<ProductScreen />} />
-            <Route path='/myaccount/' element={<MyAccount />} />
-            <Route path='/myaccount/orders' element={<Orderscreen />} />
-            <Route path='/order' element={<SingleOrderscreen />} />
-            <Route path='/ordertracker' element={<OrderTracker />} />
-            <Route path='/addaddress' element={<AddAddress />} />
-            <Route path='/editaddress/:id' element={<EditAddress />} />
-            <Route path='/editprofile' element={<EditProfile />} />
+            <Route path='/myaccount/'  element={<PrivateRoute element={<MyAccount />} />}/>
+            <Route path='/myaccount/orders'  element={<PrivateRoute element={<Orderscreen />} />}/>
+            <Route path='/order'  element={<PrivateRoute element={<SingleOrderscreen />} />}/>
+            <Route path='/ordertracker'  element={<PrivateRoute element={<OrderTracker />} />}/>
+            <Route path='/addaddress'  element={<PrivateRoute element={<AddAddress />} />}/>
+            <Route path='/editaddress/:id' element={<PrivateRoute element={<EditAddress />} />}/>
+            <Route path='/editprofile'  element={<PrivateRoute element={<EditProfile />} />}/>
             <Route path='/FAQs' element={<FAQ />} />
             <Route path='/about' element={<About />} />
-            <Route path='/Contact_Us' element={<Contactus/>}/>
+            <Route path='/Contact%20Us' element={<Contactus/>}/>
             <Route path='*' element={<NotFound/>}/>
 
 

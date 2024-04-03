@@ -57,10 +57,10 @@ const Cart = () => {
         })}
 
         {cartItems && (<Grid className="p-2" item container xs={12}>
-          <Grid padding={5} className="font-semibold font-poppins" item md={6}><button onClick={() => navigate('/checkout')} className="px-6 py-2 bg-orange-400 rounded-full text-white hover:bg-orange-300 hover:text-black font-poppins font-medium">Proceed To Checkout</button></Grid>
+          <Grid padding={5} className="font-semibold font-poppins" item md={6}><button onClick={() => navigate('/checkout')} className="px-6 py-2 bg-customOrange rounded-full text-white hover:bg-orange-300 hover:text-black font-poppins font-medium">Proceed To Checkout</button></Grid>
           <Grid className="font-semibold font-poppins" item md={2}></Grid>
           <Grid className="font-semibold font-poppins" item md={2}></Grid>
-          <Grid className="font-medium font-poppins hover:text-orange-400" item md={2}><button onClick={() => dispatch(deleteAllFromCart())}>{cartItems?.length > 0 && "Clear Cart"}</button></Grid>
+          <Grid className="font-medium font-poppins hover:text-customOrange" item md={2}><button onClick={() => dispatch(deleteAllFromCart())}>{cartItems?.length > 0 && "Clear Cart"}</button></Grid>
         </Grid>)}
 
 
@@ -126,11 +126,11 @@ const Cart = () => {
         )
       })}
 
-      <div className="flex justify-between items-center p-2 gap-2 mt-2"> <div className="px-6 py-2 bg-orange-400 rounded-full text-white hover:bg-orange-300 hover:text-black font-poppins font-medium">
+      <div className="flex justify-between items-center p-2 gap-2 mt-2"> <div className="px-6 py-2 bg-customOrange rounded-full text-white hover:bg-orange-300 hover:text-black font-poppins font-medium">
         {" "}
         Checkout
       </div>
-        <div className="px-6 py-2 bg-orange-400 rounded-full text-white hover:bg-orange-300 hover:text-black font-poppins font-medium">
+        <div className="px-6 py-2 bg-customOrange rounded-full text-white hover:bg-orange-300 hover:text-black font-poppins font-medium">
           {" "}
           Clear Cart
         </div></div>

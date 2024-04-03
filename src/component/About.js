@@ -4,7 +4,7 @@ const About = () => {
     return (
         <div>
             <div className='container flex flex-col justify-center items-center p-2'>
-                <h2 className='text-[2rem]'>About <span className='text-orange-400 text-[2rem]'>Auto Meka</span></h2>
+                <h2 className='text-[2rem]'>About <span className='text-customOrange text-[2rem]'>Auto Meka</span></h2>
                 <p className='text-gray-500 text[1rem]'>At Automeka, we're passionate about providing high-quality car parts and accessories to automotive enthusiasts and professionals alike. With years of experience in the industry, we understand the importance of reliable parts to keep your vehicle running smoothly.</p>
 
             </div>

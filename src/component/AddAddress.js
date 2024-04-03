@@ -2,8 +2,16 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useCreateMutation } from '../store/slices/address-slice';
 import cogoToast from 'cogo-toast';
+import { useNavigate } from 'react-router-dom';
 
 const AddAddress = () => {
+    
+    const navigate = useNavigate();
+    const goBack = () => {
+        navigate(-1); // Navigate back one step
+      };
+
+
 
     const [create] = useCreateMutation();
     let id = JSON.parse(localStorage.getItem("id") || null);
@@ -54,6 +62,8 @@ const AddAddress = () => {
 
 
             }).unwrap();
+
+            goBack();
 
 
             cogoToast.success("Address Created Successfully", { position: "bottom-left" });
@@ -142,8 +152,8 @@ const AddAddress = () => {
 
 
                 <div className="p-6 flex  md:flex-row gap-2 items-start">
-                    <button className='mr-6 px-8 md:px-12 py-2 bg-gray-100  hover:bg-orange-500 hover:text-white border rounded-md font-poppins font-medium'  >Cancel</button>
-                    <button className='px-10 md:px-12 py-2 bg-orange-400  hover:bg-orange-500 text-white hover:text-black border rounded-md font-poppins font-medium' type='submit' onClick={createAddressHandler}>Save</button>
+                    <button onClick={goBack} className='mr-6 px-8 md:px-12 py-2 bg-gray-100  hover:bg-orange-500 hover:text-white border rounded-md font-poppins font-medium'  >Cancel</button>
+                    <button className='px-10 md:px-12 py-2 bg-customOrange  hover:bg-orange-500 text-white hover:text-black border rounded-md font-poppins font-medium' type='submit' onClick={createAddressHandler}>Save</button>
                 </div>
                 <div></div>
 

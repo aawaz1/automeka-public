@@ -99,7 +99,7 @@ const EditProfile = () => {
 
                 <div className="p-6 flex flex-col md:flex-row  gap-2  items-start">
                     <button className='mr-6 px-8 md:px-12 py-2 bg-gray-100  hover:bg-orange-500 hover:text-white border rounded-md font-poppins font-medium' type='submit'>Cancel</button>
-                    <button className='px-10 md:px-14 py-2 bg-orange-400  hover:bg-orange-500 text-white hover:text-black border rounded-md font-poppins font-medium' type='submit' onClick={submitHandler}>Save</button>
+                    <button className='px-10 md:px-14 py-2 bg-customOrange  hover:bg-orange-500 text-white hover:text-black border rounded-md font-poppins font-medium' type='submit' onClick={submitHandler}>Save</button>
                 </div>
                 <div></div>
 

@@ -129,7 +129,7 @@ const Orderscreen = () => {
                 <Grid item xs={2}>{order?.created_at.substring(0, 10)}</Grid>
                 <Grid item xs={3}>pending</Grid>
                 <Grid item xs={2}>{order?.total_price}</Grid>
-                <Grid className="text-base text-orange-400 cursor-pointer font-poppins" item xs={2} onClick={() => dispatch(fetchOrder(order._id))}>Details</Grid>
+                <Grid className="text-base text-customOrange cursor-pointer font-poppins" item xs={2} onClick={() => dispatch(fetchOrder(order._id))}>Details</Grid>
               </React.Fragment>
             ))}
           </Grid>

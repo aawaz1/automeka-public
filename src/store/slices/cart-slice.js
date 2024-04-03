@@ -48,6 +48,7 @@ const cartSlice = createSlice({
         
         deleteFromCart(state, action) {
             state.cartItems = state.cartItems.filter(item => item.cartItemId !== action.payload);
+            cogoToast.error("Removed From Cart", {position: "bottom-left"});
            
         },
         
@@ -56,13 +57,14 @@ const cartSlice = createSlice({
             const product = action.payload;
             if (product.quantity === 1) {
                 state.cartItems = state.cartItems.filter(item => item.cartItemId !== product.cartItemId);
-               
+                cogoToast.error("Removed From Cart", {position: "bottom-left"});
             } else {
                 state.cartItems = state.cartItems.map(item =>
                     item.cartItemId === product.cartItemId
                         ? { ...item, quantity: item.quantity - 1 }
                         : item
                 );
+                cogoToast.warn("Item Decremented From Cart", {position: "bottom-left"});
                 
             }
            
