@@ -45,7 +45,7 @@ const Productcard = ({ product }) => {
         </h2>)}
 
       </div>
-    
+
     </div>
   );
 }

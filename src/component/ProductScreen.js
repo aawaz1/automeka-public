@@ -107,16 +107,16 @@ const ProductScreen = () => {
                     <CommonRating value={product?.rating} />
                     <div className='flex py-2'>
                         {availability !== null && availability > 0 ? (<>
-                            <div className='rounded-l-lg border border-gray-500 px-2 bg-gray-100' onClick={handleDecrement}>-</div>
+                            <div className='cursor-pointer                                                                                           rounded-l-lg border border-gray-500 px-2 bg-gray-100' onClick={handleDecrement}>-</div>
                             <div className='px-2 border border-gray-500'>{qty}</div>
-                            <div className='rounded-r-lg border border-gray-500 bg-gray-100 px-2' onClick={handleIncrement}>+</div>
+                            <div className=' cursor-pointer rounded-r-lg border border-gray-500 bg-gray-100 px-2' onClick={handleIncrement}>+</div>
                         </>) : ((
                             <>
                                 {product?.on_stock > 1 ? (
                                     <>
-                                        <div className='rounded-l-lg border border-gray-500 px-2 bg-gray-100' onClick={handleDecrement}>-</div>
+                                        <div className=' cursor-pointerrounded-l-lg border border-gray-500 px-2 bg-gray-100' onClick={handleDecrement}>-</div>
                                         <div className='px-2 border border-gray-500'>{qty}</div>
-                                        <div className='rounded-r-lg border border-gray-500 bg-gray-100 px-2' onClick={handleIncrement}>+</div>
+                                        <div className=' cursor-pointer rounded-r-lg border border-gray-500 bg-gray-100 px-2' onClick={handleIncrement}>+</div>
                                     </>) : null}
 
                             </>

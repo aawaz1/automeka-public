@@ -44,7 +44,7 @@ const Reviews = ({ product }) => {
   return (
     <div className='flex items-start flex-col p-2'>
       <h4 className='font-poppins text-[1rem] '>Customer Reviews</h4>
-      {reviews?.map((review) => (
+      {reviews && reviews?.length > 0 ? (reviews?.map((review) => (
         <div key={review._id} style={{ display: "flex", flexDirection: "column", width: "80%" }}>
           <strong>{review.user.email}</strong>
           <CommonRating value={review.rating} />
@@ -52,7 +52,7 @@ const Reviews = ({ product }) => {
           <p>{review.review}</p>
           <hr className='border border-gray-300' />
         </div>
-      ))}
+      ))) : (<h4 className='text-[1rem] text-customOrange p-2'>No Reviews Yet</h4>)}
       <h4 className='font-poppins text-[1rem] '>Add Reviews</h4>
       {userInfo ? (
         <form onSubmit={submitHandler} class="form">
