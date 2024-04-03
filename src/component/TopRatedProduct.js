@@ -6,9 +6,11 @@ import Productcard from "./cards/Productcard.js";
 import Producttitle from "../wrapper/Producttitle.js";
 import ProductSlider from "./ScrollComponent/ProductSlider.js";
 import useTopRatedProducts from "./customHooks/useTopRatedProducts.js";
+import { useNavigate } from "react-router-dom";
 
 
 const TopRatedProduct = () => {
+    const navigate = useNavigate()
     const topRatedProducts = useTopRatedProducts();
     const responsive = {
         superLargeDesktop: {
@@ -32,11 +34,18 @@ const TopRatedProduct = () => {
     const productData = [{ name: "10w40 United Oil", image: '/car-service-white-background-isolated-3d-illustration.jpg', price: 2.222 }, { name: "10w40 United Oil", image: '/car-service-white-background-isolated-3d-illustration.jpg', price: 2.222 }, { name: "10w40 United Oil", image: '/car-service-white-background-isolated-3d-illustration.jpg', price: 2.222 }, { name: "10w40 United Oil", image: '/car-service-white-background-isolated-3d-illustration.jpg', price: 2.222 }, { name: "10w40 United Oil", image: '/car-service-white-background-isolated-3d-illustration.jpg', price: 2.222 },]
     return (
         <div className="">{topRatedProducts ?
+            <>
             <ProductSlider title={<Producttitle title={"Best Selling Products"} />} >
                 {topRatedProducts?.map(product => {
                     return (<Productcard product={product} />)
                 })}
-            </ProductSlider> : <>No Data</>}
+            </ProductSlider>
+            <div className="  flex justify-center mt-2  items-center   text-[1rem]" >
+            <span className="font-poppins cursor-pointer  text-[1rem]" onClick={() =>  navigate(`/category?filterSort=2`)}> View All</span>
+        </div>
+        </>
+        
+             : <>No Data</>}
         </div>
 
     )

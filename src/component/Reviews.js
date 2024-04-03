@@ -5,6 +5,7 @@ import cogoToast from 'cogo-toast';
 import { BASE_URL } from '../constants';
 import CommonRating from './Rating';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const Reviews = ({ product }) => {
   const productId = product?._id;
@@ -24,6 +25,7 @@ const Reviews = ({ product }) => {
       cogoToast.success('Review Submitted')
       setReview('');
       setRating(0);
+      getReviews();
 
     } catch (err) {
       console.log(err?.data?.message || err?.message);
@@ -81,7 +83,7 @@ const Reviews = ({ product }) => {
         </form>
       ) : (
         <h4>
-          Please <a href="/login">sign in</a> to write a review
+          Please <Link to="/login"> sign in </Link> to write a review
         </h4>
       )}
 

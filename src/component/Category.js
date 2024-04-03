@@ -18,6 +18,7 @@ const Category = () => {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const category = searchParams.get('category');
+    const filterSortQuery = searchParams.get('filterSort');
 
     const [isOpen, setIsOpen] = useState(false);
     const [featuredProducts, setFeaturedProducts] = useState(null);
@@ -58,6 +59,12 @@ const Category = () => {
     // }
     const [selectedCategory, setSelectedCategory] = useState(null)
     useEffect(() => {
+        if(filterSortQuery){
+            setFilterSort(Number(filterSortQuery))
+        }
+    },[filterSortQuery])
+    useEffect(() => {
+       
         if (category) {
             setSelectedCategory(category);
         }
@@ -125,14 +132,16 @@ const Category = () => {
 
 
                             </div>
-                            <div className='hidden md:block items-center px-2  border border-2px border-solid rounded-sm  justify-center shadow-lg border-gray-400 gap-2 w-[100%]'>
-                                <h2 className='text-[1rem] pl-7 pt-3  font-semibold '>filters</h2>
+                            
+                                <h2 className='text-[1rem] pl-10 pt-3  font-semibold '> Filters</h2>
                                 <div className='pb-1'>   <hr className='border border-solid border-gray-400 w-[80%] m-auto p-0' /></div>
-                                <button className={`text-[0.9rem] font-medium font-poppins border border-black border-20px p-1 px-2 rounded-sm hover:bg-customOrange hover:text-white ${filterSort === 2 ? "bg-customOrange text-white" : ""}`} onClick={() => handleFilter(2)}>Top Selling</button>
-                                <button className={`text-[0.9rem] font-medium font-poppins border border-black border-20px p-1 px-2 rounded-sm hover:bg-customOrange hover:text-white ${filterSort === 0 ? "bg-customOrange text-white" : ""} `} onClick={() => handleFilter(0)}>Low To High</button>
-                                <button className={`text-[0.9rem] font-medium font-poppins border border-black border-20px p-1 px-2 rounded-sm hover:bg-customOrange hover:text-white ${filterSort === 1 ? "bg-customOrange text-white" : ""}`} onClick={() => handleFilter(1)}> High to Low</button>
+                               <div className='flex flex-col p-2'>
+                               <button className={`text-[0.9rem] font-medium font-poppins border border-black border-20px p-1 px-2 rounded-sm   ${filterSort === 2 ? "bg-customOrange text-white" : ""}`} onClick={() => handleFilter(2)}>Top Selling</button>
+                                <button className={`text-[0.9rem] font-medium font-poppins border border-black border-20px p-1 px-2 rounded-sm   ${filterSort === 0 ? "bg-customOrange text-white" : ""} `} onClick={() => handleFilter(0)}>Low To High</button>
+                                <button className={`text-[0.9rem] font-medium font-poppins border border-black border-20px p-1 px-2 rounded-sm e  ${filterSort === 1 ? "bg-customOrange text-white" : ""}`} onClick={() => handleFilter(1)}> High to Low</button>
+                               </div>
 
-                            </div>
+                            
                         </div>
 
                     </Grid>

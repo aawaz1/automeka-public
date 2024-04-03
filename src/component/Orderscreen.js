@@ -11,20 +11,16 @@ import { IoIosArrowForward } from "react-icons/io";
 
 const Orderscreen = () => {
   const { orderDetails } = useSelector(state => state.order);
-  console.log(orderDetails)
 
   const cart = useSelector((state) => state.cart);
   const [tracker, setTracker] = useState(null);
 
-  
+
   const { cartItems } = cart;
   let id = JSON.parse(localStorage.getItem("id") || null);
-  console.log(id)
-  console.log(cart);
   const { saveAddress } = cart;
-  console.log(saveAddress);
 
- 
+
 
 
   const dispatch = useDispatch();
@@ -36,23 +32,19 @@ const Orderscreen = () => {
         `https://restapi.ansoftt.com:4321/v1/order/${id}`
       );
       setOrders(data.data);
-      console.log(data.data);
-      console.log(orders);
-
 
     } catch (error) {
       console.log(error);
     }
   };
 
-  console.log(orders)
   useEffect(() => {
     getAllOrders()
   }, [])
   return (
     <div className="p-2 flex flex-col  w-[30rem] md:w-[100%]   justify-center items-center container">
       <h2 className=' pb-4 font-semibold text-[1.2rem]'>{orderDetails ? (tracker ? "Order Tracker" : "Order Details") : "Your Order History"}
-</h2>
+      </h2>
 
       {orderDetails ? <>
         {tracker ? <OrderTracker tracker={tracker} setTracker={setTracker} /> : <div className='container p-2   justify-center items-center'>
@@ -96,7 +88,7 @@ const Orderscreen = () => {
                         </div>
                       </div>
                     </div>
-                    <div onClick={() => setTracker(order_item?.product?._id)}><IoIosArrowForward/></div>
+                    <div onClick={() => setTracker(order_item?.product?._id)}><IoIosArrowForward /></div>
                   </div>
                 </div>
               )

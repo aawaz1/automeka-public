@@ -75,6 +75,7 @@ const Registerform = () => {
                 confirmPassword: ""
 
             });
+            cogoToast.success("Account Created Successfully", { position: "bottom-left" });
         } catch (err) {
             console.log(err);
             cogoToast.error(err?.data?.message, { position: "bottom-left" });

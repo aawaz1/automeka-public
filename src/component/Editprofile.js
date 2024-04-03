@@ -5,7 +5,7 @@ import { setCredentials } from '../store/slices/auth-slice';
 
 const EditProfile = () => {
     const { userInfo } = useSelector((state) => state.auth);
-    console.log(userInfo)
+    let user = JSON.parse(localStorage.getItem("userInfo") || null);
 
     const [user_name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -21,6 +21,16 @@ const EditProfile = () => {
     };
     useEffect(() => {
 
+    })
+
+    // useEffect(() => {
+    //     if (user) {
+    //         setName(user?.name)
+    //         setPhone(user?.phone)
+    //     }
+    // } ,[])
+    useEffect(() => {
+
         if (userInfo) {
             setName(userInfo.name || userInfo?.data?.user?.name);
             setEmail(userInfo?.email || userInfo?.data?.auth?.email);
@@ -30,10 +40,11 @@ const EditProfile = () => {
         } else {
 
         }
-    }, [userInfo.name, userInfo.email]);
+    }, [userInfo]);
 
     let id = JSON.parse(localStorage.getItem("id") || null);
-    console.log(id)
+    let token = JSON.parse(localStorage.getItem("token") || null);
+
 
     const submitHandler = async (e) => {
         e.preventDefault();
@@ -42,13 +53,13 @@ const EditProfile = () => {
                 `https://restapi.ansoftt.com:4321/v1/user/${id}`, updatedData
             );
             console.log(data);
-            dispatch(setCredentials({ ...updatedData, }));
+            dispatch(setCredentials({ ...updatedData, _id: id, token: token }));
             // Handle data or set state as needed
         } catch (error) {
             console.log(error);
         }
     };
-    console.log(setCredentials({ ...updatedData }))
+
     return (
         <div className='container p-4'>
             <div className=' container flex justify-start p-2 '>
