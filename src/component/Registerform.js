@@ -110,7 +110,11 @@ const Registerform = () => {
                             placeholder="Enter Your Phone"
                             value={formData.phone}
                             inputStyle={{ width: "100%" }}
-                            onChange={(value) => handleChange({ target: { value, name: "phone" } })}
+                            onChange={(value, countryData) => {
+                                const countryCodeNumber = countryData?.dialCode;
+                                handleChange({ target: { value, name: "phone" } });
+                                console.log("Country Code Number:", countryCodeNumber);
+                            }}
                             countryCodeEditable={false}
                         />
 

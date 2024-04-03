@@ -6,6 +6,7 @@ import cogoToast from 'cogo-toast';
 
 const EditProfile = () => {
     const { userInfo } = useSelector((state) => state.auth);
+    console.log(userInfo)
     let user = JSON.parse(localStorage.getItem("userInfo") || null);
 
     const [user_name, setName] = useState("");
@@ -53,9 +54,9 @@ const EditProfile = () => {
             const { data } = await axios.patch(
                 `https://restapi.ansoftt.com:4321/v1/user/${id}`, updatedData
             );
-            
-            dispatch(setCredentials({ ...updatedData, _id: id, token: token }));
-            cogoToast.success('Details Updated Successfully', {position: "bottom-left"});  
+
+            dispatch(setCredentials({ ...userInfo, ...updatedData, _id: id, token: token }));
+            cogoToast.success('Details Updated Successfully', { position: "bottom-left" });
             // Handle data or set state as needed
         } catch (error) {
             console.log(error);
@@ -65,7 +66,7 @@ const EditProfile = () => {
     return (
         <div className='container p-4'>
             <div className=' container flex justify-start p-2 '>
-                <div><button className='rounded-full border border-solid border-gray-400 px-3 py-2'> 0 points</button></div>
+                <div><button className='rounded-full border border-solid border-gray-400 px-2 py-2'> 0 points</button></div>
 
             </div>
 

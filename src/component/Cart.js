@@ -11,6 +11,7 @@ import { IMAGE_URL } from "../constants.js";
 import { addToCart, decreaseQuantity, deleteAllFromCart } from "../store/slices/cart-slice.js";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import Noitemsfound from "./Noitemsfound.js";
 
 const Cart = () => {
   const navigate = useNavigate();
@@ -23,7 +24,7 @@ const Cart = () => {
   const { cartItems } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
   return (<>
-    <div className="hidden md:block container">
+    {cartItems && cartItems.length > 0 ? (<div className="hidden md:block container">
       <h2 className="font-bold font-poppins text-[1.2rem] p-2 py-4">Shopping Cart</h2>
       <div style={{ borderBottom: "1px solid lightgrey" }}></div>
       <Grid container spacing={1} className="py-3">
@@ -65,12 +66,12 @@ const Cart = () => {
 
 
       </Grid>
-    </div>
+    </div>) : (<Noitemsfound />)}
 
     <div className="md:hidden container h-[50rem] flex flex-col self-center px-5  w-full font-medium max-w-[1371px] max-md:mt-10 max-md:max-w-full">
-      <div className="text-2xl text-black max-md:max-w-full">
+      {cartItems && cartItems.length > 0 ? <div className="text-2xl text-black max-md:max-w-full">
         Shopping Cart
-      </div>
+      </div> : null}
       <div className="flex gap-3 justify-around mt-16 w-full text-lg text-black max-md:flex-wrap max-md:mt-10 max-md:max-w-full">
         {/* <div>PRODUCT</div> */}
         {/* <div className="flex gap-5 max-md:flex-wrap max-md:max-w-full">
@@ -78,8 +79,9 @@ const Cart = () => {
           <div className="flex-auto">QUANTITY</div>
           <div className="flex-auto">TOTAL</div>
         </div> */}
+        <div className="shrink-0  border border-solid bg-stone-300 border-stone-300 h-[3px] max-md:max-w-full" />
       </div>
-      <div className="shrink-0  border border-solid bg-stone-300 border-stone-300 h-[3px] max-md:max-w-full" />
+
       {cartItems.map(cartItem => {
         return (<>
           <div className="flex gap-2 justify-between px-0.5 mt-6 w-full max-md:flex-wrap max-md:max-w-full">
@@ -126,14 +128,17 @@ const Cart = () => {
         )
       })}
 
-      <div className="flex justify-between items-center p-2 gap-2 mt-2"> <div className="px-6 py-2 bg-customOrange rounded-full text-white hover:bg-orange-300 hover:text-black font-poppins font-medium">
-        {" "}
-        Checkout
-      </div>
-        <div className="px-6 py-2 bg-customOrange rounded-full text-white hover:bg-orange-300 hover:text-black font-poppins font-medium">
-          {" "}
-          Clear Cart
-        </div></div>
+      {cartItems && cartItems.length > 0 ?
+        <div className="flex justify-between items-center p-2 gap-2 mt-2">
+          <div className="px-6 py-2 bg-customOrange rounded-full text-white hover:bg-orange-300 hover:text-black font-poppins font-medium">
+            {" "}
+            Checkout
+          </div>
+          <div className="px-6 py-2 bg-customOrange rounded-full text-white hover:bg-orange-300 hover:text-black font-poppins font-medium">
+            {" "}
+            Clear Cart
+          </div>
+        </div> : null}
     </div>
   </>
   );

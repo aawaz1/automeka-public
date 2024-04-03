@@ -16,6 +16,9 @@ import useCategory from './customHooks/useCategory.js';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../store/slices/auth-slice.js';
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
+import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -59,7 +62,7 @@ const Navbar = () => {
         <SearchBox />
         <div className="flex">
           <button className=" max-sm:mr-1 sm:mr-4" ><div className="flex items-center text-black relative group cursor-pointer">
-            <div className="   items-center flex text-black"><RiAccountBoxLine style={{ fontSize: "1.4rem" }} /></div>
+            <div className="   items-center flex text-black"><AccountBoxOutlinedIcon style={{ fontSize: "1.4rem" }} /></div>
 
             <div className='absolute max-sm:top-0 max-sm:right-0 md:left-[-62px] md:top-[20px]  bg-gray-800 text-white rounded-md shadow-lg hidden group-hover:block w-[10vw]'>
               <ul className='gap-2 pt-2'>

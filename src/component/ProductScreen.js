@@ -4,21 +4,29 @@ import TabNav from '../component/Tabnav.js'
 import { useNavigate, useParams } from 'react-router-dom';
 
 import { IMAGE_URL } from '../constants.js';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { addToCart } from "../store/slices/cart-slice.js";
 import useFeaturedProducts from './customHooks/useFeaturedProducts.js';
 import Productcard from './cards/Productcard.js';
 import ProductSlider from './ScrollComponent/ProductSlider.js';
 import { fetchProductDetails } from '../store/api.js';
-import { addToWishlist } from '../store/slices/wishlist-slice.js';
+import { addToWishlist, deleteFromWishlist } from '../store/slices/wishlist-slice.js';
 import CommonRating from './Rating.js';
 
 const ProductScreen = () => {
+    const  {wishlistItems } = useSelector(state => state.wishlist);
     const navigate = useNavigate()
     const [qty, setQty] = useState(1);
     const { id } = useParams();
     const dispatch = useDispatch()
-    const [product, setProduct] = useState()
+    const [product, setProduct] = useState();
+
+    const handleWishlist = () => {
+        dispatch(addToWishlist(product))
+        if(product){
+            dispatch(deleteFromWishlist(product._id))
+        }
+    }
 
 
     const handleProductDetail = async () => {
@@ -174,7 +182,7 @@ const ProductScreen = () => {
 
 
                                 <button className='  bg-customOrange px-4 py-1 text-white font-medium font-poppins rounded-md'> Buy Now</button>
-                                <FaRegHeart onClick={() => dispatch(addToWishlist(product))} /> </>) : (
+                                <FaRegHeart onClick={handleWishlist} /> </>) : (
                             <>
                                 {product?.on_stock > 0 && (
                                     <>

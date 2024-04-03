@@ -16,7 +16,8 @@ const cartSlice = createSlice({
         shippingAddress: [],
         variant  : [],
         category : "",
-        price : ""
+        price : "",
+        myAccountTab : 0
        
       },
     reducers: {
@@ -75,6 +76,9 @@ const cartSlice = createSlice({
         saveShippingAddress(state, action) {
             state.shippingAddress = action.payload;
         },
+        saveMyAccountTab(state, action) {
+          state.myAccountTab = action.payload;
+      },
         saveAddress1(state,action){
           state.saveAddress = action.payload
         },
@@ -93,7 +97,7 @@ const cartSlice = createSlice({
     },
 });
 
-export const { addToCart, deleteFromCart,saveSearch ,saveShippingAddress,saveCategory,savePrice ,saveVariant,saveAddress1,increaseOrder, decreaseQuantity, deleteAllFromCart } = cartSlice.actions;
+export const { addToCart, deleteFromCart,saveSearch,saveMyAccountTab ,saveShippingAddress,saveCategory,savePrice ,saveVariant,saveAddress1,increaseOrder, decreaseQuantity, deleteAllFromCart } = cartSlice.actions;
 export default cartSlice.reducer;
 
 

@@ -50,13 +50,7 @@ const Category = () => {
         })
     }
 
-    // const topSellingProducts = () => {
-    //     setFilterSort(2);
-    //     if (filterSort === 2) {
-    //         setFilterSort(null)
-
-    //     }
-    // }
+   
     const [selectedCategory, setSelectedCategory] = useState(null)
     useEffect(() => {
         if(filterSortQuery){

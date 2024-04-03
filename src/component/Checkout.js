@@ -15,6 +15,8 @@ const Checkout = () => {
 
   const { cartItems } = cart;
   let id = JSON.parse(localStorage.getItem("id") || null);
+  const {userInfo} = useSelector(state => state.auth);
+  console.log(userInfo)
   const { saveAddress } = cart;
   const dispatch = useDispatch();
   const [selectedAddress, setSelectedAddress] = useState('');
@@ -85,7 +87,7 @@ const Checkout = () => {
         price: 10,
         quantity: cartItems[0].quantity,
         total_qty: total_qty,
-        points_used: "2",
+        points_used: userInfo?.data?.user?.loyalty_points,
         ordered_items: orderItems,
         total_products_cost: "4",
         total_price: calculateSum(),

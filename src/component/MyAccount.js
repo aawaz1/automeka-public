@@ -7,6 +7,8 @@ import Box from '@mui/material/Box';
 import OrderScreen from '../component/Orderscreen.js'
 import Address from '../component/Address.js'
 import EditProfile from './Editprofile.js';
+import { useDispatch, useSelector } from 'react-redux';
+import { saveMyAccountTab } from '../store/slices/cart-slice.js';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -42,10 +44,15 @@ function a11yProps(index) {
 }
 
 export default function VerticalTabs() {
+  const dispatch = useDispatch()
+  const {myAccountTab} = useSelector(state => state.cart);
+  
+  
+
   const [value, setValue] = React.useState(0);
 
   const handleChange = (event, newValue) => {
-    setValue(newValue);
+    dispatch(saveMyAccountTab(newValue));
   };
 
   return (
@@ -60,7 +67,7 @@ export default function VerticalTabs() {
 
               orientation="vertical"
 
-              value={value}
+              value={myAccountTab}
               onChange={handleChange}
               aria-label="Vertical tabs example"
               sx={{ borderRight: 1, borderColor: 'divider' }}
@@ -74,7 +81,7 @@ export default function VerticalTabs() {
           <Box className={"block md:hidden "}>
             <Tabs
               variant='scrollable'
-              value={value}
+              value={myAccountTab}
               onChange={handleChange}
             >
               <Tab label="My Orders" {...a11yProps(0)} />
@@ -84,13 +91,13 @@ export default function VerticalTabs() {
             </Tabs>
           </Box>
 
-          <TabPanel style={{ flexGrow: 1 }} value={value} index={0}>
+          <TabPanel style={{ flexGrow: 1 }} value={myAccountTab} index={0}>
             <OrderScreen />
           </TabPanel>
-          <TabPanel style={{ flexGrow: 1 }} value={value} index={1}>
+          <TabPanel style={{ flexGrow: 1 }} value={myAccountTab} index={1}>
             <EditProfile />
           </TabPanel>
-          <TabPanel value={value} index={2}>
+          <TabPanel value={myAccountTab} index={2}>
             <Address />
           </TabPanel>
 
