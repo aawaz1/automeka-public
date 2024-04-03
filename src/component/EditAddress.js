@@ -3,12 +3,13 @@ import React, { useEffect, useState } from 'react'
 import { useCreateMutation, useUpdateMutation } from '../store/slices/address-slice';
 import cogoToast from 'cogo-toast';
 import { useNavigate, useParams } from 'react-router-dom';
+import { BASE_URL } from '../constants';
 
 const EditAddress = () => {
     const navigate = useNavigate();
     const goBack = () => {
         navigate(-1); // Navigate back one step
-      };
+    };
 
     const { id: addressId } = useParams()
 
@@ -39,7 +40,7 @@ const EditAddress = () => {
     const getAddress = async () => {
         try {
             const { data } = await axios.get(
-                `http://192.168.1.98:4321/v1/address/${addressId}`
+                BASE_URL + `/address/${addressId}`
             );
             setAddresses(data?.data);
             console.log(data?.data.address_1);
@@ -65,6 +66,7 @@ const EditAddress = () => {
     const [governates, setGovernates] = useState([]);
     const [landmark, setLandmark] = useState(address.landmark);
     const [postal_code, setPostalCode] = useState(address.postal_code);
+    const [errors, setErrors] = useState({});
     useEffect(() => {
         setAddress1(address.address_1);
         setAddress2(address.address_2);
@@ -78,6 +80,39 @@ const EditAddress = () => {
 
     }, [address])
     const createAddressHandler = async () => {
+        const validationErrors = {};
+        if (!name.trim()) {
+            validationErrors.name = "Name is required";
+        }
+        if (!city.trim()) {
+            validationErrors.city = "City is required";
+        }
+        if (!phone.trim()) {
+            validationErrors.phone = "Phone is required";
+        }
+        if (!address_1.trim()) {
+            validationErrors.address_1 = "Address 1 is required";
+        }
+        if (!address_2.trim()) {
+            validationErrors.address_2 = "Address 2 is required";
+        }
+        if (!country.trim()) {
+            validationErrors.country = "Country is required";
+        }
+        if (!postal_code.trim()) {
+            validationErrors.postal_code = "Postal Code is required";
+        }
+        if (!state.trim()) {
+            validationErrors.state = "State is required";
+        }
+        if (!landmark.trim()) {
+            validationErrors.landmark = "Landmark is required";
+        }
+
+
+        setErrors(validationErrors);
+
+
 
         try {
             const res = await update({
@@ -100,7 +135,7 @@ const EditAddress = () => {
 
             cogoToast.success("Address Updated Successfully", { position: "bottom-left" });
 
-       goBack();
+            goBack();
 
         } catch (error) {
             cogoToast.error("Please fill all the input fields", { position: "bottom-left" });
@@ -116,41 +151,48 @@ const EditAddress = () => {
             <div className='grid grid-cols-1 md:grid-cols-2 p-1 gap-2 w-[20rem] justify-center border rounded-md border-gray-400 md:w-[60rem]'>
 
 
-                <div className="p-2">
+            <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Address 1</label>
 
                     <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="address_2" value={address_1} onChange={(e) => setAddress1(e.target.value)} />
+                    <div className='text-red-500'>{errors.address_1 && <span>{errors.address_1}</span>}</div>
 
                 </div>
                 <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Address 2</label>
                     <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="address_2" value={address_2} onChange={(e) => setAddress2(e.target.value)} />
+                    <div className='text-red-500'>{errors.address_2 && <span>{errors.address_2}</span>}</div>
 
                 </div>
                 <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Country</label>
-                    <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="confirmPassword" value={country} onChange={(e) => setCountry(e.target.value)} />
+                    <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="country" value={country} onChange={(e) => setCountry(e.target.value)} />
+                    <div className='text-red-500'>{errors.country && <span>{errors.country}</span>}</div>
 
                 </div>
                 <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>State</label>
                     <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="confirmPassword" value={state} onChange={(e) => setState(e.target.value)} />
+                    <div className='text-red-500'>{errors.state && <span>{errors.state}</span>}</div>
 
                 </div>
                 <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Postal-Code</label>
                     <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="confirmPassword" value={postal_code} onChange={(e) => setPostalCode(e.target.value)} />
+                    <div className='text-red-500'>{errors.postal_code && <span>{errors.postal_code}</span>}</div>
 
                 </div>
                 <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>City</label>
                     <input className="bg-whitesmoke rounded-md p-2 w-[100%] md:w-[100%]" type="text" name="email" value={city} onChange={(e) => setCity(e.target.value)} />
+                    <div className='text-red-500'>{errors.city && <span>{errors.city}</span>}</div>
 
                 </div>
 
                 <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>LandMark</label>
                     <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="confirmPassword" value={landmark} onChange={(e) => setLandmark(e.target.value)} />
+                    <div className='text-red-500'>{errors.landmark && <span>{errors.landmark}</span>}</div>
 
                 </div>
                 <div className="p-2">
@@ -173,18 +215,21 @@ const EditAddress = () => {
                 <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Name</label>
                     <input className="bg-whitesmoke rounded-md p-2 w-[100%] md:w-[100%]" type="text" name="email" value={name} onChange={(e) => setName(e.target.value)} />
+                    <div className='text-red-500'>{errors.name && <span>{errors.name}</span>}</div>
 
                 </div>
                 <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Mobile Number</label>
                     <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="confirmPassword" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                    <div className='text-red-500'>{errors.phone && <span>{errors.phone}</span>}</div>
 
                 </div>
 
 
-                <div className="p-6  items-start">
-                    <button className='mr-6 px-12 py-2 bg-gray-100  hover:bg-orange-500 hover:text-white border rounded-md font-poppins font-medium'  onClick={goBack}>Cancel</button>
-                    <button className='px-12 py-2 bg-customOrange  hover:bg-orange-500 text-white hover:text-black border rounded-md font-poppins font-medium' type='submit' onClick={createAddressHandler}>Save</button>
+
+                <div className="p-6 flex  md:flex-row gap-2 items-start">
+                    <button onClick={goBack} className='mr-6 px-8 md:px-12 py-2 bg-gray-100  hover:bg-orange-500 hover:text-white border rounded-md font-poppins font-medium'  >Cancel</button>
+                    <button className='px-10 md:px-12 py-2 bg-customOrange  hover:bg-orange-500 text-white hover:text-black border rounded-md font-poppins font-medium' type='submit' onClick={createAddressHandler}>Save</button>
                 </div>
                 <div></div>
 

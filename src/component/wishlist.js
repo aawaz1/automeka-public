@@ -21,7 +21,7 @@ const Wishlist = () => {
     dispatch(addToCart({ product: cartItem, qty: 1 }));
   };
   return (<>
-   {wishlistItems && wishlistItems?.length > 0  ? <div className="hidden md:block container">
+    {wishlistItems && wishlistItems?.length > 0 ? <div className="hidden md:block container">
       <h2 className="font-bold font-poppins text-[1.2rem] p-2 py-4">Your Wishlists Item</h2>
       <div style={{ borderBottom: "1px solid lightgrey" }}></div>
       <Grid container spacing={1} className="py-3">
@@ -71,8 +71,8 @@ const Wishlist = () => {
         </Grid>)}
 
       </Grid>
-    </div> : <Noitemsfound/>}
-    <div className="md:hidden container h-[50rem] flex flex-col self-center px-5 pb-3 pt-3 mt-16 w-full font-medium max-w-[1371px] max-md:mt-10 max-md:max-w-full">
+    </div> : null}
+    {wishlistItems && wishlistItems?.length > 0 ? <div className=" md:hidden container h-[50rem] flex flex-col self-center px-5 pb-3 pt-3 mt-16 w-full font-medium max-w-[1371px] max-md:mt-10 max-md:max-w-full">
       <div className="text-2xl text-black max-md:max-w-full">
         Your Wishlist items
       </div>
@@ -97,7 +97,7 @@ const Wishlist = () => {
               <div className="flex flex-col self-stretch my-auto">
                 <div className="text-lg text-black">{cartItem?.name}</div>
                 <div className="flex gap-2 mt-3.5 text-xs whitespace-nowrap text-neutral-400">
-                 
+
                 </div>
               </div>
             </div>
@@ -105,25 +105,25 @@ const Wishlist = () => {
               <div className="self-stretch my-auto text-black">KD {cartItem?.price.toFixed(3)}</div>
 
               <div className="justify-center self-stretch px-2 py-2 tracking-tight text-center ">
-              {cartItem.varaints > 0 ? (
-                <button disabled={cartItem.coming_soon} style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-customOrange font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product: cartItem, qty: 1 }))}>Add To Cart</button>
-              ) : (
-                <>
-                  {cartItem?.on_stock > 1 && (
-                    <button disabled={cartItem.coming_soon} style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-customOrange font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product: cartItem, qty: 1 }))}>Add to Cart</button>
-                  )}
-                  {cartItem?.on_stock <= 0 && (
-                    <button style={{ cursor: "not-allowed" }} className=' p-[0.42rem] bg-black bottom-2 rounded-sm flex  text-white items-center justify-center' disabled>Out of Stock</button>
-                  )}
-                </>
-              )}
+                {cartItem.varaints > 0 ? (
+                  <button disabled={cartItem.coming_soon} style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-customOrange font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product: cartItem, qty: 1 }))}>Add To Cart</button>
+                ) : (
+                  <>
+                    {cartItem?.on_stock > 1 && (
+                      <button disabled={cartItem.coming_soon} style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-customOrange font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product: cartItem, qty: 1 }))}>Add to Cart</button>
+                    )}
+                    {cartItem?.on_stock <= 0 && (
+                      <button style={{ cursor: "not-allowed" }} className=' p-[0.42rem] bg-black bottom-2 rounded-sm flex  text-white items-center justify-center' disabled>Out of Stock</button>
+                    )}
+                  </>
+                )}
 
               </div>
               <div><button onClick={() =>
-              dispatch(deleteFromWishlist(cartItem._id))
-            } >
-              Remove
-            </button></div>
+                dispatch(deleteFromWishlist(cartItem._id))
+              } >
+                Remove
+              </button></div>
             </div>
           </div>
           <div className="shrink-0 mt-2 border border-solid bg-stone-300 border-stone-300 h-[3px] max-md:max-w-full" />
@@ -135,7 +135,7 @@ const Wishlist = () => {
         {" "}
         Clear All Wishlist
       </div>
-    </div>
+    </div> : <Noitemsfound />}
   </>);
 };
 

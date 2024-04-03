@@ -229,6 +229,9 @@ const ProductScreen = () => {
                                 return (<Productcard product={product} />)
                             })}
                         </ProductSlider>
+                        <div className="  flex justify-center mt-2  items-center   text-[1rem]" >
+                            <span className="font-poppins cursor-pointer text-gray-600  text-[1rem]" onClick={() => navigate(`/category/?category=${product?.category?.name}`)}> View All</span>
+                        </div>
                     </div>
                 </div></div>
 

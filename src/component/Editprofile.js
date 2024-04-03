@@ -2,6 +2,7 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { setCredentials } from '../store/slices/auth-slice';
+import cogoToast from 'cogo-toast';
 
 const EditProfile = () => {
     const { userInfo } = useSelector((state) => state.auth);
@@ -52,8 +53,9 @@ const EditProfile = () => {
             const { data } = await axios.patch(
                 `https://restapi.ansoftt.com:4321/v1/user/${id}`, updatedData
             );
-            console.log(data);
+            
             dispatch(setCredentials({ ...updatedData, _id: id, token: token }));
+            cogoToast.success('Details Updated Successfully', {position: "bottom-left"});  
             // Handle data or set state as needed
         } catch (error) {
             console.log(error);
@@ -108,9 +110,9 @@ const EditProfile = () => {
 
 
 
-                <div className="p-6 flex flex-col md:flex-row  gap-2  items-start">
-                    <button className='mr-6 px-8 md:px-12 py-2 bg-gray-100  hover:bg-orange-500 hover:text-white border rounded-md font-poppins font-medium' type='submit'>Cancel</button>
-                    <button className='px-10 md:px-14 py-2 bg-customOrange  hover:bg-orange-500 text-white hover:text-black border rounded-md font-poppins font-medium' type='submit' onClick={submitHandler}>Save</button>
+                <div className="p-1 py-2 flex flex-col md:flex-row  gap-2  items-start">
+                    {/* <button className='mr-6 px-8 md:px-12 py-2 bg-gray-100  hover:bg-orange-500 hover:text-white border rounded-md font-poppins font-medium' type='submit'>Cancel</button> */}
+                    <button className='px-4 md:px-14 py-2 bg-customOrange  hover:bg-orange-500 text-white hover:text-black border rounded-md font-poppins font-medium' type='submit' onClick={submitHandler}>Save</button>
                 </div>
                 <div></div>
 

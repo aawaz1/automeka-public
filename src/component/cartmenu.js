@@ -29,7 +29,7 @@ const Cartmenu = ({ handleIsOpen }) => {
 
                     <>
                         <div className='p-2'>
-                            <div className='flex mb-8 justify-between items-center gap-3 '><h2 className='text-[1rem]'>Shopping Cart</h2> <div onClick={handleIsOpen}><RxCross2 className='font-bold' /></div>
+                            <div className='flex mb-8 justify-between items-center gap-3 '><h2 className='text-[1rem]'>Shopping Cart</h2> <div onClick={handleIsOpen} ><RxCross2 style={{ cursor: "pointer" }} className='font-bold ' /></div>
 
                             </div>
                             <hr className='border border-gray-500' />
@@ -92,10 +92,11 @@ const Cartmenu = ({ handleIsOpen }) => {
 
                     : (
                         <div className='p-2'>
-                            <div className='flex mb-8 justify-between items-center gap-3 '><h2 className='text-[1rem]'>Shopping Cart</h2> <div onClick={handleIsOpen}><RxCross2 className='font-bold' /></div></div>
+                            <div className='flex mb-8 justify-between items-center gap-3 '><h2 className='text-[1rem]'>Shopping Cart</h2> <div onClick={handleIsOpen}><RxCross2 style={{ cursor: "pointer" }} className='font-bold' /></div></div>
                             <div className='flex justify-center'><IoCartOutline style={{ fontSize: "3rem" }} /></div>
                             <div className='text-sm text-gray-400 text-center mb-4'>Your Cart is Currently Empty</div>
-                            <div className='flex justify-center'><button className='text-white rounded-md bg-orange-500 p-2 flex justify-center items-center max-w-[10rem] w-[100%]' onClick={handleIsOpen}>Buy Now</button></div>
+                            <div className='flex justify-center'><button className='text-white rounded-md bg-orange-500 p-2 flex justify-center items-center max-w-[10rem] w-[100%]' onClick={() => { handleIsOpen(); navigate('/category'); }}
+                            >Buy Now</button></div>
                         </div>
                     )
             }

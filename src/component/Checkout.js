@@ -115,7 +115,7 @@ const Checkout = () => {
   }
   return (
     <>
-    {cart.cartItems && cart.cartItems.length ?  <div className="container  grid grid-cols-1 md:grid-cols-2 p-4 gap-3">
+      {cart.cartItems && cart.cartItems.length ? <div className="container  grid grid-cols-1 md:grid-cols-2 p-4 gap-3">
         <div>
 
           <h3 className="font-poppins font-semibold text-[1.6rem]">Delivery Address</h3>
@@ -217,9 +217,9 @@ const Checkout = () => {
                           />
                         </button> */}
                             <img style={{ width: "6rem" }} src={IMAGE_URL + item.image_list[0]} />
-                            <div className=" flex-1 flex flex-col items-start justify-start pt-2 px-0 pb-0 box-border">
-                              <div className="self-stretch flex-1 flex flex-col items-start justify-start gap-[7px]">
-                                <div className="flex flex-row items-start justify-start py-0 pr-[5px] pl-1">
+                            <div className=" flex-1  flex flex-col items-start justify-start pt-2 px-0 pb-0 box-border">
+                              <div className="self-stretch w flex-1 flex flex-col items-start justify-start gap-[7px]">
+                                <div className="flex   flex-row items-start justify-start py-0 pr-[5px] pl-1">
                                   <div className="relative font-medium z-[1]">
                                     {item?.name}
                                   </div>
@@ -253,8 +253,8 @@ const Checkout = () => {
                 })
               }
 
-              <div className=" flex flex-row items-start justify-start py-0 px-[3px] box-border max-w-full text-gray-300">
-                <div className="flex-1 flex flex-row items-start justify-between max-w-full gap-[20px] mq450:flex-wrap">
+              <div className=" flex flex-row items-start justify-start py-0 px-[3px] w-[100%] box-border max-w-full text-gray-300">
+                <div className="flex-1 flex flex-row items-start justify-between max-w-full  gap-[20px] mq450:flex-wrap">
                   <div className=" flex flex-col items-start justify-start gap-[6px]">
                     <div className="self-stretch relative font-medium z-[1]">
                       <p className="m-0 text-gray-500">Items :</p>
@@ -284,7 +284,7 @@ const Checkout = () => {
                   </div>
                 </div>
               </div>
-              <div className="self-stretch flex flex-col items-start justify-start gap-[12.5px] max-w-full text-xl">
+              <div className="self-stretch flex flex-col items-start justify-start mr-[2rem] gap-[12.5px] max-w-full text-xl">
                 <div className="self-stretch h-[0.5px] relative box-border z-[1] border-t-[0.5px] border-solid border-silver-200" />
                 <div className="w-[551px] flex flex-row items-start justify-start py-0 px-[3px] box-border max-w-full">
                   <div className="flex-1 flex flex-row items-start justify-between max-w-full gap-[20px] mq450:flex-wrap">
@@ -304,7 +304,7 @@ const Checkout = () => {
         </div>
 
 
-      </div> : <Noitemsfound/>}
+      </div> : <Noitemsfound />}
 
 
 

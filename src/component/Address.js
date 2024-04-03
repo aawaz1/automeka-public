@@ -80,10 +80,10 @@ const Address = () => {
 
             </div>
 
-            <div className="p-6 flex gap-2  items-start">
+            {selectedAddress ? <div className="p-6 flex gap-2  items-start">
                 <button onClick={() => navigate(`/editaddress/${selectedAddress._id}`)} className='mr-6 px-8 py-1  text-gray-500 hover:text-black hover:bg-customOrange border rounded-full font-poppins font-medium' type='submit'>Edit</button>
                 <button onClick={handleDeleteAddress} className='px-6 py-1  text-gray-500 hover:text-black hover:bg-customOrange  border rounded-full font-poppins font-medium' type='submit'>Delete</button>
-            </div>
+            </div> : null}
 
 
         </div>

@@ -58,10 +58,10 @@ const MyTabs = ({ product }) => {
                 <div className='p-2'>{product?.about}</div>
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
-                {/* {product?.specs} */}
+                <h4 className=' p-2 text-[1rem]'>No Specifications Yet</h4>
             </CustomTabPanel>
             <CustomTabPanel value={value} index={2}>
-                <Reviews product={product}/>
+                <Reviews product={product} />
             </CustomTabPanel>
         </Box>
     );

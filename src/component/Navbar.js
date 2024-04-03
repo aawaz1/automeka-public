@@ -65,7 +65,7 @@ const Navbar = () => {
               <ul className='gap-2 pt-2'>
                 {!userInfo && (<Link style={{ transition: "ease-out", textDecoration: "none", color: "white" }} to='/login'>Login</Link>)}
                 {userInfo && (<> <Link style={{ transition: "ease-out", textDecoration: "none", color: "white" }} className='text' to={'/myaccount'}><li >My Account</li></Link>
-                  <Link onClick={logoutHandler} to='/login' style={{ transition: "ease-out", textDecoration: "none", color: "white" }} className='text' ><li >LogOut</li></Link> </>)}
+                  <Link onClick={logoutHandler} to='/login' style={{ transition: "ease-out", textDecoration: "none", color: "white" }} className='text' ><li >Logout</li></Link> </>)}
 
 
               </ul>

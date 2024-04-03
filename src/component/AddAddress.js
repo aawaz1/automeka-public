@@ -5,11 +5,11 @@ import cogoToast from 'cogo-toast';
 import { useNavigate } from 'react-router-dom';
 
 const AddAddress = () => {
-    
+
     const navigate = useNavigate();
     const goBack = () => {
         navigate(-1); // Navigate back one step
-      };
+    };
 
 
 
@@ -27,6 +27,7 @@ const AddAddress = () => {
     const [governates, setGovernates] = useState([]);
     const [landmark, setLandmark] = useState('');
     const [postal_code, setPostalCode] = useState('')
+    const [errors, setErrors] = useState({});
 
     const handleGovernateSelect = (selectedValue) => {
         setGovernate(selectedValue); // Set the selected governate ID in the state
@@ -45,6 +46,38 @@ const AddAddress = () => {
         getAllGovernates();
     }, []);
     const createAddressHandler = async () => {
+        const validationErrors = {};
+
+        if (!name.trim()) {
+            validationErrors.name = "Name is required";
+        }
+        if (!city.trim()) {
+            validationErrors.city = "City is required";
+        }
+        if (!phone.trim()) {
+            validationErrors.phone = "Phone is required";
+        }
+        if (!address_1.trim()) {
+            validationErrors.address_1 = "Address 1 is required";
+        }
+        if (!address_2.trim()) {
+            validationErrors.address_2 = "Address 2 is required";
+        }
+        if (!country.trim()) {
+            validationErrors.country = "Country is required";
+        }
+        if (!postal_code.trim()) {
+            validationErrors.postal_code = "Postal Code is required";
+        }
+        if (!state.trim()) {
+            validationErrors.state = "State is required";
+        }
+        if (!landmark.trim()) {
+            validationErrors.landmark = "Landmark is required";
+        }
+
+
+        setErrors(validationErrors);
 
         try {
             const res = await create({
@@ -89,37 +122,44 @@ const AddAddress = () => {
                     <label className='text-[1rem] font-semiobold font-poppins'>Address 1</label>
 
                     <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="address_2" value={address_1} onChange={(e) => setAddress1(e.target.value)} />
+                    <div className='text-red-500'>{errors.address_1 && <span>{errors.address_1}</span>}</div>
 
                 </div>
                 <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Address 2</label>
                     <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="address_2" value={address_2} onChange={(e) => setAddress2(e.target.value)} />
+                    <div className='text-red-500'>{errors.address_2 && <span>{errors.address_2}</span>}</div>
 
                 </div>
                 <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Country</label>
-                    <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="confirmPassword" value={country} onChange={(e) => setCountry(e.target.value)} />
+                    <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="country" value={country} onChange={(e) => setCountry(e.target.value)} />
+                    <div className='text-red-500'>{errors.country && <span>{errors.country}</span>}</div>
 
                 </div>
                 <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>State</label>
                     <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="confirmPassword" value={state} onChange={(e) => setState(e.target.value)} />
+                    <div className='text-red-500'>{errors.state && <span>{errors.state}</span>}</div>
 
                 </div>
                 <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Postal-Code</label>
                     <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="confirmPassword" value={postal_code} onChange={(e) => setPostalCode(e.target.value)} />
+                    <div className='text-red-500'>{errors.postal_code && <span>{errors.postal_code}</span>}</div>
 
                 </div>
                 <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>City</label>
                     <input className="bg-whitesmoke rounded-md p-2 w-[100%] md:w-[100%]" type="text" name="email" value={city} onChange={(e) => setCity(e.target.value)} />
+                    <div className='text-red-500'>{errors.city && <span>{errors.city}</span>}</div>
 
                 </div>
 
                 <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>LandMark</label>
                     <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="confirmPassword" value={landmark} onChange={(e) => setLandmark(e.target.value)} />
+                    <div className='text-red-500'>{errors.landmark && <span>{errors.landmark}</span>}</div>
 
                 </div>
                 <div className="p-2">
@@ -142,11 +182,13 @@ const AddAddress = () => {
                 <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Name</label>
                     <input className="bg-whitesmoke rounded-md p-2 w-[100%] md:w-[100%]" type="text" name="email" value={name} onChange={(e) => setName(e.target.value)} />
+                    <div className='text-red-500'>{errors.name && <span>{errors.name}</span>}</div>
 
                 </div>
                 <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Mobile Number</label>
                     <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="confirmPassword" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                    <div className='text-red-500'>{errors.phone && <span>{errors.phone}</span>}</div>
 
                 </div>
 
