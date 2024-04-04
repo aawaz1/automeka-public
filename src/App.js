@@ -24,6 +24,8 @@ import NotFound from './component/Notfound.js'
 import PrivateRoute from './component/routes/PrivateRoute.js';
 import Returnpolicy from './component/Returnpolicy.js';
 import Privacypolicy from './component/privacypolicy.js'
+import Forgotpassword from './component/Forgotpassword.js';
+import Enterotp from './component/enterotp.js'
 
 
 function App() {
@@ -54,6 +56,10 @@ function App() {
             <Route path='/contactus' element={<Contactus/>}/>
             <Route path='/returnpolicy' element={<Returnpolicy/>}/>
             <Route path='/privacypolicy' element={<Privacypolicy/>}/>
+            <Route path='/forgot-password' element={<Forgotpassword/>}/>
+            <Route path='/enterotp' element={<Enterotp/>}/>
+            
+            
             <Route path='*' element={<NotFound/>}/>
 
 

@@ -78,7 +78,9 @@ const ProductScreen = () => {
         }
     };
 
-
+    const price = getPriceForColor();
+    const discountPrice = (product?.discount / 100) * price;
+    const discountedPrice = price - discountPrice
 
     useEffect(() => {
         if (product?.variants?.length > 0) {
@@ -101,10 +103,12 @@ const ProductScreen = () => {
 
     return (
         <div className='container'>
-            <div className='grid grid-cols-1 md:grid-cols-2  gap-4 p-2'>
+            <div className=' relative grid grid-cols-1 md:grid-cols-2  gap-4 p-2'>
                 <div className='p-2'>
+                    {product?.discount ? <div className='bg-red-600 absolute rounded-sm  py-1 px-2   top-4 right-120' style={{ fontSize: "0.5rem" }}><span className='text-white'>{product?.discount}%</span></div> : null}
 
                     <div>
+
                         <img src={currentImage} alt="main" className='max-sm:w-[100%]' style={{ height: "20rem" }} />
                     </div>
                     {product?.image_list?.length > 1 && <>
@@ -121,7 +125,7 @@ const ProductScreen = () => {
                 </div>
                 <div className='p-2'>
                     <h2 className='text-[1.2rem]'>{product?.name}</h2>
-                    <h2 className='text-[1.0rem] text-green-400'>KD {getPriceForColor()?.toFixed(3)}</h2>
+                    <div className='flex justify-start items-center gap-2'>{product?.discount ? <> <h2 className='text-[1.0rem] text-green-400'>KD {discountedPrice?.toFixed(3)}</h2>  <del className='text-[1.0rem] text-black'>KD {getPriceForColor()?.toFixed(3)}</del></> : <h2 className='text-[1.0rem] text-green-400'>KD {getPriceForColor()?.toFixed(3)}</h2>}</div>
                     <CommonRating value={product?.rating} />
                     <div className='flex py-2'>
                         {availability !== null && availability > 0 ? (<>
@@ -208,8 +212,8 @@ const ProductScreen = () => {
                                             }
                                         }} > Buy Now</button>
                                         <>
-                                         <div onClick={handleWishlist}>{isInWishlist ? <FavoriteIcon style={{ color: 'red', fontSize: "2.3rem" ,cursor :"pointer" }} /> : <FavoriteBorderIcon style={{ fontSize: "2.3rem"}} />}</div></>
-                                        
+                                            <div onClick={handleWishlist}>{isInWishlist ? <FavoriteIcon style={{ color: 'red', fontSize: "2.3rem", cursor: "pointer" }} /> : <FavoriteBorderIcon style={{ fontSize: "2.3rem" }} />}</div></>
+
                                     </>
                                 )}
                                     {product?.on_stock <= 0 && (
@@ -217,12 +221,12 @@ const ProductScreen = () => {
                                             <div style={{ cursor: "not-allowed" }} className=' p-[0.42rem] bg-black bottom-2 rounded-sm flex  items-center justify-center'>{ }
                                                 <button style={{ cursor: "not-allowed" }} disabled className='text-white  flex items-center '> Out Of Stock</button>
                                             </div>
-                                            <div onClick={handleWishlist}>{isInWishlist ? <FavoriteIcon style={{ color: 'red', fontSize: "2.3rem" }} /> : <FavoriteBorderIcon style={{ fontSize: "2.3rem"}} />}</div></>
+                                            <div onClick={handleWishlist}>{isInWishlist ? <FavoriteIcon style={{ color: 'red', fontSize: "2.3rem" }} /> : <FavoriteBorderIcon style={{ fontSize: "2.3rem" }} />}</div></>
                                     )}</> : <>
                                     <div style={{ cursor: "not-allowed" }} className=' p-[0.42rem] bg-black bottom-2 rounded-sm flex  items-center justify-center'>{ }
                                         <button style={{ cursor: "not-allowed" }} disabled className='text-white  flex items-center '> Coming Soon</button>
                                     </div>
-                                    <div onClick={handleWishlist}>{isInWishlist ? <FavoriteIcon style={{ color: 'red', fontSize: "2.3rem" }} /> : <FavoriteBorderIcon style={{ fontSize: "2.3rem"}} />}</div></>}
+                                    <div onClick={handleWishlist}>{isInWishlist ? <FavoriteIcon style={{ color: 'red', fontSize: "2.3rem" }} /> : <FavoriteBorderIcon style={{ fontSize: "2.3rem" }} />}</div></>}
 
 
                             </>

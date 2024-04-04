@@ -1,0 +1,11 @@
+.custom-carousel-class {
+    position: static !important;
+}
+
+.react-multiple-carousel__arrow--left {
+    left:0;
+}
+
+.react-multiple-carousel__arrow--right {
+    right:0;
+}

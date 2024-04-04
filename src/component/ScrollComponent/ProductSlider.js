@@ -1,5 +1,6 @@
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
+import "./ProductSlider.css"
 
 
 const ProductSlider = ({ children, title, desktopItemCount, superLargeDesktopItemCount, tabletItemCount, mobileItemCount, responsiveProp }) => {
@@ -24,19 +25,19 @@ const ProductSlider = ({ children, title, desktopItemCount, superLargeDesktopIte
     };
     const CustomRightArrow = ({ onClick, ...rest }) => {
         const {
-          onMove,
-          carouselState: { currentSlide, deviceType }
+            onMove,
+            carouselState: { currentSlide, deviceType }
         } = rest;
-     
+
         return <button onClick={() => onClick()}>CustomRightArrow</button>;
-      };
+    };
     //   <Carousel customRightArrow={<CustomRightArrow />} />
     return (
         <div style={{ width: "100%" }}>
             {title ? <div>{title}</div> : null}
-          
-            <div className="w-full flex justify-center">
-                <Carousel className="flex justify-start w-[90%] max-w-[1200px]" responsive={responsiveProp ? responsiveProp : responsive}>
+
+            <div className="w-full flex justify-center relative">
+                <Carousel className="custom-carousel-class flex justify-start w-[90%] max-w-[1200px]" responsive={responsiveProp ? responsiveProp : responsive}>
                     {
                         children
                     }

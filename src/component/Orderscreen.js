@@ -11,7 +11,7 @@ import { IoIosArrowForward } from "react-icons/io";
 
 const Orderscreen = () => {
   const { orderDetails } = useSelector(state => state.order);
-  console.log(orderDetails);
+  console.log(orderDetails?.ordered_items);
   const [orderId, setOrderId] = useState(null);
 
   const cart = useSelector((state) => state.cart);
@@ -93,7 +93,14 @@ const Orderscreen = () => {
                   <div>
                     <div className='flex justify-start gap-3 p-1'>
                       <div><strong>Total Items :</strong></div>
-                      <div><strong>{orderDetails?.total_qty}</strong></div>
+                      <div>
+                        <strong>
+                          {orderDetails?.ordered_items.reduce(
+                            (acc, item) => acc + 1 * item?.qty,
+                            0
+                          )}
+                        </strong>
+                      </div>
                     </div>
                     <div className='flex justify-start gap-2 p-1'>
                       <div><strong>Total Price :</strong></div>
@@ -120,10 +127,14 @@ const Orderscreen = () => {
                           <div className="flex flex-col mt-2.5 font-medium max-md:mt-10">
                             <div className="text-base text-black">{order_item?.product?.name}</div>
                             <div className="mt-3.5 text-sm text-green-500">
-                              KD {order_item?.product?.price.toFixed(3)}
+                              KD  {order_item?.product?.price.toFixed(3)}
+                            </div>
+                            <div className="mt-3.5 text-sm text-gray-500">
+                              X {order_item?.qty}
                             </div>
                           </div>
                         </div>
+
                         <div className='cursor-pointer' onClick={() => setTracker(order_item?.product?._id)}><IoIosArrowForward /></div>
                       </div>
                     </div>

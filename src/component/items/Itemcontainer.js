@@ -8,7 +8,7 @@ const ItemsContainer = () => {
       <div className=' item1'><Items Links={PRODUCTS} title="PRODUCTS" /></div>
      <div  className='item2'> <Item Links={RESOURCES} title="CONTACT" /></div>
      <div  className='item3'> <Item Links={COMPANY} title="USEFUL LINKS" /></div>
-      <div  className='item4'><Item Links={SUPPORT} title="SOCIAL MEDIA" /></div>
+      {/* <div  className='item4'><Item Links={SUPPORT} title="SOCIAL MEDIA" /></div> */}
     </div>
   );
 };

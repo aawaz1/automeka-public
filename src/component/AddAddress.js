@@ -45,6 +45,10 @@ const AddAddress = () => {
     useEffect(() => {
         getAllGovernates();
     }, []);
+
+    const handleCountryChange = (event) => {
+        setCountry(event.target.value); 
+      };
     const createAddressHandler = async () => {
         const validationErrors = {};
 
@@ -133,7 +137,16 @@ const AddAddress = () => {
                 </div>
                 <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Country</label>
-                    <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="country" value={country} onChange={(e) => setCountry(e.target.value)} />
+                    <select className='bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2' id="country" name="country" value={country} onChange={handleCountryChange}>
+                        <option value="kuwait">Kuwait</option>
+                        <option value="uae">UAE</option>
+                        <option value="qatar">Qatar</option>
+                        <option value="saudi_arabia">Saudi Arabia</option>
+                        <option value="bahrain">Bahrain</option>
+                      
+
+                    </select>
+                    {/* <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="country" value={country} onChange={(e) => setCountry(e.target.value)} /> */}
                     <div className='text-red-500'>{errors.country && <span>{errors.country}</span>}</div>
 
                 </div>

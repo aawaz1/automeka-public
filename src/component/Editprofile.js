@@ -14,6 +14,7 @@ const EditProfile = () => {
     const [password, setPassword] = useState("");
     const [phone, setPhone] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [points ,setPoints] = useState("")
     const dispatch = useDispatch();
     const updatedData = {
         name: user_name,
@@ -36,7 +37,8 @@ const EditProfile = () => {
         if (userInfo) {
             setName(userInfo.name || userInfo?.data?.user?.name);
             setEmail(userInfo?.email || userInfo?.data?.auth?.email);
-            setPhone(userInfo?.phone || userInfo?.data?.user?.phone)
+            setPhone(userInfo?.phone || userInfo?.data?.user?.phone);
+            setPoints(userInfo?.loyalty_points || userInfo?.data?.user?.loyalty_points)
 
 
         } else {
@@ -66,7 +68,7 @@ const EditProfile = () => {
     return (
         <div className='container p-4'>
             <div className=' container flex justify-start p-2 '>
-                <div><button className='rounded-full border border-solid border-gray-400 px-2 py-2'> 0 points</button></div>
+                <div><button className='rounded-full border border-solid border-gray-400 px-2 py-2'> {points} points</button></div>
 
             </div>
 

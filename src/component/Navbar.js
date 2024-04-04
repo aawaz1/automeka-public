@@ -5,10 +5,8 @@ import { Menu, X } from 'lucide-react';
 import { RxDividerVertical } from "react-icons/rx";
 import { IoCartOutline } from "react-icons/io5";
 import SearchBox from './items/SearchBox.js';
-import { GrCart } from "react-icons/gr";
 import { FcLike } from "react-icons/fc";
 import { RiAccountBoxLine } from "react-icons/ri";
-import { FaRegHeart } from "react-icons/fa";
 import './top.css'
 
 import Container from './Container.js';
@@ -18,7 +16,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { logout } from '../store/slices/auth-slice.js';
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
-import AccountBoxOutlinedIcon from '@mui/icons-material/AccountBoxOutlined';
+import PortraitOutlinedIcon from '@mui/icons-material/PortraitOutlined';
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -62,7 +60,7 @@ const Navbar = () => {
         <SearchBox />
         <div className="flex">
           <button className=" max-sm:mr-1 sm:mr-4" ><div className="flex items-center text-black relative group cursor-pointer">
-            <div className="   items-center flex text-black"><AccountBoxOutlinedIcon style={{ fontSize: "1.4rem" }} /></div>
+            <div className="   items-center flex text-black"><PortraitOutlinedIcon style={{ fontSize: "1.4rem", position: "relative", top: 2 }} /></div>
 
             <div style={{ minWidth: "7rem", zIndex: 3 }} className='absolute  min-w-7rem max-sm:top-0 max-sm:right-0 md:left-[-62px] md:top-[20px]  bg-gray-800 text-white rounded-md shadow-lg hidden group-hover:block w-[10vw]'>
               <ul className='gap-2 pt-2'>
@@ -74,13 +72,13 @@ const Navbar = () => {
               </ul>
             </div>
           </div></button>
-          <div className='relative max-sm:mr-1 sm:mr-4'> <button onClick={handleIsOpen} className=""><GrCart style={{ fontSize: "1.4rem" }} /></button>
+          <div className='relative max-sm:mr-1 sm:mr-4'> <button onClick={handleIsOpen} className=""><ShoppingCartOutlinedIcon style={{ fontSize: "1.4rem" }} /></button>
             {cartQuantity ? <div className='absolute top-[-1rem] right-[-0.9rem] bg-customOrange w-[1.2rem] rounded-full  flex justify-center items-center'>
               <span>{cartQuantity}</span>
               {/* <span>{cartItems?.length > 0 && cartItems?.length}</span> */}
             </div> : null}
           </div>
-          <div className='max-sm:mr-1 sm:mr-4 relative'><button className=" font-semibold " onClick={() => navigate('/wishlist')}><FaRegHeart className="" style={{ fontSize: "1.4rem" }} /></button><div className='absolute top-[-1rem] right-[-0.9rem] bg-customOrange w-[1.2rem] rounded-full  flex justify-center items-center'><span> {wishlistItems?.length > 0 && wishlistItems?.length}</span></div></div>
+          <div className='max-sm:mr-1 sm:mr-4 relative'><button className=" font-semibold " onClick={() => navigate('/wishlist')}><FavoriteBorderOutlinedIcon className="" style={{ fontSize: "1.4rem" }} /></button><div className='absolute top-[-1rem] right-[-0.9rem] bg-customOrange w-[1.2rem] rounded-full  flex justify-center items-center'><span> {wishlistItems?.length > 0 && wishlistItems?.length}</span></div></div>
         </div>
       </div>
 

@@ -15,17 +15,25 @@ const Checkout = () => {
 
   const { cartItems } = cart;
   let id = JSON.parse(localStorage.getItem("id") || null);
-  const {userInfo} = useSelector(state => state.auth);
-  console.log(userInfo)
+  const { userInfo } = useSelector(state => state.auth);
   const { saveAddress } = cart;
   const dispatch = useDispatch();
+  const [isUsed, setIsUsed] = useState(false)
+  const pointsValueInKd = userInfo?.data?.user?.loyalty_points / 1000;
   const [selectedAddress, setSelectedAddress] = useState('');
   const [addresses, setAddresses] = useState([]);
-  const total_qty = parseInt(cartItems[0]?.quantity);
+  const total_qty = cartItems?.reduce((accumulator, item) => {
+    return accumulator + item?.quantity;
+  }, 0) || 0;
+  console.log(cartItems, "total_qty: ", total_qty)
+
   const governate_charges = parseInt(saveAddress?.governates?.value);
   const governateValue = parseFloat(saveAddress?.governates?.value || 0);
   const calculateSum = () => {
-    const sum = governateValue + totalCartPrice
+    let sum = governateValue + totalCartPrice;
+    if (isUsed) {
+      sum -= pointsValueInKd;
+    }
     return sum;
   };
   const [createOrder] = useCreateOrderMutation();
@@ -44,6 +52,7 @@ const Checkout = () => {
   };
 
   const getAllAddresses = async () => {
+
     try {
       const { data } = await axios.get(
         `https://restapi.ansoftt.com:4321/v1/address/all/${id}`
@@ -84,10 +93,11 @@ const Checkout = () => {
         address: cart.saveAddress,
 
         user_id: id,
-        price: 10,
-        quantity: cartItems[0].quantity,
+        price: calculateSum(),
+        quantity: cartItems?.length,
         total_qty: total_qty,
-        points_used: userInfo?.data?.user?.loyalty_points,
+        // points_used: userInfo?.data?.user?.loyalty_points,
+        // is_poin
         ordered_items: orderItems,
         total_products_cost: "4",
         total_price: calculateSum(),
@@ -135,6 +145,7 @@ const Checkout = () => {
 
           </div>
 
+
           <div className="py-6">
 
             <div className="border border-solid border-gray-400 rounded-md p-4">
@@ -144,6 +155,13 @@ const Checkout = () => {
             <div className="py-2 flex justify-end items-end"><button onClick={() => navigate("/addaddress")} style={{ borderBottom: " 2px solid orange" }} className="text-gray-400 border-b-customOrange"><MdAddToQueue fontSize={"1.5rem"}
             /></button></div>
 
+          </div>
+
+
+          <div className="flex items-center gap-2">
+            <label for="myCheckbox">Use Points</label>
+            <span>({userInfo?.data?.user?.loyalty_points})</span>
+            <input type="checkbox" id="myCheckbox" value={isUsed} onClick={() => setIsUsed(!isUsed)} name="myCheckbox" />
           </div>
           <div className="self-stretch h-[517px] flex flex-col items-start justify-start gap-[10px] max-w-full">
             <div className="flex flex-col items-start justify-start gap-[3px]">
@@ -267,11 +285,15 @@ const Checkout = () => {
                     <div className="self-stretch relative font-medium z-[1]">
                       <p className="m-0 text-gray-500">Shipping Cost :</p>
                     </div>
+                    {isUsed ? <div className="self-stretch relative font-medium z-[1]">
+                      <p className="m-0 text-gray-500">Points Used :</p>
+                    </div> : null}
+
                   </div>
                   <div className="flex flex-col items-start justify-start pt-0.5 px-0 pb-0 text-mini text-black">
                     <div className="flex flex-col items-start justify-start gap-[5px]">
                       <div className="relative font-medium inline-block min-w-[111px] z-[1]">
-                        {cart.cartItems[0]?.quantity}
+                        {total_qty}
                       </div>
                       <div className="relative font-medium inline-block min-w-[111px] z-[1]">
                         KD {cart.cartItems.reduce(
@@ -282,6 +304,9 @@ const Checkout = () => {
                       <div className="relative font-medium inline-block min-w-[111px] z-[1]">
                         KD {parseInt(saveAddress?.governates?.value).toFixed(3)}
                       </div>
+                      {isUsed ? <div className="relative font-medium inline-block min-w-[111px] z-[1]">
+                        KD {pointsValueInKd}
+                      </div> : null}
                     </div>
                   </div>
                 </div>
