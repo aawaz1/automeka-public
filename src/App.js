@@ -22,6 +22,8 @@ import About from './component/About.js'
 import Contactus from './component/Contactus.js';
 import NotFound from './component/Notfound.js'
 import PrivateRoute from './component/routes/PrivateRoute.js';
+import Returnpolicy from './component/Returnpolicy.js';
+import Privacypolicy from './component/privacypolicy.js'
 
 
 function App() {
@@ -49,7 +51,9 @@ function App() {
             <Route path='/editprofile'  element={<PrivateRoute element={<EditProfile />} />}/>
             <Route path='/FAQs' element={<FAQ />} />
             <Route path='/about' element={<About />} />
-            <Route path='/Contact_Us' element={<Contactus/>}/>
+            <Route path='/contactus' element={<Contactus/>}/>
+            <Route path='/returnpolicy' element={<Returnpolicy/>}/>
+            <Route path='/privacypolicy' element={<Privacypolicy/>}/>
             <Route path='*' element={<NotFound/>}/>
 
 

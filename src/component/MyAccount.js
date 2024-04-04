@@ -14,7 +14,7 @@ function TabPanel(props) {
   const { children, value, index, ...other } = props;
   React.useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-}, []);
+  }, []);
 
   return (
     <div
@@ -43,14 +43,15 @@ function a11yProps(index) {
   return {
     id: `vertical-tab-${index}`,
     'aria-controls': `vertical-tabpanel-${index}`,
+    "sx": { '&.Mui-selected': { color: 'orange' } }
   };
 }
 
 export default function VerticalTabs() {
   const dispatch = useDispatch()
-  const {myAccountTab} = useSelector(state => state.cart);
-  
-  
+  const { myAccountTab } = useSelector(state => state.cart);
+
+
 
   const [value, setValue] = React.useState(0);
 
@@ -72,6 +73,7 @@ export default function VerticalTabs() {
 
               value={myAccountTab}
               onChange={handleChange}
+              TabIndicatorProps={{ sx: { backgroundColor: 'orange' } }}
               aria-label="Vertical tabs example"
               sx={{ borderRight: 1, borderColor: 'divider' }}
             >
@@ -86,6 +88,7 @@ export default function VerticalTabs() {
               variant='scrollable'
               value={myAccountTab}
               onChange={handleChange}
+              TabIndicatorProps={{ sx: { backgroundColor: 'orange' } }}
             >
               <Tab label="My Orders" {...a11yProps(0)} />
               <Tab label="User Profile" {...a11yProps(1)} />

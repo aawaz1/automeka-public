@@ -38,8 +38,8 @@ const FeaturedProducts = () => {
             <ProductSlider title={<FeaturedProducttitle />} >
 
 
-                {featuredProducts.map(product => {
-                    return (<Productcard product={product} />)
+                {featuredProducts?.map(product => {
+                    return (<Productcard product={product} key={product?._id} />)
                 })}
             </ProductSlider>
             <div className="  flex justify-center mt-2  items-center   text-[1rem]" >

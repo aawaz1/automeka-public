@@ -12,10 +12,12 @@ import ProductSlider from './ScrollComponent/ProductSlider.js';
 import { fetchProductDetails } from '../store/api.js';
 import { addToWishlist, deleteFromWishlist } from '../store/slices/wishlist-slice.js';
 import CommonRating from './Rating.js';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 const ProductScreen = () => {
-    const  {wishlistItems } = useSelector(state => state.wishlist);
-    const [isInWishlist, setIsInWishlist] = useState(false); 
+    const { wishlistItems } = useSelector(state => state.wishlist);
+    const [isInWishlist, setIsInWishlist] = useState(false);
     const navigate = useNavigate()
     const [qty, setQty] = useState(1);
     const { id } = useParams();
@@ -60,7 +62,7 @@ const ProductScreen = () => {
     const featuredProducts = useFeaturedProducts();
     const getPriceForColor = () => {
         const selectedVariant = product?.variants?.find(variant => variant.name === selectedColor);
-        return selectedVariant ? selectedVariant.price : product?.price;
+        return selectedVariant && selectedVariant.price
     };
     const handleIncrement = () => {
         if (qty < product?.on_stock) {
@@ -69,7 +71,6 @@ const ProductScreen = () => {
             setQty(qty + 1);
         }
     };
-
 
     const handleDecrement = () => {
         if (qty > 1) {
@@ -80,7 +81,7 @@ const ProductScreen = () => {
 
 
     useEffect(() => {
-        if (!product?.on_stock && product?.variants?.length > 0) {
+        if (product?.variants?.length > 0) {
             setSelectedColor(product.variants[0].name);
             setAvailability(product.variants[0].stock);
         }
@@ -104,7 +105,7 @@ const ProductScreen = () => {
                 <div className='p-2'>
 
                     <div>
-                        <img src={currentImage} alt="main" width={'80%'} style={{ height: "20rem" }} />
+                        <img src={currentImage} alt="main" className='max-sm:w-[100%]' style={{ height: "20rem" }} />
                     </div>
                     {product?.image_list?.length > 1 && <>
                         <div className='flex p-2 px-6 gap-8'>
@@ -191,9 +192,9 @@ const ProductScreen = () => {
 
 
                                 <button className='  bg-customOrange px-4 py-1 text-white font-medium font-poppins rounded-md'> Buy Now</button>
-                                <FaRegHeart onClick={handleWishlist} /> </>) : (
+                                <div onClick={handleWishlist}>{isInWishlist ? <FavoriteIcon style={{ color: 'red', fontSize: "2.3rem" }} /> : <FavoriteBorderIcon />}</div> </>) : (
                             <>
-                                {product?.on_stock > 0 && (
+                                {product?.coming_soon === false ? <> {product?.on_stock > 0 && (
                                     <>
                                         <button style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-customOrange font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product, qty }))}> Add to Cart</button>
 
@@ -206,15 +207,24 @@ const ProductScreen = () => {
                                                 console.error('Error occurred while adding to cart:', error);
                                             }
                                         }} > Buy Now</button>
-                                        <FaRegHeart onClick={() => dispatch(addToWishlist(product))} />  </>
+                                        <>
+                                         <div onClick={handleWishlist}>{isInWishlist ? <FavoriteIcon style={{ color: 'red', fontSize: "2.3rem" }} /> : <FavoriteBorderIcon style={{ fontSize: "2.3rem"}} />}</div></>
+                                        
+                                    </>
                                 )}
-                                {product?.on_stock <= 0 && (
-                                    <>
-                                        <div style={{ cursor: "not-allowed" }} className=' p-[0.42rem] bg-black bottom-2 rounded-sm flex  items-center justify-center'>{ }
-                                            <button style={{ cursor: "not-allowed" }} disabled className='text-white  flex items-center '> Out Of Stock</button>
-                                        </div>
-                                        <FaRegHeart style={{overflow : "hidden" }} onClick={handleWishlist} /></>
-                                )}
+                                    {product?.on_stock <= 0 && (
+                                        <>
+                                            <div style={{ cursor: "not-allowed" }} className=' p-[0.42rem] bg-black bottom-2 rounded-sm flex  items-center justify-center'>{ }
+                                                <button style={{ cursor: "not-allowed" }} disabled className='text-white  flex items-center '> Out Of Stock</button>
+                                            </div>
+                                            <div onClick={handleWishlist}>{isInWishlist ? <FavoriteIcon style={{ color: 'red', fontSize: "2.3rem" }} /> : <FavoriteBorderIcon style={{ fontSize: "2.3rem"}} />}</div></>
+                                    )}</> : <>
+                                    <div style={{ cursor: "not-allowed" }} className=' p-[0.42rem] bg-black bottom-2 rounded-sm flex  items-center justify-center'>{ }
+                                        <button style={{ cursor: "not-allowed" }} disabled className='text-white  flex items-center '> Coming Soon</button>
+                                    </div>
+                                    <div onClick={handleWishlist}>{isInWishlist ? <FavoriteIcon style={{ color: 'red', fontSize: "2.3rem" }} /> : <FavoriteBorderIcon style={{ fontSize: "2.3rem"}} />}</div></>}
+
+
                             </>
                         )}
 

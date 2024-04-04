@@ -11,11 +11,11 @@ import { IoIosArrowForward } from "react-icons/io";
 
 const Orderscreen = () => {
   const { orderDetails } = useSelector(state => state.order);
-  const [orderId , setOrderId] = useState(null);
+  const [orderId, setOrderId] = useState(null);
 
   const cart = useSelector((state) => state.cart);
   const [tracker, setTracker] = useState(null);
-  const [singleOrder ,setSingleOrder] = useState([]);
+  const [singleOrder, setSingleOrder] = useState([]);
 
 
   const { cartItems } = cart;
@@ -23,20 +23,20 @@ const Orderscreen = () => {
   const { saveAddress } = cart;
   const getOrder = async () => {
     try {
-        const { data } = await axios.get(
-            `https://restapi.ansoftt.com:4321/v1/order/details/${orderId}`
-        );
-        setSingleOrder(data?.data);
+      const { data } = await axios.get(
+        `https://restapi.ansoftt.com:4321/v1/order/details/${orderId}`
+      );
+      setSingleOrder(data?.data);
 
-        console.log(data?.data)
+      console.log(data?.data)
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-};
+  };
 
-useEffect(() => {
-  getOrder()
-} , [orderId])
+  useEffect(() => {
+    getOrder()
+  }, [orderId])
 
 
 
@@ -86,18 +86,18 @@ useEffect(() => {
                   {orderDetails.address?.address_1}, {orderDetails?.address.address_2}, {orderDetails?.address?.postal_code}, {orderDetails?.address?.country}, {orderDetails?.address?.phone},
                 </div>
                 <div className='border border-gray-400 w-[100%]'>
-                <div className=" w-full text-lg font-medium text-black max-md:max-w-full">
+                  <div className=" w-full text-lg font-medium text-black max-md:max-w-full">
                     Order Summary
-                </div>
+                  </div>
                   <div>
-                  <div className='flex justify-start gap-3 p-1'>
-            <div><strong>Total Items :</strong></div>
-            <div><strong>{orderDetails?.total_qty}</strong></div>
-        </div>
-        <div className='flex justify-start gap-2 p-1'>
-            <div><strong>Total Price :</strong></div>
-            <div><strong><span>KD</span>{orderDetails?.total_price?.toFixed(3)}</strong></div>
-        </div>
+                    <div className='flex justify-start gap-3 p-1'>
+                      <div><strong>Total Items :</strong></div>
+                      <div><strong>{orderDetails?.total_qty}</strong></div>
+                    </div>
+                    <div className='flex justify-start gap-2 p-1'>
+                      <div><strong>Total Price :</strong></div>
+                      <div><strong><span>KD</span>{orderDetails?.total_price?.toFixed(3)}</strong></div>
+                    </div>
                   </div>
                 </div>
                 <div className=" w-full text-lg font-medium text-black max-md:mt-10 max-md:max-w-full">
@@ -143,9 +143,9 @@ useEffect(() => {
 
             <div className='w-[100%] p-2 overflow-x-scroll md:overflow-hidden'>
               <Grid bgcolor={"#F5F5F5"} container spacing={1} className='min-w-[45rem]'>
-                <Grid item xs={3}>Order Number</Grid>
+                <Grid item xs={4}>Order Number</Grid>
                 <Grid item xs={2}>Order Date</Grid>
-                <Grid item xs={1}>Status</Grid>
+                
                 <Grid item xs={2}>Total Price</Grid>
                 <Grid item xs={2}>Points Used</Grid>
                 <Grid item xs={2}></Grid>
@@ -153,15 +153,16 @@ useEffect(() => {
 
                 {orders.map(order => (
                   <React.Fragment key={order?._id}>
-                    <Grid item xs={3}>{order?._id}</Grid>
+                    <Grid item xs={4}>{order?._id}</Grid>
                     <Grid item xs={2}>{order?.created_at.substring(0, 10)}</Grid>
-                    <Grid item xs={1}>pending</Grid>
+                   
                     <Grid item xs={2}>{order?.total_price}</Grid>
-                    <Grid item xs={2}>{}</Grid>
+                    <Grid item xs={2}>{ }</Grid>
                     <Grid className="text-base text-customOrange cursor-pointer font-poppins" item xs={2} onClick={() => {
-    // Call both functions here
-    dispatch(fetchOrder(order._id));
-    setOrderId(order._id);}}>Details</Grid>
+                      // Call both functions here
+                      dispatch(fetchOrder(order._id));
+                      setOrderId(order._id);
+                    }}>Details</Grid>
                   </React.Fragment>
                 ))}
               </Grid>

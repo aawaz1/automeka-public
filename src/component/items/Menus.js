@@ -8,13 +8,13 @@ export const PRODUCTS = [
 ];
 export const RESOURCES = [
   { name: "FAQs", link: "#" },
-  { name: "Contact_Us", link: "#" },
+  { name: "Contact_Us", link: "contactus" },
 
 
 ];
 export const COMPANY = [
-  { name: "Privacy Policy", link: "#" },
-  { name: "Return Policy", link: "#" },
+  { name: "Privacy Policy", link: "privacypolicy" },
+  { name: "Return Policy", link: "returnpolicy" },
 
 
 ];

@@ -22,7 +22,7 @@ const Category = () => {
     const category = searchParams.get('category');
     const filterSortQuery = searchParams.get('filterSort');
 
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
     const [featuredProducts, setFeaturedProducts] = useState(null);
     const allProducts = useFeaturedProducts(search)
     useEffect(() => {
@@ -52,15 +52,15 @@ const Category = () => {
         })
     }
 
-   
+
     const [selectedCategory, setSelectedCategory] = useState(null)
     useEffect(() => {
-        if(filterSortQuery){
+        if (filterSortQuery) {
             setFilterSort(Number(filterSortQuery))
         }
-    },[filterSortQuery])
+    }, [filterSortQuery])
     useEffect(() => {
-       
+
         if (category) {
             setSelectedCategory(category);
         }
@@ -90,7 +90,7 @@ const Category = () => {
     return (
         <div className='px-4 py-2'>
             <div onClick={() => setIsOpen(!isOpen)} className={`flex md:hidden ${isOpen ? 'justify-start' : 'justify-end'}`}>{isOpen ? <FaArrowLeft style={{ fontSize: "1.0rem" }} /> : <TbSortDescending style={{ fontSize: "1.5rem" }} />}</div>
-            {isOpen && (
+            {isOpen && false && (
                 <div className='top-0 relative h-[100vh] w-[100vw]'> <h2 className='text-[1rem] pl-4 pt-3 font-semibold '>Select Category</h2>
                     {/* <div className='pb-1 '>   <hr className='border border-solid border-gray-400 w-[80%] m-auto p-0' /></div> */}
 
@@ -110,38 +110,44 @@ const Category = () => {
             )}
             <div className='container'>
                 <Grid container spacing={1} >
-                    <Grid item  xs={12}>
-                        <div className='hidden md:block   border border-2px border-solid rounded-sm  justify-center shadow-lg border-gray-400 w-[100%]'>
-                            <h2 className='text-[1rem] pl-4 pt-1 font-semibold '>Select Category</h2>
-                            <div className=''>   <hr className='border border-solid border-gray-400 w-[80%] m-auto p-0' /></div>
-
-                            <div className='p-[0.2rem] flex flex-wrap gap-2'>
-                                {categories.map(category => {
-                                    return (
-                                        <button className={`text-[0.9rem] font-medium font-poppins border border-black border-20px p-1 px-2 rounded-sm hover:bg-customOrange hover:text-white ${selectedCategory === category?.name ? "bg-customOrange text-white" : ""}`} onClick={() => setSelectedCategory(category.name)}>{category.name}</button>
-                                    )
-
-                                })}
+                    <Grid style={{ display: isOpen ? "block" : "none" }} item xs={12}>
+                        <div className=' pl-4 pt-1 pb-2  border border-2px border-solid rounded-sm  justify-center  border-gray-400 w-[100%]'>
+                            <Grid container spacing={2} > <Grid item md={6} xs={12}>
+                                <h2 className='text-[1rem] font-semibold '>Select Category</h2>
 
 
+                                <div className='p-[0.2rem] flex flex-wrap gap-2'>
+                                    {categories.map(category => {
+                                        return (
+                                            <button className={`text-[0.9rem] font-medium font-poppins border border-black border-20px p-1 px-2 rounded-sm hover:bg-customOrange hover:text-white ${selectedCategory === category?.name ? "bg-customOrange text-white" : ""}`} onClick={() => setSelectedCategory(category.name)}>{category.name}</button>
+                                        )
+
+                                    })}
 
 
 
-                            </div>
-                            
-                                <h2 className='text-[1rem] pl-10 pt-3  font-semibold '> Filters</h2>
-                                <div className='pb-1'>   <hr className='border border-solid border-gray-400 w-[80%] m-auto p-0' /></div>
-                               <div className='flex p-2'>
-                               <button className={`text-[0.9rem] font-medium font-poppins border border-black border-20px p-1 px-2 rounded-sm   ${filterSort === 2 ? "bg-customOrange text-white" : ""}`} onClick={() => handleFilter(2)}>Top Selling</button>
-                                <button className={`text-[0.9rem] font-medium font-poppins border border-black border-20px p-1 px-2 rounded-sm   ${filterSort === 0 ? "bg-customOrange text-white" : ""} `} onClick={() => handleFilter(0)}>Low To High</button>
-                                <button className={`text-[0.9rem] font-medium font-poppins border border-black border-20px p-1 px-2 rounded-sm e  ${filterSort === 1 ? "bg-customOrange text-white" : ""}`} onClick={() => handleFilter(1)}> High to Low</button>
-                               </div>
 
-                            
+
+                                </div>
+                            </Grid>
+
+
+                                <Grid item xs={12} md={6}>
+                                    <h2 className='text-[1rem]   font-semibold '> Filters</h2>
+
+                                    <div className='p-[0.2rem] flex flex-wrap gap-2'>
+                                        <button className={`text-[0.9rem] font-medium font-poppins border border-black border-20px p-1 px-2 rounded-sm   ${filterSort === 2 ? "bg-customOrange text-white" : ""}`} onClick={() => handleFilter(2)}>Top Selling</button>
+                                        <button className={`text-[0.9rem] font-medium font-poppins border border-black border-20px p-1 px-2 rounded-sm   ${filterSort === 0 ? "bg-customOrange text-white" : ""} `} onClick={() => handleFilter(0)}>Low To High</button>
+                                        <button className={`text-[0.9rem] font-medium font-poppins border border-black border-20px p-1 px-2 rounded-sm e  ${filterSort === 1 ? "bg-customOrange text-white" : ""}`} onClick={() => handleFilter(1)}> High to Low</button>
+                                    </div>
+                                </Grid>
+                            </Grid>
+
+
                         </div>
 
                     </Grid>
-                    <Grid item container  xs={12} spacing={2}>
+                    <Grid item container xs={12} spacing={2}>
 
                         {featuredProducts?.length > 0 ?
                             filteredProduct(featuredProducts).map(category => {
@@ -152,7 +158,7 @@ const Category = () => {
 
 
                     </Grid>
-                    
+
                 </Grid>
             </div>
         </div>
