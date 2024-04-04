@@ -30,18 +30,7 @@ const Category = () => {
 
     }, [allProducts])
     console.log(featuredProducts);
-    // const sortByPriceLowToHigh = () => {
-    //     // const sortedItems = [...featuredProducts].sort((a, b) => a.price - b.price);
-    //     // setFeaturedProducts(sortedItems);
-    //     setFilterSort(0);
-
-    // };
-
-    // const sortByPriceHighToLow = () => {
-    //     // const sortedItems = [...featuredProducts].sort((a, b) => b.price - a.price);
-    //     // setFeaturedProducts(sortedItems);
-    //     setFilterSort(1);
-    // };
+    
 
     const handleFilter = (val) => {
         setFilterSort((prevState) => {
@@ -87,6 +76,7 @@ const Category = () => {
         return resultedProducts || []
 
     }
+    const filteredData = filteredProduct(featuredProducts)
     return (
         <div className='px-4 py-2'>
             <div onClick={() => setIsOpen(!isOpen)} className={`flex md:hidden ${isOpen ? 'justify-start' : 'justify-end'}`}>{isOpen ? <FaArrowLeft style={{ fontSize: "1.0rem" }} /> : <TbSortDescending style={{ fontSize: "1.5rem" }} />}</div>
@@ -149,9 +139,9 @@ const Category = () => {
                     </Grid>
                     <Grid item container xs={12} spacing={2}>
 
-                        {featuredProducts?.length > 0 ?
-                            filteredProduct(featuredProducts).map(category => {
-                                return (<Grid item lg={3} md={6} xs={12}><Productcard product={category} /></Grid>)
+                        {filteredData?.length > 0 ?
+                            filteredData.map(category => {
+                                return (<Grid item lg={3} md={4} xs={12}><Productcard product={category} /></Grid>)
                             }) : <Notfound />}
 
 

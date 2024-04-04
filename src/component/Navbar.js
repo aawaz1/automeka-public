@@ -64,7 +64,7 @@ const Navbar = () => {
           <button className=" max-sm:mr-1 sm:mr-4" ><div className="flex items-center text-black relative group cursor-pointer">
             <div className="   items-center flex text-black"><AccountBoxOutlinedIcon style={{ fontSize: "1.4rem" }} /></div>
 
-            <div className='absolute max-sm:top-0 max-sm:right-0 md:left-[-62px] md:top-[20px]  bg-gray-800 text-white rounded-md shadow-lg hidden group-hover:block w-[10vw]'>
+            <div style={{ minWidth: "7rem", zIndex: 3 }} className='absolute  min-w-7rem max-sm:top-0 max-sm:right-0 md:left-[-62px] md:top-[20px]  bg-gray-800 text-white rounded-md shadow-lg hidden group-hover:block w-[10vw]'>
               <ul className='gap-2 pt-2'>
                 {!userInfo && (<Link style={{ transition: "ease-out", textDecoration: "none", color: "white" }} to='/login'>Login</Link>)}
                 {userInfo && (<> <Link style={{ transition: "ease-out", textDecoration: "none", color: "white" }} className='text' to={'/myaccount'}><li >My Account</li></Link>

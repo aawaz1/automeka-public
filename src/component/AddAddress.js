@@ -187,7 +187,7 @@ const AddAddress = () => {
                 </div>
                 <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Mobile Number</label>
-                    <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="confirmPassword" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                    <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="number" name="confirmPassword" value={phone} onChange={(e) => setPhone(e.target.value)} />
                     <div className='text-red-500'>{errors.phone && <span>{errors.phone}</span>}</div>
 
                 </div>

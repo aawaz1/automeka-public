@@ -46,33 +46,29 @@ const OrderTracker = ({ setTracker, tracker }) => {
 
         </div>
       </div> */}
-      <div className=" px-1 md:px-16 gap-4 py-9 mt-16 w-full bg-neutral-100 max-md:px-5  max-md:max-w-full">
-        <div className="flex gap-1 max-md:flex-col max-md:gap-0">
+      <div className=" px-1 md:px-16  py-9 mt-1 md:mt-16 w-full bg-neutral-100 max-md:px-5  max-md:max-w-full">
+        <div className="flex justify-center items-center gap-4">
           <div className="flex flex-col  max-md:ml-0 max-md:w-full">
             <img
               loading="lazy"
               src={IMAGE_URL + product?.image_list?.[0]}
-              style={{ width: "8rem" }}
+              // style={{ width: "8rem" }}
+              className='w-[100%] md:w-[8rem]'
             />
           </div>
           <div className="flex flex-col ml-1 w-6/12 max-md:ml-0 max-md:w-full">
-            <div className="flex flex-col mt-2.5 font-medium max-md:mt-10">
+            <div className="flex flex-col mt-2.5 font-medium ">
               <div className="text-base text-black">{product?.name}</div>
 
             </div>
           </div>
           <div className="flex flex-col ml-1 w-6/12 max-md:ml-0 max-md:w-full">
-            <div className="flex flex-col mt-2.5 font-medium max-md:mt-10">
+            <div className="flex flex-col mt-2.5 font-medium ">
               <div className="text-base text-black">KD {(product?.price)?.toFixed(3)}</div>
 
             </div>
           </div>
-          <div className="flex flex-col ml-1 w-6/12 max-md:ml-0 max-md:w-full">
-            <div className="flex flex-col mt-2.5 font-medium max-md:mt-10">
-              <div className="text-base text-black"> </div>
 
-            </div>
-          </div>
         </div>
         <div className="flex gap-1 max-md:flex-col max-md:gap-0">
           <div className="flex flex-col  max-md:ml-0 max-md:w-full">

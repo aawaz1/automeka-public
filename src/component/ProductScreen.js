@@ -208,7 +208,7 @@ const ProductScreen = () => {
                                             }
                                         }} > Buy Now</button>
                                         <>
-                                         <div onClick={handleWishlist}>{isInWishlist ? <FavoriteIcon style={{ color: 'red', fontSize: "2.3rem" }} /> : <FavoriteBorderIcon style={{ fontSize: "2.3rem"}} />}</div></>
+                                         <div onClick={handleWishlist}>{isInWishlist ? <FavoriteIcon style={{ color: 'red', fontSize: "2.3rem" ,cursor :"pointer" }} /> : <FavoriteBorderIcon style={{ fontSize: "2.3rem"}} />}</div></>
                                         
                                     </>
                                 )}

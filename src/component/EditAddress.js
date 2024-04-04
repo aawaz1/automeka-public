@@ -115,7 +115,7 @@ const EditAddress = () => {
 
 
         try {
-            const res = await update({
+            let request = {
                 id: addressId,
                 address_1: address_1,
                 address_2: address_2,
@@ -130,10 +130,13 @@ const EditAddress = () => {
                 phone
 
 
-            }).unwrap();
+            };
+            console.log(request)
+            const res = await update({ id: addressId, data: request }).unwrap();
 
 
             cogoToast.success("Address Updated Successfully", { position: "bottom-left" });
+            getAddress();
 
             goBack();
 
@@ -151,7 +154,7 @@ const EditAddress = () => {
             <div className='grid grid-cols-1 md:grid-cols-2 p-1 gap-2 w-[20rem] justify-center border rounded-md border-gray-400 md:w-[60rem]'>
 
 
-            <div className="p-2">
+                <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Address 1</label>
 
                     <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="address_2" value={address_1} onChange={(e) => setAddress1(e.target.value)} />
@@ -220,7 +223,7 @@ const EditAddress = () => {
                 </div>
                 <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Mobile Number</label>
-                    <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="confirmPassword" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                    <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="number" name="confirmPassword" value={phone} onChange={(e) => setPhone(e.target.value)} />
                     <div className='text-red-500'>{errors.phone && <span>{errors.phone}</span>}</div>
 
                 </div>

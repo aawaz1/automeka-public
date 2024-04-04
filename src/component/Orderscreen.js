@@ -11,6 +11,7 @@ import { IoIosArrowForward } from "react-icons/io";
 
 const Orderscreen = () => {
   const { orderDetails } = useSelector(state => state.order);
+  console.log(orderDetails);
   const [orderId, setOrderId] = useState(null);
 
   const cart = useSelector((state) => state.cart);
@@ -76,17 +77,17 @@ const Orderscreen = () => {
             <div className="justify-center items-start px-2 py-[1rem] mt-2 max-w-full text-base font-medium bg-white rounded border border-solid border-stone-300 text-zinc-500 w-[410px] max-md:pr-5">
               {orders?.orderedItems?._id}
             </div> */}
-                <div className=" w-full text-lg font-medium text-black max-md:max-w-full">
+                <div className=" w-full text-lg font-bold font-poppins text-black max-md:max-w-full">
                   Delivery Address
                 </div>
                 {/* <div className=" w-full text-base font-medium text-zinc-500 max-md:max-w-full">
               Loream ipsum dolor
             </div> */}
-                <div className=" w-full text-base font-medium text-zinc-500 max-md:max-w-full">
+                <div className=" w-full text-base font-medium font-poppins text-zinc-500 max-md:max-w-full">
                   {orderDetails.address?.address_1}, {orderDetails?.address.address_2}, {orderDetails?.address?.postal_code}, {orderDetails?.address?.country}, {orderDetails?.address?.phone},
                 </div>
-                <div className='border border-gray-400 w-[100%]'>
-                  <div className=" w-full text-lg font-medium text-black max-md:max-w-full">
+                <div className=' w-[100%]'>
+                  <div className="P-1 w-full text-lg font-bold text-black max-md:max-w-full">
                     Order Summary
                   </div>
                   <div>
@@ -100,7 +101,7 @@ const Orderscreen = () => {
                     </div>
                   </div>
                 </div>
-                <div className=" w-full text-lg font-medium text-black max-md:mt-10 max-md:max-w-full">
+                <div className=" w-full text-lg font-semibold text-black max-md:mt-10 max-md:max-w-full">
                   Product Details
                 </div>
                 {orderDetails?.ordered_items?.map(order_item => {
@@ -145,7 +146,7 @@ const Orderscreen = () => {
               <Grid bgcolor={"#F5F5F5"} container spacing={1} className='min-w-[45rem]'>
                 <Grid item xs={4}>Order Number</Grid>
                 <Grid item xs={2}>Order Date</Grid>
-                
+
                 <Grid item xs={2}>Total Price</Grid>
                 <Grid item xs={2}>Points Used</Grid>
                 <Grid item xs={2}></Grid>
@@ -155,7 +156,7 @@ const Orderscreen = () => {
                   <React.Fragment key={order?._id}>
                     <Grid item xs={4}>{order?._id}</Grid>
                     <Grid item xs={2}>{order?.created_at.substring(0, 10)}</Grid>
-                   
+
                     <Grid item xs={2}>{order?.total_price}</Grid>
                     <Grid item xs={2}>{ }</Grid>
                     <Grid className="text-base text-customOrange cursor-pointer font-poppins" item xs={2} onClick={() => {
