@@ -159,7 +159,7 @@ const Orderscreen = () => {
                 <Grid item xs={2}>Order Date</Grid>
 
                 <Grid item xs={2}>Total Price</Grid>
-                <Grid item xs={2}>Points Used</Grid>
+                <Grid item xs={2}>Points</Grid>
                 <Grid item xs={2}></Grid>
 
 
@@ -168,8 +168,8 @@ const Orderscreen = () => {
                     <Grid item xs={4}>{order?._id}</Grid>
                     <Grid item xs={2}>{order?.created_at.substring(0, 10)}</Grid>
 
-                    <Grid item xs={2}>{order?.total_price}</Grid>
-                    <Grid item xs={2}>{ }</Grid>
+                    <Grid item xs={2}>{order?.total_price?.toFixed(3) || 0}</Grid>
+                    <Grid item xs={2}>{((order?.points_earned?.toFixed(4) || 0) - (order?.points_used?.toFixed(4) || 0))?.toFixed(4)}</Grid>
                     <Grid className="text-base text-customOrange cursor-pointer font-poppins" item xs={2} onClick={() => {
                       // Call both functions here
                       dispatch(fetchOrder(order._id));

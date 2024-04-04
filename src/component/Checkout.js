@@ -97,7 +97,7 @@ const Checkout = () => {
         quantity: cartItems?.length,
         total_qty: total_qty,
         // points_used: userInfo?.data?.user?.loyalty_points,
-        // is_poin
+        is_points_used: isUsed,
         ordered_items: orderItems,
         total_products_cost: "4",
         total_price: calculateSum(),
@@ -200,7 +200,7 @@ const Checkout = () => {
               </div>
             </div>
           </div>
-          <button className="cursor-pointer [border:none] pt-[22px] px-5 pb-[19px] bg-orange-500 w-[774px] mt-2 rounded-md flex flex-row items-start justify-center box-border max-w-full hover:bg-chocolate">
+          <button onClick={placeOrderHandler} className="cursor-pointer [border:none] pt-[22px] px-5 pb-[19px] bg-orange-500 w-[774px] mt-2 rounded-md flex flex-row items-start justify-center box-border max-w-full hover:bg-chocolate">
             <div className="h-[55px] w-[668px] relative rounded-8xs bg-darkorange hidden max-w-full" />
             <div onClick={placeOrderHandler} className="h-3.5 w-[103px] relative text-xl tracking-[-0.3px] font-medium font-poppins text-white text-center flex items-center justify-center shrink-0 z-[1] mq450:text-base">
               Pay Now
