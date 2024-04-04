@@ -11,7 +11,9 @@ import { useSelector } from 'react-redux';
 import Notfound from './Notfound';
 
 const Category = () => {
-
+    useEffect(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, []);
     const { search } = useSelector(state => state.cart);
     const [filterSort, setFilterSort] = useState(null);
 
@@ -106,14 +108,14 @@ const Category = () => {
                         <button className=' border border-solid border-gray-400 px-4 py-1  rounded-sm active:bg-slate-600 bg-slate-300 ' onClick={() => setIsOpen(!isOpen)}  >Ok</button>
                     </div></div>
             )}
-            <div className=' container '>
+            <div className='container'>
                 <Grid container spacing={1} >
-                    <Grid item lg={2} md={3} xs={12}>
+                    <Grid item  xs={12}>
                         <div className='hidden md:block   border border-2px border-solid rounded-sm  justify-center shadow-lg border-gray-400 w-[100%]'>
-                            <h2 className='text-[1rem] pl-4 pt-3 font-semibold '>Select Category</h2>
-                            <div className='pb-1'>   <hr className='border border-solid border-gray-400 w-[80%] m-auto p-0' /></div>
+                            <h2 className='text-[1rem] pl-4 pt-1 font-semibold '>Select Category</h2>
+                            <div className=''>   <hr className='border border-solid border-gray-400 w-[80%] m-auto p-0' /></div>
 
-                            <div className='p-4 flex flex-wrap gap-2'>
+                            <div className='p-[0.2rem] flex flex-wrap gap-2'>
                                 {categories.map(category => {
                                     return (
                                         <button className={`text-[0.9rem] font-medium font-poppins border border-black border-20px p-1 px-2 rounded-sm hover:bg-customOrange hover:text-white ${selectedCategory === category?.name ? "bg-customOrange text-white" : ""}`} onClick={() => setSelectedCategory(category.name)}>{category.name}</button>
@@ -129,7 +131,7 @@ const Category = () => {
                             
                                 <h2 className='text-[1rem] pl-10 pt-3  font-semibold '> Filters</h2>
                                 <div className='pb-1'>   <hr className='border border-solid border-gray-400 w-[80%] m-auto p-0' /></div>
-                               <div className='flex flex-col p-2'>
+                               <div className='flex p-2'>
                                <button className={`text-[0.9rem] font-medium font-poppins border border-black border-20px p-1 px-2 rounded-sm   ${filterSort === 2 ? "bg-customOrange text-white" : ""}`} onClick={() => handleFilter(2)}>Top Selling</button>
                                 <button className={`text-[0.9rem] font-medium font-poppins border border-black border-20px p-1 px-2 rounded-sm   ${filterSort === 0 ? "bg-customOrange text-white" : ""} `} onClick={() => handleFilter(0)}>Low To High</button>
                                 <button className={`text-[0.9rem] font-medium font-poppins border border-black border-20px p-1 px-2 rounded-sm e  ${filterSort === 1 ? "bg-customOrange text-white" : ""}`} onClick={() => handleFilter(1)}> High to Low</button>
@@ -139,7 +141,7 @@ const Category = () => {
                         </div>
 
                     </Grid>
-                    <Grid item container lg={10} md={9} xs={12} spacing={2}>
+                    <Grid item container  xs={12} spacing={2}>
 
                         {featuredProducts?.length > 0 ?
                             filteredProduct(featuredProducts).map(category => {
@@ -150,6 +152,7 @@ const Category = () => {
 
 
                     </Grid>
+                    
                 </Grid>
             </div>
         </div>

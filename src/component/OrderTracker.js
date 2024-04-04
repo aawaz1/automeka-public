@@ -32,7 +32,7 @@ const OrderTracker = ({ setTracker, tracker }) => {
     getTrackers()
   }, [])
   return (
-    <div className='container p-6'><div className='p-4  flex flex-col justify-center items-center'>
+    <div className='container p-1 md:p-6'><div className='p-1 md:p-4  flex flex-col justify-center items-center'>
 
       {trackerr?.filter(item => item.product._id === tracker)?.map(producttracker => <Stepper tracker={producttracker.status} />
 
@@ -46,7 +46,7 @@ const OrderTracker = ({ setTracker, tracker }) => {
 
         </div>
       </div> */}
-      <div className="px-16 gap-4 py-9 mt-16 w-full bg-neutral-100 max-md:px-5 max-md:mt-10 max-md:max-w-full">
+      <div className=" px-1 md:px-16 gap-4 py-9 mt-16 w-full bg-neutral-100 max-md:px-5  max-md:max-w-full">
         <div className="flex gap-1 max-md:flex-col max-md:gap-0">
           <div className="flex flex-col  max-md:ml-0 max-md:w-full">
             <img

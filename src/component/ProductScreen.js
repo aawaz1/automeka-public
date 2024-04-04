@@ -15,18 +15,27 @@ import CommonRating from './Rating.js';
 
 const ProductScreen = () => {
     const  {wishlistItems } = useSelector(state => state.wishlist);
+    const [isInWishlist, setIsInWishlist] = useState(false); 
     const navigate = useNavigate()
     const [qty, setQty] = useState(1);
     const { id } = useParams();
     const dispatch = useDispatch()
     const [product, setProduct] = useState();
+    useEffect(() => {
+        setIsInWishlist(wishlistItems.some(item => item._id === id));
+    }, [wishlistItems, id]);
+
 
     const handleWishlist = () => {
-        dispatch(addToWishlist(product))
-        if(product){
-            dispatch(deleteFromWishlist(product._id))
+        if (isInWishlist) {
+            dispatch(deleteFromWishlist(product._id));
+            console.log("true")
+        } else {
+            dispatch(addToWishlist(product));
+            console.log("false")
         }
-    }
+        setIsInWishlist(!isInWishlist);
+    };
 
 
     const handleProductDetail = async () => {
@@ -204,7 +213,7 @@ const ProductScreen = () => {
                                         <div style={{ cursor: "not-allowed" }} className=' p-[0.42rem] bg-black bottom-2 rounded-sm flex  items-center justify-center'>{ }
                                             <button style={{ cursor: "not-allowed" }} disabled className='text-white  flex items-center '> Out Of Stock</button>
                                         </div>
-                                        <FaRegHeart onClick={() => dispatch(addToWishlist(product))} /></>
+                                        <FaRegHeart style={{overflow : "hidden" }} onClick={handleWishlist} /></>
                                 )}
                             </>
                         )}

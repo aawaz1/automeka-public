@@ -12,6 +12,9 @@ import { saveMyAccountTab } from '../store/slices/cart-slice.js';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
+  React.useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+}, []);
 
   return (
     <div
@@ -57,7 +60,7 @@ export default function VerticalTabs() {
 
   return (
     <div className='p-2  min-h-[100%] md:min-h-screen'>
-      <div className='container p-4 h-full border border-gray-400'>
+      <div className='container p-1 md:p-4 h-full border border-gray-400'>
         <Box
           sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex' }}
           className="flex flex-col md:flex-row"

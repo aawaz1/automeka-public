@@ -1,9 +1,10 @@
 import React from 'react'
 import Itemcontainer from './items/Itemcontainer'
+import ScrollToTop from './Scrolltotop'
 
 const Footer = () => {
   return (
-    <footer className='bg-gray-700 text-white '>
+    <footer className='bg-gray-700 text-white relative'>
       <div className='h-50 md:flex md:justify-around md:items-center sm:px-12 px-4 bg-customOrange py-7'>
         <h1 className='lg:text-3xl text-xl md:mb-0 mb-6 lg:leadiing-normal font-semibold md:w-2/5'>Subscribe Our Newsletter</h1>
         <div>
@@ -12,6 +13,7 @@ const Footer = () => {
         </div>
 
       </div>
+      {/* <div className='border absolute bottom-0 w-7  border-purple-700 bg-blue-400'><ScrollToTop/></div> */}
 
       <Itemcontainer />
 

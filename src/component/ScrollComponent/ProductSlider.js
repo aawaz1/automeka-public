@@ -22,12 +22,21 @@ const ProductSlider = ({ children, title, desktopItemCount, superLargeDesktopIte
             items: mobileItemCount ? mobileItemCount : 1
         }
     };
+    const CustomRightArrow = ({ onClick, ...rest }) => {
+        const {
+          onMove,
+          carouselState: { currentSlide, deviceType }
+        } = rest;
+     
+        return <button onClick={() => onClick()}>CustomRightArrow</button>;
+      };
+    //   <Carousel customRightArrow={<CustomRightArrow />} />
     return (
         <div style={{ width: "100%" }}>
             {title ? <div>{title}</div> : null}
           
             <div className="w-full flex justify-center">
-                <Carousel className="flex justify-start w-[90%] max-w-[1200px]" responsive={responsiveProp ? responsiveProp : responsive}>
+                <Carousel customRightArrow={<CustomRightArrow />} className="flex justify-start w-[90%] max-w-[1200px]" responsive={responsiveProp ? responsiveProp : responsive}>
                     {
                         children
                     }

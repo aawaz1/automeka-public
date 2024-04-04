@@ -49,7 +49,7 @@ function App() {
             <Route path='/editprofile'  element={<PrivateRoute element={<EditProfile />} />}/>
             <Route path='/FAQs' element={<FAQ />} />
             <Route path='/about' element={<About />} />
-            <Route path='/Contact%20Us' element={<Contactus/>}/>
+            <Route path='/Contact_Us' element={<Contactus/>}/>
             <Route path='*' element={<NotFound/>}/>
 
 

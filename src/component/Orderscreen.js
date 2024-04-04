@@ -11,15 +11,32 @@ import { IoIosArrowForward } from "react-icons/io";
 
 const Orderscreen = () => {
   const { orderDetails } = useSelector(state => state.order);
+  const [orderId , setOrderId] = useState(null);
 
   const cart = useSelector((state) => state.cart);
   const [tracker, setTracker] = useState(null);
+  const [singleOrder ,setSingleOrder] = useState([]);
 
 
   const { cartItems } = cart;
   let id = JSON.parse(localStorage.getItem("id") || null);
   const { saveAddress } = cart;
+  const getOrder = async () => {
+    try {
+        const { data } = await axios.get(
+            `https://restapi.ansoftt.com:4321/v1/order/details/${orderId}`
+        );
+        setSingleOrder(data?.data);
 
+        console.log(data?.data)
+    } catch (error) {
+        console.log(error);
+    }
+};
+
+useEffect(() => {
+  getOrder()
+} , [orderId])
 
 
 
@@ -43,7 +60,7 @@ const Orderscreen = () => {
   }, [])
   return (
     <div className="p-2 flex flex-col  w-[30rem] md:w-[100%]   justify-center items-center container">
-      <h2 className=' pb-4 font-semibold text-[1.2rem]'>{orderDetails ? (tracker ? "Order Tracker" : "Order Details") : "Your Order History"}
+      <h2 className='pb-4 font-semibold text-[1.2rem]'>{orderDetails ? (tracker ? "Order Tracker" : "Order Details") : "Your Order History"}
       </h2>
 
       {
@@ -52,7 +69,7 @@ const Orderscreen = () => {
           (orderDetails ? <>
             {tracker ? <OrderTracker tracker={tracker} setTracker={setTracker} /> : <div className='container p-2   justify-center items-center'>
               {/* <h2 className=' pb-4 font-semibold text-[1.2rem]'>Your Order History</h2> */}
-              <div className="flex flex-col gap-3 px-5 max-w-[862px]">
+              <div className="flex flex-col gap-3 px- 1 md:px-5 max-w-[862px]">
                 {/* <div className="w-full text-lg font-medium text-black max-md:max-w-full">
               Tracking Number
             </div>
@@ -68,14 +85,29 @@ const Orderscreen = () => {
                 <div className=" w-full text-base font-medium text-zinc-500 max-md:max-w-full">
                   {orderDetails.address?.address_1}, {orderDetails?.address.address_2}, {orderDetails?.address?.postal_code}, {orderDetails?.address?.country}, {orderDetails?.address?.phone},
                 </div>
+                <div className='border border-gray-400 w-[100%]'>
+                <div className=" w-full text-lg font-medium text-black max-md:max-w-full">
+                    Order Summary
+                </div>
+                  <div>
+                  <div className='flex justify-start gap-3 p-1'>
+            <div><strong>Total Items :</strong></div>
+            <div><strong>{orderDetails?.total_qty}</strong></div>
+        </div>
+        <div className='flex justify-start gap-2 p-1'>
+            <div><strong>Total Price :</strong></div>
+            <div><strong><span>KD</span>{orderDetails?.total_price?.toFixed(3)}</strong></div>
+        </div>
+                  </div>
+                </div>
                 <div className=" w-full text-lg font-medium text-black max-md:mt-10 max-md:max-w-full">
                   Product Details
                 </div>
                 {orderDetails?.ordered_items?.map(order_item => {
                   return (
 
-                    <div className="px-8 py-4 mt-4 w-full bg-neutral-100 max-md:px-5 max-md:mt-10 max-md:max-w-full">
-                      <div className="flex gap-5 max-md:flex-col max-md:gap-0">
+                    <div className="px-8 py-4 mt-4 w-full bg-neutral-100 max-md:px-1 max-md:mt-10 max-md:max-w-full">
+                      <div className="flex gap-5  max-md:gap-0">
                         <div className="flex flex-col w-6/12 max-md:ml-0 max-md:w-full">
                           <img
                             loading="lazy"
@@ -83,7 +115,7 @@ const Orderscreen = () => {
                             className="grow shrink-0 max-w-full aspect-[1.54] w-[126px] max-md:mt-10"
                           />
                         </div>
-                        <div className="flex flex-col ml-5 w-6/12 max-md:ml-0 max-md:w-full">
+                        <div className="flex flex-col ml-1 md:ml-5 w-6/12 max-md:ml-0 max-md:w-full">
                           <div className="flex flex-col mt-2.5 font-medium max-md:mt-10">
                             <div className="text-base text-black">{order_item?.product?.name}</div>
                             <div className="mt-3.5 text-sm text-green-500">
@@ -113,8 +145,9 @@ const Orderscreen = () => {
               <Grid bgcolor={"#F5F5F5"} container spacing={1} className='min-w-[45rem]'>
                 <Grid item xs={3}>Order Number</Grid>
                 <Grid item xs={2}>Order Date</Grid>
-                <Grid item xs={3}>Status</Grid>
+                <Grid item xs={1}>Status</Grid>
                 <Grid item xs={2}>Total Price</Grid>
+                <Grid item xs={2}>Points Used</Grid>
                 <Grid item xs={2}></Grid>
 
 
@@ -122,9 +155,13 @@ const Orderscreen = () => {
                   <React.Fragment key={order?._id}>
                     <Grid item xs={3}>{order?._id}</Grid>
                     <Grid item xs={2}>{order?.created_at.substring(0, 10)}</Grid>
-                    <Grid item xs={3}>pending</Grid>
+                    <Grid item xs={1}>pending</Grid>
                     <Grid item xs={2}>{order?.total_price}</Grid>
-                    <Grid className="text-base text-customOrange cursor-pointer font-poppins" item xs={2} onClick={() => dispatch(fetchOrder(order._id))}>Details</Grid>
+                    <Grid item xs={2}>{}</Grid>
+                    <Grid className="text-base text-customOrange cursor-pointer font-poppins" item xs={2} onClick={() => {
+    // Call both functions here
+    dispatch(fetchOrder(order._id));
+    setOrderId(order._id);}}>Details</Grid>
                   </React.Fragment>
                 ))}
               </Grid>

@@ -53,6 +53,7 @@ const Loginform = () => {
 
 
             });
+            cogoToast.success("Logged In Successfully", { position: "bottom-left" });
         } catch (err) {
             console.log(err);
             cogoToast.error(err?.data?.message || err?.data?.error[0]?.msg, { position: "bottom-left" });
