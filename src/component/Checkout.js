@@ -20,16 +20,17 @@ const Checkout = () => {
   const { saveAddress } = cart;
   const dispatch = useDispatch();
   const [isUsed, setIsUsed] = useState(false)
-  const pointsValueInKd = userInfo?.data?.user?.loyalty_points / 1000;
+  const pointsValueInKd = userInfo?.data?.user?.loyalty_points / 100;
   const [selectedAddress, setSelectedAddress] = useState('');
   const [addresses, setAddresses] = useState([]);
   const total_qty = cartItems?.reduce((accumulator, item) => {
     return accumulator + item?.quantity;
   }, 0) || 0;
-  console.log(cartItems, "total_qty: ", total_qty)
+
 
   const governate_charges = parseInt(saveAddress?.governates?.value);
   const governateValue = parseFloat(saveAddress?.governates?.value || 0);
+  console.log(governateValue)
   const calculateSum = () => {
     let sum = governateValue + totalCartPrice;
     if (isUsed) {
@@ -39,10 +40,21 @@ const Checkout = () => {
   };
   const [createOrder] = useCreateOrderMutation();
 
-  const totalCartPrice = cart?.cartItems?.reduce(
-    (acc, item) => acc + item?.price * item?.quantity,
+  const totalCartPrice = 
+  cart.cartItems.reduce(
+    (acc, item) => {
+      let price = item.price;
+      if (item?.variantId && item?.variants?.length) {
+        item.variants.map(variant => {
+          if (variant._id == item?.variantId) {
+            price = variant?.price
+          }
+        })
+      }
+      return (acc + (price * item.quantity * (100 - item.discount) / 100))
+    },
     0
-  );
+  )
 
   const handleAddressChange = (event) => {
     const selectedAddressId = event.target.value;
@@ -134,9 +146,10 @@ const Checkout = () => {
         <div>
 
           <h3 className="font-poppins font-semibold text-[1.6rem]">Delivery Address</h3>
-          <div className="w-[100%] text-none rounded-full text-orange-500 p-2">
+          <div className="w-[100%] text-none rounded-full text-customOrange p-2">
 
-            <select style={{ border: "2px solid orange", borderRadius: "3px" }} className='w-[100%]' value={saveAddress?.id} onChange={handleAddressChange}>
+            <select style={{ border: "2px solid orange", borderRadius: "3px" }} className='w-[100%]' value={saveAddress?.id
+            } onChange={handleAddressChange}>
               <option style={{ color: "#D17B06" }} className='text-slate-500' value="">View addresses</option>
               {addresses.map((address) => (
                 <option className='w-[100%]' style={{ color: "#D17B06" }} key={address._id} value={address._id}>
@@ -203,7 +216,7 @@ const Checkout = () => {
               </div>
             </div>
           </div>
-          <button onClick={placeOrderHandler} className="cursor-pointer [border:none] pt-[22px] px-5 pb-[19px] bg-orange-500 w-[774px] mt-2 rounded-md flex flex-row items-start justify-center box-border max-w-full hover:bg-chocolate">
+          <button onClick={placeOrderHandler} className="cursor-pointer [border:none] pt-[22px] px-5 pb-[19px] bg-customOrange w-[774px] mt-2 rounded-md flex flex-row items-start justify-center box-border max-w-full hover:bg-chocolate">
             <div className="h-[55px] w-[668px] relative rounded-8xs bg-darkorange hidden max-w-full" />
             <div onClick={placeOrderHandler} className="h-3.5 w-[103px] relative text-xl tracking-[-0.3px] font-medium font-poppins text-white text-center flex items-center justify-center shrink-0 z-[1] mq450:text-base">
               Pay Now
@@ -225,6 +238,13 @@ const Checkout = () => {
             <div className="self-stretch flex flex-col items-start justify-start gap-[19.666666666666668px] max-w-full text-base">
               {
                 cart.cartItems.map(item => {
+                  const variantId = item?.variantId;
+
+                  const variant = item.variants.find(variant => variant._id === variantId);
+                  const price = variant ? variant.price : null;
+                  const discount = item?.discount
+                  const discountPrice = (item?.discount / 100) * price;
+                  const discountedPrice = price - discountPrice
                   return (
                     <div className="self-stretch w-450px md:600px flex flex-col items-start justify-start gap-[14px] max-w-full">
                       <div className="self-stretch flex flex-row items-start justify-start py-0 pr-3 pl-[3px] box-border max-w-full">
@@ -247,25 +267,16 @@ const Checkout = () => {
                                     {item?.name}
                                   </div>
                                 </div>
-                                {/* <div className="flex-1 flex flex-row items-start justify-start gap-[7px] text-xs text-darkgray">
-                              <img
-                                className="h-[21px] w-[104px] relative z-[1]"
-                                loading="lazy"
-                                alt=""
-                                src={item.image_list[0]}
-                              />
-                              <div className="flex flex-col items-start justify-start pt-[3.5px] px-0 pb-0">
-                                <div className="h-[7px] relative font-medium inline-block shrink-0 min-w-[30px] z-[1]">
-                                  (4.7)
-                                </div>
-                              </div>
-                            </div> */}
+
                               </div>
                             </div>
                           </div>
-                          <div className="flex flex-col items-start justify-start pt-[15px] px-0 pb-0 text-mini text-dimgray-100">
-                            <div className="relative text-green-400 font-medium inline-block max-sm:w-[2em]  z-[1]">
-                              KD {(item?.price).toFixed(3)}
+                          <div className="flex flex-col items-start justify-start pt-[15px] md:w-[6rem] px-0 pb-0 text-mini text-dimgray-100">
+                            <div className="relative text-green-400 font-medium inline-block  z-[1]">
+
+                              {price ? discountedPrice.toFixed(3) :
+                                item?.price.toFixed(3)
+                              }  KD &nbsp;
                             </div>
                           </div>
                         </div>
@@ -299,16 +310,26 @@ const Checkout = () => {
                         {total_qty}
                       </div>
                       <div className="relative font-medium inline-block min-w-[111px] z-[1]">
-                        KD {cart.cartItems.reduce(
-                          (acc, item) => acc + item.price * item.quantity,
+                        {cart.cartItems.reduce(
+                          (acc, item) => {
+                            let price = item.price;
+                            if (item?.variantId && item?.variants?.length) {
+                              item.variants.map(variant => {
+                                if (variant._id == item?.variantId) {
+                                  price = variant?.price
+                                }
+                              })
+                            }
+                            return (acc + (price * item.quantity * (100 - item.discount) / 100))
+                          },
                           0
-                        ).toFixed(3)}
+                        ).toFixed(3)}  KD
                       </div>
                       <div className="relative font-medium inline-block min-w-[111px] z-[1]">
-                        KD {parseInt(saveAddress?.governates?.value).toFixed(3)}
+                        {governateValue.toFixed(3)} KD
                       </div>
                       {isUsed ? <div className="relative font-medium inline-block min-w-[111px] z-[1]">
-                        KD {pointsValueInKd}
+                        {pointsValueInKd.toFixed(3)}  KD
                       </div> : null}
                     </div>
                   </div>
@@ -323,7 +344,7 @@ const Checkout = () => {
                     </div>
                     <div className="flex flex-col items-start justify-start pt-0.5 px-0 pb-0 text-lg">
                       <div className="relative font-medium z-[1]">
-                        KD {calculateSum().toFixed(3)}
+                        {calculateSum().toFixed(3)}  KD
                       </div>
                     </div>
                   </div>

@@ -35,11 +35,18 @@ const Cartmenu = ({ handleIsOpen }) => {
                             <hr className='border border-gray-500' />
                             {
                                 cartItems?.map(cartItem => {
+                                    const variantId = cartItem?.variantId;
+
+        const variant = cartItem.variants.find(variant => variant._id === variantId);
+        const price = variant ? variant.price : null;
+        const discount = cartItem?.discount
+        const discountPrice = (cartItem?.discount / 100) * price;
+        const discountedPrice = price - discountPrice
                                     return (<div className='flex gap-2 justify-center p-2'>
                                         <div><img src={IMAGE_URL + cartItem?.image_list?.[0]} style={{ maxWidth: "4rem" }} alt='cartimage' /></div>
                                         <div className='p-2'>
                                             <h2 className='text-[1rem] font-poppins'>{cartItem.name}</h2>
-                                            <h2 className='text-[0.9rem] text-green-400 font-poppins'>Price : {cartItem?.price?.toFixed(3)} KD</h2>
+                                            <h2 className='text-[0.9rem] text-green-400 font-poppins'>Price :{price ? discountedPrice.toFixed(3) : cartItem?.price.toFixed(3)} KD</h2>
                                             <div className='flex gap-2'>
                                                 <div className='flex flex-row'>
                                                     <div className='rounded-l-lg border border-gray-500 px-2 cursor-pointer bg-gray-100' onClick={() =>
@@ -95,7 +102,7 @@ const Cartmenu = ({ handleIsOpen }) => {
                             <div className='flex mb-8 justify-between items-center gap-3 '><h2 className='text-[1rem]'>Shopping Cart</h2> <div onClick={handleIsOpen}><RxCross2 style={{ cursor: "pointer" }} className='font-bold' /></div></div>
                             <div className='flex justify-center'><IoCartOutline style={{ fontSize: "3rem" }} /></div>
                             <div className='text-sm text-gray-400 text-center mb-4'>Your Cart is Currently Empty</div>
-                            <div className='flex justify-center'><button className='text-white rounded-md bg-orange-500 p-2 flex justify-center items-center max-w-[10rem] w-[100%]' onClick={() => { handleIsOpen(); navigate('/category'); }}
+                            <div className='flex justify-center'><button className='text-white rounded-md bg-customOrange p-2 flex justify-center items-center max-w-[10rem] w-[100%]' onClick={() => { handleIsOpen(); navigate('/category'); }}
                             >Buy Now</button></div>
                         </div>
                     )

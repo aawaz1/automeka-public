@@ -9,6 +9,7 @@ import { Grid } from '@mui/material';
 import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Notfound from './Notfound';
+import Noitemsfound from './Noitemsfound';
 
 const Category = () => {
     useEffect(() => {
@@ -142,7 +143,7 @@ const Category = () => {
                         {filteredData?.length > 0 ?
                             filteredData.map(category => {
                                 return (<Grid item lg={3} md={4} xs={12}><Productcard product={category} /></Grid>)
-                            }) : <Notfound />}
+                            }) : <Noitemsfound />}
 
 
 

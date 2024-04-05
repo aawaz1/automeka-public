@@ -139,10 +139,10 @@ const Navbar = () => {
       </div>
       {
         isOpen && (
-          <div className='flex basis-full  items-center g-8 pl-[0.2rem]'>
-            <div className='flex flex-col gap-1 pt-[1rem] pl-[0.7rem] shadow-md hover:shadow-lg border-full'>
+          <div className='flex basis-full  items-center g-8 pl-[1.2rem]'>
+            <div className='flex  gap-1 pt-[1rem] p-1 pl-[0.7rem] shadow-md hover:shadow-lg border-full'>
               <div className=' mr-4 relative group'>
-                <div className="flex items-center hover:text-white cursor-pointer text-white bg-orange-500 px-1 py-1 rounded-md">
+                <div className="flex items-center hover: cursor-pointer  px-1 py-1 rounded-md">
                   <span className=''>All Categories</span>
                   <svg className="w-4 h-4 ml-1 transform group-hover:-rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
@@ -158,13 +158,13 @@ const Navbar = () => {
                   </ul>
                 </div>
               </div>
-              <div className='mr-4'>Home</div>
-              <div>About Us</div>
+              <div onClick={() => navigate("/")} className='mr-4 relative top-[2px]'>Home</div>
+              <div onClick={() => navigate('/aboutus')} className='relative top-[2px]'>About Us</div>
 
-            </div></div>
-        )
-      }
-    </div>)
+          </div></div>
+  )
+}
+    </div >)
 }
 
 export default Navbar

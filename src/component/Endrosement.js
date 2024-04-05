@@ -24,7 +24,7 @@ const Endrosement = () => {
         }
     };
 
-    const productData = [{ name: "10w40 United Oil", image: '/Group 42735.png', price: 2.222 }]
+    const productData = [{ name: "10w40 United Oil", image: '/Group 42735.png', price: 2.222 },{ name: "10w40 United Oil", image: '/Group 42885.png', price: 2.222 },{ name: "10w40 United Oil", image: '/Group 42884.png', price: 2.222 }]
 
     return (
         <div className='flex p-4 flex-col justify-center items-center text-center bg-gray-100'>

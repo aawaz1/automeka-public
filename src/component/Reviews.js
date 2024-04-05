@@ -66,6 +66,7 @@ const Reviews = ({ product }) => {
             <label for="comment">Comment</label>
             <textarea
               class="comment form-control"
+
               style={{ maxWidth: "100%", width: "30rem" }}
               id="comm"
               rows="3"

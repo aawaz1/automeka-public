@@ -22,7 +22,11 @@ const Cart = () => {
   };
 
   const { cartItems } = useSelector((state) => state.cart);
+
+  console.log(cartItems)
   const dispatch = useDispatch();
+
+  // const prices = cartItems?.variants?.filter(variant => variant._id === variantId)?.map(item => item.price);
   return (<>
     {cartItems && cartItems.length > 0 ? (<div className="hidden md:block container">
       <h2 className="font-bold font-poppins text-[1.2rem] p-2 py-4">Shopping Cart</h2>
@@ -36,6 +40,13 @@ const Cart = () => {
         </Grid>
 
         {cartItems.map(cartItem => {
+          const variantId = cartItem?.variantId;
+
+          const variant = cartItem.variants.find(variant => variant._id === variantId);
+          const price = variant ? variant.price : null;
+          const discount = cartItem?.discount
+          const discountPrice = (cartItem?.discount / 100) * price;
+          const discountedPrice = price - discountPrice
           return (<Grid item container xs={12} style={{ borderBottom: "1px solid lightgrey" }}>
             <Grid item md={6}>
               <div className="flex py-2 gap-2">
@@ -43,7 +54,8 @@ const Cart = () => {
                 <div><h2 className="text-[1.0rem] font-medium font-poppins">{cartItem.name}</h2></div>
               </div>
             </Grid>
-            <Grid className="font-medium font-poppins" item md={2} alignItems={"center"} display={"flex"}>{cartItem?.price.toFixed(3)}</Grid>
+
+            <Grid className="font-medium font-poppins" item md={2} alignItems={"center"} display={"flex"}> {price ? discountedPrice.toFixed(3) : cartItem?.price.toFixed(3)}</Grid>
             <Grid item md={2} alignItems={"center"} display={"flex"}>
               <div className="flex">
                 <div className='rounded-l-lg border border-gray-500 px-2 bg-gray-100 cursor-pointer' onClick={() =>
@@ -53,7 +65,7 @@ const Cart = () => {
                 <div className='rounded-r-lg border border-gray-500 bg-gray-100 px-2 cursor-pointer' onClick={() => handleIncrement(cartItem)}>+</div>
               </div>
             </Grid>
-            <Grid item md={2} alignItems={"center"} display={"flex"}>{cartItem.price * cartItem.quantity}</Grid>
+            <Grid item md={2} alignItems={"center"} display={"flex"}>{price ? (discountedPrice * cartItem.quantity).toFixed(3) : (cartItem.price * cartItem.quantity).toFixed(3)}</Grid>
           </Grid>)
         })}
 
@@ -83,6 +95,13 @@ const Cart = () => {
       </div>
 
       {cartItems.map(cartItem => {
+        const variantId = cartItem?.variantId;
+
+        const variant = cartItem.variants.find(variant => variant._id === variantId);
+        const price = variant ? variant.price : null;
+        const discount = cartItem?.discount
+        const discountPrice = (cartItem?.discount / 100) * price;
+        const discountedPrice = price - discountPrice
         return (<>
           <div className="flex gap-2 justify-between px-0.5 mt-6 w-full max-md:flex-wrap max-md:max-w-full">
             <div className="flex gap-5 justify-between items-center">
@@ -109,7 +128,7 @@ const Cart = () => {
               </div>
             </div>
             <div className="flex gap-5 justify-around items-center self-start mt-2 text-base max-md:flex-wrap max-md:max-w-full">
-              <div className="self-stretch my-auto text-black">KD {cartItem?.price.toFixed(3)}</div>
+              <div className="self-stretch my-auto text-black">KD {price ? discountedPrice.toFixed(3) : cartItem?.price.toFixed(3)}</div>
               <div className="flex">
                 <div className='rounded-l-lg border border-gray-500 px-2 bg-gray-100 cursor-pointer' onClick={() =>
                   dispatch(decreaseQuantity(cartItem))
@@ -118,7 +137,7 @@ const Cart = () => {
                 <div className='rounded-r-lg border border-gray-500 bg-gray-100 px-2 cursor-pointer' onClick={() => handleIncrement(cartItem)}>+</div>
               </div>
               <div className="justify-center self-stretch px-2 py-2 tracking-tight text-center ">
-                KD {(cartItem.price * cartItem.quantity).toFixed(3)}
+                KD {price ? (discountedPrice * cartItem.quantity).toFixed(3) : (cartItem.price * cartItem.quantity).toFixed(3)}
               </div>
             </div>
           </div>
@@ -130,11 +149,11 @@ const Cart = () => {
 
       {cartItems && cartItems.length > 0 ?
         <div className="flex justify-between items-center p-2 gap-2 mt-2">
-          <div className="px-6 py-2 bg-customOrange rounded-full text-white hover:bg-orange-300 hover:text-black font-poppins font-medium">
+          <div onClick={() => navigate('/checkout')} className="px-6 py-2 bg-customOrange rounded-full text-white hover:bg-orange-300 hover:text-black font-poppins font-medium">
             {" "}
             Checkout
           </div>
-          <div className="px-6 py-2 bg-customOrange rounded-full text-white hover:bg-orange-300 hover:text-black font-poppins font-medium">
+          <div className="px-6 py-2 bg-customOrange rounded-full text-white hover:bg-orange-300 hover:text-black font-poppins font-medium"  onClick={() => dispatch(deleteAllFromCart())}>
             {" "}
             Clear Cart
           </div>

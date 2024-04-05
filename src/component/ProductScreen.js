@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 
 import { IMAGE_URL } from '../constants.js';
 import { useDispatch, useSelector } from 'react-redux';
-import { addToCart } from "../store/slices/cart-slice.js";
+import { addToCart, saveVariantId } from "../store/slices/cart-slice.js";
 import useFeaturedProducts from './customHooks/useFeaturedProducts.js';
 import Productcard from './cards/Productcard.js';
 import ProductSlider from './ScrollComponent/ProductSlider.js';
@@ -16,6 +16,8 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 
 const ProductScreen = () => {
+    const {cart} = useSelector(state => state.cart);
+   
     const { wishlistItems } = useSelector(state => state.wishlist);
     const [isInWishlist, setIsInWishlist] = useState(false);
     const navigate = useNavigate()
@@ -23,9 +25,12 @@ const ProductScreen = () => {
     const { id } = useParams();
     const dispatch = useDispatch()
     const [product, setProduct] = useState();
+    const [variantId , setVariantId] = useState("")
     useEffect(() => {
         setIsInWishlist(wishlistItems.some(item => item._id === id));
     }, [wishlistItems, id]);
+
+    console.log(cart)
 
 
     const handleWishlist = () => {
@@ -86,11 +91,13 @@ const ProductScreen = () => {
         if (product?.variants?.length > 0) {
             setSelectedColor(product.variants[0].name);
             setAvailability(product.variants[0].stock);
+            setVariantId(product.variants[0]._id)
         }
     }, [product]);
-    const handleColorSelect = (color, stock) => {
+    const handleColorSelect = (color, stock , variantId) => {
         setSelectedColor(color);
         setAvailability(stock);
+        setVariantId(variantId)
     };
     useEffect(() => {
         handleProductDetail()
@@ -125,7 +132,15 @@ const ProductScreen = () => {
                 </div>
                 <div className='p-2'>
                     <h2 className='text-[1.2rem]'>{product?.name}</h2>
-                    <div className='flex justify-start items-center gap-2'>{product?.discount ? <> <h2 className='text-[1.0rem] text-green-400'>KD {discountedPrice?.toFixed(3)}</h2>  <del className='text-[1.0rem] text-black'>KD {getPriceForColor()?.toFixed(3)}</del></> : <h2 className='text-[1.0rem] text-green-400'>KD {getPriceForColor()?.toFixed(3)}</h2>}</div>
+                    <div className='flex justify-start items-center gap-2'>
+                        {product?.discount ?
+                            <>
+                                <h2 style={{marginBottom : 0}} className='text-[1.0rem] text-green-400'>KD {discountedPrice?.toFixed(3)}</h2>
+                                <del className='text-[1.0rem] text-black'>KD {getPriceForColor()?.toFixed(3)}</del>
+                            </>
+                            :
+                            <h2 style={{marginBottom : 0}} className='text-[1.0rem] text-green-400'>KD {getPriceForColor()?.toFixed(3)}</h2>}
+                    </div>
                     <CommonRating value={product?.rating} />
                     <div className='flex py-2'>
                         {availability !== null && availability > 0 ? (<>
@@ -154,7 +169,7 @@ const ProductScreen = () => {
                                         className="checkbox flex flex-col"
                                         key={index}
 
-                                        onClick={() => handleColorSelect(variant.name, variant.stock)} // Pass stock as argument
+                                        onClick={() => handleColorSelect(variant.name, variant.stock , variant._id)} // Pass stock as argument
                                     >
                                         <input
                                             className="radio-input"
@@ -163,7 +178,7 @@ const ProductScreen = () => {
 
                                             value={variant.name}
                                             checked={selectedColor === variant.name}
-                                            onChange={() => handleColorSelect(variant.name, variant.stock)} // Pass stock as argument
+                                            onChange={() => handleColorSelect(variant.name, variant.stock, variant._id)} // Pass stock as argument
                                         />
                                         <label htmlFor={`color-${index}`} id="label">{variant?.name}</label>
                                     </div>
@@ -172,27 +187,11 @@ const ProductScreen = () => {
 
                         </div>
                     )}
-                    {/* <h2 className='text-[1.0rem] font-semibold py-2'>Select Variant :</h2>
-                    <div className='flex gap-2'>
-                        <div class="flex  items-center">
-                            <input type="radio" id="radio1" name="radios" class="hidden" />
-                            <label for="radio1" class="cursor-pointer relative">
-                                <div class="w-4 h-4 text-sm border border-gray-400 rounded-full mr-2"></div>
-                                red
-                            </label>
-                        </div>
-                        <div class="flex items-center">
-                            <input type="radio" id="radio1" name="radios" class="hidden" />
-                            <label for="radio1" class="cursor-pointer relative">
-                                <div class="w-4 h-4 text-sm border border-gray-400 rounded-full mr-2"></div>
-                                blue
-                            </label>
-                        </div>
-                    </div> */}
+                   
                     <div className='flex  gap-4 items-center'>
                         {availability !== null && availability > 0 ? (
                             <>
-                                <button style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-customOrange font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product, qty }))}> Add to Cart</button>
+                                <button style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-customOrange font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product, qty , variantId }))}> Add to Cart</button>
 
 
                                 <button className='  bg-customOrange px-4 py-1 text-white font-medium font-poppins rounded-md'> Buy Now</button>
@@ -200,12 +199,12 @@ const ProductScreen = () => {
                             <>
                                 {product?.coming_soon === false ? <> {product?.on_stock > 0 && (
                                     <>
-                                        <button style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-customOrange font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product, qty }))}> Add to Cart</button>
+                                        <button style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-customOrange font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product, qty, variantId }))}> Add to Cart</button>
 
 
                                         <button className='  bg-customOrange px-4 py-1 text-white font-medium font-poppins rounded-md' onClick={() => {
                                             try {
-                                                dispatch(addToCart({ product, qty }));
+                                                dispatch(addToCart({ product, qty ,  variantId}));
                                                 navigate('/cart');
                                             } catch (error) {
                                                 console.error('Error occurred while adding to cart:', error);
@@ -243,6 +242,10 @@ const ProductScreen = () => {
                     <div className='flex items-center py-2 gap-2'>
                         <h2 className='text-[0.9rem] '>Product ID :</h2>
                         <h4 className='text-[0.9rem]'>{product?.port_number}</h4>
+                    </div>
+                    <div className='flex items-center py-2 gap-2'>
+                        <h2 className='text-[0.9rem] '>Delivery Duration :</h2>
+                        <h4 className='text-[0.9rem]'>in 7 days</h4>
                     </div>
                     {/* <div className='flex items-center py-2 gap-2'>
                         <h2 className='text-[1rem] '>Country of Origin :</h2>

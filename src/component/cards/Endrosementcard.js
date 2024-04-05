@@ -4,7 +4,7 @@ const Endrosementcard = ({ image, name }) => {
   console.log("ffwegrg")
   return (
     <div style={{}}>
-      <img style={{ width: "60rem" }} src={image} />
+      <img style={{ width: "20rem" }} src={image} />
       {/* <h2>{name}</h2> */}
     </div>
   )
