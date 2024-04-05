@@ -15,12 +15,14 @@ const Registerform = () => {
     const navigate = useNavigate();
     const { search } = useLocation();
     const [country, setCountry] = useState("kw");
+    
 
     const sp = new URLSearchParams(search);
     const redirect = sp.get('redirect') || '/'
     const [formData, setFormData] = useState({
         name: "",
         phone: "",
+        countryCode : "",
         password: "",
         email: "",
 
@@ -28,11 +30,33 @@ const Registerform = () => {
 
     const [errors, setErrors] = useState({});
 
-    const handleChange = (e) => {
+    const handleChange = (e, inputType) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-        setShowPassword(true)
+        if (inputType === "phone") {
+            const formattedPhoneNumber = value.replace(/\D/g, ""); // Remove non-numeric characters
+            setFormData(prevFormData => ({
+                ...prevFormData,countryCode : ""
+            }));
+        } else {
+            setFormData(prevFormData => ({
+                ...prevFormData,
+                [name]: value
+            }));
+        }
+        setShowPassword(true);
     };
+    // const handlePhoneChange = (value, countryData) => {
+    //     handleChange({ target: { value, name: "phone" } });
+    //     const countryCodeNumber = countryData?.dialCode;
+    //     const formattedPhoneNumber = `+${countryCodeNumber}${value}`;
+    //     setFormData(prevFormData => ({
+    //         ...prevFormData,
+    //         phone: formattedPhoneNumber
+    //     }));
+    // };
+
+
+
     const submitHandler = async (e) => {
         e.preventDefault();
         const validationErrors = {};
@@ -112,8 +136,10 @@ const Registerform = () => {
                             inputStyle={{ width: "100%" }}
                             onChange={(value, countryData) => {
                                 const countryCodeNumber = countryData?.dialCode;
-                                handleChange({ target: { value, name: "phone" } });
+                                handleChange({ target: {value, name: "phone" } });
+                                handleChange({})
                                 console.log("Country Code Number:", countryCodeNumber);
+                                
                             }}
                             countryCodeEditable={false}
                         />

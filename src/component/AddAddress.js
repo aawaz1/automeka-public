@@ -28,10 +28,26 @@ const AddAddress = () => {
     const [landmark, setLandmark] = useState('');
     const [postal_code, setPostalCode] = useState('')
     const [errors, setErrors] = useState({});
+    const [error, setError] = useState('')
 
     const handleGovernateSelect = (selectedValue) => {
         setGovernate(selectedValue); // Set the selected governate ID in the state
     };
+
+    const handlePhoneChange = (e) => {
+        const input = e.target.value;
+        // Check if the input consists only of digits
+        if (/^\d*$/.test(input)) {
+            // If it's a number, update the phone state
+            setPhone(input);
+            // Clear any previous error messages
+            setError('');
+        } else {
+            // If it's not a number, show an error message
+            setError('Please enter only numeric characters');
+        }
+    };
+
     const getAllGovernates = async () => {
         try {
             const { data } = await axios.get(
@@ -47,8 +63,8 @@ const AddAddress = () => {
     }, []);
 
     const handleCountryChange = (event) => {
-        setCountry(event.target.value); 
-      };
+        setCountry(event.target.value);
+    };
     const createAddressHandler = async () => {
         const validationErrors = {};
 
@@ -143,7 +159,7 @@ const AddAddress = () => {
                         <option value="qatar">Qatar</option>
                         <option value="saudi_arabia">Saudi Arabia</option>
                         <option value="bahrain">Bahrain</option>
-                      
+
 
                     </select>
                     {/* <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="country" value={country} onChange={(e) => setCountry(e.target.value)} /> */}
@@ -200,7 +216,9 @@ const AddAddress = () => {
                 </div>
                 <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Mobile Number</label>
-                    <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="number" name="confirmPassword" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                    <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="phonr"
+                        value={phone}
+                        onChange={handlePhoneChange} />
                     <div className='text-red-500'>{errors.phone && <span>{errors.phone}</span>}</div>
 
                 </div>

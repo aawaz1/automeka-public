@@ -11,7 +11,8 @@ const EditAddress = () => {
         navigate(-1); // Navigate back one step
     };
 
-    const { id: addressId } = useParams()
+    const { id: addressId } = useParams();
+    const [error, setError] = useState("");
 
     const [update] = useUpdateMutation();
     let id = JSON.parse(localStorage.getItem("id") || null);
@@ -21,6 +22,21 @@ const EditAddress = () => {
     const handleGovernateSelect = (selectedValue) => {
         setGovernate(selectedValue); // Set the selected governate ID in the state
     };
+
+    const handlePhoneChange = (e) => {
+        const input = e.target.value;
+        // Check if the input consists only of digits
+        if (/^\d*$/.test(input)) {
+            // If it's a number, update the phone state
+            setPhone(input);
+            // Clear any previous error messages
+            setError('');
+        } else {
+            // If it's not a number, show an error message
+            setError('Please enter only numeric characters');
+        }
+    };
+
     const getAllGovernates = async () => {
         try {
             const { data } = await axios.get(
@@ -67,6 +83,8 @@ const EditAddress = () => {
     const [landmark, setLandmark] = useState(address.landmark);
     const [postal_code, setPostalCode] = useState(address.postal_code);
     const [errors, setErrors] = useState({});
+    console.log(governate);
+    console.log(address);
     useEffect(() => {
         setAddress1(address.address_1);
         setAddress2(address.address_2);
@@ -77,8 +95,12 @@ const EditAddress = () => {
         setLandmark(address.landmark);
         setPostalCode(address.postal_code)
         setName(address.name)
+        setGovernate(address.governates)
 
-    }, [address])
+    }, [address]);
+    const handleCountryChange = (event) => {
+        setCountry(event.target.value);
+    };
     const createAddressHandler = async () => {
         const validationErrors = {};
         if (!name.trim()) {
@@ -169,7 +191,16 @@ const EditAddress = () => {
                 </div>
                 <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Country</label>
-                    <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="country" value={country} onChange={(e) => setCountry(e.target.value)} />
+                    <select className='bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2' id="country" name="country" value={country} onChange={handleCountryChange}>
+                        <option value="kuwait">Kuwait</option>
+                        <option value="uae">UAE</option>
+                        <option value="qatar">Qatar</option>
+                        <option value="saudi_arabia">Saudi Arabia</option>
+                        <option value="bahrain">Bahrain</option>
+
+
+                    </select>
+                    {/* <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="country" value={country} onChange={(e) => setCountry(e.target.value)} /> */}
                     <div className='text-red-500'>{errors.country && <span>{errors.country}</span>}</div>
 
                 </div>
@@ -223,7 +254,9 @@ const EditAddress = () => {
                 </div>
                 <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Mobile Number</label>
-                    <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="number" name="confirmPassword" value={phone} onChange={(e) => setPhone(e.target.value)} />
+                    <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="phonr"
+                        value={phone}
+                        onChange={handlePhoneChange} />
                     <div className='text-red-500'>{errors.phone && <span>{errors.phone}</span>}</div>
 
                 </div>

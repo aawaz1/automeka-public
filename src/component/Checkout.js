@@ -7,6 +7,7 @@ import { IMAGE_URL } from "../constants";
 import { useNavigate } from "react-router-dom";
 import { MdAddToQueue } from "react-icons/md";
 import Noitemsfound from "./Noitemsfound";
+import cogoToast from "cogo-toast";
 
 
 const Checkout = () => {
@@ -96,7 +97,7 @@ const Checkout = () => {
         price: calculateSum(),
         quantity: cartItems?.length,
         total_qty: total_qty,
-        // points_used: userInfo?.data?.user?.loyalty_points,
+        points_used: 0,
         is_points_used: isUsed,
         ordered_items: orderItems,
         total_products_cost: "4",
@@ -113,6 +114,7 @@ const Checkout = () => {
 
       navigate(`/`);
       dispatch(deleteAllFromCart(cartItems))
+      cogoToast.success("Order Submitted Successfully", { position: "bottom-left" })
 
 
 
@@ -120,6 +122,7 @@ const Checkout = () => {
 
     } catch (error) {
       console.log(error)
+      cogoToast.error("Please Fill All The Details", { position: "bottom-left" })
 
 
     }
@@ -133,7 +136,7 @@ const Checkout = () => {
           <h3 className="font-poppins font-semibold text-[1.6rem]">Delivery Address</h3>
           <div className="w-[100%] text-none rounded-full text-orange-500 p-2">
 
-            <select style={{ border: "2px solid orange", borderRadius: "3px" }} className='w-[100%]' onChange={handleAddressChange}>
+            <select style={{ border: "2px solid orange", borderRadius: "3px" }} className='w-[100%]' value={saveAddress?.id} onChange={handleAddressChange}>
               <option style={{ color: "#D17B06" }} className='text-slate-500' value="">View addresses</option>
               {addresses.map((address) => (
                 <option className='w-[100%]' style={{ color: "#D17B06" }} key={address._id} value={address._id}>
@@ -149,7 +152,7 @@ const Checkout = () => {
           <div className="py-6">
 
             <div className="border border-solid border-gray-400 rounded-md p-4">
-              <h3 className="font-poppins text-[1rem] font-medium">{saveAddress?.address_1} ,{saveAddress?.address_2} ,{saveAddress?.postal_code} , {saveAddress?.country} ,{saveAddress?.city} , {saveAddress?.state}</h3>
+              {saveAddress && <h3 className="font-poppins text-[1rem] font-medium">{saveAddress?.address_1} ,{saveAddress?.address_2} ,{saveAddress?.postal_code} , {saveAddress?.country} ,{saveAddress?.city} , {saveAddress?.state}</h3>}
 
             </div>
             <div className="py-2 flex justify-end items-end"><button onClick={() => navigate("/addaddress")} style={{ borderBottom: " 2px solid orange" }} className="text-gray-400 border-b-customOrange"><MdAddToQueue fontSize={"1.5rem"}
