@@ -10,6 +10,7 @@ import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Notfound from './Notfound';
 import Noitemsfound from './Noitemsfound';
+import useBrands from './customHooks/useBrands';
 
 const Category = () => {
     useEffect(() => {
@@ -21,6 +22,7 @@ const Category = () => {
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const category = searchParams.get('category');
+    const brand = searchParams.get('brand');
     const filterSortQuery = searchParams.get('filterSort');
 
     const [isOpen, setIsOpen] = useState(true);
@@ -43,22 +45,27 @@ const Category = () => {
     }
 
 
-    const [selectedCategory, setSelectedCategory] = useState(null)
+    const [selectedCategory, setSelectedCategory] = useState(null);
+    const [selectedBrand, setSelectedBrand] = useState(null);
     useEffect(() => {
         if (filterSortQuery) {
             setFilterSort(Number(filterSortQuery))
         }
     }, [filterSortQuery])
     useEffect(() => {
+        if(brand){
+            setSelectedBrand(brand);
+        }
 
         if (category) {
             setSelectedCategory(category);
         }
-    }, [category])
+    }, [category,brand]);
     const categories = useCategory();
+    const brands = useBrands();
 
     const filteredProduct = (products) => {
-        let resultedProducts = products?.filter(item => (!selectedCategory || item?.category?.name === selectedCategory)) || [];
+        let resultedProducts = products?.filter(item => (!selectedCategory || item?.category?.name === selectedCategory) && (!selectedBrand || item?.brand?.name === selectedBrand)) || [];
         if (filterSort === 0) {
             resultedProducts = (resultedProducts || []).sort((a, b) => a.price - b.price)
 
@@ -132,6 +139,24 @@ const Category = () => {
                                         <button className={`text-[0.9rem] font-medium font-poppins border border-black border-20px p-1 px-2 rounded-sm e  ${filterSort === 1 ? "bg-customOrange text-white" : ""}`} onClick={() => handleFilter(1)}> High to Low</button>
                                     </div>
                                 </Grid>
+                                <Grid item xs={12} md={12}>
+                                    <h2 className='text-[1rem]   font-semibold '> Brands</h2>
+
+                                    <div className='p-[0.2rem] flex flex-wrap gap-2'>
+                                    {brands.map(brand => {
+                                        return (
+                                            <button className={`text-[0.9rem] font-medium font-poppins border border-black border-20px p-1 px-2 rounded-sm hover:bg-customOrange hover:text-white ${selectedBrand === brand?.name ? "bg-customOrange text-white" : ""}`} onClick={() => setSelectedBrand(brand?.name)}>{brand?.name}</button>
+                                        )
+
+                                    })}
+
+
+
+
+
+                                </div>
+                                </Grid>
+                                
                             </Grid>
 
 
