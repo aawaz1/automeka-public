@@ -8,6 +8,7 @@ import './brandImage.css'
 import Producttitle from '../wrapper/Producttitle';
 import useBrands from './customHooks/useBrands';
 import { IMAGE_URL } from '../constants';
+import { Link } from 'react-router-dom';
 
 
 const Brands = () => {
@@ -25,9 +26,8 @@ const Brands = () => {
 
             <Marquee style={{ gap: '7vw', cursor: "pointer" }} pauseOnHover={true}>
                 {brands.map(item => (
-                    <div style={{ marginLeft: "6vw" }}>
-
-                        <img className='brandImage' src={IMAGE_URL + item.image} alt='' />
+                    <div style={{ marginLeft: "6vw" }} >
+                        <Link style={{ textDecoration: "none", color: "white" }} to={`/category?brand=${item.name}`}> <img className='brandImage' src={IMAGE_URL + item.image} alt='' /></Link>
                     </div>
                 ))}
             </Marquee>
