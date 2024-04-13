@@ -26,7 +26,7 @@ import Returnpolicy from './component/Returnpolicy.js';
 import Privacypolicy from './component/privacypolicy.js'
 import Forgotpassword from './component/Forgotpassword.js';
 import Enterotp from './component/enterotp.js'
-
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 
 function App() {
   return (
@@ -39,28 +39,28 @@ function App() {
 
             <Route path='/wishlist' element={<Wishlist />} />
             <Route path='/cart' element={<Cart />} />
-            <Route path='/checkout'  element={<PrivateRoute element={<Checkout />} />}/>
+            <Route path='/checkout' element={<PrivateRoute element={<Checkout />} />} />
             <Route path='/category' element={<Category />} />
             <Route path='/login' element={<LoginForm />} />
             <Route path='/register' element={<RegisterForm />} />
             <Route path='/product/:id' element={<ProductScreen />} />
-            <Route path='/myaccount/'  element={<PrivateRoute element={<MyAccount />} />}/>
-            <Route path='/myaccount/orders'  element={<PrivateRoute element={<Orderscreen />} />}/>
-            <Route path='/order'  element={<PrivateRoute element={<SingleOrderscreen />} />}/>
-            <Route path='/ordertracker'  element={<PrivateRoute element={<OrderTracker />} />}/>
-            <Route path='/addaddress'  element={<PrivateRoute element={<AddAddress />} />}/>
-            <Route path='/editaddress/:id' element={<PrivateRoute element={<EditAddress />} />}/>
-            <Route path='/editprofile'  element={<PrivateRoute element={<EditProfile />} />}/>
+            <Route path='/myaccount/' element={<PrivateRoute element={<MyAccount />} />} />
+            <Route path='/myaccount/orders' element={<PrivateRoute element={<Orderscreen />} />} />
+            <Route path='/order' element={<PrivateRoute element={<SingleOrderscreen />} />} />
+            <Route path='/ordertracker' element={<PrivateRoute element={<OrderTracker />} />} />
+            <Route path='/addaddress' element={<PrivateRoute element={<AddAddress />} />} />
+            <Route path='/editaddress/:id' element={<PrivateRoute element={<EditAddress />} />} />
+            <Route path='/editprofile' element={<PrivateRoute element={<EditProfile />} />} />
             <Route path='/FAQs' element={<FAQ />} />
             <Route path='/about' element={<About />} />
-            <Route path='/contactus' element={<Contactus/>}/>
-            <Route path='/returnpolicy' element={<Returnpolicy/>}/>
-            <Route path='/privacypolicy' element={<Privacypolicy/>}/>
-            <Route path='/forgot-password' element={<Forgotpassword/>}/>
-            <Route path='/enterotp' element={<Enterotp/>}/>
-            
-            
-            <Route path='*' element={<NotFound/>}/>
+            <Route path='/contactus' element={<Contactus />} />
+            <Route path='/returnpolicy' element={<Returnpolicy />} />
+            <Route path='/privacypolicy' element={<Privacypolicy />} />
+            <Route path='/forgot-password' element={<Forgotpassword />} />
+            <Route path='/enterotp' element={<Enterotp />} />
+
+
+            <Route path='*' element={<NotFound />} />
 
 
 
@@ -71,7 +71,12 @@ function App() {
 
       </Router>
 
-
+      <a
+        style={{ position: "fixed", bottom: "8rem", right: "1rem", cursor: "pointer" }}
+        href={`https://api.whatsapp.com/send?phone=96541102264&text=I need support.`}
+        target='_blank'
+      ><WhatsAppIcon style={{ fontSize: "3.5rem", color: "#25D366" }} />
+      </a>
 
 
 
