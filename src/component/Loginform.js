@@ -4,7 +4,7 @@ import { useLoginMutation } from '../store/slices/usersApiSlice.js'
 import { setCredentials } from '../store/slices/auth-slice.js';
 import { useDispatch } from 'react-redux';
 import cogoToast from 'cogo-toast';
-
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 const Loginform = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch()
@@ -72,7 +72,12 @@ const Loginform = () => {
         }
 
 
-    }
+    };
+    const [showPassword, setShowPassword] = useState(false);
+
+    const togglePasswordVisibility = () => {
+        setShowPassword(!showPassword);
+    };
     return (
         <div className='flex flex-col justify-center items-center  p-3 border border-red-500 border-solid'>
             <h2 className='font-semibold text-[1.5rem] font-poppins text-orange-500'>Log<span className='text-black'>in</span></h2>
@@ -86,7 +91,22 @@ const Loginform = () => {
 
 
 
-                    <div className='w-[100%]'> <input className="bg-whitesmoke  w-[100%] rounded-md p-2 " placeholder="Enter your Password" name='password' type="password" value={formData.password} onChange={handleChange} />
+                    <div className='w-[100%] relative'>
+                        <input
+                            className="bg-whitesmoke w-[100%] rounded-md p-2 pr-10 " // Added pr-10 to make space for the button
+                            placeholder="Enter your Password"
+                            name='password'
+                            type={showPassword ? 'text' : 'password'}
+                            value={formData.password}
+                            onChange={handleChange}
+                        />
+                        <button
+                            type="button"
+                            style={{ position: 'absolute', right: '8px', top: '25%',  transform: 'translateY(-50%)' }}
+                            onClick={togglePasswordVisibility}
+                        >
+                            {showPassword ? <FaEyeSlash /> : <FaEye />}
+                        </button>
                         <div className='text-red-500'>{errors.password && <span>{errors.password}</span>}</div>
                         <p className='p-1 font-poppins text-[0.9rem] cursor-pointer' onClick={() => navigate('/forgot-password')}>Forgot Password?</p>
                     </div>

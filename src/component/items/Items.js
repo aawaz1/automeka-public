@@ -11,7 +11,7 @@ const Items = ({ Links, title }) => {
           <div className="flex  justify-start gap-2 mt-1">
             <div className="pr-1">
               <a href={'https://play.google.com/store/apps/details?id=com.anintl.automeka&pli=1'} target="_blank" rel="noopener noreferrer"><img src={link.image1} style={{ width: "6rem", height: "2rem" }} /></a>
-            </div>  <div><img src={link.image2} style={{ width: "6rem", height: "2rem" }} /></div>
+            </div>  <div> <a href={'https://apps.apple.com/in/app/auto-meka/id6467641600'} target="_blank" rel="noopener noreferrer"><img src={link.image2} style={{ width: "6rem", height: "2rem" }} /></a></div>
           </div>
 
         </li>
