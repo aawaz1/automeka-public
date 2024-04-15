@@ -158,7 +158,7 @@ const Registerform = () => {
                 </div>
                 <div></div> */}
                     <div className=" items-start">
-                        <button className='px-2 py-1 bg-slate-300  hover:bg-orange-500 hover:text-white border rounded-md font-poppins font-medium' type='submit'>Submit</button>
+                        <button className='px-2 py-1 bg-slate-300  hover:customOrange hover:text-white border rounded-md font-poppins font-medium' type='submit'>Submit</button>
                     </div>
                     <div></div>
                     <div><h4 className='text-sm font-poppins '>Already Have An Account ? <Link to='/login'>Login</Link></h4></div>

@@ -19,7 +19,7 @@ const Home = () => {
             <HeroSlider />
             <div className='container'>
                 <Categories />
-                <Cashback />
+                {/* <Cashback /> */}
                 <FeaturedProducts />
                 <TopRatedProduct />
                 <ComingSoonProduct />

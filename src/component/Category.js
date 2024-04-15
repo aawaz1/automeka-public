@@ -4,6 +4,7 @@ import CategoriesCard from './cards/Categoriescard'
 import { FaArrowLeft } from "react-icons/fa";
 import { TbSortDescending } from "react-icons/tb";
 import useCategory from './customHooks/useCategory';
+import useBrands from './customHooks/useBrands';
 import useFeaturedProducts from './customHooks/useFeaturedProducts';
 import { Grid } from '@mui/material';
 import { useLocation, useParams, useSearchParams } from 'react-router-dom';
@@ -22,6 +23,7 @@ const Category = () => {
     const searchParams = new URLSearchParams(location.search);
     const category = searchParams.get('category');
     const filterSortQuery = searchParams.get('filterSort');
+    const brand = searchParams.get('brand');
 
     const [isOpen, setIsOpen] = useState(true);
     const [featuredProducts, setFeaturedProducts] = useState(null);
@@ -30,8 +32,8 @@ const Category = () => {
         setFeaturedProducts(allProducts);
 
     }, [allProducts])
-    console.log(featuredProducts);
-    
+   
+
 
     const handleFilter = (val) => {
         setFilterSort((prevState) => {
@@ -43,12 +45,18 @@ const Category = () => {
     }
 
 
-    const [selectedCategory, setSelectedCategory] = useState(null)
+    const [selectedCategory, setSelectedCategory] = useState(null);
+    const [selectedBrand, setSelectedBrand] = useState(null);
     useEffect(() => {
         if (filterSortQuery) {
             setFilterSort(Number(filterSortQuery))
         }
     }, [filterSortQuery])
+    useEffect(() => {
+        if(brand){
+            setSelectedBrand(brand)
+        }
+    },[brand])
     useEffect(() => {
 
         if (category) {
@@ -56,9 +64,11 @@ const Category = () => {
         }
     }, [category])
     const categories = useCategory();
+    const brands = useBrands();
+    console.log(featuredProducts);
 
     const filteredProduct = (products) => {
-        let resultedProducts = products?.filter(item => (!selectedCategory || item?.category?.name === selectedCategory)) || [];
+        let resultedProducts = products?.filter(item => (!selectedCategory || item?.category?.name === selectedCategory)) || products?.filter(item => (!selectedBrand || item?.brand?.name === selectedBrand));
         if (filterSort === 0) {
             resultedProducts = (resultedProducts || []).sort((a, b) => a.price - b.price)
 
@@ -72,6 +82,10 @@ const Category = () => {
         if (filterSort === 1) {
             resultedProducts = (resultedProducts || []).sort((a, b) => b.price - a.price)
 
+        }
+
+        if (selectedBrand && brands.includes(selectedBrand)) {
+            resultedProducts = resultedProducts.filter(item => item.brand?.name === selectedBrand);
         }
 
         return resultedProducts || []
@@ -132,6 +146,21 @@ const Category = () => {
                                         <button className={`text-[0.9rem] font-medium font-poppins border border-black border-20px p-1 px-2 rounded-sm e  ${filterSort === 1 ? "bg-customOrange text-white" : ""}`} onClick={() => handleFilter(1)}> High to Low</button>
                                     </div>
                                 </Grid>
+
+                            </Grid>
+                            <Grid item xs={12} md={12}>
+                                <h2 className='text-[1rem]   font-semibold '>Brands</h2>
+
+                                <div className='p-2 flex flex-wrap gap-2'>
+                                    {brands?.map(product => {
+                                        return (<button className='text-[0.9rem] font-medium font-poppins border border-black border-20px p-1 px-2 rounded-sm hover:bg-customOrange hover:text-white' onClick={() => setSelectedBrand(product?.name)}>{product?.name}</button>)
+
+                                    })}
+
+
+
+
+                                </div>
                             </Grid>
 
 

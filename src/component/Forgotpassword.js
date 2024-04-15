@@ -1,17 +1,23 @@
 import axios from 'axios';
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import cogoToast from 'cogo-toast';
 import { useNavigate } from 'react-router-dom';
 
 const Forgotpassword = () => {
     const [email, setEmail] = useState("");
     const navigate = useNavigate();
     const submitHandler = async (e) => {
+        try {
         e.preventDefault();
-        const { data } = await axios.post("https://restapi.ansoftt.com:4321/v1/user/forgot-password", { email }).then(res => {
-            console.log(res);
-            navigate('/enterotp')
-
-        })
+        
+        localStorage.setItem('email', JSON.stringify(email));
+        const {res} = await axios.post("https://restapi.ansoftt.com:4321/v1/auth/forgotpassword", { email })
+        navigate("/enterotp")
+        cogoToast.success("Email Sent Successfully", { position: "bottom-left" });
+    }catch {
+        cogoToast.error("Please Submit Your Email", { position: "bottom-left" });
+    }
+    
 
     }
     return (

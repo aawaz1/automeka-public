@@ -245,7 +245,7 @@ const ProductScreen = () => {
                     </div>
                     <div className='flex items-center py-2 gap-2'>
                         <h2 className='text-[0.9rem] '>Delivery Duration :</h2>
-                        <h4 className='text-[0.9rem]'>in 7 days</h4>
+                        <h4 className='text-[0.9rem]'>in {product?.delivery_type} days</h4>
                     </div>
                     {/* <div className='flex items-center py-2 gap-2'>
                         <h2 className='text-[1rem] '>Country of Origin :</h2>

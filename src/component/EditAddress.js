@@ -204,12 +204,12 @@ const EditAddress = () => {
                     <div className='text-red-500'>{errors.country && <span>{errors.country}</span>}</div>
 
                 </div>
-                <div className="p-2">
+                {/* <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>State</label>
                     <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="confirmPassword" value={state} onChange={(e) => setState(e.target.value)} />
                     <div className='text-red-500'>{errors.state && <span>{errors.state}</span>}</div>
 
-                </div>
+                </div> */}
                 <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Postal-Code</label>
                     <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="confirmPassword" value={postal_code} onChange={(e) => setPostalCode(e.target.value)} />
@@ -217,7 +217,7 @@ const EditAddress = () => {
 
                 </div>
                 <div className="p-2">
-                    <label className='text-[1rem] font-semiobold font-poppins'>City</label>
+                    <label className='text-[1rem] font-semiobold font-poppins'>Street Name</label>
                     <input className="bg-whitesmoke rounded-md p-2 w-[100%] md:w-[100%]" type="text" name="email" value={city} onChange={(e) => setCity(e.target.value)} />
                     <div className='text-red-500'>{errors.city && <span>{errors.city}</span>}</div>
 
@@ -260,7 +260,7 @@ const EditAddress = () => {
                     <div className='text-red-500'>{errors.phone && <span>{errors.phone}</span>}</div>
 
                 </div>
-
+                <div></div>
 
 
                 <div className="p-6 flex  md:flex-row gap-2 items-start">

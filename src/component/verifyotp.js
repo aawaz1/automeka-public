@@ -1,29 +1,28 @@
 import axios from 'axios';
-import cogoToast from 'cogo-toast';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
+import cogoToast from 'cogo-toast';
 
-const EnterOtp = () => {
+const VerifyOtp = () => {
     const [email, setEmail] = useState("");
+    let id = JSON.parse(localStorage.getItem("id") || null);
     const navigate = useNavigate();
-    const emailId = JSON.parse(localStorage.getItem('email'));
     const submitHandler = async (e) => {
-        try {
+      try {
+        e.preventDefault();
+        const { data } = await axios.post(`https://restapi.ansoftt.com:4321/v1/auth/verifyotp/${id}`, { otp: email });
+       
+        cogoToast.success("OTP Submitted Successfully")
+        
+      } catch (error) {
+        cogoToast.error("Please Submit The OTP", { position: "bottom-left" });
+        
+      }
 
-
-            e.preventDefault();
-            const response = await axios.post(`https://restapi.ansoftt.com:4321/v1/auth/verifyotp`, { otp: email, email: emailId });
-            cogoToast.success("OTP Submitted Successfully", { position: "bottom-left" });
-            navigate('/resetpassword')
-
-        } catch (err) {
-            console.log(err?.data)
-            cogoToast.error("Please Enter The Correct OTP", { position: "bottom-left" });
-        }
-    };
+    }
     return (
         <div className='flex flex-col justify-center items-center mt-4  p-4 gap-4'>
-            <h4 className='max-sm:text-[1rem] text-[1.rem] font-poppins'>Enter One Time Password To Verify</h4>
+            <h4>Please Enter The One Time Password</h4>
             <form className=' gap-3'>
                 <div className='max-w-[30rem] flex flex-col gap-3 p-4 md:px-6 md:py-4 w-[20rem] justify-center items-start border rounded-md border-gray-400 md:w-[40rem]'>
 
@@ -52,4 +51,4 @@ const EnterOtp = () => {
     )
 }
 
-export default EnterOtp
+export default VerifyOtp

@@ -44,8 +44,16 @@ const Loginform = () => {
         try {
             const res = await login(formData).unwrap();
             dispatch(setCredentials({ ...res, }));
-            cogoToast.success("Logged IN Successfully")
-            navigate(redirect);
+
+            // cogoToast.success("Logged IN Successfully")
+            // navigate(redirect);
+            if (res?.data?.auth?.is_email_verified) {
+                // If verified, navigate to the redirect route
+                navigate(redirect);
+            } else {
+                // If not verified, navigate to the verifyotp route
+                navigate('/verifyotp');
+            }
             setFormData({
 
                 password: "",
@@ -80,8 +88,8 @@ const Loginform = () => {
 
                     <div className='w-[100%]'> <input className="bg-whitesmoke  w-[100%] rounded-md p-2 " placeholder="Enter your Password" name='password' type="password" value={formData.password} onChange={handleChange} />
                         <div className='text-red-500'>{errors.password && <span>{errors.password}</span>}</div>
-                        {/* <p className='p-1 font-poppins text-[0.9rem] cursor-pointer' onClick={() => navigate('/forgot-password')}>Forgot Password?</p> */}
-                        </div>
+                        <p className='p-1 font-poppins text-[0.9rem] cursor-pointer' onClick={() => navigate('/forgot-password')}>Forgot Password?</p>
+                    </div>
 
 
 

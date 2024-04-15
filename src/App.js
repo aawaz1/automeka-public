@@ -14,6 +14,7 @@ import Orderscreen from './component/Orderscreen.js';
 import SingleOrderscreen from './component/SingleOrderScreen.js';
 import OrderTracker from './component/OrderTracker.js';
 import AddAddress from './component/AddAddress.js';
+import AddAddresss from './component/addaddresss.js';
 import EditProfile from './component/Editprofile.js'
 import Cart from './component/Cart.js';
 import FAQ from './component/Faq.js';
@@ -25,7 +26,9 @@ import PrivateRoute from './component/routes/PrivateRoute.js';
 import Returnpolicy from './component/Returnpolicy.js';
 import Privacypolicy from './component/privacypolicy.js'
 import Forgotpassword from './component/Forgotpassword.js';
-import Enterotp from './component/enterotp.js'
+import Enterotp from './component/enterotp.js';
+import Verifyotp from './component/verifyotp.js';
+import ResetPassword from './component/resetpassword.js'
 
 
 function App() {
@@ -49,6 +52,7 @@ function App() {
             <Route path='/order'  element={<PrivateRoute element={<SingleOrderscreen />} />}/>
             <Route path='/ordertracker'  element={<PrivateRoute element={<OrderTracker />} />}/>
             <Route path='/addaddress'  element={<PrivateRoute element={<AddAddress />} />}/>
+            <Route path='/home2'   element={<AddAddresss />}/>
             <Route path='/editaddress/:id' element={<PrivateRoute element={<EditAddress />} />}/>
             <Route path='/editprofile'  element={<PrivateRoute element={<EditProfile />} />}/>
             <Route path='/FAQs' element={<FAQ />} />
@@ -58,6 +62,8 @@ function App() {
             <Route path='/privacypolicy' element={<Privacypolicy/>}/>
             <Route path='/forgot-password' element={<Forgotpassword/>}/>
             <Route path='/enterotp' element={<Enterotp/>}/>
+            <Route path='/verifyotp' element={<Verifyotp/>}/>
+            <Route path='/resetpassword' element={<ResetPassword/>}/>
             
             
             <Route path='*' element={<NotFound/>}/>

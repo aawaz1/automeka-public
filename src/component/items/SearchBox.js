@@ -13,8 +13,8 @@ const SearchBox = () => {
             behavior: "smooth" // Smooth scrolling animation
         });
     };
-    const cart  = useSelector(state => state.cart);
-    const {search} = cart;
+    const cart = useSelector(state => state.cart);
+    const { search } = cart;
     const scroll = useScrollTop()
     const navigate = useNavigate();
     const dispatch = useDispatch()
@@ -23,7 +23,7 @@ const SearchBox = () => {
     const submitHandler = (e) => {
         e.preventDefault();
         navigate(`/category`)
-       handleScrollToTop();
+        handleScrollToTop();
 
         // if (keyword.trim()) {
         //     setKeyword('');
@@ -50,7 +50,7 @@ const SearchBox = () => {
 
                 <button
 
-                    className=" h-10 bg-slate-600 z-[2] flex items-center rounded-r  px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
+                    className="h-10 bg-slate-600 z-[2] flex items-center rounded-r  px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg"
                     type="button"
                     onClick={submitHandler}
                     id="button-addon1">

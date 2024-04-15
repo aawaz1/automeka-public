@@ -72,7 +72,7 @@ const AddAddress = () => {
             validationErrors.name = "Name is required";
         }
         if (!city.trim()) {
-            validationErrors.city = "City is required";
+            validationErrors.city = "Street Name is required";
         }
         if (!phone.trim()) {
             validationErrors.phone = "Phone is required";
@@ -94,6 +94,9 @@ const AddAddress = () => {
         }
         if (!landmark.trim()) {
             validationErrors.landmark = "Landmark is required";
+        }
+        if (!governate.trim()) {
+            validationErrors.governate = "Governate is required";
         }
 
 
@@ -119,13 +122,13 @@ const AddAddress = () => {
             goBack();
 
 
-            cogoToast.success("Address Created Successfully", { position: "bottom-left" });
+            cogoToast.success("Address Created Successfully",{ position: "bottom-left" });
 
 
 
         } catch (error) {
-            console.log(error)
-            cogoToast.error("Please fill all the input fields", { position: "bottom-left" });
+            console.log(error);
+            cogoToast.error("Please fill all the input fields",{ position: "bottom-left" });
 
 
         }
@@ -154,6 +157,7 @@ const AddAddress = () => {
                 <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Country</label>
                     <select className='bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2' id="country" name="country" value={country} onChange={handleCountryChange}>
+                    <option value="select">Select A Counry</option>
                         <option value="kuwait">Kuwait</option>
                         <option value="uae">UAE</option>
                         <option value="qatar">Qatar</option>
@@ -166,12 +170,12 @@ const AddAddress = () => {
                     <div className='text-red-500'>{errors.country && <span>{errors.country}</span>}</div>
 
                 </div>
-                <div className="p-2">
+                {/* <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>State</label>
                     <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="confirmPassword" value={state} onChange={(e) => setState(e.target.value)} />
                     <div className='text-red-500'>{errors.state && <span>{errors.state}</span>}</div>
 
-                </div>
+                </div> */}
                 <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Postal-Code</label>
                     <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="confirmPassword" value={postal_code} onChange={(e) => setPostalCode(e.target.value)} />
@@ -179,7 +183,7 @@ const AddAddress = () => {
 
                 </div>
                 <div className="p-2">
-                    <label className='text-[1rem] font-semiobold font-poppins'>City</label>
+                    <label className='text-[1rem] font-semiobold font-poppins'>Stree Name</label>
                     <input className="bg-whitesmoke rounded-md p-2 w-[100%] md:w-[100%]" type="text" name="email" value={city} onChange={(e) => setCity(e.target.value)} />
                     <div className='text-red-500'>{errors.city && <span>{errors.city}</span>}</div>
 
@@ -201,6 +205,7 @@ const AddAddress = () => {
                                 <option key={g._id} value={g._id}>{g.value} - {g.name}</option>
                             ))}
                         </select>
+                        <div className='text-red-500'>{errors?.governate && <span>{errors?.governate}</span>}</div>
 
 
 
@@ -222,6 +227,7 @@ const AddAddress = () => {
                     <div className='text-red-500'>{errors.phone && <span>{errors.phone}</span>}</div>
 
                 </div>
+                <div></div>
 
 
                 <div className="p-6 flex  md:flex-row gap-2 items-start">

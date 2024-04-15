@@ -8,10 +8,12 @@ import './brandImage.css'
 import Producttitle from '../wrapper/Producttitle';
 import useBrands from './customHooks/useBrands';
 import { IMAGE_URL } from '../constants';
+import { useNavigate } from 'react-router-dom';
 
 
 const Brands = () => {
     const brands = useBrands();
+    const navigate = useNavigate()
     const productData = [{ name: "10w40 United Oil", image: '/car-service-white-background-isolated-3d-illustration.jpg', price: 2.222 }, { name: "10w40 United Oil", image: '/car-service-white-background-isolated-3d-illustration.jpg', price: 2.222 }, { name: "10w40 United Oil", image: '/car-service-white-background-isolated-3d-illustration.jpg', price: 2.222 }, { name: "10w40 United Oil", image: '/car-service-white-background-isolated-3d-illustration.jpg', price: 2.222 }, { name: "10w40 United Oil", image: '/car-service-white-background-isolated-3d-illustration.jpg', price: 2.222 },]
 
 
@@ -25,7 +27,7 @@ const Brands = () => {
 
             <Marquee style={{ gap: '7vw', cursor: "pointer" }} pauseOnHover={true}>
                 {brands.map(item => (
-                    <div style={{ marginLeft: "6vw" }}>
+                    <div onClick={() => navigate(`/category?brand=${item?.name}`)} style={{ marginLeft: "6vw" }}>
 
                         <img className='brandImage' src={IMAGE_URL + item.image} alt='' />
                     </div>
