@@ -31,6 +31,8 @@ import Verifyotp from './component/verifyotp.js';
 import ResetPassword from './component/resetpassword.js'
 
 
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+
 function App() {
   return (
     <div>
@@ -42,7 +44,7 @@ function App() {
 
             <Route path='/wishlist' element={<Wishlist />} />
             <Route path='/cart' element={<Cart />} />
-            <Route path='/checkout'  element={<PrivateRoute element={<Checkout />} />}/>
+            <Route path='/checkout' element={<PrivateRoute element={<Checkout />} />} />
             <Route path='/category' element={<Category />} />
             <Route path='/login' element={<LoginForm />} />
             <Route path='/register' element={<RegisterForm />} />
@@ -77,7 +79,12 @@ function App() {
 
       </Router>
 
-
+      <a
+        style={{ position: "fixed", bottom: "8rem", right: "1rem", cursor: "pointer" }}
+        href={`https://api.whatsapp.com/send?phone=96541102264&text=I need support.`}
+        target='_blank'
+      ><WhatsAppIcon style={{ fontSize: "3.5rem", color: "#25D366" }} />
+      </a>
 
 
 
