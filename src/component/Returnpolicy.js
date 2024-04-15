@@ -5,7 +5,7 @@ const Returnpolicy = () => {
         <div>
             <div className='container flex flex-col justify-center items-center p-2'>
                 <h2 className='text-[2rem]'>Return <span className='text-customOrange text-[2rem]'>Policy</span></h2>
-                <p>At Automeka, we want you to be completely satisfied with your purchase. If you are not satisfied with your purchase for any reason, you may return it within [number of days] days of receipt for a refund or exchange, subject to the following conditions:</p>
+                <p>At Automeka, we want you to be completely satisfied with your purchase. If you are not satisfied with your purchase for any reason, you may return it within 14 days of receipt for a refund or exchange, subject to the following conditions:</p>
 
 
             </div>
@@ -23,7 +23,7 @@ Return shipping costs are the responsibility of the customer, unless the return 
             <div className='container flex-start'>
                 <h2 className='flex-start text-[1.5rem]'>Refunds:</h2>
                 <p className='text-gray-500 text[1rem]'>Refunds will be issued to the original payment method used for the purchase.
-Refunds are typically processed within [number of days] days of receiving the returned item..</p>
+Refunds are typically processed within 14  days of receiving the returned item..</p>
             </div>
             <div className='container flex-start'>
                 <h2 className='flex-start text-[1.5rem]'>Exchanges:</h2>

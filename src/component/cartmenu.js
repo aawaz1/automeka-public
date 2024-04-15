@@ -8,12 +8,16 @@ import { IMAGE_URL } from '../constants.js';
 
 const Cartmenu = ({ handleIsOpen }) => {
     const { cartItems } = useSelector((state) => state.cart);
+    console.log(cartItems)
+    console.log(cartItems?.variantId)
+
+
 
     const navigate = useNavigate();
     const dispatch = useDispatch()
     const [qty, setQty] = useState(1);
     const handleIncrement = (cartItem) => {
-        dispatch(addToCart({ product: cartItem, qty: 1 }));
+        dispatch(addToCart({ product: cartItem, qty: 1, variantId: cartItem?.variantId }));
     };
 
 
@@ -28,7 +32,7 @@ const Cartmenu = ({ handleIsOpen }) => {
                 cartItems?.length > 0 ? (
 
                     <>
-                        <div className='p-2'>
+                        <div  className=' p-2 min-h-[100%]'>
                             <div className='flex mb-8 justify-between items-center gap-3 '><h2 className='text-[1rem]'>Shopping Cart</h2> <div onClick={handleIsOpen} ><RxCross2 style={{ cursor: "pointer" }} className='font-bold ' /></div>
 
                             </div>
@@ -37,12 +41,12 @@ const Cartmenu = ({ handleIsOpen }) => {
                                 cartItems?.map(cartItem => {
                                     const variantId = cartItem?.variantId;
 
-        const variant = cartItem.variants.find(variant => variant._id === variantId);
-        const price = variant ? variant.price : null;
-        const discount = cartItem?.discount
-        const discountPrice = (cartItem?.discount / 100) * price;
-        const discountedPrice = price - discountPrice
-                                    return (<div className='flex gap-2 justify-center p-2'>
+                                    const variant = cartItem.variants.find(variant => variant._id === variantId);
+                                    const price = variant ? variant.price : null;
+                                    const discount = cartItem?.discount
+                                    const discountPrice = (cartItem?.discount / 100) * price;
+                                    const discountedPrice = price - discountPrice
+                                    return (<div className='flex gap-2 justify-center p-2 '>
                                         <div><img src={IMAGE_URL + cartItem?.image_list?.[0]} style={{ maxWidth: "4rem" }} alt='cartimage' /></div>
                                         <div className='p-2'>
                                             <h2 className='text-[1rem] font-poppins'>{cartItem.name}</h2>

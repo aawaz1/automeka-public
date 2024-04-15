@@ -2,9 +2,11 @@ import axios from 'axios';
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import cogoToast from 'cogo-toast';
+import useScrollTop from './customHooks/useScrollToTop';
 
 const VerifyOtp = () => {
     const [email, setEmail] = useState("");
+    useScrollTop()
     let id = JSON.parse(localStorage.getItem("id") || null);
     const navigate = useNavigate();
     const submitHandler = async (e) => {

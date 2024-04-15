@@ -9,12 +9,11 @@ import Address from '../component/Address.js'
 import EditProfile from './Editprofile.js';
 import { useDispatch, useSelector } from 'react-redux';
 import { saveMyAccountTab } from '../store/slices/cart-slice.js';
+import useScrollTop from './customHooks/useScrollToTop.js';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
-  React.useEffect(() => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, []);
+  useScrollTop();
 
   return (
     <div

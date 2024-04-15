@@ -12,10 +12,11 @@ import { IMAGE_URL } from "../constants.js";
 import { deleteAllFromWishlist, deleteFromWishlist } from "../store/slices/wishlist-slice.js";
 import { addToCart } from "../store/slices/cart-slice.js";
 import Noitemsfound from "./Noitemsfound.js";
+import useScrollTop from "./customHooks/useScrollToTop.js";
 
 const Wishlist = () => {
   const { wishlistItems } = useSelector((state) => state.wishlist);
-  console.log(wishlistItems);
+  useScrollTop();
   const dispatch = useDispatch();
   const handleIncrement = (cartItem) => {
     dispatch(addToCart({ product: cartItem, qty: 1 }));

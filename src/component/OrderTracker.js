@@ -3,8 +3,10 @@ import Stepper from '../component/Stepper.js'
 import { fetchProductDetails } from '../store/api.js';
 import { BASE_URL, IMAGE_URL } from '../constants.js';
 import axios from 'axios';
+import useScrollTop from './customHooks/useScrollToTop.js';
 
 const OrderTracker = ({ setTracker, tracker }) => {
+  useScrollTop();
 
 
   const [product, setProduct] = useState();
@@ -31,6 +33,7 @@ const OrderTracker = ({ setTracker, tracker }) => {
   useEffect(() => {
     getTrackers()
   }, [])
+  console.log(trackerr)
   return (
     <div className='container p-1 md:p-6'><div className='p-1 md:p-4  flex flex-col justify-center items-center'>
 

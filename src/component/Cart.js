@@ -12,13 +12,15 @@ import { addToCart, decreaseQuantity, deleteAllFromCart } from "../store/slices/
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import Noitemsfound from "./Noitemsfound.js";
+import useScrollTop from "./customHooks/useScrollToTop.js";
 
 const Cart = () => {
   const navigate = useNavigate();
+  useScrollTop();
 
   const [qty, setQty] = useState(1);
   const handleIncrement = (cartItem) => {
-    dispatch(addToCart({ product: cartItem, qty: 1 }));
+    dispatch(addToCart({ product: cartItem, qty: 1 , variantId : cartItem?.variantId }));
   };
 
   const { cartItems } = useSelector((state) => state.cart);

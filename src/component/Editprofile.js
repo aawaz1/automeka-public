@@ -3,18 +3,21 @@ import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux';
 import { setCredentials } from '../store/slices/auth-slice';
 import cogoToast from 'cogo-toast';
+import useScrollTop from './customHooks/useScrollToTop';
 
 const EditProfile = () => {
     const { userInfo } = useSelector((state) => state.auth);
     console.log(userInfo)
+    useScrollTop()
     let user = JSON.parse(localStorage.getItem("userInfo") || null);
 
     const [user_name, setName] = useState("");
+    const [users, setUser] = useState([])
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [phone, setPhone] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
-    const [points ,setPoints] = useState("")
+    const [points, setPoints] = useState("")
     const dispatch = useDispatch();
     const updatedData = {
         name: user_name,
@@ -49,7 +52,21 @@ const EditProfile = () => {
     let id = JSON.parse(localStorage.getItem("id") || null);
     let token = JSON.parse(localStorage.getItem("token") || null);
 
+    const getUserById = async (e) => {
+        try {
+            const { data } = await axios.get(
+                `https://restapi.ansoftt.com:4321/v1/user/${id}`
+            );
+            setUser(data?.data)
+            console.log(data?.data)
+        } catch (error) {
 
+        }
+    }
+
+    useEffect(() => {
+        getUserById()
+    } ,[])
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
@@ -68,7 +85,7 @@ const EditProfile = () => {
     return (
         <div className='container p-4'>
             <div className=' container flex justify-start p-2 '>
-                <div><button className='rounded-full border border-solid border-gray-400 px-2 py-2'> {points} points</button></div>
+                <div className='border-gray-400'><button className='rounded-full text-blue-600 border border-solid border-gray-400 px-2 py-2'> {parseFloat(users?.loyalty_points).toFixed(3)} points</button></div>
 
             </div>
 
