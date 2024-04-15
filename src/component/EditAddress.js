@@ -4,8 +4,10 @@ import { useCreateMutation, useUpdateMutation } from '../store/slices/address-sl
 import cogoToast from 'cogo-toast';
 import { useNavigate, useParams } from 'react-router-dom';
 import { BASE_URL } from '../constants';
+import useScrollTop from './customHooks/useScrollToTop';
 
 const EditAddress = () => {
+    useScrollTop();
     const navigate = useNavigate();
     const goBack = () => {
         navigate(-1); // Navigate back one step
@@ -83,7 +85,7 @@ const EditAddress = () => {
     const [landmark, setLandmark] = useState(address.landmark);
     const [postal_code, setPostalCode] = useState(address.postal_code);
     const [errors, setErrors] = useState({});
-    console.log(governate);
+    console.log(governate?._id);
     console.log(address);
     useEffect(() => {
         setAddress1(address.address_1);
@@ -183,12 +185,12 @@ const EditAddress = () => {
                     <div className='text-red-500'>{errors.address_1 && <span>{errors.address_1}</span>}</div>
 
                 </div>
-                <div className="p-2">
+                {/* <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Address 2</label>
                     <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="address_2" value={address_2} onChange={(e) => setAddress2(e.target.value)} />
                     <div className='text-red-500'>{errors.address_2 && <span>{errors.address_2}</span>}</div>
 
-                </div>
+                </div> */}
                 <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Country</label>
                     <select className='bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2' id="country" name="country" value={country} onChange={handleCountryChange}>
@@ -233,7 +235,7 @@ const EditAddress = () => {
                     <label className='text-[1rem] font-semiobold font-poppins'>Governate</label>
                     <div className="">
 
-                        <select className='bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2' value={governate} onChange={(e) => handleGovernateSelect(e.target.value)}>
+                        <select className='bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2' value={governate?._id} onChange={(e) => handleGovernateSelect(e.target.value)}>
                             <option value="">Select a governate</option>
                             {governates.map(g => (
                                 <option key={g._id} value={g._id}>{g.value} - {g.name}</option>
@@ -260,7 +262,7 @@ const EditAddress = () => {
                     <div className='text-red-500'>{errors.phone && <span>{errors.phone}</span>}</div>
 
                 </div>
-                <div></div>
+                
 
 
                 <div className="p-6 flex  md:flex-row gap-2 items-start">

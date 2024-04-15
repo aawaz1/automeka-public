@@ -8,16 +8,20 @@ import { useNavigate } from "react-router-dom";
 import { MdAddToQueue } from "react-icons/md";
 import Noitemsfound from "./Noitemsfound";
 import cogoToast from "cogo-toast";
+import useScrollTop from "./customHooks/useScrollToTop";
 
 
 const Checkout = () => {
   const navigate = useNavigate()
   const cart = useSelector((state) => state.cart);
+  useScrollTop()
 
   const { cartItems } = cart;
+
   let id = JSON.parse(localStorage.getItem("id") || null);
   const { userInfo } = useSelector(state => state.auth);
   const { saveAddress } = cart;
+  console.log(saveAddress)
   const dispatch = useDispatch();
   const [isUsed, setIsUsed] = useState(false)
   const pointsValueInKd = userInfo?.data?.user?.loyalty_points / 100;
@@ -40,21 +44,21 @@ const Checkout = () => {
   };
   const [createOrder] = useCreateOrderMutation();
 
-  const totalCartPrice = 
-  cart.cartItems.reduce(
-    (acc, item) => {
-      let price = item.price;
-      if (item?.variantId && item?.variants?.length) {
-        item.variants.map(variant => {
-          if (variant._id == item?.variantId) {
-            price = variant?.price
-          }
-        })
-      }
-      return (acc + (price * item.quantity * (100 - item.discount) / 100))
-    },
-    0
-  )
+  const totalCartPrice =
+    cart.cartItems.reduce(
+      (acc, item) => {
+        let price = item.price;
+        if (item?.variantId && item?.variants?.length) {
+          item.variants.map(variant => {
+            if (variant._id == item?.variantId) {
+              price = variant?.price
+            }
+          })
+        }
+        return (acc + (price * item.quantity * (100 - item.discount) / 100))
+      },
+      0
+    )
 
   const handleAddressChange = (event) => {
     const selectedAddressId = event.target.value;
@@ -82,17 +86,16 @@ const Checkout = () => {
   }, []);
   const placeOrderHandler = async () => {
     console.log(cart);
-
+  
     try {
       const orderItems = [];
-
+  
       for (const iterator of cartItems) {
         console.log(iterator);
         const singleItem = {};
         singleItem['product'] = iterator._id;
         if (iterator?.varaints?.length > 0) {
           singleItem['variant'] = iterator.varaints?.[0]._id;
-
         }
         singleItem['qty'] = iterator.quantity;
         singleItem['price'] = iterator.price;
@@ -100,11 +103,9 @@ const Checkout = () => {
         orderItems.push(singleItem);
       }
       console.log(orderItems);
-
+  
       const res = await createOrder({
-
         address: cart.saveAddress,
-
         user_id: id,
         price: calculateSum(),
         quantity: cartItems?.length,
@@ -114,32 +115,39 @@ const Checkout = () => {
         ordered_items: orderItems,
         total_products_cost: "4",
         total_price: calculateSum(),
-
-
         governate_charges: governate_charges,
-
-
-
-        // totalPrice : ,
-
       }).unwrap();
-
-      navigate(`/`);
-      dispatch(deleteAllFromCart(cartItems))
-      cogoToast.success("Order Submitted Successfully", { position: "bottom-left" })
-
-
-
-
-
+  
+      if (res.status === true) {
+        const { data } = await axios.post(
+          `https://restapi.ansoftt.com:4321/v1/order/`,
+          {
+            address: cart.saveAddress,
+            user_id: id,
+            price: calculateSum(),
+            quantity: cartItems?.length,
+            total_qty: total_qty,
+            points_used: 0,
+            is_points_used: isUsed,
+            ordered_items: orderItems,
+            total_products_cost: "4",
+            total_price: calculateSum(),
+            governate_charges: governate_charges,
+          }
+        );
+  
+        navigate(`/`);
+        dispatch(deleteAllFromCart(cartItems));
+        cogoToast.success("Order Submitted Successfully", { position: "bottom-left" });
+      } else {
+        cogoToast.error("Failed to create order", { position: "bottom-left" });
+      }
     } catch (error) {
-      console.log(error)
-      cogoToast.error("Please Fill All The Details", { position: "bottom-left" })
-
-
+      console.log(error);
+      cogoToast.error("Please Fill All The Details", { position: "bottom-left" });
     }
-
-  }
+  };
+  
   return (
     <>
       {cart.cartItems && cart.cartItems.length ? <div className="container  grid grid-cols-1 md:grid-cols-2 p-4 gap-3">
@@ -163,20 +171,20 @@ const Checkout = () => {
 
 
           <div className="py-6">
+            {saveAddress &&
+              <div className="border border-solid border-gray-400 rounded-md p-4">
+                {saveAddress && <h3 className="font-poppins text-[1rem] font-medium">{saveAddress?.address_1} ,{saveAddress?.address_2} ,{saveAddress?.postal_code} , {saveAddress?.country} ,{saveAddress?.city} , {saveAddress?.state}</h3>}
 
-            <div className="border border-solid border-gray-400 rounded-md p-4">
-              {saveAddress && <h3 className="font-poppins text-[1rem] font-medium">{saveAddress?.address_1} ,{saveAddress?.address_2} ,{saveAddress?.postal_code} , {saveAddress?.country} ,{saveAddress?.city} , {saveAddress?.state}</h3>}
-
-            </div>
+              </div>}
             <div className="py-2 flex justify-end items-end"><button onClick={() => navigate("/addaddress")} style={{ borderBottom: " 2px solid orange" }} className="text-gray-400 border-b-customOrange"><MdAddToQueue fontSize={"1.5rem"}
             /></button></div>
 
           </div>
 
 
-          <div className="flex items-center gap-2">
-            <label for="myCheckbox">Use Points</label>
-            <span>({userInfo?.data?.user?.loyalty_points})</span>
+          <div className="flex justify-start items-center gap-2">
+            <label style={{ margin: "unset" }} for="myCheckbox">Use Points</label>
+            <span>({userInfo?.data?.user?.loyalty_points.toFixed(4)})</span>
             <input type="checkbox" id="myCheckbox" value={isUsed} onClick={() => setIsUsed(!isUsed)} name="myCheckbox" />
           </div>
           <div className="self-stretch h-[517px] flex flex-col items-start justify-start gap-[10px] max-w-full">
@@ -228,7 +236,7 @@ const Checkout = () => {
 
 
         <div className="  flex flex-wrap flex-col items-start justify-start pt-1.5 px-0 pb-0 box-border min-w-[6rem] max-w-full mq900:min-w-full mq1300:flex-1">
-          <div className=" w-[400px] md:w-[648px] self-stretch rounded-md bg-whitesmoke box-border flex flex-col items-start justify-start pt-[39px] pb-[291px] pr-none md:pr-8 pl:none md:pl-[52px] gap-[45px] max-w-full border-[0.9px] border-solid border-silver-100 mq900:gap-[22px_45px] mq900:pl-[26px] mq900:pt-[25px] mq900:pb-[189px] mq900:box-border mq450:pt-5 mq450:pb-[123px] mq450:box-border">
+          <div className=" w-[400px] md:w-[648px] self-stretch rounded-md bg-whitesmoke box-border flex flex-col items-start justify-start pt-[39px] pb-[2rem] pr-none md:pr-8 pl:none md:pl-[52px] gap-[45px] max-w-full border-[0.9px] border-solid border-silver-100 mq900:gap-[22px_45px] mq900:pl-[26px] mq900:pt-[25px] mq900:pb-[189px] mq900:box-border mq450:pt-5 mq450:pb-[123px] mq450:box-border">
             <div className="w-[648px] h-[791px] relative rounded-md bg-whitesmoke box-border hidden max-w-full border-[0.9px] border-solid border-silver-100" />
             <div className="w-[543px] flex flex-row items-start justify-center max-w-full">
               <h3 className="m-0 relative text-inherit font-medium font-inherit z-[1] mq450:text-lgi">
@@ -249,7 +257,7 @@ const Checkout = () => {
                     <div className="self-stretch w-450px md:600px flex flex-col items-start justify-start gap-[14px] max-w-full">
                       <div className="self-stretch flex flex-row items-start justify-start py-0 pr-3 pl-[3px] box-border max-w-full">
                         <div className="flex-1 flex flex-row items-start justify-between max-w-full gap-[20px] mq900:flex-wrap">
-                          <div className="h-[100%] w-[266px] flex flex-row items-start justify-start gap-[21px]">
+                          <div className="h-[100%] w-[100%] flex flex-row items-start justify-start gap-[21px]">
                             {/* <button className="cursor-pointer pt-[9px] pb-1.5 pr-[21px] pl-[22px] bg-white self-stretch w-[104px] rounded box-border flex flex-row items-start justify-start z-[1] border-[0.9px] border-solid border-silver-100">
                           <div className="h-[95px] w-[104px] relative rounded bg-white box-border hidden border-[0.9px] border-solid border-silver-100" />
                           <img
@@ -262,9 +270,12 @@ const Checkout = () => {
                             <img style={{ width: "6rem" }} src={IMAGE_URL + item.image_list[0]} />
                             <div className=" flex-1  flex flex-col items-start justify-start pt-2 px-0 pb-0 box-border">
                               <div className="self-stretch w flex-1 flex flex-col items-start justify-start gap-[7px]">
-                                <div className="flex   flex-row items-start justify-start py-0 pr-[5px] pl-1">
+                                <div className="flex   flex-row items-start justify-start py-0 pr-[5px] pl-1 gap-2">
                                   <div className="relative font-medium z-[1]">
                                     {item?.name}
+                                  </div>
+                                  <div className="relative font-medium z-[1]">
+                                     {item?.quantity}
                                   </div>
                                 </div>
 
@@ -287,7 +298,7 @@ const Checkout = () => {
                 })
               }
 
-              <div className=" flex flex-row items-start justify-start py-0 px-[3px] w-[100%] box-border max-w-full text-gray-300">
+              <div className=" flex flex-row items-start justify-start py-0 px-[7px] w-[100%] box-border max-w-full text-gray-300">
                 <div className="flex-1 flex flex-row items-start justify-between max-w-full  gap-[20px] mq450:flex-wrap">
                   <div className=" flex flex-col items-start justify-start gap-[6px]">
                     <div className="self-stretch relative font-medium z-[1]">
@@ -337,7 +348,7 @@ const Checkout = () => {
               </div>
               <div className="self-stretch flex flex-col items-start justify-start mr-[2rem] gap-[12.5px] max-w-full text-xl">
                 <div className="self-stretch h-[0.5px] relative box-border z-[1] border-t-[0.5px] border-solid border-silver-200" />
-                <div className="w-[551px] flex flex-row items-start justify-start py-0 px-[3px] box-border max-w-full">
+                <div className="w-[551px] flex flex-row items-start justify-start py-0 px-[7px] box-border max-w-full">
                   <div className="flex-1 flex flex-row items-start justify-between max-w-full gap-[20px] mq450:flex-wrap">
                     <div className="h-[27px] w-[138px] relative font-medium inline-block shrink-0 z-[1] mq450:text-base">
                       <p className="m-0">Total</p>

@@ -1,6 +1,8 @@
 import React from 'react'
+import useScrollTop from './customHooks/useScrollToTop'
 
 const SingleOrderScreen = () => {
+  useScrollTop();
   return (
     <div className='container p-2  flex flex-col  justify-center items-center'>
       <h2 className=' pb-4 font-semibold text-[1.2rem]'>Your Order History</h2>

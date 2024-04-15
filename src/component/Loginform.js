@@ -5,8 +5,10 @@ import { setCredentials } from '../store/slices/auth-slice.js';
 import { useDispatch } from 'react-redux';
 import cogoToast from 'cogo-toast';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
+import useScrollTop from './customHooks/useScrollToTop.js';
 const Loginform = () => {
     const navigate = useNavigate();
+    useScrollTop()
     const dispatch = useDispatch()
     const [login] = useLoginMutation()
     const [formData, setFormData] = useState({

@@ -14,10 +14,12 @@ import { addToWishlist, deleteFromWishlist } from '../store/slices/wishlist-slic
 import CommonRating from './Rating.js';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import useScrollTop from './customHooks/useScrollToTop.js';
 
 const ProductScreen = () => {
-    const {cart} = useSelector(state => state.cart);
-   
+    const { cart } = useSelector(state => state.cart);
+    useScrollTop()
+
     const { wishlistItems } = useSelector(state => state.wishlist);
     const [isInWishlist, setIsInWishlist] = useState(false);
     const navigate = useNavigate()
@@ -25,7 +27,7 @@ const ProductScreen = () => {
     const { id } = useParams();
     const dispatch = useDispatch()
     const [product, setProduct] = useState();
-    const [variantId , setVariantId] = useState("")
+    const [variantId, setVariantId] = useState("")
     useEffect(() => {
         setIsInWishlist(wishlistItems.some(item => item._id === id));
     }, [wishlistItems, id]);
@@ -94,7 +96,7 @@ const ProductScreen = () => {
             setVariantId(product.variants[0]._id)
         }
     }, [product]);
-    const handleColorSelect = (color, stock , variantId) => {
+    const handleColorSelect = (color, stock, variantId) => {
         setSelectedColor(color);
         setAvailability(stock);
         setVariantId(variantId)
@@ -106,7 +108,8 @@ const ProductScreen = () => {
         let url = IMAGE_URL + product?.image_list?.[0];
         if (url && currentImage != url) { setCurrentImage(url) }
 
-    }, [product])
+    }, [product]);
+    console.log(product)
 
     return (
         <div className='container'>
@@ -135,11 +138,11 @@ const ProductScreen = () => {
                     <div className='flex justify-start items-center gap-2'>
                         {product?.discount ?
                             <>
-                                <h2 style={{marginBottom : 0}} className='text-[1.0rem] text-green-400'>KD {discountedPrice?.toFixed(3)}</h2>
+                                <h2 style={{ marginBottom: 0 }} className='text-[1.0rem] text-green-400'>KD {discountedPrice?.toFixed(3)}</h2>
                                 <del className='text-[1.0rem] text-black'>KD {getPriceForColor()?.toFixed(3)}</del>
                             </>
                             :
-                            <h2 style={{marginBottom : 0}} className='text-[1.0rem] text-green-400'>KD {getPriceForColor()?.toFixed(3)}</h2>}
+                            <h2 style={{ marginBottom: 0 }} className='text-[1.0rem] text-green-400'>KD {getPriceForColor()?.toFixed(3)}</h2>}
                     </div>
                     <CommonRating value={product?.rating} />
                     <div className='flex py-2'>
@@ -169,7 +172,7 @@ const ProductScreen = () => {
                                         className="checkbox flex flex-col"
                                         key={index}
 
-                                        onClick={() => handleColorSelect(variant.name, variant.stock , variant._id)} // Pass stock as argument
+                                        onClick={() => handleColorSelect(variant.name, variant.stock, variant._id)} // Pass stock as argument
                                     >
                                         <input
                                             className="radio-input"
@@ -187,11 +190,11 @@ const ProductScreen = () => {
 
                         </div>
                     )}
-                   
+
                     <div className='flex  gap-4 items-center'>
                         {availability !== null && availability > 0 ? (
                             <>
-                                <button style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-customOrange font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product, qty , variantId }))}> Add to Cart</button>
+                                <button style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-customOrange font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product, qty, variantId }))}> Add to Cart</button>
 
 
                                 <button className='  bg-customOrange px-4 py-1 text-white font-medium font-poppins rounded-md'> Buy Now</button>
@@ -204,7 +207,7 @@ const ProductScreen = () => {
 
                                         <button className='  bg-customOrange px-4 py-1 text-white font-medium font-poppins rounded-md' onClick={() => {
                                             try {
-                                                dispatch(addToCart({ product, qty ,  variantId}));
+                                                dispatch(addToCart({ product, qty, variantId }));
                                                 navigate('/cart');
                                             } catch (error) {
                                                 console.error('Error occurred while adding to cart:', error);
@@ -245,7 +248,7 @@ const ProductScreen = () => {
                     </div>
                     <div className='flex items-center py-2 gap-2'>
                         <h2 className='text-[0.9rem] '>Delivery Duration :</h2>
-                        <h4 className='text-[0.9rem]'>in {product?.delivery_type} days</h4>
+                        <h4 className='text-[0.9rem]  text-blue-600'> {product?.delivery_type} days</h4>
                     </div>
                     {/* <div className='flex items-center py-2 gap-2'>
                         <h2 className='text-[1rem] '>Country of Origin :</h2>

@@ -7,11 +7,12 @@ import { clearOrderDetails } from '../store/slices/orderSlice'
 import { IMAGE_URL } from '../constants'
 import OrderTracker from './OrderTracker';
 import { IoIosArrowForward } from "react-icons/io";
+import useScrollTop from './customHooks/useScrollToTop'
 
 
 const Orderscreen = () => {
   const { orderDetails } = useSelector(state => state.order);
-  console.log(orderDetails?.ordered_items);
+  useScrollTop()
   const [orderId, setOrderId] = useState(null);
 
   const cart = useSelector((state) => state.cart);

@@ -19,9 +19,10 @@ export const COMPANY = [
 
 ];
 export const SUPPORT = [
-  { name: "Instagram", link: "#" },
-  { name: "Facebook", link: "#" },
-  // { name: "Webinars", link: "#" },
+  { name: "Office no 01, first floor", link: "#" },
+  { name: " Sharifa Al Mulla Tower, Ibn Khaldoon St", link: "#" },
+  { name: " Hawallay, State of Kuwait", link: "#" },
+ 
 
 ];
 

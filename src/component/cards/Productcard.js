@@ -60,9 +60,12 @@ const Productcard = ({ product }) => {
 
         </div>) : product?.coming_soon === false && showButton ? (<>
           {product?.on_stock && product?.on_stock > 0 ? (<div className=' w-[100%] p-[0.42rem] gap-2 bg-customOrange bottom-2 rounded-sm flex items-center justify-center'>{ }
-            <button className='text-white w-[70%] flex justify-around items-center ' onClick={() => dispatch(addToCart({ product, qty: 1 }))}>
+          {product?.varaints && product?.on_stock.length === 0  ?   <button className='text-white w-[70%] flex justify-around items-center ' onClick={() => navigate(`product/${product?._id}`)}>
+              <MdShoppingCart className='font-sm' />
+              Add To Cart</button> :   <button className='text-white w-[70%] flex justify-around items-center ' onClick={() => dispatch(addToCart({ product, qty: 1 }))}>
               <MdShoppingCart className='font-sm' />
               Add To Cart</button>
+              }
             <button className='text-white w-[30%] flex items-center ' onClick={handleWishlist}>  {isInWishlist ? <FavoriteIcon style={{ color: 'red' }} /> : <FavoriteBorderIcon />} </button>
           </div>) : (<div className=' p-[0.42rem] bg-black bottom-2 rounded-sm flex items-center justify-center'>{ }
             <button disabled className='text-white  flex items-center '> Out Of Stock</button>

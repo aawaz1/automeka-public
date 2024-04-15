@@ -11,19 +11,21 @@ import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import Notfound from './Notfound';
 import Noitemsfound from './Noitemsfound';
+import useScrollTop from './customHooks/useScrollToTop';
 
 
 const Category = () => {
-    useEffect(() => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    }, []);
+    useScrollTop()
+    // useEffect(() => {
+    //     window.scrollTo({ top: 0, behavior: 'smooth' });
+    // }, []);
     const { search } = useSelector(state => state.cart);
     const [filterSort, setFilterSort] = useState(null);
 
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
     const category = searchParams.get('category');
-  
+
     const filterSortQuery = searchParams.get('filterSort');
     const brand = searchParams.get('brand');
 
@@ -34,7 +36,7 @@ const Category = () => {
         setFeaturedProducts(allProducts);
 
     }, [allProducts])
-   
+
 
 
     const handleFilter = (val) => {
@@ -55,14 +57,14 @@ const Category = () => {
         }
     }, [filterSortQuery])
     useEffect(() => {
-        if(brand){
+        if (brand) {
             setSelectedBrand(brand);
         }
 
         if (category) {
             setSelectedCategory(category);
         }
-    }, [category,brand]);
+    }, [category, brand]);
     const categories = useCategory();
     const brands = useBrands();
 
@@ -149,20 +151,20 @@ const Category = () => {
                                     <h2 className='text-[1rem]   font-semibold '> Brands</h2>
 
                                     <div className='p-[0.2rem] flex flex-wrap gap-2'>
-                                    {brands.map(brand => {
-                                        return (
-                                            <button className={`text-[0.9rem] font-medium font-poppins border border-black border-20px p-1 px-2 rounded-sm hover:bg-customOrange hover:text-white ${selectedBrand === brand?.name ? "bg-customOrange text-white" : ""}`} onClick={() => setSelectedBrand(brand?.name)}>{brand?.name}</button>
-                                        )
+                                        {brands.map(brand => {
+                                            return (
+                                                <button className={`text-[0.9rem] font-medium font-poppins border border-black border-20px p-1 px-2 rounded-sm hover:bg-customOrange hover:text-white ${selectedBrand === brand?.name ? "bg-customOrange text-white" : ""}`} onClick={() => setSelectedBrand(brand?.name)}>{brand?.name}</button>
+                                            )
 
-                                    })}
-
-
+                                        })}
 
 
 
-                                </div>
+
+
+                                    </div>
                                 </Grid>
-                                
+
                             </Grid>
 
 

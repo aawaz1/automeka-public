@@ -3,8 +3,10 @@ import React, { useEffect, useState } from 'react'
 import { useCreateMutation } from '../store/slices/address-slice';
 import cogoToast from 'cogo-toast';
 import { useNavigate } from 'react-router-dom';
+import useScrollTop from './customHooks/useScrollToTop';
 
 const AddAddress = () => {
+    useScrollTop()
 
     const navigate = useNavigate();
     const goBack = () => {
@@ -78,7 +80,7 @@ const AddAddress = () => {
             validationErrors.phone = "Phone is required";
         }
         if (!address_1.trim()) {
-            validationErrors.address_1 = "Address 1 is required";
+            validationErrors.address_1 = "Address  is required";
         }
         if (!address_2.trim()) {
             validationErrors.address_2 = "Address 2 is required";
@@ -122,13 +124,13 @@ const AddAddress = () => {
             goBack();
 
 
-            cogoToast.success("Address Created Successfully",{ position: "bottom-left" });
+            cogoToast.success("Address Created Successfully", { position: "bottom-left" });
 
 
 
         } catch (error) {
             console.log(error);
-            cogoToast.error("Please fill all the input fields",{ position: "bottom-left" });
+            cogoToast.error("Please fill all the input fields", { position: "bottom-left" });
 
 
         }
@@ -142,22 +144,22 @@ const AddAddress = () => {
 
 
                 <div className="p-2">
-                    <label className='text-[1rem] font-semiobold font-poppins'>Address 1</label>
+                    <label className='text-[1rem] font-semiobold font-poppins'>Address </label>
 
                     <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="address_2" value={address_1} onChange={(e) => setAddress1(e.target.value)} />
                     <div className='text-red-500'>{errors.address_1 && <span>{errors.address_1}</span>}</div>
 
                 </div>
-                <div className="p-2">
+                {/* <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Address 2</label>
-                    <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="address_2" value={address_2} onChange={(e) => setAddress2(e.target.value)} />
-                    <div className='text-red-500'>{errors.address_2 && <span>{errors.address_2}</span>}</div>
+                    <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="address_2" value={address_2} onChange={(e) => setAddress2(e.target.value)} /> */}
+                    {/* <div className='text-red-500'>{errors.address_2 && <span>{errors.address_2}</span>}</div> */}
 
-                </div>
+                {/* </div> */}
                 <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Country</label>
                     <select className='bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2' id="country" name="country" value={country} onChange={handleCountryChange}>
-                    <option value="select">Select A Counry</option>
+                        <option value="select">Select A Counry</option>
                         <option value="kuwait">Kuwait</option>
                         <option value="uae">UAE</option>
                         <option value="qatar">Qatar</option>
@@ -227,7 +229,7 @@ const AddAddress = () => {
                     <div className='text-red-500'>{errors.phone && <span>{errors.phone}</span>}</div>
 
                 </div>
-                <div></div>
+                
 
 
                 <div className="p-6 flex  md:flex-row gap-2 items-start">
