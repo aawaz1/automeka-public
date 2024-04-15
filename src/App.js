@@ -32,10 +32,13 @@ import ResetPassword from './component/resetpassword.js'
 
 
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import MessagingComponent from './components/MessagingComponent.js';
 
 function App() {
+
   return (
     <div>
+      <MessagingComponent />
       <Router>
         <Layout>
           <Routes>
@@ -49,26 +52,26 @@ function App() {
             <Route path='/login' element={<LoginForm />} />
             <Route path='/register' element={<RegisterForm />} />
             <Route path='/product/:id' element={<ProductScreen />} />
-            <Route path='/myaccount/'  element={<PrivateRoute element={<MyAccount />} />}/>
-            <Route path='/myaccount/orders'  element={<PrivateRoute element={<Orderscreen />} />}/>
-            <Route path='/order'  element={<PrivateRoute element={<SingleOrderscreen />} />}/>
-            <Route path='/ordertracker'  element={<PrivateRoute element={<OrderTracker />} />}/>
-            <Route path='/addaddress'  element={<PrivateRoute element={<AddAddress />} />}/>
-            <Route path='/home2'   element={<AddAddresss />}/>
-            <Route path='/editaddress/:id' element={<PrivateRoute element={<EditAddress />} />}/>
-            <Route path='/editprofile'  element={<PrivateRoute element={<EditProfile />} />}/>
+            <Route path='/myaccount/' element={<PrivateRoute element={<MyAccount />} />} />
+            <Route path='/myaccount/orders' element={<PrivateRoute element={<Orderscreen />} />} />
+            <Route path='/order' element={<PrivateRoute element={<SingleOrderscreen />} />} />
+            <Route path='/ordertracker' element={<PrivateRoute element={<OrderTracker />} />} />
+            <Route path='/addaddress' element={<PrivateRoute element={<AddAddress />} />} />
+            <Route path='/home2' element={<AddAddresss />} />
+            <Route path='/editaddress/:id' element={<PrivateRoute element={<EditAddress />} />} />
+            <Route path='/editprofile' element={<PrivateRoute element={<EditProfile />} />} />
             <Route path='/FAQs' element={<FAQ />} />
             <Route path='/about' element={<About />} />
-            <Route path='/contactus' element={<Contactus/>}/>
-            <Route path='/returnpolicy' element={<Returnpolicy/>}/>
-            <Route path='/privacypolicy' element={<Privacypolicy/>}/>
-            <Route path='/forgot-password' element={<Forgotpassword/>}/>
-            <Route path='/enterotp' element={<Enterotp/>}/>
-            <Route path='/verifyotp' element={<Verifyotp/>}/>
-            <Route path='/resetpassword' element={<ResetPassword/>}/>
-            
-            
-            <Route path='*' element={<NotFound/>}/>
+            <Route path='/contactus' element={<Contactus />} />
+            <Route path='/returnpolicy' element={<Returnpolicy />} />
+            <Route path='/privacypolicy' element={<Privacypolicy />} />
+            <Route path='/forgot-password' element={<Forgotpassword />} />
+            <Route path='/enterotp' element={<Enterotp />} />
+            <Route path='/verifyotp' element={<Verifyotp />} />
+            <Route path='/resetpassword' element={<ResetPassword />} />
+
+
+            <Route path='*' element={<NotFound />} />
 
 
 

@@ -1,28 +1,37 @@
-import React from 'react';
+import React, { createContext } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter as Router ,Route,Routes } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
+import firebase from './firebase';
+const FirebaseContext = createContext(null);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <Provider store={store}>
-    <App/>
-
-    </Provider>
-   
-
-     
-    
-  </React.StrictMode>
+    <FirebaseContext.Provider value={firebase}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </FirebaseContext.Provider>
+  </React.StrictMode >
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    console.log("1")
+    navigator.serviceWorker.register('/firebase-messaging-sw.js').then((registration) => {
+      console.log("2")
+      console.log('ServiceWorker registration successful:', registration);
+    }).catch((error) => {
+      console.log("3")
+      console.log(error)
+      console.error('ServiceWorker registration failed:', error);
+    });
+  });
+}
+
 reportWebVitals();

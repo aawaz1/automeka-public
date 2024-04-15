@@ -1,7 +1,6 @@
 import React from 'react'
 
 const Endrosementcard = ({ image, name }) => {
-  console.log("ffwegrg")
   return (
     <div style={{}}>
       <img style={{ width: "20rem" }} src={image} />
