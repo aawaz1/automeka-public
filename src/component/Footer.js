@@ -35,7 +35,7 @@ const Footer = () => {
         }
       );
 
-      cogoToast.success("Form Submitted Successfully");
+      cogoToast.success("Form Submitted Successfully" , { position: "bottom-left" });
 
     } catch (error) {
       cogoToast.error("Already Subscribed", { position: "bottom-left" });
