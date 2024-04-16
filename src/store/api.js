@@ -28,3 +28,24 @@ export const fetchProductDetails = async (id) => {
 
   return response;
 };
+
+export const updateFcmToken = async (token) => {
+  const authData = localStorage.getItem("userInfo")
+  if (authData) {
+    const userRes = JSON.parse(authData)
+    const auth = userRes?.data?.auth;
+    if (auth) {
+      auth.fcm_token = token;
+      const response = await axios.patch(`${BASE_URL}/auth/token/${auth?._id}`, auth);
+
+      if (response.statusText != "OK") {
+
+        throw new Error('Failed to fetch user data');
+      }
+
+      localStorage.setItem("fcmToken", token)
+      localStorage.setItem("userInfo", JSON.stringify(userRes))
+      return response;
+    }
+  }
+};
