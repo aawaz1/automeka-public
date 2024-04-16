@@ -29,7 +29,7 @@ const VerifyOtp = () => {
     }
     return (
         <div className='flex flex-col justify-center items-center mt-4  p-4 gap-4'>
-            <h4>Please Enter The One Time Password</h4>
+            <h4>Please Enter The OTP To Verify</h4>
             <form className=' gap-3'>
                 <div className='max-w-[30rem] flex flex-col gap-3 p-4 md:px-6 md:py-4 w-[20rem] justify-center items-start border rounded-md border-gray-400 md:w-[40rem]'>
 

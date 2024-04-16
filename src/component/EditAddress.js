@@ -45,8 +45,7 @@ const EditAddress = () => {
                 `https://restapi.ansoftt.com:4321/v1/governate/`
             );
             setGovernates(data.data);
-            console.log(data.data)
-            console.log(governates)
+
         } catch (error) {
             console.log(error);
         }
@@ -61,9 +60,9 @@ const EditAddress = () => {
                 BASE_URL + `/address/${addressId}`
             );
             setAddresses(data?.data);
-            console.log(data?.data.address_1);
 
-            console.log(data?.data);
+
+
 
 
         } catch (error) {
@@ -85,8 +84,7 @@ const EditAddress = () => {
     const [landmark, setLandmark] = useState(address.landmark);
     const [postal_code, setPostalCode] = useState(address.postal_code);
     const [errors, setErrors] = useState({});
-    console.log(governate?._id);
-    console.log(address);
+
     useEffect(() => {
         setAddress1(address.address_1);
         setAddress2(address.address_2);
@@ -155,7 +153,8 @@ const EditAddress = () => {
 
 
             };
-            console.log(request)
+
+
             const res = await update({ id: addressId, data: request }).unwrap();
 
 
@@ -175,7 +174,7 @@ const EditAddress = () => {
         <div className='container p-4'>
             <h2 className='font-semibold text-lg font-poppins'>Add Address</h2>
 
-            <div className='grid grid-cols-1 md:grid-cols-2 p-1 gap-2 w-[20rem] justify-center border rounded-md border-gray-400 md:w-[60rem]'>
+            <div className='grid grid-cols-1 md:grid-cols-2 p-1 gap-2 w-[100%] justify-center border rounded-md border-gray-400 md:w-[60rem]'>
 
 
                 <div className="p-2">
@@ -262,7 +261,7 @@ const EditAddress = () => {
                     <div className='text-red-500'>{errors.phone && <span>{errors.phone}</span>}</div>
 
                 </div>
-                
+
 
 
                 <div className="p-6 flex  md:flex-row gap-2 items-start">

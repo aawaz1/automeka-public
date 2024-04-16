@@ -12,6 +12,7 @@ import useScrollTop from "./customHooks/useScrollToTop";
 
 
 const Checkout = () => {
+
   const navigate = useNavigate()
   const cart = useSelector((state) => state.cart);
   useScrollTop()
@@ -22,10 +23,11 @@ const Checkout = () => {
   const { userInfo } = useSelector(state => state.auth);
   const [user, setUser] = useState([]);
   const { saveAddress } = cart;
-  console.log(saveAddress)
+  
   const dispatch = useDispatch();
   const [isUsed, setIsUsed] = useState(false)
-  const pointsValueInKd = userInfo?.data?.user?.loyalty_points / 100;
+  const pointsValueInKd = user?.loyalty_points / 100;
+  
   const [selectedAddress, setSelectedAddress] = useState('');
   const [addresses, setAddresses] = useState([]);
   const total_qty = cartItems?.reduce((accumulator, item) => {
@@ -35,15 +37,26 @@ const Checkout = () => {
 
   const governate_charges = parseInt(saveAddress?.governates?.value);
   const governateValue = parseFloat(saveAddress?.governates?.value || 0);
-  console.log(governateValue)
+  
   const calculateSum = () => {
     let sum = governateValue + totalCartPrice;
+    let pointsUsed = 0;
+
     if (isUsed) {
-      sum -= pointsValueInKd;
+
+      if (pointsValueInKd >= sum) {
+        pointsUsed = sum;
+      } else {
+        pointsUsed = pointsValueInKd;
+      }
+      sum -= pointsUsed;
     }
-    return sum;
+
+    return Math.max(0, sum);
   };
+
   const [createOrder] = useCreateOrderMutation();
+
 
   const totalCartPrice =
     cart.cartItems.reduce(
@@ -67,7 +80,7 @@ const Checkout = () => {
         `https://restapi.ansoftt.com:4321/v1/user/${id}`
       );
       setUser(data?.data)
-      console.log(data?.data)
+     
     } catch (error) {
 
     }
@@ -77,7 +90,7 @@ const Checkout = () => {
     getUserById()
   }, [])
 
-  console.log(user);
+
 
   const handleAddressChange = (event) => {
     const selectedAddressId = event.target.value;
@@ -103,74 +116,79 @@ const Checkout = () => {
   useEffect(() => {
     getAllAddresses();
   }, []);
+  console.log(user);
   const placeOrderHandler = async () => {
     console.log(cart);
 
-   if (user?.is_email_verifed){
-    try {
-      const orderItems = [];
+    if (user?.is_email_verified) {
+      try {
+        const orderItems = [];
 
-      for (const iterator of cartItems) {
-        console.log(iterator);
-        const singleItem = {};
-        singleItem['product'] = iterator._id;
-        if (iterator?.varaints?.length > 0) {
-          singleItem['variant'] = iterator.varaints?.[0]._id;
-        }
-        singleItem['qty'] = iterator.quantity;
-        singleItem['price'] = iterator.price;
-        singleItem['status'] = "pending";
-        orderItems.push(singleItem);
-      }
-      console.log(orderItems);
-
-      const res = await createOrder({
-        address: cart.saveAddress,
-        user_id: id,
-        price: calculateSum(),
-        quantity: cartItems?.length,
-        total_qty: total_qty,
-        points_used: 0,
-        is_points_used: isUsed,
-        ordered_items: orderItems,
-        total_products_cost: "4",
-        total_price: calculateSum(),
-        governate_charges: governate_charges,
-      }).unwrap();
-
-      if (res.status === true) {
-        const { data } = await axios.post(
-          `https://restapi.ansoftt.com:4321/v1/order/`,
-          {
-            address: cart.saveAddress,
-            user_id: id,
-            price: calculateSum(),
-            quantity: cartItems?.length,
-            total_qty: total_qty,
-            points_used: 0,
-            is_points_used: isUsed,
-            ordered_items: orderItems,
-            total_products_cost: "4",
-            total_price: calculateSum(),
-            governate_charges: governate_charges,
+        for (const iterator of cartItems) {
+          console.log(iterator);
+          const singleItem = {};
+          singleItem['product'] = iterator._id;
+          if (iterator?.varaints?.length > 0) {
+            singleItem['variant'] = iterator.varaints?.[0]._id;
           }
-        );
+          singleItem['qty'] = iterator.quantity;
+          singleItem['price'] = iterator.price;
+          singleItem['status'] = "pending";
+          orderItems.push(singleItem);
+        }
+        console.log(orderItems);
 
-        navigate(`/`);
-        dispatch(deleteAllFromCart(cartItems));
-        cogoToast.success("Order Submitted Successfully", { position: "bottom-left" });
-      } else {
-        cogoToast.error("Failed to create order", { position: "bottom-left" });
+        const res = await createOrder({
+          address: cart.saveAddress,
+          user_id: id,
+          price: calculateSum(),
+          quantity: cartItems?.length,
+          total_qty: total_qty,
+          points_used: 0,
+          is_points_used: isUsed,
+          ordered_items: orderItems,
+          total_products_cost: "4",
+          total_price: calculateSum(),
+          governate_charges: governate_charges,
+        }).unwrap();
+
+        if (res.status === true) {
+          const { data } = await axios.post(
+            `https://restapi.ansoftt.com:4321/v1/order/`,
+            {
+              address: cart.saveAddress,
+              user_id: id,
+              price: calculateSum(),
+              quantity: cartItems?.length,
+              total_qty: total_qty,
+              points_used: 0,
+              is_points_used: isUsed,
+              ordered_items: orderItems,
+              total_products_cost: "4",
+              total_price: calculateSum(),
+              governate_charges: governate_charges,
+            }
+          );
+
+          navigate(`/`);
+          dispatch(deleteAllFromCart(cartItems));
+          cogoToast.success("Order Submitted Successfully", { position: "bottom-left" });
+        } else {
+          cogoToast.error("Failed to create order", { position: "bottom-left" });
+        }
+      } catch (error) {
+        console.log(error);
+        cogoToast.error("Please Fill All The Details", { position: "bottom-left" });
       }
-    } catch (error) {
-      console.log(error);
-      cogoToast.error("Please Fill All The Details", { position: "bottom-left" });
     }
-   }
-   else{
-    navigate('/verifyotp')
-   }
+    else {
+      navigate('/verifyotp')
+    }
   };
+
+  let sum = governateValue + totalCartPrice
+
+  const formattedPoints = pointsValueInKd >= sum ? sum.toFixed(3) : pointsValueInKd.toFixed(3);
 
   return (
     <>
@@ -208,7 +226,7 @@ const Checkout = () => {
 
           <div className="flex justify-start items-center gap-2">
             <label style={{ margin: "unset" }} for="myCheckbox">Use Points</label>
-            <span>({userInfo?.data?.user?.loyalty_points.toFixed(4)})</span>
+            <span>({user?.loyalty_points?.toFixed(4)})</span>
             <input type="checkbox" id="myCheckbox" value={isUsed} onClick={() => setIsUsed(!isUsed)} name="myCheckbox" />
           </div>
           <div className="self-stretch h-[517px] flex flex-col items-start justify-start gap-[10px] max-w-full">
@@ -299,7 +317,7 @@ const Checkout = () => {
                                     {item?.name}
                                   </div>
                                   <div className="relative font-medium z-[1]">
-                                    {item?.quantity}
+                                   x {item?.quantity}
                                   </div>
                                 </div>
 
@@ -364,7 +382,7 @@ const Checkout = () => {
                         {governateValue.toFixed(3)} KD
                       </div>
                       {isUsed ? <div className="relative font-medium inline-block min-w-[111px] z-[1]">
-                        {pointsValueInKd.toFixed(3)}  KD
+                        {formattedPoints}  KD
                       </div> : null}
                     </div>
                   </div>

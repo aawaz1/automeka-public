@@ -8,8 +8,7 @@ import { IMAGE_URL } from '../constants.js';
 
 const Cartmenu = ({ handleIsOpen }) => {
     const { cartItems } = useSelector((state) => state.cart);
-    console.log(cartItems)
-    console.log(cartItems?.variantId)
+   
 
 
 

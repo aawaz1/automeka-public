@@ -7,7 +7,7 @@ import useScrollTop from './customHooks/useScrollToTop';
 
 const EditProfile = () => {
     const { userInfo } = useSelector((state) => state.auth);
-    console.log(userInfo)
+   
     useScrollTop()
     let user = JSON.parse(localStorage.getItem("userInfo") || null);
 
@@ -58,7 +58,7 @@ const EditProfile = () => {
                 `https://restapi.ansoftt.com:4321/v1/user/${id}`
             );
             setUser(data?.data)
-            console.log(data?.data)
+            
         } catch (error) {
 
         }

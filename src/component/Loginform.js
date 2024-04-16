@@ -42,14 +42,18 @@ const Loginform = () => {
         } else if (formData.password?.length < 6) {
             validationErrors.password = "Password must be at least 6 characters long";
         }
-        setErrors(validationErrors);
+        if (Object.keys(validationErrors).length > 0) {
+            setErrors(validationErrors);
+            return; // Exit the function early if there are validation errors
+        }
         try {
             const res = await login(formData).unwrap();
             dispatch(setCredentials({ ...res, }));
 
             // cogoToast.success("Logged IN Successfully")
             // navigate(redirect);
-            if (res?.data?.auth?.is_email_verified) {
+            console.log(res);
+            if (res?.data?.user?.is_email_verified) {
                 // If verified, navigate to the redirect route
                 navigate(redirect);
             } else {
@@ -104,7 +108,7 @@ const Loginform = () => {
                         />
                         <button
                             type="button"
-                            style={{ position: 'absolute', right: '8px', top: '25%',  transform: 'translateY(-50%)' }}
+                            style={{ position: 'absolute', right: '8px', top: '25%', transform: 'translateY(-50%)' }}
                             onClick={togglePasswordVisibility}
                         >
                             {showPassword ? <FaEyeSlash /> : <FaEye />}

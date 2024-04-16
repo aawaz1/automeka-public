@@ -25,7 +25,7 @@ const OrderTracker = ({ setTracker, tracker }) => {
   const getTrackers = async () => {
 
     const { data } = await axios.get(`${BASE_URL}/ordertracker`)
-    console.log("wecwvrv", data.data)
+  
     setTrackerr(data.data);
 
   }
@@ -33,7 +33,7 @@ const OrderTracker = ({ setTracker, tracker }) => {
   useEffect(() => {
     getTrackers()
   }, [])
-  console.log(trackerr)
+ 
   return (
     <div className='container p-1 md:p-6'><div className='p-1 md:p-4  flex flex-col justify-center items-center'>
 

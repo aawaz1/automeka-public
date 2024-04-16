@@ -41,7 +41,7 @@ const Endrosement = () => {
             <p className='text-gray-400 font-thin font-poppins'>repairing a damage vehicle <br /> can be expensive using the <br /> automeka product is a good solution if you are on budget.</p>
 
 
-            {console.log("ProductL ", productData)}
+            
             <div className='w-[100%] md:w-[30%]'> {productData?.length ?
                 <Slider {...settings}>
                     {productData?.map(item => {

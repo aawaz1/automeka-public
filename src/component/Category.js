@@ -97,7 +97,7 @@ const Category = () => {
         <div className='px-4 py-2'>
             <div onClick={() => setIsOpen(!isOpen)} className={`flex md:hidden ${isOpen ? 'justify-start' : 'justify-end'}`}>{isOpen ? <FaArrowLeft style={{ fontSize: "1.0rem" }} /> : <TbSortDescending style={{ fontSize: "1.5rem" }} />}</div>
             {isOpen && false && (
-                <div className='top-0 relative h-[100vh] w-[100vw]'> <h2 className='text-[1rem] pl-4 pt-3 font-semibold '>Select Category</h2>
+                <div className='top-0 relative h-[100vh] w-[100vw]'> <h2 className='text-[1rem] pl-4 pt-3 font-semibold '> Category</h2>
                     {/* <div className='pb-1 '>   <hr className='border border-solid border-gray-400 w-[80%] m-auto p-0' /></div> */}
 
                     <div className='p-2 flex flex-wrap gap-2'>
@@ -119,7 +119,7 @@ const Category = () => {
                     <Grid style={{ display: isOpen ? "block" : "none" }} item xs={12}>
                         <div className=' pl-4 pt-1 pb-2  border border-2px border-solid rounded-sm  justify-center  border-gray-400 w-[100%]'>
                             <Grid container spacing={2} > <Grid item md={6} xs={12}>
-                                <h2 className='text-[1rem] font-semibold '>Select Category</h2>
+                                <h2 className='text-[1rem] font-semibold '> Category</h2>
 
 
                                 <div className='p-[0.2rem] flex flex-wrap gap-2'>

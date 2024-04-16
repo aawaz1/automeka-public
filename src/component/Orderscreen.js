@@ -30,7 +30,7 @@ const Orderscreen = () => {
       );
       setSingleOrder(data?.data);
 
-      console.log(data?.data)
+
     } catch (error) {
       console.log(error);
     }
@@ -154,7 +154,7 @@ const Orderscreen = () => {
             } </> :
 
 
-            <div className='w-[100%] p-2 overflow-x-scroll md:overflow-hidden'>
+            <div className='w-[100%]  p-2 overflow-x-scroll  md:overflow-hidden'>
               <Grid bgcolor={"#F5F5F5"} container spacing={1} className='min-w-[45rem]'>
                 <Grid item xs={4}>Order Number</Grid>
                 <Grid item xs={2}>Order Date</Grid>

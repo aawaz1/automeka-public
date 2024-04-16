@@ -42,7 +42,7 @@ const Navbar = () => {
   const categories = useCategory();
   const [issOpen, setIssOpen] = useState(false);
   const handleIsOpen = () => {
-    console.log(`is open ${issOpen}`)
+    
     setIssOpen(!issOpen)
   }
   const [isOpen, setIsOpen] = useState(false);

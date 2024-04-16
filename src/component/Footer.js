@@ -35,7 +35,7 @@ const Footer = () => {
         }
       );
 
-      cogoToast.success("Form Submitted Successfully" , { position: "bottom-left" });
+      cogoToast.success("Subscribed Successfully" , { position: "bottom-left" });
 
     } catch (error) {
       cogoToast.error("Already Subscribed", { position: "bottom-left" });
@@ -47,7 +47,7 @@ const Footer = () => {
   return (
     <footer className='bg-gray-700 text-white relative'>
       <div className='h-50 md:flex md:justify-around md:items-center sm:px-12 px-4 bg-customOrange py-7'>
-        <h1 className='lg:text-xl text-xl md:mb-0 mb-6 lg:leadiing-normal font-semibold md:w-2/5'>Subscribe For Latest Products</h1>
+        <h1 className='lg:text-xl text-xl md:mb-0 mb-6 lg:leadiing-normal font-semibold md:w-2/5'>Subscribe For Latest Updates</h1>
         <div className='flex'>
           <div className='flex flex-col'>
             <input type='text' placeholder='Enter your E-mail' value={email} onChange={(e) => setEmail(e.target.value)} className='text-gray-400 sm:w-72 w-full   sm:mr-5 mr-1 lg:mb-0 py-2.5 rounded px-2 focus:outline-none' />

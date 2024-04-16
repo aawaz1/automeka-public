@@ -7,7 +7,7 @@ export const PRODUCTS = [
 
 ];
 export const RESOURCES = [
-  { name: "FAQs", link: "FAQS" },
+  { name: "FAQ", link: "faq" },
   { name: "Contact Us", link: "contactus" },
 
 

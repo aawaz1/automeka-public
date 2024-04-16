@@ -60,7 +60,7 @@ function App() {
             <Route path='/home2' element={<AddAddresss />} />
             <Route path='/editaddress/:id' element={<PrivateRoute element={<EditAddress />} />} />
             <Route path='/editprofile' element={<PrivateRoute element={<EditProfile />} />} />
-            <Route path='/FAQs' element={<FAQ />} />
+            <Route path='/faq' element={<FAQ />} />
             <Route path='/about' element={<About />} />
             <Route path='/contactus' element={<Contactus />} />
             <Route path='/returnpolicy' element={<Returnpolicy />} />

@@ -25,7 +25,7 @@ const Cart = () => {
 
   const { cartItems } = useSelector((state) => state.cart);
 
-  console.log(cartItems)
+
   const dispatch = useDispatch();
 
   // const prices = cartItems?.variants?.filter(variant => variant._id === variantId)?.map(item => item.price);
