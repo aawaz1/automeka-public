@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { setupNotificationToken } from "../../utils/firebaseMethods";
 
 const initialState = {
   userInfo: localStorage.getItem('userInfo') ? JSON.parse(localStorage.getItem('userInfo') || "") : null,
@@ -27,6 +28,7 @@ const authSlice = createSlice({
       localStorage.setItem("id", JSON.stringify(action?.payload?.data?.auth?._id || action.payload?._id || ""));
       localStorage.setItem("token", JSON.stringify(action?.payload?.data?.auth?.access_token || action?.payload?.token || ""));
       console.log(2)
+      setupNotificationToken()
     },
 
 
