@@ -14,6 +14,7 @@ export const setupNotificationToken = () => {
                     return messaging.getToken();
                 })
                 .then(async (token) => {
+                    localStorage.setItem("fcmToken", token)
                     updateFcmToken(token)
                 })
                 .catch((err) => {

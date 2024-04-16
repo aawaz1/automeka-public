@@ -61,7 +61,6 @@ const Loginform = () => {
                 password: "",
                 email: "",
             });
-            setupNotificationToken()
             cogoToast.success("Logged In Successfully", { position: "bottom-left" });
         } catch (err) {
             console.log(err);
