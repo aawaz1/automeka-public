@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import cogoToast from 'cogo-toast';
 import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import useScrollTop from './customHooks/useScrollToTop.js';
+import { setupNotificationToken } from '../utils/firebaseMethods.js';
 const Loginform = () => {
     const navigate = useNavigate();
     useScrollTop()
@@ -57,12 +58,10 @@ const Loginform = () => {
                 navigate('/verifyotp');
             }
             setFormData({
-
                 password: "",
                 email: "",
-
-
             });
+            setupNotificationToken()
             cogoToast.success("Logged In Successfully", { position: "bottom-left" });
         } catch (err) {
             console.log(err);
@@ -104,7 +103,7 @@ const Loginform = () => {
                         />
                         <button
                             type="button"
-                            style={{ position: 'absolute', right: '8px', top: '25%',  transform: 'translateY(-50%)' }}
+                            style={{ position: 'absolute', right: '8px', top: '25%', transform: 'translateY(-50%)' }}
                             onClick={togglePasswordVisibility}
                         >
                             {showPassword ? <FaEyeSlash /> : <FaEye />}
