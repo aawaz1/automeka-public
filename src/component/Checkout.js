@@ -20,6 +20,7 @@ const Checkout = () => {
 
   let id = JSON.parse(localStorage.getItem("id") || null);
   const { userInfo } = useSelector(state => state.auth);
+  const [user, setUser] = useState([]);
   const { saveAddress } = cart;
   console.log(saveAddress)
   const dispatch = useDispatch();
@@ -58,7 +59,25 @@ const Checkout = () => {
         return (acc + (price * item.quantity * (100 - item.discount) / 100))
       },
       0
-    )
+    );
+
+  const getUserById = async (e) => {
+    try {
+      const { data } = await axios.get(
+        `https://restapi.ansoftt.com:4321/v1/user/${id}`
+      );
+      setUser(data?.data)
+      console.log(data?.data)
+    } catch (error) {
+
+    }
+  }
+
+  useEffect(() => {
+    getUserById()
+  }, [])
+
+  console.log(user);
 
   const handleAddressChange = (event) => {
     const selectedAddressId = event.target.value;
@@ -86,10 +105,11 @@ const Checkout = () => {
   }, []);
   const placeOrderHandler = async () => {
     console.log(cart);
-  
+
+   if (user?.is_email_verifed){
     try {
       const orderItems = [];
-  
+
       for (const iterator of cartItems) {
         console.log(iterator);
         const singleItem = {};
@@ -103,7 +123,7 @@ const Checkout = () => {
         orderItems.push(singleItem);
       }
       console.log(orderItems);
-  
+
       const res = await createOrder({
         address: cart.saveAddress,
         user_id: id,
@@ -117,7 +137,7 @@ const Checkout = () => {
         total_price: calculateSum(),
         governate_charges: governate_charges,
       }).unwrap();
-  
+
       if (res.status === true) {
         const { data } = await axios.post(
           `https://restapi.ansoftt.com:4321/v1/order/`,
@@ -135,7 +155,7 @@ const Checkout = () => {
             governate_charges: governate_charges,
           }
         );
-  
+
         navigate(`/`);
         dispatch(deleteAllFromCart(cartItems));
         cogoToast.success("Order Submitted Successfully", { position: "bottom-left" });
@@ -146,8 +166,12 @@ const Checkout = () => {
       console.log(error);
       cogoToast.error("Please Fill All The Details", { position: "bottom-left" });
     }
+   }
+   else{
+    navigate('/verifyotp')
+   }
   };
-  
+
   return (
     <>
       {cart.cartItems && cart.cartItems.length ? <div className="container  grid grid-cols-1 md:grid-cols-2 p-4 gap-3">
@@ -275,7 +299,7 @@ const Checkout = () => {
                                     {item?.name}
                                   </div>
                                   <div className="relative font-medium z-[1]">
-                                     {item?.quantity}
+                                    {item?.quantity}
                                   </div>
                                 </div>
 

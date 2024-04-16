@@ -1,25 +1,30 @@
 import axios from 'axios';
 import React, { useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useHistory } from 'react-router-dom';
 import cogoToast from 'cogo-toast';
 import useScrollTop from './customHooks/useScrollToTop';
 
 const VerifyOtp = () => {
+
     const [email, setEmail] = useState("");
     useScrollTop()
     let id = JSON.parse(localStorage.getItem("id") || null);
     const navigate = useNavigate();
+    const goBack = () => {
+        navigate(-1); // This will navigate back one step in the history stack
+    };
     const submitHandler = async (e) => {
-      try {
-        e.preventDefault();
-        const { data } = await axios.post(`https://restapi.ansoftt.com:4321/v1/auth/verifyotp/${id}`, { otp: email });
-       
-        cogoToast.success("OTP Submitted Successfully")
-        
-      } catch (error) {
-        cogoToast.error("Please Submit The OTP", { position: "bottom-left" });
-        
-      }
+        try {
+            e.preventDefault();
+            const { data } = await axios.post(`https://restapi.ansoftt.com:4321/v1/auth/verifyotp/${id}`, { otp: email });
+
+            cogoToast.success("OTP Submitted Successfully")
+            goBack();
+
+        } catch (error) {
+            cogoToast.error("Please Submit The OTP", { position: "bottom-left" });
+
+        }
 
     }
     return (

@@ -80,11 +80,7 @@ const Registerform = () => {
             validationErrors.password = "Password must be at least 6 characters long";
         }
 
-        // if (!formData.confirmPassword.trim()) {
-        //     validationErrors.confirmPassword = "Confirm Password is required";
-        // } else if (formData.confirmPassword !== formData.password) {
-        //     validationErrors.confirmPassword = "Passwords do not match";
-        // }
+       
 
         setErrors(validationErrors);
         try {

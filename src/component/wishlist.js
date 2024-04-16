@@ -37,18 +37,18 @@ const Wishlist = () => {
           return (<Grid item container xs={12} style={{ borderBottom: "1px solid lightgrey" }}>
             <Grid item md={6}>
               <div className="flex py-2 gap-2">
-                <div className=""><img style={{ width: "6rem", height: "4rem" }} src={IMAGE_URL + cartItem?.image_list[0]} alt="hello cart" /></div>
+                <div className=""><img style={{ width: "6rem", height: "4rem" }} src={IMAGE_URL + cartItem?.image_list?.[0]} alt="hello cart" /></div>
                 <div><h2 className="text-[1.0rem] font-medium font-poppins">{cartItem.name}</h2></div>
               </div>
             </Grid>
-            <Grid className="font-medium font-poppins" item md={2} alignItems={"center"} display={"flex"}>{cartItem?.price.toFixed(3)}</Grid>
+            <Grid className="font-medium font-poppins" item md={2} alignItems={"center"} display={"flex"}>{cartItem?.price?.toFixed(3)}</Grid>
             <Grid item md={2} alignItems={"center"} display={"flex"}>
               {cartItem.varaints > 0 ? (
-                <button disabled={cartItem.coming_soon} style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-customOrange font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product: cartItem, qty: 1 }))}>Add To Cart</button>
+                <button disabled={cartItem.coming_soon} style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-customOrange font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product: cartItem, qty: 1, variantId: cartItem?.variantId }))}>Add To Cart</button>
               ) : (
                 <>
                   {cartItem?.on_stock > 1 && (
-                    <button disabled={cartItem.coming_soon} style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-customOrange font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product: cartItem, qty: 1 }))}>Add to Cart</button>
+                    <button disabled={cartItem.coming_soon} style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-customOrange font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product: cartItem, qty: 1, variantId: cartItem?.variantId }))}>Add to Cart</button>
                   )}
                   {cartItem?.on_stock <= 0 && (
                     <button style={{ cursor: "not-allowed" }} className=' p-[0.42rem] bg-black bottom-2 rounded-sm flex  text-white items-center justify-center' disabled>Out of Stock</button>
@@ -103,7 +103,7 @@ const Wishlist = () => {
               </div>
             </div>
             <div className="flex gap-5 justify-around items-center self-start mt-2 text-base max-md:flex-wrap max-md:max-w-full">
-              <div className="self-stretch my-auto text-black">KD {cartItem?.price.toFixed(3)}</div>
+              <div className="self-stretch my-auto text-black">KD {cartItem?.price?.toFixed(3)}</div>
 
               <div className="justify-center self-stretch px-2 py-2 tracking-tight text-center ">
                 {cartItem.varaints > 0 ? (

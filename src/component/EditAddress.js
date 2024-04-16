@@ -179,7 +179,7 @@ const EditAddress = () => {
 
 
                 <div className="p-2">
-                    <label className='text-[1rem] font-semiobold font-poppins'>Address 1</label>
+                    <label className='text-[1rem] font-semiobold font-poppins'>Address </label>
 
                     <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="address_2" value={address_1} onChange={(e) => setAddress1(e.target.value)} />
                     <div className='text-red-500'>{errors.address_1 && <span>{errors.address_1}</span>}</div>
@@ -226,7 +226,7 @@ const EditAddress = () => {
                 </div>
 
                 <div className="p-2">
-                    <label className='text-[1rem] font-semiobold font-poppins'>LandMark</label>
+                    <label className='text-[1rem] font-semiobold font-poppins'>Landmark</label>
                     <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="confirmPassword" value={landmark} onChange={(e) => setLandmark(e.target.value)} />
                     <div className='text-red-500'>{errors.landmark && <span>{errors.landmark}</span>}</div>
 

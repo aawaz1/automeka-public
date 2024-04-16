@@ -159,11 +159,11 @@ const Navbar = () => {
                 </div>
               </div>
               <div onClick={() => navigate("/")} className='mr-4 relative top-[2px]'>Home</div>
-              <div onClick={() => navigate('/aboutus')} className='relative top-[2px]'>About Us</div>
+              <div onClick={() => navigate('/about')} className='relative top-[2px]'>About Us</div>
 
-          </div></div>
-  )
-}
+            </div></div>
+        )
+      }
     </div >)
 }
 

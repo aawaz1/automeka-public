@@ -4,6 +4,7 @@ import React from 'react'
 import { useState } from 'react';
 import { motion, AnimatePresence, } from 'framer-motion';
 import { RiArrowDropDownLine, RiArrowDropUpLine } from "react-icons/ri";
+import useScrollTop from './customHooks/useScrollToTop';
 
 // import {
 //     Accordion,
@@ -48,6 +49,8 @@ const FAQ = () => {
             answer: "Shipping is between 1 to 2 days"
         }
     ]
+
+    useScrollTop()
 
     return (
         <>

@@ -10,12 +10,17 @@ const wishlistSlice = createSlice({
     },
     reducers: {
         addToWishlist(state, action) {
-            const isInWishlist = state.wishlistItems.findIndex(item => item._id === action.payload._id);
+            // const { product ,variantId } = action.payload;
+            const isInWishlist = state.wishlistItems.findIndex(item => item._id === action.payload._id
+                // product._id 
+                //  && item.variantId === variantId
+                 );
             if (isInWishlist > -1) {
                 cogoToast.info("Product already in wishlist", {position: "bottom-left"});
 
             } else {
                 state.wishlistItems.push(action.payload);
+                // state.wishlistItems.push({...product , variantId});
                 cogoToast.success("Added To wishlist", {position: "bottom-left"});
 
             }

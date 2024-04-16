@@ -5,7 +5,7 @@ const Items = ({ Links, title }) => {
   const navigate = useNavigate();
   return (
     <ul className="">
-      <h1 className="mb-4 font-semibold">{ }</h1>
+      <h1 className="mb-1 font-semibold">{ }</h1>
       {Links.map((link) => (
         <li key={link.name}>
           <img onClick={() => navigate("/")} className="cursor-pointer" src={link.image} style={{ width: "7rem", height: "7rem" }} />

@@ -1,6 +1,8 @@
 import React from 'react'
+import useScrollTop from './customHooks/useScrollToTop'
 
-const privacypolicy = () => {
+const Privacypolicy = () => {
+    useScrollTop()
     return (
         <div>
             <div className='container flex flex-col justify-center items-center p-2'>
@@ -18,13 +20,13 @@ const privacypolicy = () => {
             <div className='container flex-start'>
                 <h2 className='flex-start text-[1.5rem]'>How We Use Your Information:</h2>
                 <p className='text-gray-500 text[1rem]'>Order Processing: We use your personal information to process and fulfill your orders, communicate with you about your purchases, and provide customer support.
-Marketing: With your consent, we may send you promotional emails about our products, special offers, and promotions.
-Analytics: We use browsing information and cookies to analyze website traffic, improve our website and services, and personalize your experience.</p>
+                    Marketing: With your consent, we may send you promotional emails about our products, special offers, and promotions.
+                    Analytics: We use browsing information and cookies to analyze website traffic, improve our website and services, and personalize your experience.</p>
             </div>
             <div className='container flex-start'>
                 <h2 className='flex-start text-[1.5rem]'>Sharing Your Information:</h2>
                 <p className='text-gray-500 text[1rem]'>We may share your information with third-party service providers who assist us in operating our website, processing payments, or delivering products to you.
-We may also share your information as required by law or to protect our rights, property, or safety, or that of others.</p>
+                    We may also share your information as required by law or to protect our rights, property, or safety, or that of others.</p>
             </div>
             <div className='container flex-start'>
                 <h2 className='flex-start text-[1.5rem]'>Data Security:</h2>
@@ -38,4 +40,4 @@ We may also share your information as required by law or to protect our rights, 
     )
 }
 
-export default privacypolicy
+export default Privacypolicy

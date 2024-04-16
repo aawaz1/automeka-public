@@ -92,7 +92,7 @@ const Orderscreen = () => {
                     Order Summary
                   </div>
                   <div>
-                    <div className='flex justify-start gap-3 p-1'>
+                    <div className='flex justify-start gap-3 py-1'>
                       <div><strong>Total Items :</strong></div>
                       <div>
                         <strong>
@@ -103,9 +103,9 @@ const Orderscreen = () => {
                         </strong>
                       </div>
                     </div>
-                    <div className='flex justify-start gap-2 p-1'>
+                    <div className='flex justify-start gap-2 '>
                       <div><strong>Total Price :</strong></div>
-                      <div><strong><span>KD</span>&nbsp;{orderDetails?.total_price?.toFixed(3)}</strong></div>
+                      <div><strong>{orderDetails?.total_price?.toFixed(3)}&nbsp;<span>KD</span></strong></div>
                     </div>
                   </div>
                 </div>
@@ -128,7 +128,7 @@ const Orderscreen = () => {
                           <div className="flex flex-col mt-2.5 font-medium max-md:mt-10">
                             <div className="text-base text-black">{order_item?.product?.name}</div>
                             <div className="mt-3.5 text-sm text-green-500">
-                              KD   {order_item?.product?.price.toFixed(3)}
+                              {order_item?.product?.price.toFixed(3)} KD
                             </div>
                             <div className="mt-3.5 text-sm text-gray-500">
                               X {order_item?.qty}

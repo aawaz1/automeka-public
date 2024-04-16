@@ -41,6 +41,7 @@ const ProductScreen = () => {
             console.log("true")
         } else {
             dispatch(addToWishlist(product));
+            // dispatch(addToWishlist({product , variantId}));
             console.log("false")
         }
         setIsInWishlist(!isInWishlist);

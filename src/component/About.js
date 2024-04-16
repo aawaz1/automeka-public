@@ -1,6 +1,8 @@
 import React from 'react'
+import useScrollTop from './customHooks/useScrollToTop'
 
 const About = () => {
+    useScrollTop()
     return (
         <div>
             <div className='container flex flex-col justify-center items-center p-2'>
