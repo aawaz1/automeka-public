@@ -21,7 +21,7 @@ const ComingSoonProduct = () => {
 })}
 </ProductSlider>
 <div className="  flex justify-center mt-2  items-center   text-[1rem]" >
-<span className="font-poppins cursor-pointer  text-[1rem]" onClick={() => navigate("/category")}> View All</span>
+{/* <span className="font-poppins cursor-pointer  text-[1rem]" onClick={() => navigate("/category")}> View All</span> */}
 </div>
                 {/* <ProductSlider desktopItemCount={3}>
                     {

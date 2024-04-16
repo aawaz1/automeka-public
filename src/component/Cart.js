@@ -52,7 +52,7 @@ const Cart = () => {
           return (<Grid item container xs={12} style={{ borderBottom: "1px solid lightgrey" }}>
             <Grid item md={6}>
               <div className="flex py-2 gap-2">
-                <div className=""><img style={{ width: "6rem", height: "4rem" }} src={IMAGE_URL + cartItem?.image_list[0]} alt="hello cart" /></div>
+                <div onClick={() => navigate(`/product/${cartItem._id}`)} className=""><img style={{ width: "6rem", height: "4rem" }} src={IMAGE_URL + cartItem?.image_list[0]} alt="hello cart" /></div>
                 <div><h2 className="text-[1.0rem] font-medium font-poppins">{cartItem.name}</h2></div>
               </div>
             </Grid>
@@ -106,7 +106,7 @@ const Cart = () => {
         const discountedPrice = price - discountPrice
         return (<>
           <div className="flex gap-2 justify-between px-0.5 mt-6 w-full max-md:flex-wrap max-md:max-w-full">
-            <div className="flex gap-5 justify-between items-center">
+            <div className="flex gap-5 justify-between items-center" onClick={() => navigate(`/product/${cartItem._id}`)}>
               {/* <img
         loading="lazy"
         src="https://cdn.builder.io/api/v1/image/assets/TEMP/4275a5684bdda0fcbc734c7ccf0f0a5c197ca91676414ac6082d84401871c22e?apiKey=97bd60a383fa4df4a87dc42761361ab7&"
