@@ -22,7 +22,7 @@ const Wishlist = () => {
     dispatch(addToCart({ product: cartItem, qty: 1 }));
   };
   return (<>
-    {wishlistItems && wishlistItems?.length > 0 ? <div className="hidden md:block container">
+    {wishlistItems && wishlistItems?.length > 0 ? <div className="hidden lg:block container">
       <h2 className="font-bold font-poppins text-[1.2rem] p-2 py-4">Your Wishlists Item</h2>
       <div style={{ borderBottom: "1px solid lightgrey" }}></div>
       <Grid container spacing={1} className="py-3">
@@ -73,7 +73,7 @@ const Wishlist = () => {
 
       </Grid>
     </div> : null}
-    {wishlistItems && wishlistItems?.length > 0 ? <div className=" md:hidden container h-[50rem] flex flex-col self-center px-5 pb-3 pt-3 mt-16 w-full font-medium max-w-[1371px] max-md:mt-10 max-md:max-w-full">
+    {wishlistItems && wishlistItems?.length > 0 ? <div className=" lg:hidden container h-[50rem] flex flex-col self-center px-5 pb-3 pt-3 mt-16 w-full font-medium max-w-[1371px] max-md:mt-10 max-md:max-w-full">
       <div className="text-2xl text-black max-md:max-w-full">
         Your Wishlist items
       </div>

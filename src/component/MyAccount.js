@@ -63,9 +63,9 @@ export default function VerticalTabs() {
       <div className='container p-1 md:p-4 h-full border border-gray-400'>
         <Box
           sx={{ flexGrow: 1, bgcolor: 'background.paper', display: 'flex' }}
-          className="flex flex-col md:flex-row"
+          className="flex flex-col lg:flex-row"
         >
-          <Box className='hidden md:block'>
+          <Box className='hidden lg:block'>
             <Tabs
 
               orientation="vertical"
@@ -82,7 +82,7 @@ export default function VerticalTabs() {
 
             </Tabs>
           </Box>
-          <Box className={"block md:hidden "}>
+          <Box className={"block lg:hidden "}>
             <Tabs
               variant='scrollable'
               value={myAccountTab}

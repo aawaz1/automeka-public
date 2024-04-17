@@ -278,7 +278,7 @@ const Checkout = () => {
 
 
         <div className="  flex flex-wrap flex-col items-start justify-start pt-1.5 px-0 pb-0 box-border min-w-[6rem] max-w-full mq900:min-w-full mq1300:flex-1">
-          <div className=" w-[400px] md:w-[648px] self-stretch rounded-md bg-whitesmoke box-border flex flex-col items-start justify-start pt-[39px] pb-[2rem] pr-none md:pr-8 pl:none md:pl-[52px] gap-[45px] max-w-full border-[0.9px] border-solid border-silver-100 mq900:gap-[22px_45px] mq900:pl-[26px] mq900:pt-[25px] mq900:pb-[189px] mq900:box-border mq450:pt-5 mq450:pb-[123px] mq450:box-border">
+          <div className=" w-[400px] md:w-[648px] self-stretch rounded-md bg-whitesmoke box-border flex flex-col items-start justify-start pt-[39px] pb-[2rem] pr-none md:pr-8 pl:none lg:pl-[52px] gap-[45px] max-w-full border-[0.9px] border-solid border-silver-100 mq900:gap-[22px_45px] mq900:pl-[26px] mq900:pt-[25px] mq900:pb-[189px] mq900:box-border mq450:pt-5 mq450:pb-[123px] mq450:box-border">
             <div className="w-[648px] h-[791px] relative rounded-md bg-whitesmoke box-border hidden max-w-full border-[0.9px] border-solid border-silver-100" />
             <div className="w-[543px] flex flex-row items-start justify-center max-w-full">
               <h3 className="m-0 relative text-inherit font-medium font-inherit z-[1] mq450:text-lgi">

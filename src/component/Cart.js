@@ -30,7 +30,7 @@ const Cart = () => {
 
   // const prices = cartItems?.variants?.filter(variant => variant._id === variantId)?.map(item => item.price);
   return (<>
-    {cartItems && cartItems.length > 0 ? (<div className="hidden md:block container">
+    {cartItems && cartItems.length > 0 ? (<div className="hidden lg:block container">
       <h2 className="font-bold font-poppins text-[1.2rem] p-2 py-4">Shopping Cart</h2>
       <div style={{ borderBottom: "1px solid lightgrey" }}></div>
       <Grid container spacing={1} className="py-3">
@@ -82,7 +82,7 @@ const Cart = () => {
       </Grid>
     </div>) : (<Noitemsfound />)}
 
-    <div className="md:hidden container h-[50rem] flex flex-col self-center px-5  w-full font-medium max-w-[1371px] max-md:mt-10 max-md:max-w-full">
+    <div className="lg:hidden container h-[50rem] flex flex-col self-center px-5  w-full font-medium max-w-[1371px] max-md:mt-10 max-md:max-w-full">
       {cartItems && cartItems.length > 0 ? <div className="text-2xl text-black max-md:max-w-full">
         Shopping Cart
       </div> : null}
