@@ -37,7 +37,7 @@ const ProductSlider = ({ children, title, desktopItemCount, superLargeDesktopIte
             {title ? <div>{title}</div> : null}
 
             <div className="w-full flex justify-center relative">
-                <Carousel className="custom-carousel-class flex justify-start w-[90%] max-w-[1200px]" responsive={responsiveProp ? responsiveProp : responsive}>
+                <Carousel className="custom-carousel-class flex justify-start w-[90%] max-w-[1200px] p-[1px]" responsive={responsiveProp ? responsiveProp : responsive}>
                     {
                         children
                     }

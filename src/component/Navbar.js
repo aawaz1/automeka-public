@@ -42,7 +42,7 @@ const Navbar = () => {
   const categories = useCategory();
   const [issOpen, setIssOpen] = useState(false);
   const handleIsOpen = () => {
-    
+
     setIssOpen(!issOpen)
   }
   const [isOpen, setIsOpen] = useState(false);
@@ -83,7 +83,7 @@ const Navbar = () => {
       </div>
 
       <Container isOpen={issOpen} handleIsOpen={handleIsOpen} />
-      <div className='  z-55 bg-slate-700 " text-customOrange '>
+      <div className='  z-55 bg-slate-700 " text-white'>
         <div style={{ minHeight: "50px" }} className=' container hidden pl-30 md:flex justify-between '>
           <div className='flex'>
 
@@ -115,8 +115,8 @@ const Navbar = () => {
             </div>
 
 
-            <div className='h-100 flex items-center  px-6 py-2 hover:text-white cursor-pointer' onClick={() => navigate('/')}>Home</div>
-            <div className='h-100 flex items-center px-2 py-2 hover:text-white cursor-pointer' onClick={() => navigate('/about')}>About Us</div>
+            <div className='h-100 flex items-center  px-6 py-2 hover:text-customOrange cursor-pointer' onClick={() => navigate('/')}>Home</div>
+            <div className='h-100 flex items-center px-2 py-2 hover:text-customOrange cursor-pointer' onClick={() => navigate('/about')}>About Us</div>
 
           </div>
           <div className='flex items-center'>

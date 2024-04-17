@@ -37,7 +37,7 @@ const Endrosement = () => {
 
     return (
         <div className='flex p-4 flex-col justify-center items-center text-center bg-gray-200'>
-            <h2 className='font-bold font-poppins text-center text-[1.2rem]'>Why Choose Automeka ?</h2>
+            <h2 className='font-bold font-poppins text-center text-[1.8rem]'>Why Choose Automeka ?</h2>
             <p className='text-gray-400 font-thin font-poppins'>repairing a damage vehicle <br /> can be expensive using the <br /> automeka product is a good solution if you are on budget.</p>
 
 

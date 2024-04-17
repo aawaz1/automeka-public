@@ -2,8 +2,8 @@ import React from 'react'
 
 const Endrosementcard = ({ image, name }) => {
   return (
-    <div style={{}}>
-      <img style={{ width: "20rem" }} src={image} />
+    <div className='flex justify-center items-center' style={{}}>
+      <img style={{ width: "15rem" }} src={image} />
       {/* <h2>{name}</h2> */}
     </div>
   )
