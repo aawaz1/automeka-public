@@ -132,7 +132,7 @@ const Wishlist = () => {
 
         )
       })}
-      <div className="self-end mt-12 text-base text-black max-md:mt-10">
+      <div className="self-end mt-12 text-base text-black max-md:mt-10" onClick={() => dispatch(deleteAllFromWishlist())}>
         {" "}
         Clear All Wishlist
       </div>

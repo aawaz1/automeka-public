@@ -199,7 +199,7 @@ const ProductScreen = () => {
 
 
                                 <button className='  bg-customOrange px-4 py-1 text-white font-medium font-poppins rounded-md'> Buy Now</button>
-                                <div onClick={handleWishlist}>{isInWishlist ? <FavoriteIcon style={{ color: 'red', fontSize: "2.3rem" }} /> : <FavoriteBorderIcon />}</div> </>) : (
+                                <div className='cursor-pointer' onClick={handleWishlist}>{isInWishlist ? <FavoriteIcon style={{ color: 'red', fontSize: "2.3rem" }} /> : <FavoriteBorderIcon style={{ fontSize: "2.1rem" }} />}</div> </>) : (
                             <>
                                 {product?.coming_soon === false ? <> {product?.on_stock > 0 && (
                                     <>

@@ -23,11 +23,11 @@ const Checkout = () => {
   const { userInfo } = useSelector(state => state.auth);
   const [user, setUser] = useState([]);
   const { saveAddress } = cart;
-  
+
   const dispatch = useDispatch();
   const [isUsed, setIsUsed] = useState(false)
   const pointsValueInKd = user?.loyalty_points / 100;
-  
+
   const [selectedAddress, setSelectedAddress] = useState('');
   const [addresses, setAddresses] = useState([]);
   const total_qty = cartItems?.reduce((accumulator, item) => {
@@ -37,7 +37,7 @@ const Checkout = () => {
 
   const governate_charges = parseInt(saveAddress?.governates?.value);
   const governateValue = parseFloat(saveAddress?.governates?.value || 0);
-  
+
   const calculateSum = () => {
     let sum = governateValue + totalCartPrice;
     let pointsUsed = 0;
@@ -80,7 +80,7 @@ const Checkout = () => {
         `https://restapi.ansoftt.com:4321/v1/user/${id}`
       );
       setUser(data?.data)
-     
+
     } catch (error) {
 
     }
@@ -112,6 +112,8 @@ const Checkout = () => {
       console.log(error);
     }
   };
+  console.log(cartItems);
+  console.log(user);
 
   useEffect(() => {
     getAllAddresses();
@@ -128,9 +130,9 @@ const Checkout = () => {
           console.log(iterator);
           const singleItem = {};
           singleItem['product'] = iterator._id;
-          if (iterator?.varaints?.length > 0) {
-            singleItem['variant'] = iterator.varaints?.[0]._id;
-          }
+
+          singleItem['variant'] = iterator?.variantId;
+
           singleItem['qty'] = iterator.quantity;
           singleItem['price'] = iterator.price;
           singleItem['status'] = "pending";
@@ -268,7 +270,7 @@ const Checkout = () => {
           </div>
           <button onClick={placeOrderHandler} className="cursor-pointer [border:none] pt-[22px] px-5 pb-[19px] bg-customOrange w-[774px] mt-2 rounded-md flex flex-row items-start justify-center box-border max-w-full hover:bg-chocolate">
             <div className="h-[55px] w-[668px] relative rounded-8xs bg-darkorange hidden max-w-full" />
-            <div onClick={placeOrderHandler} className="h-3.5 w-[103px] relative text-xl tracking-[-0.3px] font-medium font-poppins text-white text-center flex items-center justify-center shrink-0 z-[1] mq450:text-base">
+            <div  className="h-3.5 w-[103px] relative text-xl tracking-[-0.3px] font-medium font-poppins text-white text-center flex items-center justify-center shrink-0 z-[1] mq450:text-base">
               Pay Now
             </div>
           </button>
@@ -317,7 +319,7 @@ const Checkout = () => {
                                     {item?.name}
                                   </div>
                                   <div className="relative font-medium z-[1]">
-                                   x {item?.quantity}
+                                    x {item?.quantity}
                                   </div>
                                 </div>
 
