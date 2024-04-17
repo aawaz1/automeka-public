@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteAllFromCart, saveAddress1 } from "../store/slices/cart-slice";
+import { deleteAllFromCart, saveAddress1, saveRoute } from "../store/slices/cart-slice";
 import { useCreateOrderMutation } from "../store/slices/order-slice";
 import { IMAGE_URL } from "../constants";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { MdAddToQueue } from "react-icons/md";
 import Noitemsfound from "./Noitemsfound";
 import cogoToast from "cogo-toast";
@@ -12,12 +12,27 @@ import useScrollTop from "./customHooks/useScrollToTop";
 
 
 const Checkout = () => {
+ 
+  const [previousRoute, setPreviousRoute] = useState('');
+    const location = useLocation();
+
+    useEffect(() => {
+        // Store the previous route whenever the location changes
+        setPreviousRoute(location.pathname);
+        dispatch(saveRoute(previousRoute));
+    }, [location]);
+
+    console.log(previousRoute)
+
+    
 
   const navigate = useNavigate()
   const cart = useSelector((state) => state.cart);
   useScrollTop()
 
-  const { cartItems } = cart;
+  const { cartItems , route } = cart;
+  console.log(route)
+
 
   let id = JSON.parse(localStorage.getItem("id") || null);
   const { userInfo } = useSelector(state => state.auth);
@@ -25,6 +40,7 @@ const Checkout = () => {
   const { saveAddress } = cart;
 
   const dispatch = useDispatch();
+  
   const [isUsed, setIsUsed] = useState(false)
   const pointsValueInKd = user?.loyalty_points / 100;
 

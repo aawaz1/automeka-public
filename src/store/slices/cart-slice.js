@@ -18,6 +18,7 @@ const cartSlice = createSlice({
         category : "",
         price : "",
         myAccountTab : 0,
+        route : "",
        
        
       },
@@ -110,6 +111,9 @@ const cartSlice = createSlice({
         saveVariantId(state,action){
           state.variantId = action.payload
         },
+        saveRoute(state,action){
+          state.route = action.payload
+        },
         
         saveVariant(state,action){
           state.variant = action.payload
@@ -126,7 +130,7 @@ const cartSlice = createSlice({
     },
 });
 
-export const { addToCart, deleteFromCart,saveSearch,saveMyAccountTab,saveVariantId ,saveShippingAddress,saveCategory,savePrice ,saveVariant,saveAddress1,increaseOrder, decreaseQuantity, deleteAllFromCart } = cartSlice.actions;
+export const { addToCart, deleteFromCart,saveSearch,saveRoute,saveMyAccountTab,saveVariantId ,saveShippingAddress,saveCategory,savePrice ,saveVariant,saveAddress1,increaseOrder, decreaseQuantity, deleteAllFromCart } = cartSlice.actions;
 export default cartSlice.reducer;
 
 

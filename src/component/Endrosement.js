@@ -36,12 +36,12 @@ const Endrosement = () => {
     const productData = [{ name: "10w40 United Oil", image: '/Group 42735.png', price: 2.222 }, { name: "10w40 United Oil", image: '/Group 42885.png', price: 2.222 }, { name: "10w40 United Oil", image: '/Group 42884.png', price: 2.222 }]
 
     return (
-        <div className='flex p-4 flex-col justify-center items-center text-center bg-gray-300'>
+        <div className='flex p-4 flex-col justify-center items-center text-center bg-gray-200'>
             <h2 className='font-bold font-poppins text-center text-[1.2rem]'>Why Choose Automeka ?</h2>
             <p className='text-gray-400 font-thin font-poppins'>repairing a damage vehicle <br /> can be expensive using the <br /> automeka product is a good solution if you are on budget.</p>
 
 
-            
+
             <div className='w-[100%] md:w-[30%]'> {productData?.length ?
                 <Slider {...settings}>
                     {productData?.map(item => {

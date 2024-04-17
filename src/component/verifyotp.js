@@ -1,14 +1,32 @@
 import axios from 'axios';
-import React, { useState } from 'react'
-import { useNavigate, useHistory } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { useNavigate, useHistory, useLocation } from 'react-router-dom';
 import cogoToast from 'cogo-toast';
 import useScrollTop from './customHooks/useScrollToTop';
+import { useSelector } from 'react-redux';
 
 const VerifyOtp = () => {
+    const cart = useSelector((state) => state.cart);
+    useScrollTop()
+  
+    const { cartItems , route } = cart;
 
-    const [email, setEmail] = useState("");
+
+    const [previousRoute, setPreviousRoute] = useState('');
+    const location = useLocation();
+
+    useEffect(() => {
+        // Store the previous route whenever the location changes
+        setPreviousRoute(location.pathname);
+    }, [location]);
+
+    console.log(previousRoute)
+
+    const [otp, setEmail] = useState("");
     useScrollTop()
     let id = JSON.parse(localStorage.getItem("id") || null);
+    let userInfo = JSON.parse(localStorage.getItem("userInfo") || null);
+    console.log(userInfo);
     const navigate = useNavigate();
     const goBack = () => {
         navigate(-1); // This will navigate back one step in the history stack
@@ -16,10 +34,16 @@ const VerifyOtp = () => {
     const submitHandler = async (e) => {
         try {
             e.preventDefault();
-            const { data } = await axios.post(`https://restapi.ansoftt.com:4321/v1/auth/verifyotp/${id}`, { otp: email });
+            const { data } = await axios.post(`https://restapi.ansoftt.com:4321/v1/auth/verifyotp`, { otp: otp, email: userInfo?.data?.auth?.email || "email" });
 
-            cogoToast.success("OTP Submitted Successfully")
-            goBack();
+            cogoToast.success("OTP Verified Successfully");
+            if (route === "/checkout"){
+                goBack()
+            } else {
+                navigate('/')
+            }
+
+
 
         } catch (error) {
             cogoToast.error("Please Submit The OTP", { position: "bottom-left" });
@@ -35,7 +59,7 @@ const VerifyOtp = () => {
 
                     <div className='w-[100%]'>
                         <input className="bg-whitesmoke  rounded-md p-2 w-[100%]" type="text" name='email' placeholder="Enter The OTP"
-                            value={email}
+                            value={otp}
                             onChange={(e) => setEmail(e.target.value)} />
 
                     </div>

@@ -54,7 +54,7 @@ const Loginform = () => {
             // cogoToast.success("Logged IN Successfully")
             // navigate(redirect);
             console.log(res);
-            if (res?.data?.user?.is_email_verified) {
+            if (res?.data?.auth?.is_email_verified) {
                 // If verified, navigate to the redirect route
                 navigate(redirect);
             } else {
