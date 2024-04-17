@@ -46,7 +46,7 @@ const Cartmenu = ({ handleIsOpen }) => {
                                     const discountPrice = (cartItem?.discount / 100) * price;
                                     const discountedPrice = price - discountPrice
                                     return (<div className='flex gap-2 justify-center p-2 '>
-                                        <div><img src={IMAGE_URL + cartItem?.image_list?.[0]} style={{ maxWidth: "4rem" }} alt='cartimage' /></div>
+                                        <div onClick={() => {navigate(`/product/${cartItem._id}`); handleIsOpen(); }}><img src={IMAGE_URL + cartItem?.image_list?.[0]} style={{ maxWidth: "4rem" }} alt='cartimage' /></div>
                                         <div className='p-2'>
                                             <h2 className='text-[1rem] font-poppins'>{cartItem.name}</h2>
                                             <h2 className='text-[0.9rem] text-green-400 font-poppins'>Price :{price ? discountedPrice.toFixed(3) : cartItem?.price.toFixed(3)} KD</h2>

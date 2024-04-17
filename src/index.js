@@ -20,15 +20,11 @@ root.render(
   </React.StrictMode >
 );
 
-if ('serviceWorker' in navigator) {
+if ('Notification' in window && 'serviceWorker' in navigator && 'PushManager' in window) {
   window.addEventListener('load', () => {
-    console.log("1")
     navigator.serviceWorker.register('/firebase-messaging-sw.js').then((registration) => {
-      console.log("2")
-      console.log('ServiceWorker registration successful:', registration);
+
     }).catch((error) => {
-      console.log("3")
-      console.log(error)
       console.error('ServiceWorker registration failed:', error);
     });
   });

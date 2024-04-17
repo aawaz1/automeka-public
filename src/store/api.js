@@ -42,9 +42,6 @@ export const updateFcmToken = async (token) => {
 
         throw new Error('Failed to fetch user data');
       }
-
-      localStorage.setItem("fcmToken", token)
-      localStorage.setItem("userInfo", JSON.stringify(userRes))
       return response;
     }
   }
