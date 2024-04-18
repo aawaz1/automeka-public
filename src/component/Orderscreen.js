@@ -12,11 +12,13 @@ import useScrollTop from './customHooks/useScrollToTop'
 
 const Orderscreen = () => {
   const { orderDetails } = useSelector(state => state.order);
+  console.log(orderDetails)
   useScrollTop()
   const [orderId, setOrderId] = useState(null);
 
   const cart = useSelector((state) => state.cart);
   const [tracker, setTracker] = useState(null);
+  const [productId , setProductId] = useState("")
   const [singleOrder, setSingleOrder] = useState([]);
 
 
@@ -69,7 +71,7 @@ const Orderscreen = () => {
 
         orders ?
           (orderDetails ? <>
-            {tracker ? <OrderTracker tracker={tracker} setTracker={setTracker} /> : <div className='container p-2   justify-center items-center'>
+            {tracker ? <OrderTracker id={productId} tracker={tracker} setTracker={setTracker} /> : <div className='container p-2   justify-center items-center'>
               {/* <h2 className=' pb-4 font-semibold text-[1.2rem]'>Your Order History</h2> */}
               <div className="flex flex-col gap-3 px- 1 md:px-5 max-w-[862px]">
                 {/* <div className="w-full text-lg font-medium text-black max-md:max-w-full">
@@ -136,7 +138,7 @@ const Orderscreen = () => {
                           </div>
                         </div>
 
-                        <div className='cursor-pointer' onClick={() => setTracker(order_item?.product?._id)}><IoIosArrowForward /></div>
+                        <div className='cursor-pointer' onClick={() => {setTracker(order_item?.product?._id); setProductId(order_item?._id)}}><IoIosArrowForward /></div>
                       </div>
                     </div>
                   )
@@ -173,8 +175,8 @@ const Orderscreen = () => {
                     <Grid item xs={2}>{((order?.points_earned?.toFixed(4) || 0) - (order?.points_used?.toFixed(4) || 0))?.toFixed(4)}</Grid>
                     <Grid className="text-base text-customOrange cursor-pointer font-poppins" item xs={2} onClick={() => {
                       // Call both functions here
-                      dispatch(fetchOrder(order._id));
-                      setOrderId(order._id);
+                      dispatch(fetchOrder(order?._id));
+                      setOrderId(order?._id);
                     }}>Details</Grid>
                   </React.Fragment>
                 ))}

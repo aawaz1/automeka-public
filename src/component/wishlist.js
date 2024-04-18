@@ -13,8 +13,10 @@ import { deleteAllFromWishlist, deleteFromWishlist } from "../store/slices/wishl
 import { addToCart } from "../store/slices/cart-slice.js";
 import Noitemsfound from "./Noitemsfound.js";
 import useScrollTop from "./customHooks/useScrollToTop.js";
+import { useNavigate } from "react-router-dom";
 
 const Wishlist = () => {
+  const navigate = useNavigate()
   const { wishlistItems } = useSelector((state) => state.wishlist);
   useScrollTop();
   const dispatch = useDispatch();
@@ -43,9 +45,9 @@ const Wishlist = () => {
             </Grid>
             <Grid className="font-medium font-poppins" item md={2} alignItems={"center"} display={"flex"}>{cartItem?.price?.toFixed(3)}</Grid>
             <Grid item md={2} alignItems={"center"} display={"flex"}>
-              {cartItem.varaints > 0 ? (
-                <button disabled={cartItem.coming_soon} style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-customOrange font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product: cartItem, qty: 1, variantId: cartItem?.variantId }))}>Add To Cart</button>
-              ) : (
+            {cartItem.varaints  && cartItem?.variants.length  > 0 ? (
+                  <button disabled={cartItem.coming_soon} style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-customOrange font-medium font-poppins   ' onClick={() => navigate(`product/${cartItem?._id}`)}>Add To Cart</button>
+                ) : (
                 <>
                   {cartItem?.on_stock > 1 && (
                     <button disabled={cartItem.coming_soon} style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-customOrange font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product: cartItem, qty: 1, variantId: cartItem?.variantId }))}>Add to Cart</button>
@@ -57,7 +59,7 @@ const Wishlist = () => {
               )}
             </Grid>
             <Grid item md={2} alignItems={"center"} display={"flex"}><div className=""><button onClick={() =>
-              dispatch(deleteFromWishlist(cartItem._id))
+              dispatch(deleteFromWishlist(cartItem?._id))
             } >
               Remove
             </button></div></Grid>
@@ -106,8 +108,8 @@ const Wishlist = () => {
               <div className="self-stretch my-auto text-black">KD {cartItem?.price?.toFixed(3)}</div>
 
               <div className="justify-center self-stretch px-2 py-2 tracking-tight text-center ">
-                {cartItem.varaints > 0 ? (
-                  <button disabled={cartItem.coming_soon} style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-customOrange font-medium font-poppins   ' onClick={() => dispatch(addToCart({ product: cartItem, qty: 1 }))}>Add To Cart</button>
+                {cartItem.varaints  && cartItem?.variants.length  > 0 ? (
+                  <button disabled={cartItem.coming_soon} style={{ border: "2px solid orange" }} className=' rounded-md    bg-white px-2 py-1 text-customOrange font-medium font-poppins   ' onClick={() => navigate(`product/${cartItem?._id}`)}>{cartItem?.variants ? "View Varients" : "Add to Cart"}</button>
                 ) : (
                   <>
                     {cartItem?.on_stock > 1 && (
@@ -121,7 +123,7 @@ const Wishlist = () => {
 
               </div>
               <div><button onClick={() =>
-                dispatch(deleteFromWishlist(cartItem._id))
+                dispatch(deleteFromWishlist(cartItem?._id))
               } >
                 Remove
               </button></div>

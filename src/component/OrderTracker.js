@@ -5,7 +5,7 @@ import { BASE_URL, IMAGE_URL } from '../constants.js';
 import axios from 'axios';
 import useScrollTop from './customHooks/useScrollToTop.js';
 
-const OrderTracker = ({ setTracker, tracker }) => {
+const OrderTracker = ({ setTracker, tracker ,id }) => {
   useScrollTop();
 
 
@@ -16,7 +16,7 @@ const OrderTracker = ({ setTracker, tracker }) => {
   const handleProductDetail = async () => {
     let { data, statusText } = await fetchProductDetails(tracker);
     if (statusText == "OK") {
-      setProduct(data.data || null)
+      setProduct(data?.data || null)
     }
   }
   useEffect(() => {
@@ -24,7 +24,7 @@ const OrderTracker = ({ setTracker, tracker }) => {
   }, [tracker]);
   const getTrackers = async () => {
 
-    const { data } = await axios.get(`${BASE_URL}/ordertracker`)
+    const { data } = await axios.get(`${BASE_URL}/ordertracker/${id}`)
   
     setTrackerr(data.data);
 
@@ -33,14 +33,20 @@ const OrderTracker = ({ setTracker, tracker }) => {
   useEffect(() => {
     getTrackers()
   }, [])
- 
+ console.log(trackerr)
   return (
     <div className='container p-1 md:p-6'><div className='p-1 md:p-4  flex flex-col justify-center items-center'>
+      {trackerr?.map(item  => {
+        return (
+          <Stepper tracker={item?.status} />
 
-      {trackerr?.filter(item => item.product._id === tracker)?.map(producttracker => <Stepper tracker={producttracker.status} />
+        )
+      })}
+
+      {/* {trackerr?.map(producttracker => <Stepper tracker={producttracker.status} />
 
 
-      )}
+      )} */}
 
 
     </div>

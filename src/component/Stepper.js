@@ -14,11 +14,11 @@ export default function HorizontalLinearAlternativeLabelStepper({tracker}) {
   return (
     <Box sx={{ width: '100%' , color : "orange" }}>
       <Stepper activeStep={1} alternativeLabel>
-        {tracker?.map((label) => (
-          <Step sx={{color : "red"}} key={label}>
-            <StepLabel style={{ color:  'orange' }}>{label}</StepLabel>
+       
+          <Step sx={{color : "red"}} key={tracker}>
+            <StepLabel style={{ color:  'orange' }}>{tracker}</StepLabel>
           </Step>
-        ))}
+       
       </Stepper>
     </Box>
   );

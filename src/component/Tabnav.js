@@ -6,6 +6,7 @@ import Reviews from '../component/Reviews.js'
 
 const MyTabs = ({ product }) => {
     const [value, setValue] = useState(0);
+    console.log(product)
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -58,7 +59,16 @@ const MyTabs = ({ product }) => {
                 <div className='p-2'>{product?.about}</div>
             </CustomTabPanel>
             <CustomTabPanel value={value} index={1}>
-                <h4 className=' p-2 text-[1rem]'>No Specifications Yet</h4>
+                {product?.specs ? ( <ul className='p-2'>
+                    {Object.keys(product?.specs).map((key) => (
+                        <li key={key}>
+                            <strong>{key}:</strong> {product.specs[key]}
+                        </li>
+                    ))}
+                </ul>) : "No Specifications Available"}
+
+               
+                {/* <h4 className=' p-2 text-[1rem]'>{product?.specs}</h4> */}
             </CustomTabPanel>
             <CustomTabPanel value={value} index={2}>
                 <Reviews product={product} />
