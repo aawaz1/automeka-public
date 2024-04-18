@@ -47,7 +47,7 @@ const Reviews = ({ product }) => {
     <div className='flex items-start flex-col p-2'>
       <h4 className='font-poppins text-[1rem] '>Customer Reviews</h4>
       {reviews && reviews?.length > 0 ? (reviews?.map((review) => (
-        <div key={review._id} style={{ display: "flex", flexDirection: "column", width: "80%" }}>
+        <div key={review?._id} style={{ display: "flex", flexDirection: "column", width: "80%" }}>
           <strong>{review.user.email}</strong>
           <CommonRating value={review.rating} />
           {/* <p>{review.createdAt.substring(0, 10)}</p> */}

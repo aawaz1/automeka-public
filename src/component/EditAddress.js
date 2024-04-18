@@ -237,7 +237,7 @@ const EditAddress = () => {
                         <select className='bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2' value={governate?._id} onChange={(e) => handleGovernateSelect(e.target.value)}>
                             <option value="">Select a governate</option>
                             {governates.map(g => (
-                                <option key={g._id} value={g._id}>{g.value} - {g.name}</option>
+                                <option key={g?._id} value={g?._id}>{g.value} - {g.name}</option>
                             ))}
                         </select>
 

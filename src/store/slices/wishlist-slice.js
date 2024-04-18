@@ -11,17 +11,17 @@ const wishlistSlice = createSlice({
     reducers: {
         addToWishlist(state, action) {
             // const { product ,variantId } = action.payload;
-            const isInWishlist = state.wishlistItems.findIndex(item => item._id === action.payload._id
-                // product._id 
+            const isInWishlist = state.wishlistItems.findIndex(item => item?._id === action.payload?._id
+                // product?._id 
                 //  && item.variantId === variantId
-                 );
+            );
             if (isInWishlist > -1) {
-                cogoToast.info("Product already in wishlist", {position: "bottom-left"});
+                cogoToast.info("Product already in wishlist", { position: "bottom-left" });
 
             } else {
                 state.wishlistItems.push(action.payload);
                 // state.wishlistItems.push({...product , variantId});
-                cogoToast.success("Added To wishlist", {position: "bottom-left"});
+                cogoToast.success("Added To wishlist", { position: "bottom-left" });
 
             }
 
@@ -29,9 +29,9 @@ const wishlistSlice = createSlice({
         deleteFromWishlist(state, action) {
 
 
-            state.wishlistItems = state.wishlistItems.filter(item => item._id !== action.payload);
+            state.wishlistItems = state.wishlistItems.filter(item => item?._id !== action.payload);
             console.log(action.payload);
-            cogoToast.error("Removed From Wishlist", {position: "bottom-left"});
+            cogoToast.error("Removed From Wishlist", { position: "bottom-left" });
 
 
         },

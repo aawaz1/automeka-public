@@ -12,25 +12,25 @@ import useScrollTop from "./customHooks/useScrollToTop";
 
 
 const Checkout = () => {
- 
+
   const [previousRoute, setPreviousRoute] = useState('');
-    const location = useLocation();
+  const location = useLocation();
 
-    useEffect(() => {
-        // Store the previous route whenever the location changes
-        setPreviousRoute(location.pathname);
-        dispatch(saveRoute(previousRoute));
-    }, [location]);
+  useEffect(() => {
+    // Store the previous route whenever the location changes
+    setPreviousRoute(location.pathname);
+    dispatch(saveRoute(previousRoute));
+  }, [location]);
 
-    console.log(previousRoute)
+  console.log(previousRoute)
 
-    
+
 
   const navigate = useNavigate()
   const cart = useSelector((state) => state.cart);
   useScrollTop()
 
-  const { cartItems , route } = cart;
+  const { cartItems, route } = cart;
   console.log(route)
 
 
@@ -40,7 +40,7 @@ const Checkout = () => {
   const { saveAddress } = cart;
 
   const dispatch = useDispatch();
-  
+
   const [isUsed, setIsUsed] = useState(false)
   const pointsValueInKd = user?.loyalty_points / 100;
 
@@ -80,7 +80,7 @@ const Checkout = () => {
         let price = item.price;
         if (item?.variantId && item?.variants?.length) {
           item.variants.map(variant => {
-            if (variant._id == item?.variantId) {
+            if (variant?._id == item?.variantId) {
               price = variant?.price
             }
           })
@@ -110,7 +110,7 @@ const Checkout = () => {
 
   const handleAddressChange = (event) => {
     const selectedAddressId = event.target.value;
-    const selectedAddress = addresses.find(address => address._id === selectedAddressId)
+    const selectedAddress = addresses.find(address => address?._id === selectedAddressId)
     setSelectedAddress(selectedAddress);
     dispatch(saveAddress1(selectedAddress));
     // You can perform any actions here based on the selected address
@@ -145,7 +145,7 @@ const Checkout = () => {
         for (const iterator of cartItems) {
           console.log(iterator);
           const singleItem = {};
-          singleItem['product'] = iterator._id;
+          singleItem['product'] = iterator?._id;
 
           singleItem['variant'] = iterator?.variantId;
 
@@ -220,7 +220,7 @@ const Checkout = () => {
             } onChange={handleAddressChange}>
               <option style={{ color: "#D17B06" }} className='text-slate-500' value="">View addresses</option>
               {addresses.map((address) => (
-                <option className='w-[100%]' style={{ color: "#D17B06" }} key={address._id} value={address._id}>
+                <option className='w-[100%]' style={{ color: "#D17B06" }} key={address?._id} value={address?._id}>
                   {address?.address_1}, {address?.address_2}, {address?.city}, {address?.country} , {address?.governates.value}
                 </option>
               ))}
@@ -286,7 +286,7 @@ const Checkout = () => {
           </div>
           <button onClick={placeOrderHandler} className="cursor-pointer [border:none] pt-[22px] px-5 pb-[19px] bg-customOrange w-[774px] mt-2 rounded-md flex flex-row items-start justify-center box-border max-w-full hover:bg-chocolate">
             <div className="h-[55px] w-[668px] relative rounded-8xs bg-darkorange hidden max-w-full" />
-            <div  className="h-3.5 w-[103px] relative text-xl tracking-[-0.3px] font-medium font-poppins text-white text-center flex items-center justify-center shrink-0 z-[1] mq450:text-base">
+            <div className="h-3.5 w-[103px] relative text-xl tracking-[-0.3px] font-medium font-poppins text-white text-center flex items-center justify-center shrink-0 z-[1] mq450:text-base">
               Pay Now
             </div>
           </button>
@@ -308,7 +308,7 @@ const Checkout = () => {
                 cart.cartItems.map(item => {
                   const variantId = item?.variantId;
 
-                  const variant = item.variants.find(variant => variant._id === variantId);
+                  const variant = item.variants.find(variant => variant?._id === variantId);
                   const price = variant ? variant.price : null;
                   const discount = item?.discount
                   const discountPrice = (item?.discount / 100) * price;
@@ -386,7 +386,7 @@ const Checkout = () => {
                             let price = item.price;
                             if (item?.variantId && item?.variants?.length) {
                               item.variants.map(variant => {
-                                if (variant._id == item?.variantId) {
+                                if (variant?._id == item?.variantId) {
                                   price = variant?.price
                                 }
                               })

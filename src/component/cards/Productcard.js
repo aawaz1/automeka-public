@@ -19,11 +19,11 @@ const Productcard = ({ product }) => {
   const [isInWishlist, setIsInWishlist] = useState(false);
   const navigate = useNavigate();
   useEffect(() => {
-    setIsInWishlist(wishlistItems.some(item => item._id === product._id));
-  }, [wishlistItems, product._id]);
+    setIsInWishlist(wishlistItems.some(item => item?._id === product?._id));
+  }, [wishlistItems, product?._id]);
   const handleWishlist = () => {
     if (isInWishlist) {
-      dispatch(deleteFromWishlist(product._id));
+      dispatch(deleteFromWishlist(product?._id));
       console.log("true")
     } else {
       dispatch(addToWishlist(product));
@@ -41,7 +41,7 @@ const Productcard = ({ product }) => {
     >
       <div className="border max-w-[200px] p-[1rem] border-gray-500 relative ">
         {product?.discount ? <div className='bg-red-600 absolute rounded-sm  py-1 px-2   top-2 right-2' style={{ fontSize: "0.5rem" }}><span className='text-white'>{product?.discount}%</span></div> : null}
-        <Link to={`/product/${product._id}`}>
+        <Link to={`/product/${product?._id}`}>
           <img
             className="p-2"
             style={{ width: "13rem", height: "8rem", objectFit: "contain" }}

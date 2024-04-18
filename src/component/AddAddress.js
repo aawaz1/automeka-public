@@ -153,7 +153,7 @@ const AddAddress = () => {
                 {/* <div className="p-2">
                     <label className='text-[1rem] font-semiobold font-poppins'>Address 2</label>
                     <input className="bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2 " type="text" name="address_2" value={address_2} onChange={(e) => setAddress2(e.target.value)} /> */}
-                    {/* <div className='text-red-500'>{errors.address_2 && <span>{errors.address_2}</span>}</div> */}
+                {/* <div className='text-red-500'>{errors.address_2 && <span>{errors.address_2}</span>}</div> */}
 
                 {/* </div> */}
                 <div className="p-2">
@@ -204,7 +204,7 @@ const AddAddress = () => {
                         <select className='bg-whitesmoke w-[100%] md:w-[100%] rounded-md p-2' value={governate} onChange={(e) => handleGovernateSelect(e.target.value)}>
                             <option value="">Select a governate</option>
                             {governates.map(g => (
-                                <option key={g._id} value={g._id}>{g.value} - {g.name}</option>
+                                <option key={g?._id} value={g?._id}>{g.value} - {g.name}</option>
                             ))}
                         </select>
                         <div className='text-red-500'>{errors?.governate && <span>{errors?.governate}</span>}</div>
@@ -229,7 +229,7 @@ const AddAddress = () => {
                     <div className='text-red-500'>{errors.phone && <span>{errors.phone}</span>}</div>
 
                 </div>
-                
+
 
 
                 <div className="p-6 flex  md:flex-row gap-2 items-start">

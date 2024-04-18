@@ -29,7 +29,7 @@ const ProductScreen = () => {
     const [product, setProduct] = useState();
     const [variantId, setVariantId] = useState("")
     useEffect(() => {
-        setIsInWishlist(wishlistItems.some(item => item._id === id));
+        setIsInWishlist(wishlistItems.some(item => item?._id === id));
     }, [wishlistItems, id]);
 
     console.log(cart)
@@ -37,7 +37,7 @@ const ProductScreen = () => {
 
     const handleWishlist = () => {
         if (isInWishlist) {
-            dispatch(deleteFromWishlist(product._id));
+            dispatch(deleteFromWishlist(product?._id));
             console.log("true")
         } else {
             dispatch(addToWishlist(product));
@@ -94,7 +94,7 @@ const ProductScreen = () => {
         if (product?.variants?.length > 0) {
             setSelectedColor(product.variants[0].name);
             setAvailability(product.variants[0].stock);
-            setVariantId(product.variants[0]._id)
+            setVariantId(product.variants[0]?._id)
         }
     }, [product]);
     const handleColorSelect = (color, stock, variantId) => {
@@ -173,7 +173,7 @@ const ProductScreen = () => {
                                         className="checkbox flex flex-col"
                                         key={index}
 
-                                        onClick={() => handleColorSelect(variant.name, variant.stock, variant._id)} // Pass stock as argument
+                                        onClick={() => handleColorSelect(variant.name, variant.stock, variant?._id)} // Pass stock as argument
                                     >
                                         <input
                                             className="radio-input"
@@ -182,7 +182,7 @@ const ProductScreen = () => {
 
                                             value={variant.name}
                                             checked={selectedColor === variant.name}
-                                            onChange={() => handleColorSelect(variant.name, variant.stock, variant._id)} // Pass stock as argument
+                                            onChange={() => handleColorSelect(variant.name, variant.stock, variant?._id)} // Pass stock as argument
                                         />
                                         <label htmlFor={`color-${index}`} id="label">{variant?.name}</label>
                                     </div>
@@ -263,7 +263,7 @@ const ProductScreen = () => {
                     <h2 className='text-[1.5rem] py-4'>Related Products</h2>
                     <div>
                         <ProductSlider >
-                            {featuredProducts.filter(item => item.category.name === product?.category?.name && item._id !== id).map(product => {
+                            {featuredProducts.filter(item => item.category.name === product?.category?.name && item?._id !== id).map(product => {
                                 return (<Productcard product={product} />)
                             })}
                         </ProductSlider>

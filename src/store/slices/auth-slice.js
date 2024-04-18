@@ -12,18 +12,18 @@ const authSlice = createSlice({
   initialState,
   reducers: {
     setCredentials: (state, action) => {
-      
+
       state.userInfo = action.payload;
-     
+
       // if (action.payload && action.payload.data && action.payload.data.auth && action.payload.data.auth.access_token) {
       //   const token = action.payload.data.auth.access_token;
-      //   const id = action.payload.data.auth._id;
+      //   const id = action.payload.data.auth?._id;
       //   state.token = token;
-      //   state._id = id
+      //   state?._id = id
       //   localStorage.setItem("token", JSON.stringify(token));
       //   localStorage.setItem("id", JSON.stringify(id));
       // }
-     
+
       localStorage.setItem('userInfo', JSON.stringify(action?.payload || ""));
       localStorage.setItem("id", JSON.stringify(action?.payload?.data?.auth?._id || action.payload?._id || ""));
       localStorage.setItem("token", JSON.stringify(action?.payload?.data?.auth?.access_token || action?.payload?.token || ""));

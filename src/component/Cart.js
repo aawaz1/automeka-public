@@ -28,7 +28,7 @@ const Cart = () => {
 
   const dispatch = useDispatch();
 
-  // const prices = cartItems?.variants?.filter(variant => variant._id === variantId)?.map(item => item.price);
+  // const prices = cartItems?.variants?.filter(variant => variant?._id === variantId)?.map(item => item.price);
   return (<>
     {cartItems && cartItems.length > 0 ? (<div className="hidden lg:block container">
       <h2 className="font-bold font-poppins text-[1.2rem] p-2 py-4">Shopping Cart</h2>

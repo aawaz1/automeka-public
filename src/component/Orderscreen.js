@@ -18,7 +18,7 @@ const Orderscreen = () => {
 
   const cart = useSelector((state) => state.cart);
   const [tracker, setTracker] = useState(null);
-  const [productId , setProductId] = useState("")
+  const [productId, setProductId] = useState("")
   const [singleOrder, setSingleOrder] = useState([]);
 
 
@@ -138,7 +138,7 @@ const Orderscreen = () => {
                           </div>
                         </div>
 
-                        <div className='cursor-pointer' onClick={() => {setTracker(order_item?.product?._id); setProductId(order_item?._id)}}><IoIosArrowForward /></div>
+                        <div className='cursor-pointer' onClick={() => { setTracker(order_item?.product?._id); setProductId(order_item?._id) }}><IoIosArrowForward /></div>
                       </div>
                     </div>
                   )

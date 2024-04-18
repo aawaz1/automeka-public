@@ -16,7 +16,7 @@ const Address = () => {
     const handleDeleteAddress = async () => {
         try {
             const { data } = await axios.delete(
-                `https://restapi.ansoftt.com:4321/v1/address/${selectedAddress._id}`
+                `https://restapi.ansoftt.com:4321/v1/address/${selectedAddress?._id}`
             );
             getAllAddresses();
 
@@ -29,7 +29,7 @@ const Address = () => {
     }
     const handleAddressChange = (event) => {
         const selectedAddressId = event.target.value;
-        const selectedAddress = addresses.find(address => address._id === selectedAddressId)
+        const selectedAddress = addresses.find(address => address?._id === selectedAddressId)
         setSelectedAddress(selectedAddress);
         dispatch(saveAddress1(selectedAddress));
         // You can perform any actions here based on the selected address
@@ -71,7 +71,7 @@ const Address = () => {
                 <select style={{ border: "2px solid orange", borderRadius: "3px" }} className='w-[100%]' onChange={handleAddressChange}>
                     <option style={{ color: "#D17B06" }} className='text-orange-500 w-[100%] md:w-[80%]' value="">View addresses</option>
                     {addresses.map((address) => (
-                        <option className='w-[100%]' style={{ color: "#D17B06" }} key={address._id} value={address._id}>
+                        <option className='w-[100%]' style={{ color: "#D17B06" }} key={address?._id} value={address?._id}>
                             {address.address_1}, {address.address_2}, {address.city}, {address.country} , {address.governates.value}
                         </option>
                     ))}
@@ -81,7 +81,7 @@ const Address = () => {
             </div>
 
             {selectedAddress ? <div className="p-6 flex gap-2  items-start">
-                <button onClick={() => navigate(`/editaddress/${selectedAddress._id}`)} className='mr-6 px-8 py-1  text-gray-500 hover:text-black hover:bg-customOrange border rounded-full font-poppins font-medium' type='submit'>Edit</button>
+                <button onClick={() => navigate(`/editaddress/${selectedAddress?._id}`)} className='mr-6 px-8 py-1  text-gray-500 hover:text-black hover:bg-customOrange border rounded-full font-poppins font-medium' type='submit'>Edit</button>
                 <button onClick={handleDeleteAddress} className='px-6 py-1  text-gray-500 hover:text-black hover:bg-customOrange  border rounded-full font-poppins font-medium' type='submit'>Delete</button>
             </div> : null}
 
