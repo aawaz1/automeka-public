@@ -185,7 +185,7 @@ const AddAddress = () => {
 
                 </div>
                 <div className="p-2">
-                    <label className='text-[1rem] font-semiobold font-poppins'>Stree Name</label>
+                    <label className='text-[1rem] font-semiobold font-poppins'>Street Name</label>
                     <input className="bg-whitesmoke rounded-md p-2 w-[100%] md:w-[100%]" type="text" name="email" value={city} onChange={(e) => setCity(e.target.value)} />
                     <div className='text-red-500'>{errors.city && <span>{errors.city}</span>}</div>
 
